@@ -6,8 +6,8 @@
 const CONFIG = {
   app:'Ratio Viña', version:'0.1.0', anio:2026, doi:'',
   repo:'https://github.com/hectortecumshe-ai/RatioVina',
-  autores:'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José',
-  citaAutores:{es:'Mojica-Zárate, H. T., y Díaz-José, O.',en:'Mojica-Zárate, H. T., & Díaz-José, O.'},
+  autores:'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello',
+  citaAutores:{es:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., y Alejo-Bello, S.',en:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., & Alejo-Bello, S.'},
   titulo:{es:'El conocimiento local de la vid en México como sistema complejo adaptativo, con índices de regeneración y riesgo',en:'Local grapevine knowledge in Mexico as a complex adaptive system, with regeneration and risk indices'}
 };
 let LANG = 'es', MODO = 'prod';

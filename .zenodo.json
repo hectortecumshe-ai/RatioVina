@@ -11,6 +11,12 @@
     },
     {
       "name": "Díaz-José, Oscar"
+    },
+    {
+      "name": "Sánchez-Moreno, Edgar Arturo"
+    },
+    {
+      "name": "Alejo-Bello, Sergio"
     }
   ],
   "description": "Aplicación web libre, bilingüe (español/inglés) y de un solo archivo, de la línea Ratio Complexus, para un estudio nacional del conocimiento local de la vid en México. Cada viñedo se documenta como un sistema complejo adaptativo en 14 bloques: destino (mesa, vino, pasa, jugo), variedad, portainjerto, conducción e historial (plantación y podas); región hasta la localidad (INEGI); clima vitícola con grados día de Winkler (Amerine y Winkler, 1944), índice de Huglin (1978) e índice de frescor nocturno (Tonietto y Carbonneau, 2004); requerimientos; manejo con un cuestionario base de 31 pasos y 52 actividades ordenado por etapas fenológicas BBCH (Lorenz et al., 1995), que cada viñedo responde (sí/no) y amplía; regeneración (ocho perillas 0–4); riesgos (matriz de probabilidad × impacto, capacidad adaptativa); elementos; precio y valor; red ponderada, comunidades, correlaciones y cladograma; sostenibilidad (compartimentos, índice de Sarandón, 17 ODS, huella de carbono IPCC); prospectiva a 2, 5 y 10 años; informe; y un atlas nacional que junta sin servidor los archivos de muchos viñedos, por región, destino y región de Winkler. La aplicación arranca en blanco; no existe todavía un Stack publicado de la vid, por lo que el cuestionario base, los elementos y sus vínculos se marcan como «Lectura de Ratio Viña». Motor de redes validado contra NetworkX; índices de clima con cálculo de control; agregación del atlas verificada.",

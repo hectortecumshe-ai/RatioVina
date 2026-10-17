@@ -39,7 +39,7 @@ python armar.py    # arma index.html a partir de src/
 
 ## Autores
 
-Héctor Tecumshé Mojica-Zárate ([ORCID 0000-0002-9067-3983](https://orcid.org/0000-0002-9067-3983)) · Oscar Díaz-José
+Héctor Tecumshé Mojica-Zárate ([ORCID 0000-0002-9067-3983](https://orcid.org/0000-0002-9067-3983)) · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello
 
 ## Licencia
 
