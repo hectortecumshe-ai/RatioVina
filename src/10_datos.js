@@ -4,7 +4,7 @@
    Ratio Viña — Ratio Complexus («lo que está tejido junto»)
    ===================================================================== */
 const CONFIG = {
-  app:'Ratio Viña', version:'0.1.0', anio:2026, doi:'',
+  app:'Ratio Viña', version:'0.1.0', anio:2026, doi:'10.5281/zenodo.23439305',
   repo:'https://github.com/hectortecumshe-ai/RatioVina',
   autores:'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello',
   citaAutores:{es:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., y Alejo-Bello, S.',en:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., & Alejo-Bello, S.'},

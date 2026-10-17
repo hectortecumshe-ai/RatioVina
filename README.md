@@ -2,6 +2,8 @@
 
 # Ratio Viña
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23439305.svg)](https://doi.org/10.5281/zenodo.23439305)
+
 👉 **https://hectortecumshe-ai.github.io/RatioVina/**
 
 **El conocimiento local de la vid en México como sistema complejo adaptativo, con índices de regeneración y riesgo.** Aplicación de **Ratio Complexus**, el ala de la suite [Ratio](https://hectortecumshe-ai.github.io/) dedicada a los sistemas complejos adaptativos. Hermana de [Ratio Milpa](https://hectortecumshe-ai.github.io/RatioMilpa/): hecha para un solo cultivo y para un **estudio nacional**, viñedo por viñedo, con el mismo cuestionario.
