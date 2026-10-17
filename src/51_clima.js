@@ -61,12 +61,12 @@ function renderClima(el){ const R=indicesClima(), M=R.M, c=S.clima;
     <tbody><tr><th>${T('Máxima','Maximum')}</th>${M.map((_,i)=>celda('tmax',i)).join('')}</tr><tr><th>${T('Media','Mean')}</th>${M.map((_,i)=>celda('tmed',i)).join('')}</tr><tr><th>${T('Mínima','Minimum')}</th>${M.map((_,i)=>celda('tmin',i)).join('')}</tr></tbody></table></div>
     <label class="f" style="margin-top:8px"><span>${T('Fuente de los datos','Data source')}</span><input id="clF" value="${esc(c.fuente||'')}" placeholder="${T('p. ej., SMN, normales 1991–2020, estación 00000','e.g., SMN, 1991–2020 normals, station 00000')}"></label>
     <p class="nota">${T('Los meses sombreados (abril a octubre) son los que usan los índices. Las medias calculadas con máxima y mínima se ven en gris dentro de la casilla.','Shaded months (April to October) are the ones the indices use. Means computed from maximum and minimum show in grey inside the box.')}</p></div>
-  <div class="kpis">${kpi(T('Grados día de Winkler','Winkler degree days'),R.W,'°C·d',R.cW?tx(R.cW[2]):null)}
-   ${kpi(T('Índice de Huglin','Huglin index'),R.HI,'',R.cHI?tx(R.cHI[1]):null)}
-   ${kpi(T('Frescor nocturno (sept.)','Cool night index (Sept.)'),R.CI,'°C',R.cCI?tx(R.cCI[1]):null)}</div>
+  <div class="kpis">${kpi(T('Grados día de Winkler','Winkler degree days')+ayuda('winkler'),R.W,'°C·d',R.cW?tx(R.cW[2]):null)}
+   ${kpi(T('Índice de Huglin','Huglin index')+ayuda('huglin'),R.HI,'',R.cHI?tx(R.cHI[1]):null)}
+   ${kpi(T('Frescor nocturno (sept.)','Cool night index (Sept.)')+ayuda('frescor'),R.CI,'°C',R.cCI?tx(R.cCI[1]):null)}</div>
   ${R.sinInvierno?`<div class="alert warn"><p><b>${T('Clima sin invierno marcado.','Climate without a marked winter.')}</b> ${T('Ningún mes baja de 15 °C de media. Los tres índices se crearon para la viticultura templada; aquí la vid puede no entrar en reposo y dar dos cosechas al año. Léelos con cautela.','No month has a mean below 15 °C. The three indices were built for temperate viticulture; here the vine may not go dormant and can give two harvests a year. Read them with caution.')} ${marcaInterp()}</p></div>`:''}
   <div class="grid g2"><div class="card"><h3>${T('El año de tu viñedo','Your vineyard’s year')}</h3>${graficaClima(M)}<p class="nota"><span style="color:#c43a2f">●</span> ${T('máxima','maximum')} · <span style="color:#7a4f9a">●</span> ${T('media','mean')} · <span style="color:#2d78b0">●</span> ${T('mínima','minimum')}</p></div>
-   <div class="card"><h3>${T('¿En qué región de Winkler está?','Which Winkler region is it in?')}</h3>${escalaWinkler(R.W)}
+   <div class="card"><h3>${T('¿En qué región de Winkler está?','Which Winkler region is it in?')}${ayuda('winkler')}</h3>${escalaWinkler(R.W)}
      <div class="tbl-c"><table class="tbl winkler-t"><tbody>
       <tr><td>I · &lt; 1389</td><td>${T('Fresca: vinos blancos y tintos ligeros de variedades tempranas.','Cool: white wines and light reds from early varieties.')}</td></tr>
       <tr><td>II–III · 1389–1944</td><td>${T('Templada: tintos con cuerpo y blancos.','Temperate: full reds and whites.')}</td></tr>
