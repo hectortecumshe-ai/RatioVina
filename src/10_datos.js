@@ -4,7 +4,7 @@
    Ratio Viña — Ratio Complexus («lo que está tejido junto»)
    ===================================================================== */
 const CONFIG = {
-  app:'Ratio Viña', version:'0.1.0', anio:2026, doi:'10.5281/zenodo.23439305',
+  app:'Ratio Viña', version:'0.2.0', anio:2026, doi:'10.5281/zenodo.23439305',
   repo:'https://github.com/hectortecumshe-ai/RatioVina',
   autores:'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello',
   citaAutores:{es:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., y Alejo-Bello, S.',en:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., & Alejo-Bello, S.'},
@@ -77,7 +77,7 @@ const bovTexto = ()=>{ const p=BOV.find(b=>b.id===S.bovProp)||BOV[0], s=bovSisSe
 /* ---------- Estado / state ---------- */
 let S;
 function estadoInicial(){ return {
-  formato:2,                       // 2 = respuestas sí/no (sin precarga); los archivos sin «formato» son de la versión anterior
+  formato:3,                       // 3 = con la etapa de Establecimiento (pasos 1–6); 2 = versión 0.1.0 (pasos 1–31); sin «formato» = otra app
   bloque:'inicio', visitados:{},
   proyecto:{nombre:'', productor:'', fecha:new Date().toISOString().slice(0,10), notas:''},
   cultivo:'uva', sistema:'', tipoUP:'', superficie:'',   // la app es solo de vid; lo demás empieza vacío
@@ -107,10 +107,13 @@ function estadoInicial(){ return {
   revisado:{},                     // bloques sin campos propios que el usuario marcó como revisados
   formulado:false
 }; }
-/* EJ = modo ejemplo (caso publicado de Calpan): nunca se guarda y no toca el proyecto del usuario */
+/* EJ = modo ejemplo (caso publicado de Mata de Zarza): nunca se guarda y no toca el proyecto del usuario */
 let EJ = false, S_USUARIO = null;
 function guardar(){ if(EJ) return; try{ localStorage.setItem('vina_v1', JSON.stringify(S)); }catch(e){} }
-function cargar(){ try{ const g=JSON.parse(localStorage.getItem('vina_v1')||'null'); if(g && g.manejo) return Object.assign(estadoInicial(), g); }catch(e){} return estadoInicial(); }
+function cargar(){ try{ const g=JSON.parse(localStorage.getItem('vina_v1')||'null'); if(g && g.manejo) return migrarPasos(Object.assign(estadoInicial(), g, {formato:g.formato})); }catch(e){} return estadoInicial(); }
+/* Proyectos de Ratio Viña 0.1.0 (formato 2): sus pasos 1–31 pasan a ser 7–37, porque la etapa de Establecimiento ocupa los pasos 1–6 */
+function migrarPasos(s){ if(s.formato!==2) return s; const mueve=o=>Object.fromEntries(Object.entries(o||{}).map(([n,v])=>[isFinite(+n)?String(+n+6):n, v]));
+  s.manejo=mueve(s.manejo); s.fechas=mueve(s.fechas); s.formato=3; return s; }
 /* Proyectos de Ratio Telar (maíz) abiertos como archivo: «off» se convierte en respuestas «sí» y «no».
    Solo se recupera si el usuario lo pide; «off» se convierte en respuestas «sí» y «no». */
 function proyectoAnterior(){ return null; }   // Ratio Viña no tiene versión anterior

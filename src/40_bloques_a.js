@@ -79,7 +79,7 @@ function renderInicio(el){
       <h1>${T('Ratio <em>Viña</em>: el saber local de la vid como <span class="acc">sistema vivo</span>','Ratio <em>Viña</em>: local grapevine knowledge as a <span class="acc">living system</span>')}</h1>
       <p class="big">${T('De la uva de mesa del desierto de Sonora a los vinos de Baja California, Coahuila, Querétaro y el Bajío, cada viñedo de México se cultiva con un saber propio: podas, riegos, variedades, personas e instituciones que interactúan y se adaptan a su clima. Ratio Viña documenta ese saber como un <b>sistema complejo adaptativo</b>, viñedo por viñedo, con un mismo cuestionario, mide su <b>regeneración</b> y su <b>riesgo</b>, y junta los resultados en un <b>atlas nacional</b>.','From the table grapes of the Sonoran desert to the wines of Baja California, Coahuila, Querétaro and the Bajío, every Mexican vineyard is grown with its own knowledge: pruning, irrigation, varieties, people and institutions that interact and adapt to their climate. Ratio Viña documents that knowledge as a <b>complex adaptive system</b>, vineyard by vineyard, with the same questionnaire, measures its <b>regeneration</b> and <b>risk</b>, and combines the results into a <b>national atlas</b>.')}</p>
       <div class="ctas"><button class="btn lg" data-ir="cultivo">${T('Documentar mi viñedo →','Document my vineyard →')}</button>
-        <button class="btn ghost lg" data-ir="atlas">${T('Atlas nacional','National atlas')}</button><button class="btn link" data-ir="teoria">${T('Leer la teoría','Read the theory')}</button></div>
+        <button class="btn ghost lg" data-entrar-ej>${T('Ver el caso publicado (Mata de Zarza)','See the published case (Mata de Zarza)')}</button><button class="btn ghost lg" data-ir="atlas">${T('Atlas nacional','National atlas')}</button><button class="btn link" data-ir="teoria">${T('Leer la teoría','Read the theory')}</button><a class="btn link" href="instructivo-productor.html" target="_blank" rel="noopener">${T('Instructivo del Productor','Producer Guide')} ↗</a><a class="btn link" href="instructivo-cientifico.html" target="_blank" rel="noopener">${T('Instructivo del Científico','Scientist Guide')} ↗</a></div>
       <div class="chips"><span class="chip">${T('Todo el cálculo ocurre en tu navegador','All calculations run in your browser')}</span><span class="chip">${T('Sin cookies ni recursos de terceros','No cookies or third-party resources')}</span><span class="chip">${T('Español e inglés','Spanish and English')}</span><span class="chip">${T('Libre (MIT)','Free (MIT)')}</span></div></div>
     <div class="art" aria-hidden="true" style="--anim:running"><div class="stage"></div>${telarVivo()}
       <svg class="big float" style="left:2%;top:2%;width:22%;height:30%"><use href="#c-uva"/></svg>
@@ -129,7 +129,10 @@ function renderCultivo(el){ const c=cultivoSel(), dest=VID_DESTINOS.find(d=>d.id
       <label class="f"><span>${T('Plantas por hectárea','Vines per hectare')}</span><input type="number" id="vDens" min="0" step="10" value="${esc(S.vidDens)}" placeholder="${T('p. ej., 2,200','e.g., 2,200')}"></label></div></div></div>
   <div class="card aparece"><h3>${T('Historial del viñedo','Vineyard history')}</h3>
     <p class="nota">${T('La historia de cada viñedo ayuda a entender su presente: cuándo y con qué se plantó, y cuándo y cómo se ha podado. Anota cada poda con su fecha; en climas sin invierno marcado puede haber dos podas y dos cosechas al año.','Each vineyard’s history explains its present: when and with what it was planted, and when and how it has been pruned. Record each pruning with its date; in climates without a marked winter there may be two prunings and two crops a year.')}</p>
-    <div class="grid g3"><label class="f"><span>${T('Fecha de plantación','Planting date')}</span><input type="date" id="vPlant" value="${esc(S.vidPlant)}"></label>
+    <div class="grid g3"><div class="f plantacion" style="grid-column:1/-1"><span>${T('Fecha de plantación','Planting date')}: <b id="vPlantTxt">${S.vidPlant?fechaLarga(S.vidPlant):T('sin capturar','not entered')}</b></span>
+      <div class="row" style="gap:10px;align-items:center"><input type="range" min="0" max="364" id="vPlantD" value="${S.vidPlant?diaDelAno(S.vidPlant):45}" class="${S.vidPlant?'':'fantasma'}" style="flex:1" aria-label="${T('Día del año de la plantación','Day of the year of planting')}">
+      <input type="number" id="vPlantA" min="1900" max="2100" step="1" style="width:90px" value="${S.vidPlant?S.vidPlant.slice(0,4):''}" placeholder="${T('año','year')}" aria-label="${T('Año de plantación','Planting year')}"></div>
+      <small class="muted">${T('Mueve la perilla por los 365 días del año y escribe el año.','Move the knob through the 365 days of the year and type the year.')}</small></div>
      <label class="f"><span>${T('Material de plantación','Planting material')}</span><select id="vMat" class="${S.vidMat?'':'vacio'}"><option value="" ${S.vidMat?'':'selected'} disabled>${T('— Elige el material —','— Choose the material —')}</option>${VID_MATERIAL.map(x=>`<option value="${x.id}" ${S.vidMat===x.id?'selected':''}>${esc(tx(x.n))}</option>`).join('')}</select></label>
      <div class="kpi" style="margin:0"><div class="l">${T('Edad','Age')}</div><div class="v">${edadVinedo()==null?'—':fmt(edadVinedo(),1)}</div><div class="s">${T('años','years')}</div></div></div>
     <h4 style="margin:12px 0 6px">${T('Registro de podas','Pruning record')} <span class="muted" style="font-weight:400">(${(S.podas||[]).length})</span></h4>
@@ -160,7 +163,9 @@ function renderCultivo(el){ const c=cultivoSel(), dest=VID_DESTINOS.find(d=>d.id
   $('#vPie',el).onchange=e=>{ S.vidPie=e.target.value.trim(); guardar(); render(); };
   $('#vCond',el).onchange=e=>{ S.vidCond=e.target.value; guardar(); render(); };
   if($('#vEdad',el)) $('#vEdad',el).onchange=e=>{ S.vidEdad=e.target.value; guardar(); render(); };
-  $('#vPlant',el).onchange=e=>{ S.vidPlant=e.target.value; guardar(); render(); };
+  const pD=$('#vPlantD',el), pA=$('#vPlantA',el), fijaPlant=()=>{ const a=+pA.value||new Date().getFullYear(); S.vidPlant=isoDiaAno(a,+pD.value); guardar(); render(); };
+  pD.oninput=()=>{ $('#vPlantTxt',el).textContent=fechaLarga(isoDiaAno(+pA.value||new Date().getFullYear(),+pD.value)); }; pD.onchange=fijaPlant;
+  pA.onchange=()=>{ if(pA.value) fijaPlant(); };
   $('#vMat',el).onchange=e=>{ S.vidMat=e.target.value; guardar(); render(); };
   $('#pzAdd',el).onclick=()=>{ const f=$('#pzF',el).value; if(!f) return toast(T('Pon la fecha de la poda','Set the pruning date')); S.podas=S.podas||[]; S.podas.push({f, t:$('#pzT',el).value, nota:$('#pzN',el).value.trim()}); guardar(); render(); toast(T('Poda registrada','Pruning recorded')); };
   $$('[data-qpoda]',el).forEach(b=>b.onclick=()=>{ S.podas.splice(+b.dataset.qpoda,1); guardar(); render(); });
@@ -219,13 +224,14 @@ function renderRegionVacia(el){
   enlazarRegion(el); }
 
 /* ================= BLOQUE 3 · REQUERIMIENTOS ================= */
-const REQ_TRAD = [   // lectura de Ratio Viña a partir de Winkler et al. (1974) y Keller (2020); pasos del cuestionario base
-  {b:'reposo', t:E('Poda adecuada a la variedad y estructura de conducción en buen estado','Pruning suited to the variety and a sound training structure'), pasos:[1,3,4]},
-  {b:'reposo', t:E('Reposo invernal suficiente o un manejo que rompa la dormancia donde faltan horas frío','Enough winter rest, or management to break dormancy where chilling is short'), pasos:[5]},
-  {b:'brotacion', t:E('Suelo con buen drenaje y agua de riego suficiente y oportuna, con su análisis','Well-drained soil and enough, timely irrigation water, with its analysis'), pasos:[2,7,18,27]},
-  {b:'brotacion', t:E('Sanidad: prevención de cenicilla, mildiu y pudriciones con monitoreo','Plant health: preventing powdery mildew, downy mildew and rots by scouting'), pasos:[11,12,19,28]},
-  {b:'fruto', t:E('Equilibrio entre follaje y racimos: desbrote, raleo y manejo del dosel','Balance between foliage and clusters: shoot thinning, thinning and canopy management'), pasos:[8,9,15,17]},
-  {b:'cosecha', t:E('Cosecha en la madurez que pide el destino y salida al mercado sin pérdidas','Harvest at the ripeness the destination requires and getting to market without losses'), pasos:[21,22,23,24,25]}
+const REQ_TRAD = [   // lectura de Ratio Viña a partir de Winkler et al. (1974), Keller (2020) y Mojica-Zárate et al. (2026); pasos del cuestionario base
+  {b:'establecimiento', t:E('Material vegetal sano y bien enraizado, plantado en suelo húmedo y protegido durante el primer año','Healthy, well-rooted planting material, planted in moist soil and protected during the first year'), pasos:[1,2,3,4,5]},
+  {b:'reposo', t:E('Poda adecuada a la variedad y estructura de conducción en buen estado','Pruning suited to the variety and a sound training structure'), pasos:[7,9,10]},
+  {b:'reposo', t:E('Reposo invernal suficiente o un manejo que rompa la dormancia donde faltan horas frío','Enough winter rest, or management to break dormancy where chilling is short'), pasos:[11]},
+  {b:'brotacion', t:E('Suelo con buen drenaje y agua de riego suficiente y oportuna, con su análisis','Well-drained soil and enough, timely irrigation water, with its analysis'), pasos:[8,13,24,33]},
+  {b:'brotacion', t:E('Sanidad: prevención de cenicilla, mildiu y pudriciones con monitoreo','Plant health: preventing powdery mildew, downy mildew and rots by scouting'), pasos:[17,18,25,34]},
+  {b:'fruto', t:E('Equilibrio entre follaje y racimos: desbrote, raleo y manejo del dosel','Balance between foliage and clusters: shoot thinning, thinning and canopy management'), pasos:[14,15,21,23]},
+  {b:'cosecha', t:E('Cosecha en la madurez que pide el destino y salida al mercado sin pérdidas','Harvest at the ripeness the destination requires and getting to market without losses'), pasos:[27,28,29,30,31]}
 ];
 function renderReq(el){ S.reqEst=S.reqEst||{};
   el.innerHTML = `${cabecera('requerimientos',T('Lo que el viñedo necesita para prosperar en cada etapa del año. Los seis requerimientos base son una lectura de Ratio Viña de la viticultura general; abajo puedes registrar los que tu localidad ha innovado.','What the vineyard needs to thrive at each stage of the year. The six baseline requirements are a Ratio Viña reading of general viticulture; below you can record those your locality has innovated.'))}

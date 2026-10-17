@@ -1,0 +1,524 @@
+<!-- ============================ PORTADA ============================ -->
+<style>@media print{#portada{height:297mm;overflow:hidden}#portada .in{flex:none;height:262mm;overflow:hidden;align-content:start;padding:20mm 18mm 4mm}#portada h1{font-size:31pt}#portada .sub{font-size:13pt;margin:10px 0 14px}#portada .who{margin-top:14px;padding-top:12px}#portada .art{min-height:78mm}}</style>
+<section class="cover" id="portada">
+  <div class="band">{{BANDA}}</div>
+  <div class="in">
+    <div>
+      <div class="kick"><img src="logo.svg" alt="Ratio Viña"><div><div class="eyebrow" lang="es">Instructivo del Científico</div><div class="eyebrow" lang="en">Scientist Guide</div><div style="font-size:15px;color:var(--muted)">Ratio Viña {{VERSION}} · Ratio Complexus</div></div></div>
+      <h1 lang="es">El viñedo como <em>sistema complejo adaptativo</em>: <span class="a">modelo, clima, ecuaciones y evidencia</span></h1>
+      <h1 lang="en">The vineyard as a <em>complex adaptive system</em>: <span class="a">model, climate, equations and evidence</span></h1>
+      <p class="sub" lang="es">Documentación técnica de Ratio Viña para investigación y docencia: el modelo de datos con la etapa de establecimiento, los índices de clima vitícola, la red ponderada y su estadística, el cladograma, la sostenibilidad, la regeneración, el riesgo, la prospectiva, la validación frente a NetworkX y SciPy con un viñedo real y cómo reproducir cada número.</p>
+      <p class="sub" lang="en">Technical documentation of Ratio Viña for research and teaching: the data model with the establishment stage, the viticultural climate indices, the weighted network and its statistics, the cladogram, sustainability, regeneration, risk, the outlook, validation against NetworkX and SciPy with a real vineyard, and how to reproduce every number.</p>
+      <div class="meta">
+        <div lang="es"><b>1.ª edición</b> · octubre de 2026 · describe Ratio Viña {{VERSION}}</div>
+        <div lang="en"><b>1st edition</b> · October 2026 · covers Ratio Viña {{VERSION}}</div>
+        <div>{{DOI}}<span lang="es">Texto CC BY 4.0 · app MIT</span><span lang="en">Text CC BY 4.0 · app MIT</span></div>
+      </div>
+      <div class="who">{{AUTORES}}<br><span lang="es">Para el uso paso a paso, consulta el <a href="instructivo-productor.html">Instructivo del Productor</a>.</span><span lang="en">For step-by-step use, see the <a href="instructivo-productor.html">Producer Guide</a>.</span></div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <div class="frame"><img lang="es" src="instructivo/img/validacion-es.jpg" alt=""><img lang="en" src="instructivo/img/validacion-en.jpg" alt=""></div>
+      <div class="frame b"><img lang="es" src="instructivo/img/climag-es.jpg" alt="" style="height:300px;object-fit:cover;object-position:top"><img lang="en" src="instructivo/img/climag-en.jpg" alt="" style="height:300px;object-fit:cover;object-position:top"></div>
+    </div>
+  </div>
+  <div class="steps">{{PASOS}}</div>
+</section>
+
+<div class="doc">
+
+<!-- ============================ P · PRELIMINARES ============================ -->
+<section class="chap" id="leer" data-toc="P" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">P</span>
+    <div class="eyebrow" lang="es">Preliminares</div><div class="eyebrow" lang="en">Front matter</div>
+    <h2 lang="es">Alcance, procedencia de los datos y convenciones</h2><h2 lang="en">Scope, data provenance and conventions</h2>
+    <span class="rule"></span></div>
+  <p class="lead" lang="es">Ratio Viña representa un viñedo como un sistema complejo adaptativo (Holland, 1995): sus elementos son nodos y sus actividades de manejo, los vínculos. Sobre esa red calcula centralidades, comunidades, correlaciones y un cladograma; caracteriza el clima vitícola con tres índices publicados; evalúa la sostenibilidad, la regeneración y el riesgo; y proyecta escenarios a 2, 5 y 10 años. Todo ocurre en el navegador, en un solo archivo HTML sin dependencias externas.</p>
+  <p class="lead" lang="en">Ratio Viña represents a vineyard as a complex adaptive system (Holland, 1995): its elements are nodes and its management activities, the links. On that network it computes centralities, communities, correlations and a cladogram; characterises the viticultural climate with three published indices; assesses sustainability, regeneration and risk; and projects scenarios at 2, 5 and 10 years. Everything runs in the browser, in a single HTML file with no external dependencies.</p>
+  {{FIG_TUBO}}
+  <h3 id="p-procedencia"><span lang="es">Procedencia de cada valor</span><span lang="en">Provenance of every value</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Etiqueta</th><th lang="en">Label</th><th lang="es">Significado</th><th lang="en">Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><b>● Dato publicado</b></td><td lang="es">Tomado de una fuente citada: Mojica-Zárate et al. (2026), Lorenz et al. (1995), Amerine y Winkler (1944), Huglin (1978), Tonietto y Carbonneau (2004), INEGI (2020), Hersbach et al. (2020), IPCC (2006, 2018, 2019), Zhao et al. (2017).</td><td lang="en">Taken from a cited source: Mojica-Zárate et al. (2026), Lorenz et al. (1995), Amerine and Winkler (1944), Huglin (1978), Tonietto and Carbonneau (2004), INEGI (2020), Hersbach et al. (2020), IPCC (2006, 2018, 2019), Zhao et al. (2017).</td></tr>
+      <tr><td><b>◆ Lectura de Ratio Viña</b></td><td lang="es">Regla, agrupación o valor propuesto por la app (por ejemplo, el cuestionario del ciclo anual, el vínculo actividad–elemento, los perfiles de impacto, los cortes de clase). Editable.</td><td lang="en">Rule, grouping or value proposed by the app (for example, the annual-cycle questionnaire, activity–element links, impact profiles, class cut-offs). Editable.</td></tr>
+      <tr><td><b>Supuesto</b></td><td lang="es">Parámetro de escenario sin base publicada (precios, costos, mano de obra, factores de reducción del riesgo, β de la vid). Editable y marcado.</td><td lang="en">Scenario parameter with no published basis (prices, costs, labour, risk reduction factors, grapevine β). Editable and flagged.</td></tr>
+      <tr><td><b>Sin dato</b></td><td lang="es">El dato no existe en las fuentes ni lo capturó el usuario. La app no lo imputa.</td><td lang="en">The value is not in the sources and was not entered by the user. The app does not impute it.</td></tr>
+    </tbody></table></div>
+  <div class="spec">
+    <div><span lang="es">Caso de referencia</span><span lang="en">Reference case</span><p lang="es">Parcela cooperante de 1 ha, Mata de Zarza, Puente Nacional, Veracruz (30134-0018). Uva de mesa en establecimiento, enero de 2025 a febrero de 2026 (Mojica-Zárate et al., 2026).</p><p lang="en">1 ha cooperating plot, Mata de Zarza, Puente Nacional, Veracruz (30134-0018). Table grapes in establishment, January 2025 to February 2026 (Mojica-Zárate et al., 2026).</p></div>
+    <div><span lang="es">Cuestionario base</span><span lang="en">Baseline questionnaire</span><p lang="es">7 etapas, 37 pasos y 67 actividades; 75 elementos en 10 categorías; 28 amenazas.</p><p lang="en">7 stages, 37 steps and 67 activities; 75 elements in 10 categories; 28 hazards.</p></div>
+    <div><span lang="es">Territorio y clima</span><span lang="en">Territory and climate</span><p lang="es">32 estados, 2,478 municipios, 54,357 localidades (INEGI, 2020); temperaturas mensuales del usuario o, en el caso, de ERA5 1991–2020.</p><p lang="en">32 states, 2,478 municipalities, 54,357 localities (INEGI, 2020); monthly temperatures from the user or, in the case, from ERA5 1991–2020.</p></div>
+    <div><span lang="es">Implementación</span><span lang="en">Implementation</span><p lang="es">JavaScript sin bibliotecas; un archivo armado desde <code>src/</code> con <code>armar.py</code>.</p><p lang="en">Library-free JavaScript; one file built from <code>src/</code> with <code>armar.py</code>.</p></div>
+  </div>
+</section>
+
+<!-- ============================ 1 · DATOS ============================ -->
+<section class="chap" id="datos" data-toc="1" style="--c:var(--b1)">
+  <div class="chap-head"><span class="big">1</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Modelo de datos</h2><h2 lang="en">Data model</h2>
+    <p lang="es">Etapas, actividades, elementos, valor e impacto: los insumos de todo el cálculo.</p>
+    <p lang="en">Stages, activities, elements, value and impact: the inputs to every computation.</p>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="d-etapas" data-n="1.1"><span lang="es">Etapas y cuestionario base</span><span lang="en">Stages and baseline questionnaire</span></h3>
+  <p lang="es">No existe todavía un Stack de conocimiento local publicado para un viñedo productivo en México. El cuestionario base ordena el manejo en siete etapas. La de <b>establecimiento</b> (pasos 1–6, 15 actividades) se tomó de la guía de Mata de Zarza (Mojica-Zárate et al., 2026): elección del sitio y del material vegetal, propagación de esquejes, preparación del terreno, plantación, cuidados de la planta joven y formación. Las otras seis (pasos 7–37, 52 actividades) son una lectura de Ratio Viña del ciclo anual ordenada por los estadios principales de la escala BBCH de la vid (Lorenz et al., 1995) con las labores de los textos de viticultura general (Winkler et al., 1974; Keller, 2020). Algunas actividades se marcan como propias de un destino (mesa o vino).</p>
+  <p lang="en">There is no published local knowledge Stack yet for a producing vineyard in Mexico. The baseline questionnaire orders management into seven stages. The <b>establishment</b> stage (steps 1–6, 15 activities) was taken from the Mata de Zarza guide (Mojica-Zárate et al., 2026): choice of site and planting material, propagating cuttings, site preparation, planting, young-vine care and training. The other six (steps 7–37, 52 activities) are a Ratio Viña reading of the annual cycle ordered by the principal stages of the grapevine BBCH scale (Lorenz et al., 1995) with the operations in general viticulture texts (Winkler et al., 1974; Keller, 2020). Some activities are flagged as specific to a use (table or wine).</p>
+  <h3 id="d-actividades" data-n="1.2"><span lang="es">Actividades e incidencia</span><span lang="en">Activities and incidence</span></h3>
+  <p lang="es">Cada actividad <i>a</i> pertenece a un paso <i>p</i> y a una etapa. Tiene un tipo (tradicional o innovada) y un conjunto de elementos <i>E<sub>a</sub></i>. La matriz de incidencia <i>X</i> (elementos × actividades) vale 1 si el elemento participa. Las actividades del cuestionario son preguntas: solo entran al cálculo las que el usuario responde «sí» y las innovadas que agrega; las respondidas «no» y las no respondidas quedan fuera (nada se precarga). En el caso de Mata de Zarza entran 35 actividades: 27 del cuestionario y 8 innovadas.</p>
+  <p lang="en">Each activity <i>a</i> belongs to a step <i>p</i> and a stage. It has a type (traditional or innovated) and an element set <i>E<sub>a</sub></i>. The incidence matrix <i>X</i> (elements × activities) is 1 if the element takes part. Questionnaire activities are questions: only those answered “yes” and the innovated ones the user adds enter the computation; those answered “no” and unanswered ones stay out (nothing is preloaded). In the Mata de Zarza case 35 activities enter: 27 from the questionnaire and 8 innovated.</p>
+  <h3 id="d-valor" data-n="1.3"><span lang="es">Valor de un elemento</span><span lang="en">Element value</span></h3>
+  <p lang="es">El usuario califica cada elemento en cuatro dimensiones <i>k</i> ∈ {económica, de uso, cultural, ecológica}, de 0 a 5, con pesos <i>ω<sub>k</sub></i> ∈ [0, 3]. Si no hay calificación se usa el valor estructural, la participación relativa:</p>
+  <p lang="en">The user rates each element on four dimensions <i>k</i> ∈ {economic, use, cultural, ecological}, from 0 to 5, with weights <i>ω<sub>k</sub></i> ∈ [0, 3]. Without a rating the structural value, relative participation, is used:</p>
+  <div class="eq"><span><i>v<sub>i</sub></i> = Σ<sub>k</sub> ω<sub>k</sub> · c<sub>ik</sub> ⁄ Σ<sub>k</sub> 5 ω<sub>k</sub> &nbsp; o bien &nbsp; <i>v<sub>i</sub></i> = n<sub>i</sub> ⁄ max<sub>j</sub> n<sub>j</sub></span><span class="no">(1)</span></div>
+  <p class="where" lang="es">donde <i>c<sub>ik</sub></i> es la calificación y <i>n<sub>i</sub></i> el número de actividades en que participa el elemento <i>i</i>.</p>
+  <p class="where" lang="en">where <i>c<sub>ik</sub></i> is the rating and <i>n<sub>i</sub></i> the number of activities element <i>i</i> takes part in.</p>
+  <h3 id="d-impacto" data-n="1.4"><span lang="es">Impacto por compartimento</span><span lang="en">Impact by compartment</span></h3>
+  <p lang="es">Cinco compartimentos <i>c</i>: suelo, agua, atmósfera, vegetación y fauna. Cada elemento tiene un perfil de impacto (lectura de Ratio Viña con su justificación; por ejemplo, el acolchado +1 en suelo y agua); el impacto de la actividad es la suma recortada, o el valor que edite el usuario:</p>
+  <p lang="en">Five compartments <i>c</i>: soil, water, atmosphere, vegetation and fauna. Each element has an impact profile (a Ratio Viña reading with its rationale; for example, mulch +1 on soil and water); the activity’s impact is the clipped sum, or the value edited by the user:</p>
+  <div class="eq"><span><i>s<sub>ac</sub></i> = min(2, max(−2, Σ<sub>i ∈ E<sub>a</sub></sub> π<sub>ic</sub>))</span><span class="no">(2)</span></div>
+</section>
+
+<!-- ============================ 2 · CLIMA ============================ -->
+<section class="chap" id="clima" data-toc="2" style="--c:var(--b3)">
+  <div class="chap-head"><span class="big">2</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Índices de clima vitícola</h2><h2 lang="en">Viticultural climate indices</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="k-indices" data-n="2.1"><span lang="es">Definiciones</span><span lang="en">Definitions</span></h3>
+  <p lang="es">Con las temperaturas medias mensuales máxima <i>T</i><sub>x,m</sub>, mínima <i>T</i><sub>n,m</sub> y media <i>T</i><sub>m</sub> (si falta, <i>T</i><sub>m</sub> = (<i>T</i><sub>x,m</sub> + <i>T</i><sub>n,m</sub>)/2) y los días <i>d<sub>m</sub></i> de cada mes:</p>
+  <p lang="en">With monthly mean maximum <i>T</i><sub>x,m</sub>, minimum <i>T</i><sub>n,m</sub> and mean <i>T</i><sub>m</sub> temperatures (if missing, <i>T</i><sub>m</sub> = (<i>T</i><sub>x,m</sub> + <i>T</i><sub>n,m</sub>)/2) and the days <i>d<sub>m</sub></i> of each month:</p>
+  <div class="eq"><span>W = Σ<sub>m = abr…oct</sub> max(0, <i>T<sub>m</sub></i> − 10) · <i>d<sub>m</sub></i></span><span class="no">(3)</span></div>
+  <div class="eq"><span>HI = <i>k</i> Σ<sub>m = abr…sep</sub> max(0, [(<i>T<sub>m</sub></i> − 10) + (<i>T</i><sub>x,m</sub> − 10)] ⁄ 2) · <i>d<sub>m</sub></i></span><span class="no">(4)</span></div>
+  <div class="eq"><span>CI = <i>T</i><sub>n,sep</sub></span><span class="no">(5)</span></div>
+  <p class="where" lang="es">W: grados día de Winkler (Amerine y Winkler, 1944), con las regiones I (&lt; 1389), II (1389–1667), III (1667–1944), IV (1944–2222) y V (&gt; 2222). HI: índice heliotérmico de Huglin (1978), con <i>k</i> = 1 por debajo de 40° de latitud; clases de Tonietto y Carbonneau (2004): muy fresco ≤ 1500, fresco 1500–1800, templado 1800–2100, templado cálido 2100–2400, cálido 2400–3000 y muy cálido &gt; 3000. CI: índice de frescor nocturno de Tonietto y Carbonneau (2004) para el hemisferio norte: muy frescas ≤ 12 °C, frescas 12–14, templadas 14–18 y cálidas &gt; 18. La app calcula cada índice solo si tiene todos los meses que necesita.</p>
+  <p class="where" lang="en">W: Winkler degree-days (Amerine and Winkler, 1944), with regions I (&lt; 1389), II (1389–1667), III (1667–1944), IV (1944–2222) and V (&gt; 2222). HI: Huglin’s heliothermal index (1978), with <i>k</i> = 1 below 40° latitude; Tonietto and Carbonneau (2004) classes: very cool ≤ 1500, cool 1500–1800, temperate 1800–2100, warm temperate 2100–2400, warm 2400–3000 and very warm &gt; 3000. CI: Tonietto and Carbonneau’s (2004) cool-night index for the northern hemisphere: very cool ≤ 12 °C, cool 12–14, temperate 14–18 and warm &gt; 18. The app computes each index only if it has every month it needs.</p>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Validez fuera del clima templado</span><span class="bt" lang="en">Validity outside temperate climates</span>
+    <p lang="es">Los tres índices suponen una temporada de crecimiento fija en el hemisferio norte templado. Si min<sub>m</sub> <i>T<sub>m</sub></i> ≥ 15 °C, la app avisa que el clima no tiene invierno marcado: en el trópico la vid puede no entrar en reposo, el ciclo se gobierna con la poda y puede haber dos cosechas al año (Kok, 2014). En esos casos los índices sirven para comparar sitios, no para zonificar variedades. Esta regla es una lectura de Ratio Viña.</p>
+    <p lang="en">The three indices assume a fixed growing season in the temperate northern hemisphere. If min<sub>m</sub> <i>T<sub>m</sub></i> ≥ 15 °C, the app warns that the climate has no marked winter: in the tropics the vine may not go dormant, the cycle is driven by pruning and there may be two harvests a year (Kok, 2014). In such cases the indices serve to compare sites, not to zone varieties. This rule is a Ratio Viña reading.</p></div>
+  <h3 id="k-era5" data-n="2.2"><span lang="es">Datos del caso: reanálisis ERA5</span><span lang="en">Case data: ERA5 reanalysis</span></h3>
+  <p lang="es">La guía de Mata de Zarza no publica temperaturas, en la localidad no hay estación del Servicio Meteorológico Nacional y la del Centro Académico Regional de Huatusco corresponde a otro tipo de clima. Por eso el caso usa el reanálisis ERA5 (Hersbach et al., 2020): temperaturas diarias de 1991 a 2020 en la celda de 0.25° más cercana (19.25° N, 96.75° O), ajustadas a la altitud de la localidad (467 m) y descargadas del archivo histórico de Open-Meteo; las medias mensuales resultan de promediar los 30 años. Es una reconstrucción con modelo, no una medición en el sitio, y así se declara en el campo «fuente» del proyecto.</p>
+  <p lang="en">The Mata de Zarza guide publishes no temperatures, there is no National Weather Service station in the locality and the Huatusco Regional Academic Centre station belongs to another climate type. So the case uses the ERA5 reanalysis (Hersbach et al., 2020): daily temperatures from 1991 to 2020 in the nearest 0.25° cell (19.25° N, 96.75° W), adjusted to the locality’s altitude (467 m) and downloaded from the Open-Meteo historical archive; monthly means average the 30 years. It is a model-based reconstruction, not an on-site measurement, and the project’s “source” field says so.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>°C</th><th>E/J</th><th>F</th><th>M</th><th>A</th><th>M</th><th>J</th><th>J</th><th>A</th><th>S</th><th>O</th><th>N</th><th>D</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Máx.</td><td lang="en">Max.</td><td>23.7</td><td>25.4</td><td>27.5</td><td>29.8</td><td>30.7</td><td>30.1</td><td>29.8</td><td>29.8</td><td>29.0</td><td>27.9</td><td>25.9</td><td>24.3</td></tr>
+      <tr><td lang="es">Mín.</td><td lang="en">Min.</td><td>14.7</td><td>15.5</td><td>17.1</td><td>19.3</td><td>20.9</td><td>21.5</td><td>20.5</td><td>20.8</td><td>21.2</td><td>19.7</td><td>17.2</td><td>15.3</td></tr>
+      <tr><td lang="es">Media</td><td lang="en">Mean</td><td>19.1</td><td>20.3</td><td>22.2</td><td>24.5</td><td>25.7</td><td>25.6</td><td>25.1</td><td>25.1</td><td>24.8</td><td>23.7</td><td>21.4</td><td>19.7</td></tr>
+    </tbody></table></div>
+  <p class="where" lang="es">Con estos valores: W = 3,195 °C·d (región V), HI = 3,203 (muy cálido) y CI = 21.2 °C (noches cálidas); el mes más fresco tiene 19.1 °C, de modo que aparece el aviso de clima sin invierno marcado. El cálculo a mano está en el capítulo 12.</p>
+  <p class="where" lang="en">With these values: W = 3,195 °C·d (region V), HI = 3,203 (very warm) and CI = 21.2 °C (warm nights); the coolest month averages 19.1 °C, so the no-marked-winter warning appears. The hand calculation is in chapter 12.</p>
+  <figure data-fig="climag"><figcaption><span class="fn"></span><span lang="es"><b>El año del viñedo de Mata de Zarza</b> con las temperaturas de ERA5.</span><span lang="en"><b>The Mata de Zarza vineyard’s year</b> with ERA5 temperatures.</span></figcaption></figure>
+</section>
+
+<!-- ============================ 3 · RED ============================ -->
+<section class="chap" id="red" data-toc="3" style="--c:var(--b11)">
+  <div class="chap-head"><span class="big">3</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">La red ponderada y su estadística</h2><h2 lang="en">The weighted network and its statistics</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="r-peso" data-n="3.1"><span lang="es">Construcción de la red</span><span lang="en">Network construction</span></h3>
+  <p lang="es">Dos elementos se vinculan cuando concurren en una actividad; el peso acumula la media geométrica de sus valores en todas las actividades compartidas, más los lazos estructurales del catálogo (por ejemplo, viveros con esquejes, asesores con INIFAP), que entran solo si tocan un elemento de las actividades del proyecto:</p>
+  <p lang="en">Two elements are linked when they co-occur in an activity; the weight accumulates the geometric mean of their values over all shared activities, plus the catalogue’s structural ties (for example, nurseries with cuttings, advisers with INIFAP), which enter only if they touch an element of the project’s activities:</p>
+  <div class="eq"><span><i>w<sub>ij</sub></i> = Σ<sub>a : i, j ∈ E<sub>a</sub></sub> √(<i>v<sub>i</sub></i> · <i>v<sub>j</sub></i>)</span><span class="no">(6)</span></div>
+  <p class="where" lang="es">Un valor nulo se sustituye por 0.05 para no anular el vínculo. La opción «ocultar al nodo omnipresente» excluye a los viticultores (PM), que participan en casi todas las actividades.</p>
+  <p class="where" lang="en">A zero value is replaced by 0.05 so the link is not cancelled. The “hide the omnipresent node” option excludes growers (PM), who take part in almost every activity.</p>
+  <h3 id="r-centralidad" data-n="3.2"><span lang="es">Centralidades</span><span lang="en">Centralities</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Medida</th><th lang="en">Measure</th><th lang="es">Definición en la app</th><th lang="en">Definition in the app</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Grado ponderado</td><td lang="en">Weighted degree</td><td>s<sub>i</sub> = Σ<sub>j</sub> w<sub>ij</sub></td></tr>
+      <tr><td lang="es">Intermediación</td><td lang="en">Betweenness</td><td lang="es">Brandes (2001) con Dijkstra y longitud 1/w<sub>ij</sub>; sin normalizar (Freeman, 1978).</td><td lang="en">Brandes (2001) with Dijkstra and length 1/w<sub>ij</sub>; unnormalised (Freeman, 1978).</td></tr>
+      <tr><td lang="es">Cercanía</td><td lang="en">Closeness</td><td lang="es">Inverso de la distancia media 1/w a los nodos alcanzables, escalado por la fracción alcanzable (Wasserman y Faust, 1994).</td><td lang="en">Inverse of mean 1/w distance to reachable nodes, scaled by the reachable fraction (Wasserman & Faust, 1994).</td></tr>
+      <tr><td lang="es">Vector propio</td><td lang="en">Eigenvector</td><td lang="es">Iteración de potencias sobre la matriz ponderada (200 iteraciones, normalización por el máximo).</td><td lang="en">Power iteration on the weighted matrix (200 iterations, max normalisation).</td></tr>
+      <tr><td lang="es">Agrupamiento</td><td lang="en">Clustering</td><td lang="es">Coeficiente local no ponderado; camino medio y diámetro por BFS (Watts y Strogatz, 1998).</td><td lang="en">Unweighted local coefficient; mean path and diameter by BFS (Watts & Strogatz, 1998).</td></tr>
+    </tbody></table></div>
+  <h3 id="r-comunidades" data-n="3.3"><span lang="es">Comunidades y modularidad</span><span lang="en">Communities and modularity</span></h3>
+  <p lang="es">Las comunidades se detectan con el método de Louvain (Blondel et al., 2008), determinista: movimientos locales que maximizan ΔQ y agregación, repetidos hasta que Q no mejora. La modularidad (Newman, 2006):</p>
+  <p lang="en">Communities are detected with the Louvain method (Blondel et al., 2008), deterministic: local moves maximising ΔQ and aggregation, repeated until Q stops improving. Modularity (Newman, 2006):</p>
+  <div class="eq"><span><i>Q</i> = (1 ⁄ 2<i>m</i>) Σ<sub>ij</sub> [ <i>w<sub>ij</sub></i> − <i>s<sub>i</sub> s<sub>j</sub></i> ⁄ 2<i>m</i> ] δ(<i>c<sub>i</sub></i>, <i>c<sub>j</sub></i>)</span><span class="no">(7)</span></div>
+  <h3 id="r-phi" data-n="3.4"><span lang="es">Correlación φ</span><span lang="en">φ correlation</span></h3>
+  <p lang="es">Correlación de Pearson entre los vectores de incidencia de dos elementos en las <i>N</i> actividades (equivalente al coeficiente φ de una tabla 2 × 2):</p>
+  <p lang="en">Pearson correlation between two elements’ incidence vectors across the <i>N</i> activities (equivalent to the φ coefficient of a 2 × 2 table):</p>
+  <div class="eq"><span>φ<sub>ij</sub> = Σ<sub>a</sub>(<i>x<sub>ia</sub></i> − <i>x̄<sub>i</sub></i>)(<i>x<sub>ja</sub></i> − <i>x̄<sub>j</sub></i>) ⁄ (<i>N σ<sub>i</sub> σ<sub>j</sub></i>)</span><span class="no">(8)</span></div>
+  <figure data-fig="vistas"><figcaption><span class="fn"></span><span lang="es"><b>Una tabla del Tablero en la vista científica.</b></span><span lang="en"><b>A Dashboard table in the scientist view.</b></span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">Mata de Zarza</span><span class="bt" lang="en">Mata de Zarza</span>
+    <p lang="es">Red completa: 42 nodos, 175 vínculos, densidad 0.203, Q = 0.056. Sin PM: 41 nodos, 136 vínculos, Q = 0.1940 con 4 comunidades (suelo, agua y nutrición; conocimiento e instituciones; cuidado de la planta joven y saber local; material vegetal), agrupamiento medio 0.6761 y camino medio 2.1329. La mayor intermediación sin PM corresponde al conocimiento técnico (452.5), el conocimiento tácito (210.5), el suelo (202) y los esquejes (160).</p>
+    <p lang="en">Full network: 42 nodes, 175 links, density 0.203, Q = 0.056. Without PM: 41 nodes, 136 links, Q = 0.1940 with 4 communities (soil, water and nutrition; knowledge and institutions; young-vine care and local knowledge; planting material), mean clustering 0.6761 and mean path 2.1329. The highest betweenness without PM belongs to technical knowledge (452.5), tacit knowledge (210.5), soil (202) and cuttings (160).</p></div>
+</section>
+
+<!-- ============================ 4 · CLADOGRAMA ============================ -->
+<section class="chap" id="clado" data-toc="4" style="--c:var(--b8)">
+  <div class="chap-head"><span class="big">4</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Cladograma del vecino más cercano</h2><h2 lang="en">Nearest-neighbour cladogram</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="c-dist" data-n="4.1"><span lang="es">Distancia en la red</span><span lang="en">Network distance</span></h3>
+  <p lang="es">La distancia entre dos elementos es la longitud del camino más corto en la red completa, con longitud 1/w<sub>ij</sub> por vínculo (la misma métrica que la intermediación y la cercanía). El camino puede pasar por cualquier elemento aunque el árbol muestre un subconjunto (actores; actores e instituciones; todos). Los pares sin camino reciben 1.15 veces la mayor distancia observada.</p>
+  <p lang="en">The distance between two elements is the shortest-path length in the full network, with length 1/w<sub>ij</sub> per link (the same metric as betweenness and closeness). The path may pass through any element even if the tree shows a subset (actors; actors and institutions; all). Pairs with no path get 1.15 times the largest observed distance.</p>
+  <div class="eq"><span><i>d<sub>ij</sub></i> = min<sub>caminos i→j</sub> Σ<sub>(u,v)</sub> 1 ⁄ <i>w<sub>uv</sub></i></span><span class="no">(9)</span></div>
+  <h3 id="c-enlace" data-n="4.2"><span lang="es">Enlace simple y correlación cofenética</span><span lang="en">Single linkage and cophenetic correlation</span></h3>
+  <p lang="es">Agrupamiento jerárquico aglomerativo por enlace simple (Sneath, 1957; Sokal y Sneath, 1963): en cada paso se unen los dos grupos con el par de miembros más próximo, <i>D</i>(<i>A</i>, <i>B</i>) = min<sub>i∈A, j∈B</sub> <i>d<sub>ij</sub></i>. La fidelidad del árbol se mide con la correlación cofenética de Sokal y Rohlf (1962), la correlación de Pearson entre <i>d<sub>ij</sub></i> y la altura a la que <i>i</i> y <i>j</i> se unen.</p>
+  <p lang="en">Agglomerative hierarchical clustering by single linkage (Sneath, 1957; Sokal & Sneath, 1963): at each step the two groups with the closest pair of members merge, <i>D</i>(<i>A</i>, <i>B</i>) = min<sub>i∈A, j∈B</sub> <i>d<sub>ij</sub></i>. Tree fidelity is measured with Sokal and Rohlf’s (1962) cophenetic correlation, the Pearson correlation between <i>d<sub>ij</sub></i> and the height at which <i>i</i> and <i>j</i> merge.</p>
+  <figure data-fig="clado"><figcaption><span class="fn"></span><span lang="es"><b>Cladograma de actores e instituciones de Mata de Zarza.</b> Viticultores y jornaleros son vecinos mutuos.</span><span lang="en"><b>Mata de Zarza actors and institutions cladogram.</b> Growers and labourers are mutual neighbours.</span></figcaption></figure>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Subconjunto</th><th lang="en">Subset</th><th class="r">n</th><th class="r" lang="es">r cofenética</th><th class="r" lang="en">Cophenetic r</th><th class="r" lang="es">|Δr| frente a SciPy</th><th class="r" lang="en">|Δr| vs SciPy</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Actores</td><td lang="en">Actors</td><td class="r">7</td><td class="r">0.9646</td><td class="r">3.3 × 10⁻¹⁶</td></tr>
+      <tr><td lang="es">Actores e instituciones</td><td lang="en">Actors and institutions</td><td class="r">10</td><td class="r">0.9199</td><td class="r">1.1 × 10⁻¹⁶</td></tr>
+      <tr><td lang="es">Todos los elementos</td><td lang="en">All elements</td><td class="r">42</td><td class="r">0.9750</td><td class="r">7.0 × 10⁻¹⁵</td></tr>
+    </tbody></table></div>
+  <p class="where" lang="es">Las alturas de unión coinciden exactamente con las de SciPy en los tres subconjuntos (capítulo 10).</p>
+  <p class="where" lang="en">Merge heights match SciPy exactly in all three subsets (chapter 10).</p>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Por qué enlace simple?</span><span class="bt" lang="en">Why single linkage?</span>
+    <p lang="es">Porque responde directamente a la pregunta «¿quién es el vecino más cercano de quién?»: la primera unión de cada elemento es con su vecino más cercano, y el árbol coincide con el árbol de expansión mínima de las distancias.</p>
+    <p lang="en">Because it directly answers “who is whose nearest neighbour?”: each element’s first merge is with its nearest neighbour, and the tree matches the minimum spanning tree of the distances.</p></div>
+</section>
+
+<!-- ============================ 5 · SOSTENIBILIDAD ============================ -->
+<section class="chap" id="sost" data-toc="5" style="--c:var(--b12)">
+  <div class="chap-head"><span class="big">5</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Sostenibilidad, ODS y huella de carbono</h2><h2 lang="en">Sustainability, SDGs and carbon footprint</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="s-is" data-n="5.1"><span lang="es">Índice de sostenibilidad de una actividad</span><span lang="en">Activity sustainability index</span></h3>
+  <div class="eq"><span>IS<sub>a</sub> = (1 ⁄ 5) Σ<sub>c</sub> (<i>s<sub>ac</sub></i> + 2) ⁄ 4 &nbsp; ∈ [0, 1]</span><span class="no">(10)</span></div>
+  <p class="where" lang="es">0.5 es neutra. El IS del sistema es la media de sus actividades; también se reporta por paso y por tipo (tradicional o innovada). En Mata de Zarza: 0.51.</p>
+  <p class="where" lang="en">0.5 is neutral. The system IS is the mean of its activities; it is also reported by step and by type (traditional or innovated). In Mata de Zarza: 0.51.</p>
+  <h3 id="s-sarandon" data-n="5.2"><span lang="es">Índice general de Sarandón</span><span lang="en">Sarandón’s general index</span></h3>
+  <p lang="es">Siguiendo a Sarandón (2002), cada dimensión se expresa en 0–4 con subindicadores; su traducción a datos de la app es una lectura de Ratio Viña:</p>
+  <p lang="en">Following Sarandón (2002), each dimension is expressed on 0–4 through sub-indicators; their translation into app data is a Ratio Viña reading:</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Dimensión</th><th lang="en">Dimension</th><th lang="es">Subindicadores (0–4)</th><th lang="en">Sub-indicators (0–4)</th><th class="r">Mata de Zarza</th></tr></thead>
+    <tbody>
+      <tr><td>IK</td><td lang="es">A margen 4(I − C)/I · B productos distintos (tope 4) · C 4(1 − pasos con insumos externos ⁄ pasos)</td><td lang="en">A margin 4(I − C)/I · B distinct products (cap 4) · C 4(1 − steps with external inputs ⁄ steps)</td><td class="r">1.65 (A sin dato, B 0, C 3.29)</td></tr>
+      <tr><td>IE</td><td lang="es">Media de (<i>s<sub>ac</sub></i> + 2) en actividades y compartimentos</td><td lang="en">Mean of (<i>s<sub>ac</sub></i> + 2) across activities and compartments</td><td class="r">2.03</td></tr>
+      <tr><td>ISC</td><td lang="es">A etapas con saber local · B etapas con conocimiento técnico · C instituciones vinculadas</td><td lang="en">A stages with local knowledge · B stages with technical knowledge · C linked institutions</td><td class="r">2.93 (3.20, 3.20, 2.40)</td></tr>
+    </tbody></table></div>
+  <div class="eq"><span>ISGen = (IK + IE + ISC) ⁄ 3 ; &nbsp; sostenible si ISGen &gt; 2 y min(IK, IE, ISC) ≥ 2</span><span class="no">(11)</span></div>
+  <p class="where" lang="es">En Mata de Zarza, ISGen = 2.20, pero IK = 1.65 &lt; 2: todavía no es sostenible. IK-B vale 0 porque ninguna actividad practicada produce uva (la parcela no ha cosechado) e IK-A queda sin dato hasta capturar ingresos y costos; IK promedia los subindicadores disponibles.</p>
+  <p class="where" lang="en">In Mata de Zarza, ISGen = 2.20, but IK = 1.65 &lt; 2: not yet sustainable. IK-B is 0 because no practised activity produces grapes (the plot has not harvested) and IK-A stays as no data until income and costs are entered; IK averages the available sub-indicators.</p>
+  <h3 id="s-ods" data-n="5.3"><span lang="es">Cumplimiento de los ODS</span><span lang="en">SDG attainment</span></h3>
+  <p lang="es">Para cada ODS se promedian las evidencias disponibles: ambientales (media de (<i>s<sub>ac</sub></i> + 2)/4 en los compartimentos ligados: ODS 2, 6, 12, 13 y 15) y estructurales (actividades con conocimiento técnico o asesoría, ODS 4; instituciones vinculadas, ODS 17; margen, ODS 1 y 8). Sin evidencia, «sin dato». La relación compartimento–ODS es una lectura de Ratio Viña. En Mata de Zarza hay evidencia para 7 de los 17 (2, 4, 6, 12, 13, 15 y 17).</p>
+  <p lang="en">For each SDG the available evidence is averaged: environmental (mean of (<i>s<sub>ac</sub></i> + 2)/4 over the linked compartments: SDGs 2, 6, 12, 13 and 15) and structural (activities with technical knowledge or advice, SDG 4; linked institutions, SDG 17; margin, SDGs 1 and 8). Without evidence, “no data”. The compartment–SDG mapping is a Ratio Viña reading. In Mata de Zarza 7 of the 17 have evidence (2, 4, 6, 12, 13, 15 and 17).</p>
+  <h3 id="s-huella" data-n="5.4"><span lang="es">Huella de carbono por hectárea</span><span lang="en">Carbon footprint per hectare</span></h3>
+  <div class="eq"><span>CO₂e = 2.68 <i>D</i> + <i>N</i> (0.010 + 0.11 × 0.010 + 0.24 × 0.011) × 44⁄28 × 273 + 0.20 <i>U</i> × 44⁄12</span><span class="no">(12)</span></div>
+  <p class="where" lang="es"><i>D</i>: litros de diésel; <i>N</i>: kg de N aplicado; <i>U</i>: kg de urea. Factores por defecto del IPCC (2006; refinamiento 2019): EF1, FracGASF × EF4 y FracLEACH × EF5; GWP100 del N₂O = 273 (AR6, Forster et al., 2021). Dividido entre el rendimiento da kg CO₂e por tonelada.</p>
+  <p class="where" lang="en"><i>D</i>: litres of diesel; <i>N</i>: kg of N applied; <i>U</i>: kg of urea. IPCC default factors (2006; 2019 refinement): EF1, FracGASF × EF4 and FracLEACH × EF5; N₂O GWP100 = 273 (AR6, Forster et al., 2021). Divided by yield it gives kg CO₂e per tonne.</p>
+</section>
+
+<!-- ============================ 6 · REGENERACIÓN ============================ -->
+<section class="chap" id="regen" data-toc="6" style="--c:var(--b6)">
+  <div class="chap-head"><span class="big">6</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Índice de regeneración</h2><h2 lang="en">Regeneration index</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <p lang="es">Ocho indicadores ordinales <i>s<sub>k</sub></i> ∈ {0, …, 4} agrupan los cuatro principios de salud del suelo del USDA-NRCS (mínima perturbación, suelo cubierto, diversidad, raíces vivas) y los procesos que la literatura de agricultura regenerativa añade (integración animal, menos insumos de síntesis, materia orgánica; Newton et al., 2020; Schreefel et al., 2020), más el saber local.</p>
+  <p lang="en">Eight ordinal indicators <i>s<sub>k</sub></i> ∈ {0, …, 4} group the four USDA-NRCS soil health principles (minimal disturbance, soil cover, diversity, living roots) and the processes the regenerative agriculture literature adds (livestock integration, fewer synthetic inputs, organic matter; Newton et al., 2020; Schreefel et al., 2020), plus local knowledge.</p>
+  <div class="eq"><span>IR = Σ<sub>k=1</sub><sup>8</sup> <i>s<sub>k</sub></i> ⁄ 32 &nbsp; ∈ [0, 1]</span><span class="no">(13)</span></div>
+  <h3 id="g-reglas" data-n="6.1"><span lang="es">Reglas de los valores sugeridos</span><span lang="en">Suggested-value rules</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Indicador</th><th lang="en">Indicator</th><th lang="es">Regla (lectura de Ratio Viña)</th><th lang="en">Rule (Ratio Viña reading)</th><th class="r">Mata de Zarza</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Labranza mínima</td><td lang="en">Minimal tillage</td><td lang="es">n actividades con arado, subsuelo o rastra (excluye decisiones): 0→4, 1→3, 2→2, 3–4→1, ≥5→0</td><td lang="en">n activities with plough, subsoiler or harrow (decisions excluded): 0→4, 1→3, 2→2, 3–4→1, ≥5→0</td><td class="r">4 (n = 0)</td></tr>
+      <tr><td lang="es">Suelo cubierto</td><td lang="en">Soil cover</td><td lang="es">2 si hay actividades con sarmientos, cubierta o acolchado de impacto positivo en suelo; si no, 1</td><td lang="en">2 if there are activities with prunings, cover or mulch with positive soil impact; otherwise 1</td><td class="r">2</td></tr>
+      <tr><td lang="es">Diversidad</td><td lang="en">Diversity</td><td lang="es">especies según el sistema (riego tecnificado 1, diversificado 4, traspatio 5…): 1→0, 2→1, 3→2, 4–5→3, ≥6→4</td><td lang="en">species by system (pressurised irrigation 1, diversified 4, backyard 5…): 1→0, 2→1, 3→2, 4–5→3, ≥6→4</td><td class="r">0</td></tr>
+      <tr><td lang="es">Raíces vivas</td><td lang="en">Living roots</td><td lang="es">3 por ser la vid perenne</td><td lang="en">3 since the vine is perennial</td><td class="r">3</td></tr>
+      <tr><td lang="es">Integración animal</td><td lang="en">Livestock integration</td><td lang="es">3 si hay animales; 2 si se produce forraje; si no, 0</td><td lang="en">3 with animals; 2 if fodder is produced; otherwise 0</td><td class="r">0</td></tr>
+      <tr><td lang="es">Menos síntesis</td><td lang="en">Fewer synthetics</td><td>round(4 (1 − S ⁄ (S + B)))</td><td class="r">2 (S = 2, B = 3)</td></tr>
+      <tr><td lang="es">Materia orgánica</td><td lang="en">Organic matter</td><td lang="es">1, 2 o 3 según actividades que devuelven residuos (0, 1, ≥2), +1 con análisis de suelo</td><td lang="en">1, 2 or 3 by residue-returning activities (0, 1, ≥2), +1 with soil testing</td><td class="r">2</td></tr>
+      <tr><td lang="es">Saber local</td><td lang="en">Local knowledge</td><td lang="es">min(4, round(8 f)), f = fracción de actividades con saber tácito, cultural o familiar</td><td lang="en">min(4, round(8 f)), f = share of activities with tacit, cultural or family knowledge</td><td class="r">3 (f = 0.34)</td></tr>
+    </tbody></table></div>
+  <p lang="es">Con los valores sugeridos, IR = 16/32 = 0.50 (50, en transición regenerativa). Clases: &lt; 0.25 degradante; 0.25–0.49 convencional; 0.50–0.74 en transición regenerativa; ≥ 0.75 regenerativo. La trayectoria se mide como ΔIR frente a una línea base guardada y, si hay análisis de suelo, como Δ% de materia orgánica.</p>
+  <p lang="en">With the suggested values, IR = 16/32 = 0.50 (50, regenerative transition). Classes: &lt; 0.25 degrading; 0.25–0.49 conventional; 0.50–0.74 regenerative transition; ≥ 0.75 regenerative. Trajectory is measured as ΔIR from a saved baseline and, with soil tests, as Δ% organic matter.</p>
+  <figure data-fig="perillas"><figcaption><span class="fn"></span><span lang="es"><b>Los ocho indicadores</b> con su valor sugerido y su motivo.</span><span lang="en"><b>The eight indicators</b> with their suggested value and reason.</span></figcaption></figure>
+</section>
+
+<!-- ============================ 7 · RIESGO ============================ -->
+<section class="chap" id="riesgo" data-toc="7" style="--c:var(--b7)">
+  <div class="chap-head"><span class="big">7</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Riesgo y capacidad adaptativa</h2><h2 lang="en">Risk and adaptive capacity</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <p lang="es">Veintiocho amenazas <i>h</i> en seis categorías. Cada una tiene probabilidad <i>P<sub>h</sub></i> e impacto <i>I<sub>h</sub></i> en 1–5 (matriz de 5 × 5; IEC 31010:2019, dentro del proceso de ISO 31000:2018) y un control <i>c<sub>h</sub></i> ∈ {0, 1, 2, 3}. Siguiendo el marco del IPCC (2014), el riesgo depende de la amenaza y de la vulnerabilidad, que la capacidad adaptativa reduce:</p>
+  <p lang="en">Twenty-eight hazards <i>h</i> in six categories. Each has likelihood <i>P<sub>h</sub></i> and impact <i>I<sub>h</sub></i> on 1–5 (5 × 5 matrix; IEC 31010:2019, within the ISO 31000:2018 process) and a control <i>c<sub>h</sub></i> ∈ {0, 1, 2, 3}. Following the IPCC (2014) framework, risk depends on the hazard and on vulnerability, which adaptive capacity reduces:</p>
+  <div class="eq"><span><i>r<sub>h</sub></i> = <i>P<sub>h</sub> I<sub>h</sub></i> (1 − 0.4 CA)(1 − 0.15 <i>c<sub>h</sub></i>) ; &nbsp; índice = Σ<sub>h</sub> <i>r<sub>h</sub></i> ⁄ 25<i>H</i></span><span class="no">(14)</span></div>
+  <div class="eq"><span>CA = mean(IR, IK<sub>B</sub>⁄4, ISC<sub>B</sub>⁄4, ISC<sub>C</sub>⁄4)</span><span class="no">(15)</span></div>
+  <p class="where" lang="es">Los factores 0.4 y 0.15 son supuestos de Ratio Viña. Niveles de <i>r</i>: ≤ 4 bajo, 5–9 medio, 10–15 alto, ≥ 16 muy alto. Los valores sugeridos derivan del escenario tendencial (calentamiento, costos, precio, mano de obra) y de la fracción de actividades con insumos comprados o con saber local; lo demás queda en 3.</p>
+  <p class="where" lang="en">The 0.4 and 0.15 factors are Ratio Viña assumptions. Levels of <i>r</i>: ≤ 4 low, 5–9 medium, 10–15 high, ≥ 16 very high. Suggested values derive from the trend scenario (warming, costs, price, labour) and the share of activities with purchased inputs or local knowledge; the rest stays at 3.</p>
+  <h3 id="k-catalogo" data-n="7.1"><span lang="es">Catálogo de amenazas</span><span lang="en">Hazard catalogue</span></h3>
+  <p lang="es">Cada amenaza se liga a los elementos que la transmiten (lectura de Ratio Viña) para mostrar el riesgo en los bloques de Elementos y Tablero. Las nueve agregadas en la versión 0.2.0 llevan su fuente junto al nombre.</p>
+  <p lang="en">Each hazard is linked to the elements that transmit it (a Ratio Viña reading) to show risk in the Elements and Dashboard blocks. The nine added in version 0.2.0 show their source next to the name.</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Categoría</th><th lang="en">Category</th><th lang="es">Amenazas</th><th lang="en">Hazards</th><th lang="es">Fuente de las nuevas</th><th lang="en">Source of the new ones</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Climáticas (7)</td><td lang="en">Climatic (7)</td><td lang="es">Sequía o lluvias tardías · helada · granizo · lluvias intensas · ola de calor · ciclones · <b>falta de frío invernal</b></td><td lang="en">Drought or late rains · frost · hail · heavy rain · heatwave · cyclones · <b>lack of winter chill</b></td><td>Kok (2014)</td></tr>
+      <tr><td lang="es">Biológicas (8)</td><td lang="en">Biological (8)</td><td lang="es">Plagas · enfermedades de hongos · <b>enfermedad de Pierce</b> · <b>hormiga cortadora</b> · <b>daño por animales</b> · <b>material vegetal enfermo o mal enraizado</b> · <b>deriva de herbicidas</b> · malezas</td><td lang="en">Pests · fungal diseases · <b>Pierce’s disease</b> · <b>leaf-cutter ants</b> · <b>animal damage</b> · <b>diseased or poorly rooted material</b> · <b>herbicide drift</b> · weeds</td><td lang="es">Keller (2020); Mojica-Zárate et al. (2026); deriva: lectura de Ratio Viña</td><td lang="en">Keller (2020); Mojica-Zárate et al. (2026); drift: Ratio Viña reading</td></tr>
+      <tr><td lang="es">Mercado (4)</td><td lang="en">Market (4)</td><td lang="es">Caída del precio · alza de insumos · <b>cultivo nuevo sin mercado</b> · intermediarismo</td><td lang="en">Price fall · input cost rise · <b>new crop without a market</b> · middlemen</td><td>Mojica-Zárate et al. (2026)</td></tr>
+      <tr><td lang="es">Sociales (4)</td><td lang="en">Social (4)</td><td lang="es">Falta de mano de obra y de relevo · <b>abandono del cultivo</b> · pérdida del saber local · inseguridad</td><td lang="en">Labour shortage and succession · <b>abandoning the crop</b> · loss of local knowledge · insecurity</td><td>Mojica-Zárate et al. (2026)</td></tr>
+      <tr><td lang="es">Institucionales (2)</td><td lang="en">Institutional (2)</td><td lang="es">Retiro de programas y apoyos · conflictos de tenencia</td><td lang="en">Withdrawal of programmes and support · tenure conflicts</td><td>—</td></tr>
+      <tr><td lang="es">Recursos naturales (3)</td><td lang="en">Natural resources (3)</td><td lang="es">Erosión · escasez de agua · <b>suelos arcillosos o mal drenados</b></td><td lang="en">Erosion · water scarcity · <b>clay or poorly drained soils</b></td><td>Mojica-Zárate et al. (2026)</td></tr>
+    </tbody></table></div>
+  <h3 id="k-sugerencia" data-n="7.2"><span lang="es">Reglas de los valores sugeridos</span><span lang="en">Suggested-value rules</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Amenaza</th><th lang="en">Hazard</th><th lang="es">Regla</th><th lang="en">Rule</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Sequía, ola de calor</td><td lang="en">Drought, heatwave</td><td lang="es"><i>P</i> = 4 si el calentamiento tendencial es ≥ 0.2 °C por década; si no, 3</td><td lang="en"><i>P</i> = 4 if trend warming is ≥ 0.2 °C per decade; otherwise 3</td></tr>
+      <tr><td lang="es">Alza de insumos</td><td lang="en">Input cost rise</td><td lang="es"><i>P</i> = 4 si el costo tendencial crece ≥ 2 %/año; <i>I</i> = 1 + round(4 min(1, 2<i>f<sub>s</sub></i>)), <i>f<sub>s</sub></i> = fracción de actividades con insumos comprados</td><td lang="en"><i>P</i> = 4 if trend cost grows ≥ 2 %/yr; <i>I</i> = 1 + round(4 min(1, 2<i>f<sub>s</sub></i>)), <i>f<sub>s</sub></i> = share of activities with purchased inputs</td></tr>
+      <tr><td lang="es">Mano de obra</td><td lang="en">Labour</td><td lang="es"><i>P</i> = 4 si <i>g<sub>L</sub></i> ≤ −1.5 %; 3 si <i>g<sub>L</sub></i> &lt; 0; si no, 2</td><td lang="en"><i>P</i> = 4 if <i>g<sub>L</sub></i> ≤ −1.5 %; 3 if <i>g<sub>L</sub></i> &lt; 0; otherwise 2</td></tr>
+      <tr><td lang="es">Caída del precio</td><td lang="en">Price fall</td><td lang="es"><i>P</i> = 4 si el precio tendencial baja; si no, 3</td><td lang="en"><i>P</i> = 4 if the trend price falls; otherwise 3</td></tr>
+      <tr><td lang="es">Pérdida del saber</td><td lang="en">Knowledge loss</td><td lang="es"><i>I</i> = 1 + round(4 min(1, 2<i>f<sub>k</sub></i>)), <i>f<sub>k</sub></i> = fracción de actividades con saber tácito, cultural o familiar</td><td lang="en"><i>I</i> = 1 + round(4 min(1, 2<i>f<sub>k</sub></i>)), <i>f<sub>k</sub></i> = share of activities with tacit, cultural or family knowledge</td></tr>
+      <tr><td lang="es">Las demás</td><td lang="en">All others</td><td lang="es"><i>P</i> = 3, <i>I</i> = 3 (moderado; se ajusta al viñedo)</td><td lang="en"><i>P</i> = 3, <i>I</i> = 3 (moderate; adjust to the vineyard)</td></tr>
+    </tbody></table></div>
+  <figure data-fig="riesgos"><figcaption><span class="fn"></span><span lang="es"><b>Índice y matriz de riesgos de Mata de Zarza.</b> Índice 33, CA = 0.475.</span><span lang="en"><b>Mata de Zarza risk index and matrix.</b> Index 33, CA = 0.475.</span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">Mata de Zarza</span><span class="bt" lang="en">Mata de Zarza</span>
+    <p lang="es">CA = (0.50 + 0 + 0.80 + 0.60)/4 = 0.475. Las amenazas que describe la guía llevan valores leídos de su texto (◆): escasez de agua y abandono del cultivo, <i>P</i> = 4 e <i>I</i> = 4; hormiga cortadora, cultivo nuevo sin mercado y falta de frío invernal, 4 y 3; daño por animales, material vegetal y suelos arcillosos, 3 y 3. La helada se desactiva. Con ello, 27 amenazas activas, 9 de nivel alto e índice 33.</p>
+    <p lang="en">CA = (0.50 + 0 + 0.80 + 0.60)/4 = 0.475. The hazards the guide describes carry values read from its text (◆): water scarcity and abandoning the crop, <i>P</i> = 4 and <i>I</i> = 4; leaf-cutter ants, new crop without a market and lack of winter chill, 4 and 3; animal damage, planting material and clay soils, 3 and 3. Frost is switched off. Hence 27 active hazards, 9 of high level and an index of 33.</p></div>
+</section>
+
+<!-- ============================ 8 · PROSPECTIVA ============================ -->
+<section class="chap" id="prosp" data-toc="8" style="--c:var(--b13)">
+  <div class="chap-head"><span class="big">8</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Modelo de escenarios</h2><h2 lang="en">Scenario model</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <p lang="es">Tres escenarios exploratorios (Godet y Durance, 2011) se simulan año por año, <i>t</i> = 0…10. La adopción de las actividades innovadas sigue una logística (Rogers, 2003) que parte de la fracción actual <i>a</i><sub>0</sub>:</p>
+  <p lang="en">Three exploratory scenarios (Godet & Durance, 2011) are simulated year by year, <i>t</i> = 0…10. Adoption of innovated activities follows a logistic curve (Rogers, 2003) starting from the current share <i>a</i><sub>0</sub>:</p>
+  <div class="eq"><span><i>A</i>(<i>t</i>) = <i>a</i><sub>0</sub> + (<i>A</i><sub>máx</sub> − <i>a</i><sub>0</sub>) [σ(<i>t</i> − <i>t</i><sub>50</sub>) − σ(−<i>t</i><sub>50</sub>)] ⁄ [1 − σ(−<i>t</i><sub>50</sub>)]</span><span class="no">(16)</span></div>
+  <div class="eq"><span><i>Y</i>(<i>t</i>) = 100 [1 + β ΔT <i>t</i>⁄10] · (1 − <i>p</i>(<i>t</i>) <i>L</i><sub>ef</sub>)⁄(1 − <i>p</i><sub>0</sub> <i>L</i><sub>ef</sub>) · [1 + <i>e<sub>Y</sub></i>(<i>A</i> − <i>a</i><sub>0</sub>)] · [1 − 0.5 déficit(<i>t</i>)]</span><span class="no">(17)</span></div>
+  <div class="eq"><span><i>L</i><sub>ef</sub> = <i>L</i><sub>ext</sub>(1 − 0.5 IR<sub>0</sub>) ; &nbsp; IR(<i>t</i>) = IR<sub>0</sub> + 0.5 (1 − IR<sub>0</sub>)(<i>A</i> − <i>a</i><sub>0</sub>)</span><span class="no">(18)</span></div>
+  <p class="where" lang="es">β: cambio de rendimiento por °C. Zhao et al. (2017) lo publican para maíz, trigo, arroz y soya, no para la vid; Ratio Viña usa −4.9 % como supuesto editable. ΔT: calentamiento por década (0.1, 0.2 y 0.3 °C; intervalo probable de IPCC, 2018); <i>p</i>(<i>t</i>): probabilidad de año extremo, lineal de <i>p</i><sub>0</sub> a <i>p</i><sub>ext</sub>. Precio y costo crecen a tasas constantes; la mano de obra disponible decrece a tasa <i>g<sub>L</sub></i> y la requerida baja con la adopción. El riesgo en <i>t</i> recalcula (14) con <i>P</i><sub>clima</sub> + 5(<i>p</i>(<i>t</i>) − <i>p</i><sub>0</sub>) y CA con IR(<i>t</i>). Los coeficientes 0.5 son supuestos.</p>
+  <p class="where" lang="en">β: yield change per °C. Zhao et al. (2017) publish it for maize, wheat, rice and soybean, not for grapevine; Ratio Viña uses −4.9 % as an editable assumption. ΔT: warming per decade (0.1, 0.2 and 0.3 °C; IPCC, 2018 likely range); <i>p</i>(<i>t</i>): extreme-year probability, linear from <i>p</i><sub>0</sub> to <i>p</i><sub>ext</sub>. Price and cost grow at constant rates; available labour declines at rate <i>g<sub>L</sub></i> and required labour falls with adoption. Risk at <i>t</i> recomputes (14) with <i>P</i><sub>climate</sub> + 5(<i>p</i>(<i>t</i>) − <i>p</i><sub>0</sub>) and CA with IR(<i>t</i>). The 0.5 coefficients are assumptions.</p>
+  <h3 id="e-resto" data-n="8.1"><span lang="es">Precio, costo, mano de obra y sostenibilidad</span><span lang="en">Price, cost, labour and sustainability</span></h3>
+  <div class="eq"><span><i>Pr</i>(<i>t</i>) = 100 (1 + <i>g<sub>P</sub></i>)<sup><i>t</i></sup> ; &nbsp; <i>C</i>(<i>t</i>) = 100 (1 + <i>g<sub>C</sub></i>)<sup><i>t</i></sup> (1 − <i>s<sub>C</sub></i> Δ<i>A</i>) ; &nbsp; rel = 100 (<i>Pr</i> · <i>Y</i>⁄100) ⁄ <i>C</i></span><span class="no">(19)</span></div>
+  <div class="eq"><span><i>L<sub>d</sub></i>(<i>t</i>) = (1 + <i>g<sub>L</sub></i>)<sup><i>t</i></sup> ; &nbsp; <i>L<sub>n</sub></i>(<i>t</i>) = 1 − <i>r<sub>L</sub></i> Δ<i>A</i> ; &nbsp; déficit = max(0, <i>L<sub>n</sub></i> − <i>L<sub>d</sub></i>) ⁄ <i>L<sub>n</sub></i></span><span class="no">(20)</span></div>
+  <div class="eq"><span>IS(<i>t</i>) = IS<sub>trad</sub> (1 − <i>A</i>) + IS<sub>inn</sub> <i>A</i></span><span class="no">(21)</span></div>
+  <p class="where" lang="es">Δ<i>A</i> = <i>A</i>(<i>t</i>) − <i>a</i><sub>0</sub>. Si el usuario capturó ingreso <i>I</i><sub>0</sub> y costo <i>C</i><sub>0</sub> por hectárea (Bloque 9), el ingreso neto es <i>I</i><sub>0</sub> (<i>Pr</i> · <i>Y</i>⁄100)⁄100 − <i>C</i><sub>0</sub> <i>C</i>⁄100.</p>
+  <p class="where" lang="en">Δ<i>A</i> = <i>A</i>(<i>t</i>) − <i>a</i><sub>0</sub>. If the user entered income <i>I</i><sub>0</sub> and cost <i>C</i><sub>0</sub> per hectare (Block 9), net income is <i>I</i><sub>0</sub> (<i>Pr</i> · <i>Y</i>⁄100)⁄100 − <i>C</i><sub>0</sub> <i>C</i>⁄100.</p>
+  <h3 id="e-param" data-n="8.2"><span lang="es">Parámetros por omisión</span><span lang="en">Default parameters</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Parámetro</th><th lang="en">Parameter</th><th class="r" lang="es">Deseable</th><th class="r" lang="en">Desirable</th><th class="r" lang="es">Tendencial</th><th class="r" lang="en">Trend</th><th class="r" lang="es">No deseado</th><th class="r" lang="en">Undesired</th><th lang="es">Base</th><th lang="en">Basis</th></tr></thead>
+    <tbody>
+      <tr><td lang="es"><i>g<sub>P</sub></i> precio real (%/año)</td><td lang="en"><i>g<sub>P</sub></i> real price (%/yr)</td><td class="r">+1</td><td class="r">0</td><td class="r">−1.5</td><td lang="es">supuesto</td><td lang="en">assumption</td></tr>
+      <tr><td lang="es"><i>g<sub>C</sub></i> costo real (%/año)</td><td lang="en"><i>g<sub>C</sub></i> real cost (%/yr)</td><td class="r">+1</td><td class="r">+2</td><td class="r">+4</td><td lang="es">supuesto</td><td lang="en">assumption</td></tr>
+      <tr><td lang="es">ΔT (°C por década)</td><td lang="en">ΔT (°C per decade)</td><td class="r">0.1</td><td class="r">0.2</td><td class="r">0.3</td><td>IPCC (2018)</td></tr>
+      <tr><td lang="es"><i>p</i><sub>ext</sub> año extremo a 10 años</td><td lang="en"><i>p</i><sub>ext</sub> extreme year by year 10</td><td class="r">0.12</td><td class="r">0.18</td><td class="r">0.25</td><td lang="es">supuesto</td><td lang="en">assumption</td></tr>
+      <tr><td lang="es"><i>g<sub>L</sub></i> mano de obra (%/año)</td><td lang="en"><i>g<sub>L</sub></i> labour (%/yr)</td><td class="r">−0.5</td><td class="r">−1.5</td><td class="r">−3</td><td lang="es">supuesto</td><td lang="en">assumption</td></tr>
+      <tr><td lang="es"><i>A</i><sub>máx</sub> adopción máxima</td><td lang="en"><i>A</i><sub>max</sub> maximum adoption</td><td class="r">0.9</td><td class="r">0.5</td><td class="r">0.15</td><td lang="es">supuesto</td><td lang="en">assumption</td></tr>
+      <tr><td lang="es"><i>t</i><sub>50</sub> año de media adopción</td><td lang="en"><i>t</i><sub>50</sub> half-adoption year</td><td class="r">4</td><td class="r">6</td><td class="r">9</td><td>Rogers (2003)</td></tr>
+    </tbody></table></div>
+  <p class="where" lang="es">Comunes a los tres escenarios: <i>p</i><sub>0</sub> = 0.10; <i>L</i><sub>ext</sub> = 30 % de pérdida en un año extremo; efecto de la adopción en el rendimiento <i>e<sub>Y</sub></i> = 10 %, en el costo <i>s<sub>C</sub></i> = 5 % y en la mano de obra requerida <i>r<sub>L</sub></i> = 15 %. Todos son supuestos editables en la tabla de supuestos del Bloque 13. Como <i>a</i><sub>0</sub> = 0.23 &gt; <i>A</i><sub>máx</sub> = 0.15 en el escenario no deseado, ahí la adopción se queda en <i>a</i><sub>0</sub>.</p>
+  <p class="where" lang="en">Common to the three scenarios: <i>p</i><sub>0</sub> = 0.10; <i>L</i><sub>ext</sub> = 30 % loss in an extreme year; adoption effect on yield <i>e<sub>Y</sub></i> = 10 %, on cost <i>s<sub>C</sub></i> = 5 % and on required labour <i>r<sub>L</sub></i> = 15 %. All are editable assumptions in the Block 13 assumptions table. Since <i>a</i><sub>0</sub> = 0.23 &gt; <i>A</i><sub>max</sub> = 0.15 in the undesired scenario, adoption stays at <i>a</i><sub>0</sub> there.</p>
+  <figure data-fig="supuestos"><figcaption><span class="fn"></span><span lang="es"><b>Tabla de supuestos</b> con su base: IPCC, Rogers o supuesto.</span><span lang="en"><b>Assumptions table</b> with its basis: IPCC, Rogers or assumption.</span></figcaption></figure>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Mata de Zarza, t = 10 (hoy = 100)</th><th lang="en">Mata de Zarza, t = 10 (today = 100)</th><th class="r" lang="es">Deseable</th><th class="r" lang="en">Desirable</th><th class="r" lang="es">Tendencial</th><th class="r" lang="en">Trend</th><th class="r" lang="es">No deseado</th><th class="r" lang="en">Undesired</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Rendimiento</td><td lang="en">Yield</td><td class="r">106</td><td class="r">95</td><td class="r">83</td></tr>
+      <tr><td lang="es">Ingreso bruto ÷ costo</td><td lang="en">Gross income ÷ cost</td><td class="r">109</td><td class="r">79</td><td class="r">48</td></tr>
+      <tr><td lang="es">Adopción de innovaciones (%)</td><td lang="en">Innovation adoption (%)</td><td class="r">90</td><td class="r">50</td><td class="r">23</td></tr>
+      <tr><td lang="es">Índice de regeneración (0–100)</td><td lang="en">Regeneration index (0–100)</td><td class="r">67</td><td class="r">57</td><td class="r">50</td></tr>
+      <tr><td lang="es">Índice de riesgo (0–100)</td><td lang="en">Risk index (0–100)</td><td class="r">32</td><td class="r">33</td><td class="r">34</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ============================ 9 · TERRITORIO ============================ -->
+<section class="chap" id="territorio" data-toc="9" style="--c:var(--b2)">
+  <div class="chap-head"><span class="big">9</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Territorio y mapa</h2><h2 lang="en">Territory and map</h2>
+    <span class="rule"></span></div>
+  <p lang="es">Estados, municipios y localidades provienen del Catálogo Único de Claves Geoestadísticas y del Censo de Población y Vivienda 2020 del INEGI, con población, altitud y coordenadas. Las regiones son las del Banco de México (Norte, Centro norte, Centro y Sur). Los contornos son de Natural Earth (dominio público). Para ubicar cada localidad en el mapa se ajustó una proyección:</p>
+  <p lang="en">States, municipalities and localities come from INEGI’s Geostatistical Catalogue and 2020 Population and Housing Census, with population, altitude and coordinates. Regions are Banco de México’s (North, North-central, Central and South). Outlines are from Natural Earth (public domain). To place each locality on the map a projection was fitted:</p>
+  <div class="eq"><span><i>x</i> = 32.355 (λ + 102) cos<sup>0.4375</sup> φ + 514.57 ; &nbsp; <i>y</i> = −34.346 φ + 1122.86</span><span class="no">(22)</span></div>
+  <p class="where" lang="es">El 95.4 % de las localidades cae dentro del contorno de su estado; el punto es aproximado. Mata de Zarza: 19.230° N, 96.675° O, 467 m.</p>
+  <p class="where" lang="en">95.4 % of localities fall inside their state outline; the point is approximate. Mata de Zarza: 19.230° N, 96.675° W, 467 m.</p>
+</section>
+
+<!-- ============================ 10 · VALIDACIÓN ============================ -->
+<section class="chap" id="validacion" data-toc="10" style="--c:var(--b10)">
+  <div class="chap-head"><span class="big">10</span>
+    <div class="eyebrow" lang="es">Evidencia y uso</div><div class="eyebrow" lang="en">Evidence and use</div>
+    <h2 lang="es">Validación</h2><h2 lang="en">Validation</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="v-cuestionario" data-n="10.1"><span lang="es">Integridad del cuestionario y cálculo de control del clima</span><span lang="en">Questionnaire integrity and climate control calculation</span></h3>
+  <p lang="es">El bloque de Validación comprueba que el cuestionario tiene 37 pasos, 67 actividades y 7 etapas con pasos, que toda actividad está ligada a elementos y que todos los elementos citados existen en el catálogo. Para el clima usa un caso de control: con una media constante de 20 °C de abril a octubre, W = 10 × 214 días = 2140 °C·d (región IV); con una máxima de 28 °C de abril a septiembre, HI = [(20 − 10) + (28 − 10)]/2 × 183 días = 2562 (cálido).</p>
+  <p lang="en">The Validation block checks that the questionnaire has 37 steps, 67 activities and 7 stages with steps, that every activity is linked to elements and that every cited element exists in the catalogue. For climate it uses a control case: with a constant mean of 20 °C from April to October, W = 10 × 214 days = 2140 °C·d (region IV); with a maximum of 28 °C from April to September, HI = [(20 − 10) + (28 − 10)]/2 × 183 days = 2562 (warm).</p>
+  <figure data-fig="validacion"><figcaption><span class="fn"></span><span lang="es"><b>Bloque de validación</b> de la app.</span><span lang="en"><b>The app’s validation block.</b></span></figcaption></figure>
+  <h3 id="v-redes" data-n="10.2"><span lang="es">Motor de redes y cladograma frente a NetworkX y SciPy</span><span lang="en">Network engine and cladogram against NetworkX and SciPy</span></h3>
+  <p lang="es">Con la red «cometa» de Krackhardt (1990), la app reproduce la intermediación, la cercanía, el agrupamiento, el vector propio y el camino medio de NetworkX con diferencias menores de 0.00005. Además, la red del caso de Mata de Zarza se exportó desde el modo ejemplo (<code>pruebas/red_matazarza.json</code>) y se recalculó con NetworkX 3.7 y SciPy 1.18 (<code>pruebas/verificar_matazarza.py</code>):</p>
+  <p lang="en">With Krackhardt’s (1990) kite network, the app reproduces NetworkX betweenness, closeness, clustering, eigenvector and mean path with differences below 0.00005. In addition, the Mata de Zarza case network was exported from example mode (<code>pruebas/red_matazarza.json</code>) and recomputed with NetworkX 3.7 and SciPy 1.18 (<code>pruebas/verificar_matazarza.py</code>):</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Prueba</th><th lang="en">Test</th><th class="r">Ratio Viña</th><th class="r" lang="es">Referencia</th><th class="r" lang="en">Reference</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Intermediación ponderada (41 nodos sin PM), diferencia máxima</td><td lang="en">Weighted betweenness (41 nodes without PM), max difference</td><td class="r" colspan="2">0</td></tr>
+      <tr><td lang="es">Q de la partición de la app (4 comunidades)</td><td lang="en">Q of the app partition (4 communities)</td><td class="r">0.1940</td><td class="r">0.1940</td></tr>
+      <tr><td lang="es">Agrupamiento medio · camino medio</td><td lang="en">Mean clustering · mean path</td><td class="r">0.6761 · 2.1329</td><td class="r">0.6761 · 2.1329</td></tr>
+      <tr><td lang="es">Alturas de unión del cladograma (3 subconjuntos), diferencia máxima</td><td lang="en">Cladogram merge heights (3 subsets), max difference</td><td class="r" colspan="2">0</td></tr>
+      <tr><td lang="es">Correlación cofenética (actores; actores e instituciones; todos)</td><td lang="en">Cophenetic correlation (actors; actors and institutions; all)</td><td class="r">0.9646 · 0.9199 · 0.9750</td><td class="r">0.9646 · 0.9199 · 0.9750</td></tr>
+      <tr><td lang="es">Q de Louvain (NetworkX aleatorizado, semilla 1)</td><td lang="en">Louvain Q (randomised NetworkX, seed 1)</td><td class="r">0.1940</td><td class="r">0.2024</td></tr>
+    </tbody></table></div>
+  <p lang="es">Las métricas coinciden exactamente. El Louvain aleatorizado de NetworkX encuentra aquí una partición de cuatro comunidades con Q algo mayor (0.2024 frente a 0.1940): Louvain es un método heurístico y ninguna de las dos particiones es necesariamente la óptima, de modo que la lectura de las comunidades debe tomarse como exploratoria.</p>
+  <p lang="en">Metrics match exactly. NetworkX’s randomised Louvain finds a four-community partition with slightly higher Q here (0.2024 versus 0.1940): Louvain is a heuristic and neither partition is necessarily optimal, so the reading of communities should be taken as exploratory.</p>
+</section>
+
+<!-- ============================ 11 · REPRODUCIBILIDAD ============================ -->
+<section class="chap" id="reproducir" data-toc="11" style="--c:var(--b9)">
+  <div class="chap-head"><span class="big">11</span>
+    <div class="eyebrow" lang="es">Evidencia y uso</div><div class="eyebrow" lang="en">Evidence and use</div>
+    <h2 lang="es">Reproducibilidad y exportación</h2><h2 lang="en">Reproducibility and export</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="x-codigo" data-n="11.1"><span lang="es">Código y pruebas</span><span lang="en">Code and tests</span></h3>
+  <div class="code"><div class="bar"><span>bash</span></div><pre>git clone https://github.com/hectortecumshe-ai/RatioVina
+cd RatioVina
+python armar.py                            # arma index.html desde src/
+python pruebas/verificar_matazarza.py      # red y cladograma frente a NetworkX y SciPy</pre></div>
+  <h3 id="x-exportar" data-n="11.2"><span lang="es">Datos para análisis</span><span lang="en">Data for analysis</span></h3>
+  <p lang="es">Desde el Bloque 14 se exportan en CSV las actividades (con sus cinco impactos e IS), los nodos (valor, participación, vecinos, grado ponderado, intermediación, cercanía, vector propio, agrupamiento, comunidad), los vínculos (peso y número de actividades), el calendario, los ODS y el cladograma (uniones y vecinos más cercanos). <span class="ui">Guardar proyecto</span> produce un JSON con el estado completo, que permite reproducir cualquier resultado.</p>
+  <p lang="en">Block 14 exports to CSV the activities (with their five impacts and IS), nodes (value, participation, neighbours, weighted degree, betweenness, closeness, eigenvector, clustering, community), links (weight and number of activities), calendar, SDGs and cladogram (merges and nearest neighbours). <span class="ui">Save project</span> produces a JSON with the full state, which reproduces any result.</p>
+  <h3 id="x-enlaces" data-n="11.3"><span lang="es">Enlaces directos</span><span lang="en">Deep links</span></h3>
+  <p lang="es">La dirección acepta <code>#bloque/vista/idioma</code>, por ejemplo <code>…/RatioVina/#clima/cien/en</code>. Las capturas de este instructivo se tomaron así, de forma automática.</p>
+  <p lang="en">The address accepts <code>#block/view/language</code>, for example <code>…/RatioVina/#clima/cien/en</code>. This guide’s screenshots were taken this way, automatically.</p>
+  <h3 id="x-ejemplo" data-n="11.4"><span lang="es">Caso publicado, migración y datos del usuario</span><span lang="en">Published case, migration and user data</span></h3>
+  <p lang="es">La app arranca en blanco. El caso de Mata de Zarza se carga solo en un <b>modo ejemplo</b> que no se guarda (<code>estadoMataZarza()</code> en <code>src/18b_matazarza.js</code>: uva de mesa, pie franco, barbado plantado el día 54 de 2025, 1 ha, 2,381 plantas, temperaturas de ERA5, 48 actividades respondidas y 8 innovadas, cada una con su nota de fuente); con él la red reproduce los valores de este instructivo. Los lazos estructurales entran solo si tocan un elemento de las actividades, también en el modo ejemplo. Los valores sugeridos de regeneración y riesgo cuentan en el índice, marcado como provisional, hasta que el usuario los confirma. Los archivos de proyecto llevan <code>formato: 3</code>; los de la versión 0.1.0 (<code>formato: 2</code>) se migran al abrirlos desplazando sus pasos de 1–31 a 7–37.</p>
+  <p lang="en">The app starts blank. The Mata de Zarza case is loaded only in an <b>example mode</b> that is never saved (<code>estadoMataZarza()</code> in <code>src/18b_matazarza.js</code>: table grapes, own-rooted, rooted cutting planted on day 54 of 2025, 1 ha, 2,381 vines, ERA5 temperatures, 48 answered and 8 innovated activities, each with its source note); with it the network reproduces this guide’s values. Structural ties enter only if they touch an element of the activities, in example mode too. Suggested regeneration and risk values count in the index, flagged as provisional, until the user confirms them. Project files carry <code>formato: 3</code>; version 0.1.0 files (<code>formato: 2</code>) are migrated on opening by shifting their steps from 1–31 to 7–37.</p>
+  <h3 id="x-limites" data-n="11.5"><span lang="es">Alcances y límites</span><span lang="en">Scope and limits</span></h3>
+  <ul>
+    <li lang="es">El caso de referencia documenta el establecimiento (primer año) de un viñedo de clima cálido; las etapas de floración a poscosecha esperan un Stack publicado de un viñedo productivo.</li><li lang="en">The reference case documents the establishment (first year) of a warm-climate vineyard; the flowering-to-post-harvest stages await a published Stack from a producing vineyard.</li>
+    <li lang="es">Las temperaturas del caso son de reanálisis (ERA5), no de estación; en climas sin invierno los índices de Winkler y Huglin se leen con cautela.</li><li lang="en">The case temperatures are reanalysis (ERA5), not station data; in climates without winter the Winkler and Huglin indices are read with caution.</li>
+    <li lang="es">Los vínculos actividad–elemento, los perfiles de impacto, la relación con los ODS, las reglas de regeneración, los valores de riesgo del caso y los factores de riesgo son lecturas de Ratio Viña, marcadas y editables.</li><li lang="en">Activity–element links, impact profiles, the SDG mapping, regeneration rules, the case’s risk values and risk factors are Ratio Viña readings, flagged and editable.</li>
+    <li lang="es">Los escenarios no son pronósticos; su valor está en comparar supuestos explícitos. β de la vid es un supuesto.</li><li lang="en">Scenarios are not forecasts; their value lies in comparing explicit assumptions. Grapevine β is an assumption.</li>
+  </ul>
+  <figure data-fig="teoria"><figcaption><span class="fn"></span><span lang="es"><b>Marco teórico</b> dentro de la app, con su bibliografía.</span><span lang="en"><b>Theoretical framework</b> inside the app, with its bibliography.</span></figcaption></figure>
+</section>
+
+<!-- ============================ 12 · EJEMPLO RESUELTO ============================ -->
+<section class="chap" id="ejemplo" data-toc="12" style="--c:var(--b7)">
+  <div class="chap-head"><span class="big">12</span>
+    <div class="eyebrow" lang="es">Evidencia y uso</div><div class="eyebrow" lang="en">Evidence and use</div>
+    <h2 lang="es">Ejemplo resuelto: Mata de Zarza a mano</h2><h2 lang="en">Worked example: Mata de Zarza by hand</h2>
+    <p lang="es">Cada número de este capítulo puede rehacerse con calculadora y coincide con lo que muestra la app {{VERSION}}.</p>
+    <p lang="en">Every number in this chapter can be redone with a calculator and matches what app {{VERSION}} shows.</p>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="w-winkler" data-n="12.1"><span lang="es">Grados día de Winkler</span><span lang="en">Winkler degree-days</span></h3>
+  <div class="eq"><span>W = 14.5·30 + 15.7·31 + 15.6·30 + 15.1·31 + 15.1·31 + 14.8·30 + 13.7·31 = 435 + 486.7 + 468 + 468.1 + 468.1 + 444 + 424.7 = 3194.6</span><span class="no">(3)</span></div>
+  <p lang="es">Región V (&gt; 2222). La app muestra 3195.</p>
+  <p lang="en">Region V (&gt; 2222). The app shows 3195.</p>
+  <h3 id="w-huglin" data-n="12.2"><span lang="es">Índice de Huglin</span><span lang="en">Huglin index</span></h3>
+  <div class="eq"><span>HI = 17.15·30 + 18.2·31 + 17.85·30 + 17.45·31 + 17.45·31 + 16.9·30 = 514.5 + 564.2 + 535.5 + 541.0 + 541.0 + 507.0 = 3203.1</span><span class="no">(4)</span></div>
+  <p lang="es">Por ejemplo, abril: [(24.5 − 10) + (29.8 − 10)]/2 = 17.15. Clase muy cálido (&gt; 3000). CI = <i>T</i><sub>n,sep</sub> = 21.2 °C: noches cálidas.</p>
+  <p lang="en">For example, April: [(24.5 − 10) + (29.8 − 10)]/2 = 17.15. Very warm class (&gt; 3000). CI = <i>T</i><sub>n,sep</sub> = 21.2 °C: warm nights.</p>
+  <h3 id="w-ir" data-n="12.3"><span lang="es">Regeneración</span><span lang="en">Regeneration</span></h3>
+  <div class="eq"><span>IR = (4 + 2 + 0 + 3 + 0 + 2 + 2 + 3) ⁄ 32 = 16 ⁄ 32 = 0.50</span><span class="no">(13)</span></div>
+  <p lang="es">Clase: en transición regenerativa. Si la parcela incorporara una cubierta vegetal con aves de traspatio y el productor lo reflejara en sus perillas (diversidad 1 y animales 3), el IR llegaría a 20/32 = 0.63.</p>
+  <p lang="en">Class: regenerative transition. If the plot added a cover crop with backyard poultry and the grower reflected it in the knobs (diversity 1 and animals 3), IR would reach 20/32 = 0.63.</p>
+  <h3 id="w-ca" data-n="12.4"><span lang="es">Capacidad adaptativa y riesgo de escasez de agua</span><span lang="en">Adaptive capacity and water-scarcity risk</span></h3>
+  <div class="eq"><span>CA = (0.50 + 0⁄4 + 3.20⁄4 + 2.40⁄4) ⁄ 4 = (0.50 + 0 + 0.80 + 0.60) ⁄ 4 = 0.475</span><span class="no">(15)</span></div>
+  <div class="eq"><span><i>r</i><sub>agua</sub> = 4 × 4 × (1 − 0.4 × 0.475) × (1 − 0.15 × 0) = 16 × 0.81 = 12.96</span><span class="no">(14)</span></div>
+  <p lang="es">Nivel alto (10–15); la app muestra 13.0. Un control medio (<i>c</i> = 2), por ejemplo cisternas de ferrocemento de 5,000 L para cosechar lluvia como plantea la guía, la bajaría a 12.96 × 0.70 = 9.07: nivel medio.</p>
+  <p lang="en">High level (10–15); the app shows 13.0. Medium control (<i>c</i> = 2), for example 5,000 L ferrocement rainwater tanks as the guide proposes, would lower it to 12.96 × 0.70 = 9.07: medium level.</p>
+  <h3 id="w-sar" data-n="12.5"><span lang="es">Índice general de Sarandón</span><span lang="en">Sarandón general index</span></h3>
+  <div class="eq"><span>IK = (0 + 3.29) ⁄ 2 = 1.65 ; &nbsp; ISGen = (1.65 + 2.03 + 2.93) ⁄ 3 = 2.20 &nbsp; &gt; 2 pero min = 1.65 &lt; 2 &nbsp;⇒&nbsp; no sostenible aún</span><span class="no">(11)</span></div>
+  <p lang="es">La dimensión económica es la palanca principal. En cuanto la parcela coseche, las actividades de cosecha y venta añaden el producto uva de mesa (IK-B = 1) y, con ingresos y costos capturados, el margen IK-A entra al promedio.</p>
+  <p lang="en">The economic dimension is the main lever. Once the plot harvests, the harvest and sales activities add the table-grape product (IK-B = 1) and, with income and costs entered, margin IK-A enters the average.</p>
+  <h3 id="w-huella" data-n="12.6"><span lang="es">Huella de carbono (ejemplo ilustrativo)</span><span lang="en">Carbon footprint (illustrative example)</span></h3>
+  <p lang="es">La guía publica 40 g de fosfato diamónico (18 % de N) por planta; con 2,381 plantas son 95.2 kg de fosfato diamónico y 17.1 kg de N por hectárea. Sin diésel ni urea:</p>
+  <p lang="en">The guide publishes 40 g of diammonium phosphate (18 % N) per vine; with 2,381 vines that is 95.2 kg of diammonium phosphate and 17.1 kg of N per hectare. Without diesel or urea:</p>
+  <div class="eq"><span>17.1 × 0.01374 × 44⁄28 × 273 = 100.8 kg CO₂e ⁄ ha</span><span class="no">(12)</span></div>
+  <p class="where" lang="es">0.01374 = 0.010 + 0.11 × 0.010 + 0.24 × 0.011. Es un cálculo ilustrativo con una sola aplicación; la huella real del caso requiere el número de aplicaciones y el diésel de la desbrozadora, que la guía no publica.</p>
+  <p class="where" lang="en">0.01374 = 0.010 + 0.11 × 0.010 + 0.24 × 0.011. It is an illustrative calculation with a single application; the case’s real footprint needs the number of applications and the brush cutter’s fuel, which the guide does not publish.</p>
+</section>
+
+<!-- ============================ 13 · ATLAS ============================ -->
+<section class="chap" id="atlas" data-toc="13" style="--c:var(--b15)">
+  <div class="chap-head"><span class="big">13</span>
+    <div class="eyebrow" lang="es">Método</div><div class="eyebrow" lang="en">Method</div>
+    <h2 lang="es">Agregación del atlas nacional</h2><h2 lang="en">National atlas aggregation</h2>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="a-resumen" data-n="13.1"><span lang="es">Resumen de cada viñedo</span><span lang="en">Summary of each vineyard</span></h3>
+  <p lang="es">De cada archivo <code>.vina.json</code> el atlas calcula, con las mismas funciones de la app, un resumen: ubicación (INEGI), destino, variedad, portainjerto, fecha y material de plantación, número de podas, región de Winkler, respuestas sí / no a las 67 actividades, actividades innovadas, IS, IR y riesgo (marcados como provisionales si el viñedo no confirmó todas sus perillas), capacidad adaptativa y los vínculos de su red sin el nodo omnipresente. Solo se guarda el resumen, en el navegador de quien coordina.</p>
+  <p lang="en">From each <code>.vina.json</code> file the atlas computes, with the app’s own functions, a summary: location (INEGI), use, variety, rootstock, planting date and material, number of prunings, Winkler region, yes / no answers to the 67 activities, innovated activities, IS, IR and risk (flagged provisional if the vineyard did not confirm all its knobs), adaptive capacity and its network links without the omnipresent node. Only the summary is stored, in the coordinator’s browser.</p>
+  <h3 id="a-frec" data-n="13.2"><span lang="es">Frecuencia de cada práctica</span><span lang="en">Frequency of each practice</span></h3>
+  <div class="eq"><span><i>f<sub>a</sub></i> = Σ<sub>ℓ</sub> [<i>r<sub>ℓa</sub></i> = sí] ⁄ Σ<sub>ℓ</sub> [<i>r<sub>ℓa</sub></i> ∈ {sí, no}]</span><span class="no">(23)</span></div>
+  <p class="where" lang="es">ℓ recorre los viñedos; los no respondidos quedan fuera del denominador, de modo que la ausencia de respuesta no se confunde con «no». La misma razón se calcula dentro de cada región de Banxico, de cada destino y de cada región de Winkler. El atlas muestra junto a cada valor el número de viñedos que respondieron.</p>
+  <p class="where" lang="en">ℓ runs over vineyards; unanswered items stay out of the denominator, so a missing answer is not mistaken for “no”. The same ratio is computed within each Banxico region, each use and each Winkler region. The atlas shows next to each value how many vineyards answered.</p>
+  <h3 id="a-red" data-n="13.3"><span lang="es">Red nacional</span><span lang="en">National network</span></h3>
+  <div class="eq"><span><i>W<sub>ij</sub></i> = <i>n<sub>ij</sub></i> ⁄ <i>L</i> ; &nbsp; <i>V<sub>i</sub></i> = <i>n<sub>i</sub></i> ⁄ <i>L</i></span><span class="no">(24)</span></div>
+  <p class="where" lang="es"><i>L</i>: viñedos con red; <i>n<sub>ij</sub></i>: viñedos cuya red contiene el vínculo <i>i</i>–<i>j</i>; <i>n<sub>i</sub></i>: viñedos donde aparece el elemento <i>i</i>. Sobre esta red se calculan las mismas estadísticas del capítulo 3.</p>
+  <p class="where" lang="en"><i>L</i>: vineyards with a network; <i>n<sub>ij</sub></i>: vineyards whose network contains link <i>i</i>–<i>j</i>; <i>n<sub>i</sub></i>: vineyards where element <i>i</i> appears. The chapter 3 statistics are computed on this network.</p>
+  <h3 id="a-valida" data-n="13.4"><span lang="es">Prueba de la agregación</span><span lang="en">Aggregation test</span></h3>
+  <p lang="es">La app agrega dos copias de un viñedo de prueba con las 67 actividades respondidas «sí». Si la agregación es correcta, las 67 prácticas valen 100 % con 2 respuestas y la red nacional coincide con la del viñedo de prueba (72 nodos y 250 vínculos), con todos sus pesos iguales a 1. La prueba se ejecuta en el bloque de Validación y los tres resultados son correctos.</p>
+  <p lang="en">The app combines two copies of a test vineyard with all 67 activities answered “yes”. If aggregation is correct, all 67 practices are 100 % with 2 answers and the national network matches the test vineyard’s (72 nodes and 250 links), with all weights equal to 1. The test runs in the Validation block and all three checks pass.</p>
+</section>
+
+<!-- ============================ A · GLOSARIO ============================ -->
+<section class="chap" id="glosario" data-toc="A" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">A</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Glosario técnico</h2><h2 lang="en">Technical glossary</h2>
+    <span class="rule"></span></div>
+  <dl class="glos" id="glos"></dl>
+</section>
+
+<!-- ============================ B · REFERENCIAS ============================ -->
+<section class="chap" id="referencias" data-toc="B" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">B</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Referencias, cómo citar y página legal</h2><h2 lang="en">References, how to cite and legal page</h2>
+    <span class="rule"></span></div>
+  <ol style="font-size:15.5px;line-height:1.55">
+    <li>Amerine MA, Winkler AJ. 1944. Composition and quality of musts and wines of California grapes. <i>Hilgardia</i> 15(6): 493–675.</li>
+    <li>Blondel VD, Guillaume J-L, Lambiotte R, Lefebvre E. 2008. Fast unfolding of communities in large networks. <i>Journal of Statistical Mechanics</i> P10008.</li>
+    <li>Brandes U. 2001. A faster algorithm for betweenness centrality. <i>Journal of Mathematical Sociology</i> 25(2): 163–177.</li>
+    <li>Díaz-José O, Mojica-Zárate HT, Díaz-José J, Vilaboa-Arróniz J. 2026. El conocimiento agrícola local: el stack del maíz criollo en Calpan, Puebla. <i>Agricultura, Sociedad y Desarrollo</i> 23(3). https://doi.org/10.22231/asyd.v23i3.1822</li>
+    <li>Forster P, et al. 2021. The Earth’s energy budget, climate feedbacks, and climate sensitivity. En: <i>Climate Change 2021: The Physical Science Basis</i>. Cambridge University Press.</li>
+    <li>Freeman LC. 1978. Centrality in social networks: conceptual clarification. <i>Social Networks</i> 1(3): 215–239.</li>
+    <li>Godet M, Durance P. 2011. <i>La prospectiva estratégica para las empresas y los territorios</i>. Dunod/UNESCO.</li>
+    <li>Hagberg AA, Schult DA, Swart PJ. 2008. Exploring network structure, dynamics, and function using NetworkX. <i>Proceedings of the 7th Python in Science Conference</i>: 11–15.</li>
+    <li>Hersbach H, Bell B, Berrisford P, et al. 2020. The ERA5 global reanalysis. <i>Quarterly Journal of the Royal Meteorological Society</i> 146(730): 1999–2049. https://doi.org/10.1002/qj.3803</li>
+    <li>Holland JH. 1995. <i>Hidden order: how adaptation builds complexity</i>. Addison-Wesley.</li>
+    <li>Huglin P. 1978. Nouveau mode d’évaluation des possibilités héliothermiques d’un milieu viticole. <i>Comptes Rendus de l’Académie d’Agriculture de France</i> 64: 1117–1126.</li>
+    <li>IEC. 2019. IEC 31010:2019 Risk management — Risk assessment techniques.</li>
+    <li>INEGI. 2020. Censo de Población y Vivienda 2020; Catálogo Único de Claves Geoestadísticas.</li>
+    <li>IPCC. 2006, 2019. Guidelines for National Greenhouse Gas Inventories, vol. 4, y su refinamiento de 2019.</li>
+    <li>IPCC. 2014. Summary for Policymakers. En: <i>Climate Change 2014: Impacts, Adaptation, and Vulnerability</i>. Cambridge University Press.</li>
+    <li>IPCC. 2018. Summary for Policymakers. En: <i>Global Warming of 1.5 °C</i>.</li>
+    <li>ISO. 2018. ISO 31000:2018 Risk management — Guidelines.</li>
+    <li>Keller M. 2020. <i>The science of grapevines</i>, 3.ª ed. Academic Press.</li>
+    <li>Kok D. 2014. A review on grape growing in tropical regions. <i>Turkish Journal of Agricultural and Natural Sciences</i> 1 (Özel Sayı 1).</li>
+    <li>Krackhardt D. 1990. Assessing the political landscape: structure, cognition, and power in organizations. <i>Administrative Science Quarterly</i> 35(2): 342–369.</li>
+    <li>Lorenz DH, Eichhorn KW, Bleiholder H, Klose R, Meier U, Weber E. 1995. Growth stages of the grapevine. <i>Australian Journal of Grape and Wine Research</i> 1(2): 100–103.</li>
+    <li>Mojica-Zárate HT, Barrera-Guzmán LÁ, Alejo-Bello S, Partida-Sedas JG, Rojas-Reyes JO, Díaz-José O, Tinoco-Rueda JÁ, Torres-Palacios C. 2026. <i>Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz</i>. Colección Guías Prácticas para Productores, Tomo 5. Universidad Autónoma Chapingo. ISBN 978-607-12-0712-8.</li>
+    <li>Newman MEJ. 2006. Modularity and community structure in networks. <i>PNAS</i> 103(23): 8577–8582.</li>
+    <li>Newton P, Civita N, Frankel-Goldwater L, Bartel K, Johns C. 2020. What is regenerative agriculture? <i>Frontiers in Sustainable Food Systems</i> 4: 577723.</li>
+    <li>Rogers EM. 2003. <i>Diffusion of innovations</i>, 5.ª ed. Free Press.</li>
+    <li>Sarandón SJ. 2002. El desarrollo y uso de indicadores para evaluar la sustentabilidad de los agroecosistemas. En: Sarandón SJ (ed.), <i>Agroecología: el camino hacia una agricultura sustentable</i>. Ediciones Científicas Americanas: 393–414.</li>
+    <li>Schreefel L, Schulte RPO, de Boer IJM, Schrijver AP, van Zanten HHE. 2020. Regenerative agriculture – the soil is the base. <i>Global Food Security</i> 26: 100404.</li>
+    <li>Sneath PHA. 1957. The application of computers to taxonomy. <i>Journal of General Microbiology</i> 17(1): 201–226.</li>
+    <li>Sokal RR, Rohlf FJ. 1962. The comparison of dendrograms by objective methods. <i>Taxon</i> 11(2): 33–40.</li>
+    <li>Sokal RR, Sneath PHA. 1963. <i>Principles of numerical taxonomy</i>. W. H. Freeman.</li>
+    <li>Tonietto J, Carbonneau A. 2004. A multicriteria climatic classification system for grape-growing regions worldwide. <i>Agricultural and Forest Meteorology</i> 124(1–2): 81–97.</li>
+    <li>Virtanen P, et al. 2020. SciPy 1.0: fundamental algorithms for scientific computing in Python. <i>Nature Methods</i> 17: 261–272.</li>
+    <li>Wasserman S, Faust K. 1994. <i>Social network analysis: methods and applications</i>. Cambridge University Press.</li>
+    <li>Watts DJ, Strogatz SH. 1998. Collective dynamics of ‘small-world’ networks. <i>Nature</i> 393: 440–442.</li>
+    <li>Winkler AJ, Cook JA, Kliewer WM, Lider LA. 1974. <i>General viticulture</i>, 2.ª ed. University of California Press.</li>
+    <li>Zhao C, et al. 2017. Temperature increase reduces global yields of major crops in four independent estimates. <i>PNAS</i> 114(35): 9326–9331.</li>
+  </ol>
+  <h3 id="b-citar"><span lang="es">Cómo citar el software</span><span lang="en">How to cite the software</span></h3>
+  <p lang="es">Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., y Alejo-Bello, S. (2026). <i>Ratio Viña: el conocimiento local de la vid en México como sistema complejo adaptativo, con índices de regeneración y riesgo</i> (Versión {{VERSION}}) [Software]. Zenodo. https://doi.org/{{DOIAPP}}</p>
+  <p lang="en">Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., &amp; Alejo-Bello, S. (2026). <i>Ratio Viña: local grapevine knowledge in Mexico as a complex adaptive system, with regeneration and risk indices</i> (Version {{VERSION}}) [Software]. Zenodo. https://doi.org/{{DOIAPP}}</p>
+  <div class="qrbox">{{QR}}<p lang="es">Aplicación: <b>hectortecumshe-ai.github.io/RatioVina</b><br>Código: github.com/hectortecumshe-ai/RatioVina</p><p lang="en">App: <b>hectortecumshe-ai.github.io/RatioVina</b><br>Code: github.com/hectortecumshe-ai/RatioVina</p></div>
+  {{LEGAL}}
+</section>
+
+</div>

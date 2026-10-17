@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>captura</title>
-<!-- Auxiliar para las capturas de los instructivos de Ratio Telar.
+<!-- Auxiliar para las capturas de los instructivos de Ratio Viña.
      Abre la app en un iframe (mismo origen), prepara el estado, se desplaza a una sección
      y dibuja marcas numeradas sobre los elementos indicados. Lo usa capturar.py con Edge sin interfaz.
      Parámetros: b (bloque) · v (prod|cien) · l (es|en) · h (alto) · w (ancho) · sel (selector al que desplazarse)
@@ -24,27 +24,26 @@ const P = new URLSearchParams(location.search);
 const W = +(P.get('w') || 1280), H = +(P.get('h') || 860);
 const app = document.getElementById('app'), capa = document.getElementById('capa');
 app.width = W; app.height = H; capa.style.width = W + 'px'; capa.style.height = H + 'px';
-try { localStorage.clear(); localStorage.setItem('telar_lang', P.get('l') || 'es'); localStorage.setItem('telar_modo', P.get('v') || 'prod'); localStorage.setItem('telar_tema', 'light'); } catch (e) {}
+try { localStorage.clear(); localStorage.setItem('vina_lang', P.get('l') || 'es'); localStorage.setItem('vina_modo', P.get('v') || 'prod'); localStorage.setItem('vina_tema', 'light'); } catch (e) {}
 const espera = ms => new Promise(r => setTimeout(r, ms));
-const PREP = {   // código que se ejecuta dentro de la app (S, LANG y las funciones de la app)
-  uva: "S.cultivo='uva'; S.sistema='vinedo';",
-  bovino: "S.cultivo='bovino'; renderCultivo.tipo='especie'; S.sistema='pastoreo'; S.tipoUP=3;",
-  abeja: "S.cultivo='abeja'; renderCultivo.tipo='especie'; S.sistema='apiario'; S.tipoUP=TIPOS_UP.length-1;",
-  mango: "S.cultivo='mango'; S.sistema='agrofor'; S.variedad={mango:'Ataulfo'};",
-  especies: "renderCultivo.tipo='especie';",
-  nuevo: "window.__abrir=['.cat-nuevo','.sis-nuevo'];",
-  pitahaya: "S.catExtra=[{id:'cpit',tipo:'cultivo',n:LANG==='en'?'Dragon fruit':'Pitahaya',sci:'Selenicereus undatus',col:'#c2185b'}]; S.cultivo='cpit'; S.variedad={cpit:LANG==='en'?'Red Yucatán':'Roja de Yucatán'};",
-  innova: "S.manejo[6]=S.manejo[6]||{}; S.manejo[6].inn=[{t:LANG==='en'?'Mass selection for drought tolerance':'Selección masal por tolerancia a sequía', el:['PM','SEM','KTEC','KTAC'], imp:[1,1,0,1,1]}];",
-  reqinn: "S.reqInn=[{t:LANG==='en'?'Soil test before sowing':'Análisis de suelo antes de sembrar', b:'tierra', d:'', fuente:LANG==='en'?'Technical adviser, 2025':'Asesor técnico, 2025'}];",
-  paso: "renderManejo.abierto=18;",
-  regenbase: "S.regenBase={fecha:'2025-10-10', IR:0.38, ind:[{id:'labranza',s:0},{id:'cobertura',s:1},{id:'diversidad',s:2},{id:'raices',s:2},{id:'animales',s:2},{id:'insumos',s:0},{id:'mo',s:3},{id:'saber',s:2}]}; S.regenMO={b:'1.8',a:'2.1'};",
+const PREP = {   // código que se ejecuta dentro de la app (S, LANG y las funciones de la app), después del caso base
+  paso: "renderManejo.abierto=2;",
+  plantar: "renderManejo.abierto=4;",
+  regenbase: "S.regenBase={fecha:'2025-03-01', IR:0.31, ind:[{id:'labranza',s:4},{id:'cobertura',s:1},{id:'diversidad',s:0},{id:'raices',s:2},{id:'animales',s:0},{id:'insumos',s:1},{id:'mo',s:1},{id:'saber',s:1}]}; S.regenMO={b:'1.6',a:'1.8'};",
   formulado: "S.formulado=true;",
   ejemplo: "window.__dialogo='ejemplo';",
   ayuda: "window.__dialogo='ayuda';",
   oscuro: "window.__oscuro=true;",
   clado_todos: "renderTablero.clado='todos';",
   precio_fin: "renderPrecios.cat='financieros';",
-  riesgo_clima: "renderRiesgos.cat='clima';"
+  precio_ins: "renderPrecios.cat='insumos';",
+  riesgo_bio: "renderRiesgos.cat='bio';",
+  vacio: "",
+  mixto: "renderManejo.abierto=9;",
+  sinconf: "['diversidad','raices','animales','insumos','mo','saber'].forEach(k=>{ delete S.regen[k]; });",
+  parcial: "S.vidDestino='mesa'; S.edo='30'; PASOS.slice(0,6).forEach(p=>p.a.forEach(a=>{ manejoDe(p.n).resp[a[0]]='si'; })); S.regen={labranza:4,cobertura:2};",
+  modoej: "entrarEjemplo(); S.bloque='tablero'; S.formulado=true;",
+  atlasej: "localStorage.removeItem('vina_atlas'); atlasAgregar([resumenProyecto(estadoMataZarza(), 'Mojica-Zárate et al. (2026)', true)]);"
 };
 app.addEventListener('load', async () => {
   const w = app.contentWindow, d = app.contentDocument;
@@ -52,7 +51,11 @@ app.addEventListener('load', async () => {
   st.textContent = '*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent}.aparece,main>*{opacity:1!important;transform:none!important}.dibuja,.clado .rama,.prosp-g .linea-p{stroke-dashoffset:0!important}.toast{display:none!important}';
   d.head.appendChild(st); d.documentElement.style.scrollBehavior = 'auto';
   await espera(400);
-  const codigo = (P.get('prep') || '').split(',').filter(Boolean).map(k => PREP[k] || '').join(';') + ';' + (P.get('js') || '');
+  // Caso resuelto: el caso publicado de Mata de Zarza (Mojica-Zárate et al., 2026) en modo ejemplo, con las sugerencias aceptadas.
+  // Con «vacio» la captura muestra la app como la ve una persona nueva.
+  const preps = (P.get('prep') || '').split(',').filter(Boolean), vacio = preps.includes('vacio');
+  const base = vacio ? '' : "const _b=S.bloque; entrarEjemplo(); S.bloque=_b; regeneracion().ind.forEach(x=>{ if(x.sug!=null) S.regen[x.id]=x.sug; }); riesgos().L.forEach(x=>{ if(!S.riesgo[x.id]) S.riesgo[x.id]={p:x.sug.p,i:x.sug.i,ok:true}; }); S.revisado={elementos:true}; S.formulado=false;";
+  const codigo = base + ';' + preps.map(k => PREP[k] || '').join(';') + ';' + (P.get('js') || '');
   try { w.eval(codigo + ';guardar(); render();'); } catch (e) { document.title = 'error: ' + e.message; }
   if (w.__oscuro) w.aplicarTema('dark'); else w.aplicarTema('light');
   await espera(300);

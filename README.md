@@ -10,26 +10,39 @@
 
 Está hecha para productores y para científicos, en español y en inglés.
 
-## Qué contiene (versión 0.1.0)
+## Qué contiene (versión 0.2.0)
 
 | Bloque | Contenido |
 |---|---|
 | 1 · Vid | Destino (mesa, vino, pasa, jugo o varios), variedad, portainjerto, sistema de conducción, densidad; **historial del viñedo**: fecha y material de plantación, edad y registro de podas |
 | 2 · Región | Mapa de México; estado, municipio y localidad (INEGI) |
 | 3 · Clima vitícola | Con las temperaturas mensuales de la estación más cercana: grados día de Winkler (Amerine y Winkler, 1944), índice de Huglin (1978) e índice de frescor nocturno (Tonietto y Carbonneau, 2004); aviso para climas sin invierno marcado |
-| 4 · Requerimientos | Seis requerimientos base del viñedo y los innovados en la localidad |
-| 5 · Manejo | Cuestionario base de 31 pasos y 52 actividades ordenado por etapas fenológicas BBCH (Lorenz et al., 1995): reposo y poda, brotación, floración, desarrollo del fruto, cosecha y poscosecha; labores propias de uva de mesa o de vino; fechas e innovaciones |
+| 4 · Requerimientos | Siete requerimientos base del viñedo, uno por etapa, y los innovados en la localidad |
+| 5 · Manejo | Cuestionario base de 37 pasos y 67 actividades en siete etapas: **establecimiento** (propagación de esquejes y plantación, de la guía de Mata de Zarza; Mojica-Zárate et al., 2026) y el ciclo anual por etapas fenológicas BBCH (Lorenz et al., 1995): reposo y poda, brotación, floración, desarrollo del fruto, cosecha y poscosecha; labores propias de uva de mesa o de vino; fechas e innovaciones |
 | 6 · Regeneración | Ocho perillas 0–4 con valores sugeridos que se confirman |
-| 7 · Riesgos | Amenazas con perillas de probabilidad, impacto y control; matriz 5 × 5 y capacidad adaptativa |
-| 8 · Elementos | 65 elementos del viñedo en 10 categorías y los propios |
+| 7 · Riesgos | 28 amenazas (de viñedos de todo el país, del establecimiento en clima cálido y generales de otros cultivos) con perillas de probabilidad, impacto y control; matriz 5 × 5 y capacidad adaptativa |
+| 8 · Elementos | 75 elementos del viñedo en 10 categorías y los propios |
 | 9 · Precio y valor | Precio por hectárea y valor económico, de uso, cultural y ecológico |
 | 10–13 | Formulación, tablero de redes (centralidades, Louvain, correlaciones, cladograma, calendario), sostenibilidad (Sarandón, 17 ODS, huella de carbono) y prospectiva |
 | 14 · Informe | Resumen, tablas, CSV, PDF y el archivo del viñedo (`.vina.json`) |
 | 15 · Atlas nacional | Junta los archivos de muchos viñedos: mapa, comparación por región, viñedos por región de Winkler, frecuencia de cada práctica, variedades, destinos, innovaciones y red nacional |
 
+## Caso publicado de referencia
+
+**Mata de Zarza, Puente Nacional, Veracruz**: establecimiento de uva de mesa (Perlette, Flame Seedless y Summer Royal) en una parcela cooperante de 1 ha, de enero de 2025 a febrero de 2026, según la *Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz* (Mojica-Zárate et al., 2026; UACh, ISBN 978-607-12-0712-8). Se consulta en un **modo ejemplo** con franja naranja que nunca se guarda ni toca el proyecto del usuario; la app sigue arrancando en blanco. Las temperaturas del caso son del reanálisis ERA5 1991–2020 (Hersbach et al., 2020), porque en la localidad no hay estación. Su red se verificó con NetworkX y SciPy (`pruebas/verificar_matazarza.py`).
+
+## Novedades de la versión 0.2.0
+
+- Etapa de **establecimiento** en el cuestionario (6 pasos y 15 actividades) y elementos nuevos: viveros y viñedos donantes, estudiantes, esquejes, enraizador, arena de río, acolchado, cámara de enraizamiento, protectores, tutores y hormiga cortadora.
+- **Fecha de plantación con perilla** que recorre los 365 días del año, más el año.
+- **28 amenazas**, con su fuente junto al nombre: falta de frío invernal, enfermedad de Pierce, hormiga cortadora, daño por animales, material vegetal mal enraizado, deriva de herbicidas, cultivo nuevo sin mercado, abandono del cultivo y suelos arcillosos.
+- **Modo ejemplo** con el caso publicado de Mata de Zarza.
+- Los proyectos de la 0.1.0 se abren sin perder respuestas (`formato: 3`; los pasos 1–31 pasan a 7–37).
+- **Instructivos del Productor y del Científico**, en español e inglés.
+
 ## Rigor
 
-Todavía **no existe un Stack de conocimiento local publicado para la vid**. El cuestionario base, el catálogo de elementos y sus vínculos son una propuesta de la app, marcada como **«Lectura de Ratio Viña»**, que cada viñedo responde y amplía. Los índices de clima siguen fórmulas publicadas y tienen un cálculo de control en Validación. Lo que no está documentado aparece como **«sin dato»**: la aplicación no inventa valores. La app arranca en blanco y distingue lo que llena la persona de lo que solo sugiere.
+Todavía **no existe un Stack de conocimiento local publicado para un viñedo productivo**. La etapa de establecimiento sigue la guía publicada de Mata de Zarza; el resto del cuestionario base, el catálogo de elementos y sus vínculos son una propuesta de la app, marcada como **«Lectura de Ratio Viña»**, que cada viñedo responde y amplía. Los índices de clima siguen fórmulas publicadas y tienen un cálculo de control en Validación. Lo que no está documentado aparece como **«sin dato»**: la aplicación no inventa valores. La app arranca en blanco y distingue lo que llena la persona de lo que solo sugiere.
 
 ## Uso
 

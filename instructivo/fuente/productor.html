@@ -1,0 +1,813 @@
+<style>table.hoja td{height:34px;border:1px solid var(--line)}table.hoja td:first-child{white-space:nowrap}@media print{table.hoja td{height:9mm;padding-top:0;padding-bottom:0}.tbl:has(table.hoja){overflow:visible;max-height:none}}</style>
+<!-- ============================ PORTADA ============================ -->
+<section class="cover" id="portada">
+  <div class="band">{{BANDA}}</div>
+  <div class="in">
+    <div>
+      <div class="kick"><img src="logo.svg" alt="Ratio Viña"><div><div class="eyebrow" lang="es">Instructivo del Productor</div><div class="eyebrow" lang="en">Producer Guide</div><div style="font-size:15px;color:var(--muted)">Ratio Viña {{VERSION}} · Ratio Complexus</div></div></div>
+      <h1 lang="es">El saber de tu viñedo, <em>del esqueje</em> <span class="a">al atlas de la vid</span></h1>
+      <h1 lang="en">Your vineyard’s knowledge, <em>from cutting</em> <span class="a">to the grapevine atlas</span></h1>
+      <p class="sub" lang="es">Una guía práctica para documentar con Ratio Viña el conocimiento local de un viñedo —cómo se estableció, qué variedad y qué clima tiene, cómo se maneja, qué lo regenera, qué lo pone en riesgo y hacia dónde va— y para juntar muchos viñedos en un atlas nacional. Con un caso real como ejemplo resuelto: el establecimiento de uva de mesa en Mata de Zarza, Veracruz.</p>
+      <p class="sub" lang="en">A practical guide to documenting a vineyard’s local knowledge with Ratio Viña —how it was established, which variety and climate it has, how it is managed, what regenerates it, what puts it at risk and where it is heading— and to combining many vineyards into a national atlas. With a real case as a worked example: establishing table grapes in Mata de Zarza, Veracruz.</p>
+      <div class="meta">
+        <div lang="es"><b>1.ª edición</b> · octubre de 2026 · describe Ratio Viña {{VERSION}}</div>
+        <div lang="en"><b>1st edition</b> · October 2026 · covers Ratio Viña {{VERSION}}</div>
+        <div>{{DOI}}<span lang="es">Texto CC BY 4.0 · app MIT</span><span lang="en">Text CC BY 4.0 · app MIT</span></div>
+      </div>
+      <div class="who">{{AUTORES}}<br><span lang="es">Hay otra guía para investigación y docencia: el <a href="instructivo-cientifico.html">Instructivo del Científico</a>.</span><span lang="en">There is a companion guide for research and teaching: the <a href="instructivo-cientifico.html">Scientist Guide</a>.</span></div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <div class="frame"><img lang="es" src="instructivo/img/paso-es.jpg" alt=""><img lang="en" src="instructivo/img/paso-en.jpg" alt=""></div>
+      <div class="frame b"><img lang="es" src="instructivo/img/clima-es.jpg" alt="" style="height:300px;object-fit:cover;object-position:top"><img lang="en" src="instructivo/img/clima-en.jpg" alt="" style="height:300px;object-fit:cover;object-position:top"></div>
+    </div>
+  </div>
+  <div class="steps">{{PASOS}}</div>
+</section>
+
+<div class="doc">
+
+<!-- ============================ PRELIMINARES ============================ -->
+<section class="chap" id="leer" data-toc="P" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">P</span>
+    <div class="eyebrow" lang="es">Antes de leer</div><div class="eyebrow" lang="en">Before reading</div>
+    <h2 lang="es">Cómo usar este instructivo</h2><h2 lang="en">How to use this guide</h2>
+    <p lang="es">Para quién es, cómo está organizado y qué significa cada señal que encontrarás en las páginas.</p>
+    <p lang="en">Who it is for, how it is organised and what each sign on the page means.</p>
+    <span class="rule"></span></div>
+
+  <p class="lead" lang="es">este instructivo es para quien conoce un viñedo o quiere empezar uno y quiere verlo completo: el viticultor y la viticultora, el técnico o la técnica de campo, el extensionista, el estudiante que hace su servicio social o su tesis en una comunidad. No necesitas saber programación ni estadística; necesitas conocer tu viñedo y a la gente que lo trabaja.</p>
+  <p class="lead" lang="en">This guide is for whoever knows a vineyard, or wants to start one, and wants to see it whole: growers, field technicians, extension agents, students doing their social service or thesis in a community. You need no coding or statistics; you need to know your vineyard and the people who work it.</p>
+
+  <p lang="es">Sigue el mismo orden que la app: un capítulo por cada bloque de la barra superior, del 1 al 15, cada uno con su color. Todos los ejemplos usan <b>un solo caso real</b>: una <b>parcela cooperante de 1 ha en Mata de Zarza, Puente Nacional, Veracruz</b>, donde productores de la localidad y la Universidad Autónoma Chapingo introdujeron la uva de mesa en enero de 2025. El caso está publicado en la <i>Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz</i> (Mojica-Zárate et al., 2026). En Veracruz la uva todavía no se produce en viñedos comerciales; por eso este caso documenta algo nuevo: cómo se establece un viñedo en clima cálido, del esqueje a la primera poda.</p>
+  <p lang="en">It follows the app’s order: one chapter for each block in the top bar, 1 to 15, each with its own colour. Every example uses <b>a single real case</b>: a <b>1 ha cooperating plot in Mata de Zarza, Puente Nacional, Veracruz</b>, where local farmers and Chapingo Autonomous University introduced table grapes in January 2025. The case is published in the <i>Practical guide to establishing grapes in Mata de Zarza, Veracruz</i> (Mojica-Zárate et al., 2026). Veracruz has no commercial vineyards yet, so this case documents something new: how a vineyard is established in a warm climate, from cutting to first pruning.</p>
+
+  {{FIG_TELAR}}
+
+  <h3 id="convenciones"><span lang="es">Convenciones</span><span lang="en">Conventions</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Así se escribe</th><th lang="en">Written as</th><th lang="es">Significa</th><th lang="en">Means</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui pri" lang="es">Tejer el sistema</span><span class="ui pri" lang="en">Weave the system</span></td><td lang="es">Un botón o casilla de la app, con su texto tal como aparece en pantalla.</td><td lang="en">An app button or field, with its text exactly as on screen.</td></tr>
+      <tr><td><span class="path" lang="es">Informe<i>›</i>Guardar proyecto</span><span class="path" lang="en">Report<i>›</i>Save project</span></td><td lang="es">Una ruta: abre el primer elemento y luego el siguiente.</td><td lang="en">A path: open the first item, then the next.</td></tr>
+      <tr><td><span class="val">2381</span></td><td lang="es">Un valor que escribes tal cual.</td><td lang="en">A value you type as shown.</td></tr>
+      <tr><td><b style="display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#c0772b;color:#fff;font:700 12px var(--sans)">1</b></td><td lang="es">Una marca sobre la captura; su explicación está debajo con el mismo número.</td><td lang="en">A marker on a screenshot; it is explained below with the same number.</td></tr>
+      <tr><td><b>● Dato publicado</b> · <b>◆ Lectura de Ratio Viña</b></td><td lang="es">Las mismas etiquetas de la app: un dato tomado de una fuente citada, o una propuesta de la app que puedes cambiar.</td><td lang="en">The app’s own labels: a figure taken from a cited source, or an app proposal you can change.</td></tr>
+    </tbody></table></div>
+
+  <h3 id="recuadros"><span lang="es">Los cinco recuadros</span><span lang="en">The five boxes</span></h3>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span><p lang="es">El caso de ejemplo, paso a paso, con los números reales que da la app.</p><p lang="en">The worked case, step by step, with the real numbers the app returns.</p></div>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Consejo</span><span class="bt" lang="en">Tip</span><p lang="es">Atajos y buenas prácticas que ahorran tiempo o evitan errores.</p><p lang="en">Shortcuts and good practice that save time or avoid mistakes.</p></div>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención</span><span class="bt" lang="en">Caution</span><p lang="es">Errores frecuentes que pueden llevar a una conclusión equivocada.</p><p lang="en">Common mistakes that can lead to a wrong conclusion.</p></div>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Por qué?</span><span class="bt" lang="en">Why?</span><p lang="es">La razón detrás de una recomendación, en pocas líneas. Puedes saltarla.</p><p lang="en">The reason behind a recommendation, in a few lines. You can skip it.</p></div>
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de decisión</span><span class="bt" lang="en">Decision rule</span><p lang="es">Una tabla corta: si ves esto, haz aquello.</p><p lang="en">A short table: if you see this, do that.</p></div>
+
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">Ratio Viña no inventa datos</span><span class="bt" lang="en">Ratio Viña does not make up data</span>
+    <p lang="es">Cada cifra de la app trae su fuente. Lo que es una propuesta de la app lleva la etiqueta <b>◆ Lectura de Ratio Viña</b>, y lo que no está documentado aparece como <b>sin dato</b>. Este instructivo sigue la misma regla. Los datos del caso salen de la guía publicada de Mata de Zarza; tres respuestas (microorganismos de montaña, deshierbe con desbrozadora y la poda contada como poda invernal) son comunicación personal del autor de esa guía; las temperaturas vienen del reanálisis ERA5, porque no hay estación meteorológica en la localidad; y los valores de riesgo son una lectura de Ratio Viña sobre el texto de la guía. Cada vez que algo no es un dato publicado, lo decimos.</p>
+    <p lang="en">Every figure in the app carries its source. What the app proposes is labelled <b>◆ Ratio Viña reading</b>, and what is not documented shows as <b>no data</b>. This guide follows the same rule. The case data come from the published Mata de Zarza guide; three answers (mountain microorganisms, weeding with a brush cutter and pruning counted as winter pruning) are a personal communication from that guide’s author; temperatures come from the ERA5 reanalysis, because there is no weather station in the locality; and the risk values are a Ratio Viña reading of the guide’s text. Whenever something is not a published figure, we say so.</p></div>
+</section>
+
+<!-- ============================ 0 · PRIMEROS PASOS ============================ -->
+<section class="chap" id="empezar" data-toc="0" style="--c:var(--pri)">
+  <div class="chap-head"><span class="big">0</span>
+    <div class="eyebrow" lang="es">Primeros pasos</div><div class="eyebrow" lang="en">Getting started</div>
+    <h2 lang="es">Abre la app y conoce la pantalla</h2><h2 lang="en">Open the app and meet the screen</h2>
+    <p lang="es">Ratio Viña es una página web que funciona sola en tu navegador. No se instala, no pide cuenta y no manda tus datos a ningún lado.</p>
+    <p lang="en">Ratio Viña is a web page that runs on its own in your browser. Nothing to install, no account, and your data goes nowhere.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="38" height="28" rx="3"/><path d="M17 42h14M24 36v6M12 28l7-8 6 5 9-11"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="abrir" data-n="0.1"><span lang="es">Abrir Ratio Viña</span><span lang="en">Opening Ratio Viña</span></h3>
+  <p lang="es">Entra a <a href="{{APP}}"><b>hectortecumshe-ai.github.io/RatioVina</b></a> desde la computadora, la tableta o el celular, o escanea el código QR de la página «Ratio Viña en una página». Se descarga un solo archivo; después funciona sin internet mientras dejes la pestaña abierta, y puedes guardar la página (<kbd>Ctrl</kbd> + <kbd>S</kbd>) para usarla en el viñedo sin señal.</p>
+  <p lang="en">Go to <a href="{{APP}}"><b>hectortecumshe-ai.github.io/RatioVina</b></a> from a computer, tablet or phone, or scan the QR code on the “Ratio Viña on one page” page. It downloads a single file; after that it works offline while the tab stays open, and you can save the page (<kbd>Ctrl</kbd> + <kbd>S</kbd>) to use it in the vineyard with no signal.</p>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Dónde quedan mis datos?</span><span class="bt" lang="en">Where is my data kept?</span>
+    <p lang="es">Solo en el navegador que usas. No se suben a internet ni a GitHub. Para pasarlos a otra computadora o compartirlos con tu asesor usa <span class="path">Informe<i>›</i>Guardar proyecto</span> (un archivo <code>.vina.json</code>) y en la otra computadora <span class="path">Informe<i>›</i>Abrir proyecto</span>.</p>
+    <p lang="en">Only in the browser you use. Nothing is uploaded to the internet or to GitHub. To move it to another computer or share it with your adviser use <span class="path">Report<i>›</i>Save project</span> (a <code>.vina.json</code> file) and on the other computer <span class="path">Report<i>›</i>Open project</span>.</p></div>
+
+  <h3 id="pantalla" data-n="0.2"><span lang="es">La pantalla de inicio</span><span lang="en">The home screen</span></h3>
+  <figure data-fig="inicio">
+    <figcaption><span class="fn"></span><span lang="es"><b>Inicio.</b> Todo lo que necesitas para moverte está en la barra superior.</span><span lang="en"><b>Home.</b> Everything you need to get around is in the top bar.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>ES / EN</b> cambia el idioma de toda la app, también del informe.</span><span lang="en"><b>ES / EN</b> switches the language of the whole app, report included.</span></li>
+      <li><span lang="es"><b>Productor / Científico</b> cambia la vista; tus datos no se pierden.</span><span lang="en"><b>Producer / Scientist</b> switches the view; your data is kept.</span></li>
+      <li><span lang="es"><b>☀ / ☾</b> cambia entre tema de día y de noche.</span><span lang="en"><b>☀ / ☾</b> switches between day and night themes.</span></li>
+      <li><span lang="es"><b>?</b> abre la ayuda general. Además, cada dato tiene su propio <b>?</b>.</span><span lang="en"><b>?</b> opens the general help. Every figure also has its own <b>?</b>.</span></li>
+      <li><span lang="es">La <b>barra de bloques</b>, del 1 al 15, más Validación y Teoría. Puedes saltar a cualquiera; junto a cada bloque que se llena, una marca dice si está pendiente (○), en proceso (◐) o completo (●).</span><span lang="en">The <b>block bar</b>, 1 to 15, plus Validation and Theory. You can jump to any of them; next to each block you fill in, a mark says whether it is pending (○), in progress (◐) or complete (●).</span></li>
+      <li><span lang="es">La <b>píldora</b> te recuerda qué viñedo estás tejiendo; en un proyecto nuevo dice «Viñedo nuevo · sin datos aún».</span><span lang="en">The <b>pill</b> reminds you which vineyard you are weaving; in a new project it says “New vineyard · no data yet”.</span></li>
+    </ol>
+  </figure>
+
+  <h3 id="ayudas" data-n="0.3"><span lang="es">Las ayudas «?»</span><span lang="en">The “?” helps</span></h3>
+  <p lang="es">Junto a cada número importante hay un <b>?</b>. Al tocarlo aparece qué significa, cómo se obtiene y cómo leerlo, con un semáforo: verde (bien), ámbar (revisa) y rojo (atiende).</p>
+  <p lang="en">Next to every important figure there is a <b>?</b>. Tap it to see what it means, how it is obtained and how to read it, with a traffic light: green (good), amber (check) and red (act).</p>
+  <figure data-fig="ayuda"><figcaption><span class="fn"></span><span lang="es"><b>Ayuda de un dato.</b> El «?» de los grados día de Winkler, en el Bloque 3.</span><span lang="en"><b>Help for a figure.</b> The “?” of Winkler degree-days, in Block 3.</span></figcaption></figure>
+
+  <h3 id="vistas" data-n="0.4"><span lang="es">Vista productor y vista científica</span><span lang="en">Producer and scientist views</span></h3>
+  <p lang="es">La <b>vista productor</b> muestra lo esencial en lenguaje sencillo; es la que describe este instructivo. La <b>vista científica</b> agrega tablas completas, fórmulas, correlaciones y validación. Puedes cambiar de vista en cualquier momento.</p>
+  <p lang="en">The <b>producer view</b> shows the essentials in plain language; it is the one this guide describes. The <b>scientist view</b> adds full tables, formulas, correlations and validation. You can switch at any time.</p>
+  <figure data-fig="vistas"><figcaption><span class="fn"></span><span lang="es"><b>Vista científica.</b> Una tabla del Tablero que solo aparece en esta vista.</span><span lang="en"><b>Scientist view.</b> A Dashboard table shown only in this view.</span></figcaption></figure>
+
+  <h3 id="ruta" data-n="0.5"><span lang="es">La ruta completa</span><span lang="en">The full route</span></h3>
+  <div class="flow">{{FLUJO}}</div>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Si es tu primera vez</span><span class="bt" lang="en">If this is your first time</span>
+    <p lang="es">La app empieza en blanco. Si quieres ver primero un viñedo completo, toca <span class="ui">Ver el caso publicado (Mata de Zarza)</span> en el Inicio: entras al <b>modo ejemplo</b>, recorres los bloques con este instructivo y sales con <span class="ui">Salir del ejemplo</span>. Luego llenas el tuyo desde el Bloque 1.</p>
+    <p lang="en">The app starts blank. To first see a complete vineyard, tap <span class="ui">See the published case (Mata de Zarza)</span> on Home: you enter <b>example mode</b>, walk through the blocks with this guide and leave with <span class="ui">Leave the example</span>. Then you fill in yours from Block 1.</p></div>
+
+  <h3 id="tuyo" data-n="0.6"><span lang="es">Lo tuyo, lo sugerido y el ejemplo</span><span lang="en">Yours, suggested and the example</span></h3>
+  <p lang="es">Para que nunca confundas un ejemplo con tus propios datos, la app distingue tres cosas a simple vista:</p>
+  <p lang="en">So that you never mistake an example for your own data, the app tells three things apart at a glance:</p>
+  <figure data-fig="blanco"><figcaption><span class="fn"></span><span lang="es"><b>La guía del Inicio.</b> Campo vacío, valor sugerido y ejemplo publicado.</span><span lang="en"><b>The guide on Home.</b> Empty field, suggested value and published example.</span></figcaption></figure>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Lo que ves</th><th lang="en">What you see</th><th lang="es">Qué significa</th><th lang="en">What it means</th></tr></thead>
+    <tbody>
+      <tr><td lang="es"><b>Texto gris en cursiva</b> dentro de un campo</td><td lang="en"><b>Grey italic text</b> inside a field</td><td lang="es">El campo está vacío; es solo una pista de qué escribir. Nada viene llenado.</td><td lang="en">The field is empty; it is only a hint of what to write. Nothing comes filled in.</td></tr>
+      <tr><td lang="es"><b>Perilla punteada y gris</b>, «Sugerido, sin confirmar»</td><td lang="en"><b>Dashed grey knob</b>, “Suggested, not confirmed”</td><td lang="es">La app propone un valor con tus datos. Cuenta como tuyo solo cuando lo mueves o tocas <span class="ui pri">Aceptar sugerencia</span>.</td><td lang="en">The app proposes a value from your data. It counts as yours only when you move it or tap <span class="ui pri">Accept suggestion</span>.</td></tr>
+      <tr><td lang="es"><b>Ventana «Guía de llenado»</b> con la marca de agua «GUÍA · SOLO CONSULTA»</td><td lang="en"><b>“Filling guide” window</b> with the “GUIDE · REFERENCE ONLY” watermark</td><td lang="es">Qué se captura en el bloque, de dónde sacar el dato y cómo llenarlo. Al cerrarla, tus campos siguen igual.</td><td lang="en">What to enter in the block, where to find the data and how to fill it in. When you close it, your fields stay the same.</td></tr>
+      <tr><td lang="es"><b>Franja naranja</b> arriba de la pantalla</td><td lang="en"><b>Orange band</b> at the top of the screen</td><td lang="es">Estás en el modo ejemplo, viendo el caso de Mata de Zarza. Nada se guarda; <span class="ui">Salir del ejemplo</span> te regresa a tu proyecto.</td><td lang="en">You are in example mode, viewing the Mata de Zarza case. Nothing is saved; <span class="ui">Leave the example</span> takes you back to your project.</td></tr>
+    </tbody></table></div>
+  <figure data-fig="avance"><figcaption><span class="fn"></span><span lang="es"><b>Llenado por ti.</b> La barra y las marcas del menú cuentan solo lo que tú llenaste.</span><span lang="en"><b>Filled in by you.</b> The bar and the menu marks count only what you filled in.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Marcas por bloque: pendiente, en proceso o completo.</span><span lang="en">Marks per block: pending, in progress or complete.</span></li><li><span lang="es">Porcentaje total llenado por ti.</span><span lang="en">Total share filled in by you.</span></li></ol></figure>
+  <figure data-fig="modoej"><figcaption><span class="fn"></span><span lang="es"><b>Modo ejemplo.</b> La franja naranja recuerda que esos datos son de Mata de Zarza, no tuyos.</span><span lang="en"><b>Example mode.</b> The orange band reminds you that those data are Mata de Zarza’s, not yours.</span></figcaption></figure>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Y si abro un bloque de resultados sin datos?</span><span class="bt" lang="en">What if I open a results block with no data?</span>
+    <p lang="es">Formulación, Tablero, Sostenibilidad, Prospectiva e Informe no muestran resultados vacíos: dicen qué bloques faltan por llenar y te llevan a ellos.</p>
+    <p lang="en">Formulation, Dashboard, Sustainability, Outlook and Report do not show empty results: they say which blocks are still to be filled in and take you there.</p></div>
+  <figure data-fig="vacio"><figcaption><span class="fn"></span><span lang="es"><b>Un bloque de resultados sin datos.</b></span><span lang="en"><b>A results block with no data.</b></span></figcaption></figure>
+</section>
+
+<!-- ============================ 1 · VID ============================ -->
+<section class="chap" id="b1" data-toc="1" style="--c:var(--b1)">
+  <div class="chap-head"><span class="big">1</span>
+    <div class="eyebrow" lang="es">Bloque 1 · Vid</div><div class="eyebrow" lang="en">Block 1 · Vine</div>
+    <h2 lang="es">Tu viñedo y su historia</h2><h2 lang="en">Your vineyard and its history</h2>
+    <p lang="es">Ratio Viña trabaja con un solo cultivo, la vid. Aquí dices para qué cultivas la uva, qué variedad y qué pie usas, cómo conduces la planta, cuándo y con qué se plantó y cuándo se ha podado.</p>
+    <p lang="en">Ratio Viña works with a single crop, the grapevine. Here you say what you grow grapes for, which variety and rootstock you use, how you train the vine, when and with what it was planted and when it has been pruned.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="22" r="4"/><circle cx="28" cy="22" r="4"/><circle cx="24" cy="29" r="4"/><circle cx="20" cy="36" r="4"/><circle cx="28" cy="36" r="4"/><path d="M24 18V8M24 10c4-4 10-3 12 0"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b1-vid" data-n="1.1"><span lang="es">Destino, variedad, pie y conducción</span><span lang="en">Use, variety, rootstock and training</span></h3>
+  <p lang="es">Primero elige el <b>destino</b> de tu uva: mesa, vino, pasa, jugo o varios destinos. Ese destino orienta algunas preguntas del Bloque 5; por ejemplo, el anillado y el empaque son propios de la uva de mesa y el riego deficitario controlado, de la uva para vino. Después escribe o toca tu <b>variedad</b> y tu <b>portainjerto</b>; si la planta está sobre sus propias raíces, elige «Pie franco (sin portainjerto)». Las listas son orientativas: verifica el nombre con tu vivero o asociación. Al final elige el <b>sistema de conducción</b> (espaldera, cordón, parral, lira, vaso u otro) y anota cuántas plantas hay por hectárea.</p>
+  <p lang="en">First choose your grapes’ <b>use</b>: table, wine, raisins, juice or several. That use shapes some Block 5 questions; for example, girdling and packing belong to table grapes and regulated deficit irrigation to wine grapes. Then type or tap your <b>variety</b> and <b>rootstock</b>; if the vine is on its own roots, choose “Own-rooted (no rootstock)”. The lists are indicative: check the name with your nursery or association. Finally choose the <b>training system</b> (vertical trellis, cordon, pergola, lyre, bush vine or other) and enter vines per hectare.</p>
+  <figure data-fig="vid">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 1.</b> El caso de Mata de Zarza.</span><span lang="en"><b>Block 1.</b> The Mata de Zarza case.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Variedad principal.</span><span lang="en">Main variety.</span></li><li><span lang="es">Portainjerto.</span><span lang="en">Rootstock.</span></li><li><span lang="es">Sistema de conducción.</span><span lang="en">Training system.</span></li></ol>
+  </figure>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Cómo calcular las plantas por hectárea</span><span class="bt" lang="en">How to work out vines per hectare</span>
+    <p lang="es">Divide 10,000 m² entre la distancia entre plantas por la distancia entre hileras. Con el marco de Mata de Zarza, 1.40 m entre plantas y 3.0 m entre calles: 10,000 ÷ (1.40 × 3.0) = <span class="val">2381</span> plantas por hectárea.</p>
+    <p lang="en">Divide 10,000 m² by the in-row spacing times the between-row spacing. With the Mata de Zarza layout, 1.40 m between vines and 3.0 m between rows: 10,000 ÷ (1.40 × 3.0) = <span class="val">2381</span> vines per hectare.</p></div>
+
+  <h3 id="b1-historial" data-n="1.2"><span lang="es">Historial del viñedo</span><span lang="en">Vineyard history</span></h3>
+  <p lang="es">La historia de un viñedo explica su presente. La <b>fecha de plantación</b> se pone con una perilla que recorre los 365 días del año, más el año en el recuadro de al lado; mientras no la muevas, dice «sin capturar». Con ella la app calcula la <b>edad</b> del viñedo. Elige también el <b>material de plantación</b>: esqueje sin raíz, barbado (estaca enraizada), planta injertada de vivero o portainjerto injertado en campo. Abajo, en el <b>registro de podas</b>, agrega cada poda con su fecha, su tipo (formación, producción, en verde, segunda poda del año o renovación) y una nota. En climas sin invierno marcado puede haber dos podas al año: regístralas todas.</p>
+  <p lang="en">A vineyard’s history explains its present. The <b>planting date</b> is set with a knob that runs through the 365 days of the year, plus the year in the box beside it; until you move it, it reads “not entered”. From it the app works out the vineyard’s <b>age</b>. Also choose the <b>planting material</b>: unrooted cutting, rooted cutting, nursery-grafted vine or rootstock grafted in the field. Below, in the <b>pruning record</b>, add each pruning with its date, type (training, production, summer, second pruning of the year or renewal) and a note. In climates without a marked winter there may be two prunings a year: record them all.</p>
+  <figure data-fig="historial">
+    <figcaption><span class="fn"></span><span lang="es"><b>Historial del viñedo de Mata de Zarza.</b></span><span lang="en"><b>Mata de Zarza vineyard history.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Perilla de la fecha de plantación (día del año) y el año.</span><span lang="en">Planting-date knob (day of the year) and the year.</span></li><li><span lang="es">Material de plantación.</span><span lang="en">Planting material.</span></li><li><span lang="es"><span class="ui pri">+ Agregar poda</span>.</span><span lang="en"><span class="ui pri">+ Add pruning</span>.</span></li></ol>
+  </figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es"><b>Uva de mesa</b> de las variedades <b>Perlette, Flame Seedless y Summer Royal</b>, introducidas como esquejes traídos de viñedos de Hermosillo, Sonora. Las plantas crecen sobre <b>pie franco</b>: el esqueje enraizado es la planta completa. El material de plantación es el <b>barbado</b>, porque los esquejes se enraízan antes en una cámara. La plantación se hizo en <b>febrero de 2025</b>; como la guía no da el día, el caso usa el 24 de febrero, que resulta de iniciar el enraizamiento en los primeros diez días de enero y sumar los 45 días en la cámara. La primera poda, a fines de diciembre de 2025, fue una <b>poda de formación desde la base del tallo</b>, para tener tallos más gruesos en el segundo año (Mojica-Zárate et al., 2026). El sistema de producción es «riego tecnificado» y la conducción, «espaldera», porque en el primer año se colocan alambres de sostén; ambas son lecturas de la guía.</p>
+    <p lang="en"><b>Table grapes</b> of the <b>Perlette, Flame Seedless and Summer Royal</b> varieties, introduced as cuttings from vineyards in Hermosillo, Sonora. The vines grow <b>own-rooted</b>: the rooted cutting is the whole plant. The planting material is the <b>rooted cutting</b>, because cuttings are first rooted in a chamber. Planting took place in <b>February 2025</b>; since the guide gives no day, the case uses 24 February, which results from starting rooting in the first ten days of January and adding the 45 days in the chamber. The first pruning, in late December 2025, was a <b>training pruning from the base of the stem</b>, to get thicker shoots in the second year (Mojica-Zárate et al., 2026). The production system is “pressurised irrigation” and the training “vertical trellis”, because support wires are put up in the first year; both are readings of the guide.</p></div>
+
+  <h3 id="b1-unidad" data-n="1.3"><span lang="es">Sistema y unidad de producción</span><span lang="en">Production system and unit</span></h3>
+  <p lang="es">El sistema dice cómo se maneja el viñedo: con riego tecnificado (goteo o microaspersión), por gravedad, de temporal, orgánico o en transición, diversificado (con cubiertas, frutales u otros cultivos) o parra de traspatio; si no está el tuyo, agrégalo. Luego eliges el tipo de unidad (viñedo familiar, comercial, de una bodega, rancho de uva de mesa, parcela ejidal o comunal, parcela demostrativa u <b>Otro</b>), la superficie y el nombre del proyecto.</p>
+  <p lang="en">The system says how the vineyard is managed: with pressurised irrigation (drip or micro-sprinkler), gravity irrigation, rainfed, organic or transitioning, diversified (with covers, fruit trees or other crops) or a backyard vine; if yours is missing, add it. Then choose the unit type (family, commercial, winery-owned, table-grape ranch, ejido or communal plot, demonstration plot or <b>Other</b>), the area and the project name.</p>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">Una <b>parcela demostrativa</b> de <b>1 ha</b>, una de las 19 parcelas de productores cooperantes de la primera fase (2025).</p>
+    <p lang="en">A <b>1 ha demonstration plot</b>, one of the 19 cooperating farmers’ plots of the first phase (2025).</p></div>
+</section>
+
+<!-- ============================ 2 · REGIÓN ============================ -->
+<section class="chap" id="b2" data-toc="2" style="--c:var(--b2)">
+  <div class="chap-head"><span class="big">2</span>
+    <div class="eyebrow" lang="es">Bloque 2 · Región</div><div class="eyebrow" lang="en">Block 2 · Region</div>
+    <h2 lang="es">Región, municipio y localidad</h2><h2 lang="en">Region, municipality and locality</h2>
+    <p lang="es">Cada localidad cultiva a su manera. Ubica tu viñedo y la app trae los datos oficiales del INEGI.</p>
+    <p lang="en">Every locality farms its own way. Locate your vineyard and the app brings INEGI’s official data.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 44s14-12 14-24a14 14 0 0 0-28 0c0 12 14 24 14 24z"/><circle cx="24" cy="20" r="5"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b2-mapa" data-n="2.1"><span lang="es">Del país a la localidad</span><span lang="en">From country to locality</span></h3>
+  <p lang="es">Toca tu estado en el mapa o elígelo en la lista; luego el <b>municipio</b> y la <b>localidad</b>. La app reconoce 2,478 municipios y 54,357 localidades del INEGI, con su población de 2020, su altitud y su punto en el mapa. La región (Norte, Centro norte, Centro o Sur) se asigna sola. Al empezar, los tres campos dicen «— Elige… —» en gris.</p>
+  <p lang="en">Tap your state on the map or pick it from the list; then the <b>municipality</b> and the <b>locality</b>. The app knows 2,478 municipalities and 54,357 INEGI localities, with their 2020 population, altitude and map point. The region (North, North-central, Central or South) is set automatically. At the start the three fields read “— Choose… —” in grey.</p>
+  <figure data-fig="region">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 2.</b> Veracruz iluminado; el punto es la localidad.</span><span lang="en"><b>Block 2.</b> Veracruz highlighted; the dot is the locality.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Mapa de México por regiones.</span><span lang="en">Map of Mexico by region.</span></li></ol>
+  </figure>
+  <h3 id="b2-datos" data-n="2.2"><span lang="es">Los datos de tu localidad</span><span lang="en">Your locality’s data</span></h3>
+  <figure data-fig="localidad"><figcaption><span class="fn"></span><span lang="es"><b>Datos del INEGI de la localidad.</b></span><span lang="en"><b>INEGI data for the locality.</b></span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">Veracruz (región Sur) › Puente Nacional › <b>Mata de Zarza</b>: 372 habitantes, a 467 m de altitud, en 19.230° N y 96.675° O (INEGI, 2020). La guía describe sus suelos arcillosos y la poca disponibilidad de agua como los mayores retos del cultivo.</p>
+    <p lang="en">Veracruz (South region) › Puente Nacional › <b>Mata de Zarza</b>: 372 inhabitants, at 467 m, at 19.230° N and 96.675° W (INEGI, 2020). The guide describes its clay soils and scarce water as the crop’s biggest challenges.</p></div>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Si tu localidad no aparece</span><span class="bt" lang="en">If your locality is missing</span>
+    <p lang="es">Elige la más cercana y anótalo en las notas del proyecto. El catálogo incluye las localidades de 100 habitantes o más y todas las cabeceras.</p>
+    <p lang="en">Choose the nearest one and note it in the project notes. The catalogue includes localities of 100 inhabitants or more and all municipal seats.</p></div>
+</section>
+
+<!-- ============================ 3 · CLIMA VITÍCOLA ============================ -->
+<section class="chap" id="b3" data-toc="3" style="--c:var(--b3)">
+  <div class="chap-head"><span class="big">3</span>
+    <div class="eyebrow" lang="es">Bloque 3 · Clima vitícola</div><div class="eyebrow" lang="en">Block 3 · Viticultural climate</div>
+    <h2 lang="es">Winkler, Huglin y las noches</h2><h2 lang="en">Winkler, Huglin and the nights</h2>
+    <p lang="es">Con las temperaturas de cada mes, la app calcula tres índices publicados que dicen qué tanto calor recibe la vid y qué tan frescas son sus noches.</p>
+    <p lang="en">From each month’s temperatures, the app computes three published indices that say how much heat the vine receives and how cool its nights are.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 30V10a4 4 0 0 1 8 0v20a8 8 0 1 1-8 0z"/><path d="M24 16v18"/><path d="M34 12h6M34 20h6"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b3-temp" data-n="3.1"><span lang="es">Las temperaturas mensuales</span><span lang="en">Monthly temperatures</span></h3>
+  <p lang="es">Escribe para cada mes la temperatura <b>máxima</b>, <b>mínima</b> y <b>media</b> en °C. Si no tienes la media, la app la calcula como el promedio de la máxima y la mínima. El mejor dato son las <b>normales climatológicas</b> de la estación del Servicio Meteorológico Nacional más cercana y de clima parecido; anota la fuente en su campo. Si no hay estación cercana, un reanálisis como ERA5 da valores mensuales para cualquier punto del país, con la advertencia de que no es una medición en el sitio.</p>
+  <p lang="en">For each month enter the <b>maximum</b>, <b>minimum</b> and <b>mean</b> temperature in °C. Without the mean, the app takes the average of maximum and minimum. The best data are the <b>climate normals</b> of the nearest National Weather Service station with a similar climate; note the source in its field. If there is no nearby station, a reanalysis such as ERA5 gives monthly values for any point in the country, with the caveat that it is not an on-site measurement.</p>
+  <figure data-fig="clima">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 3.</b> Temperaturas de Mata de Zarza y los tres índices.</span><span lang="en"><b>Block 3.</b> Mata de Zarza temperatures and the three indices.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Tabla de temperaturas mensuales.</span><span lang="en">Monthly temperature table.</span></li><li><span lang="es">Los tres índices, cada uno con su «?».</span><span lang="en">The three indices, each with its “?”.</span></li></ol>
+  </figure>
+  <h3 id="b3-indices" data-n="3.2"><span lang="es">Los tres índices</span><span lang="en">The three indices</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Índice</th><th lang="en">Index</th><th lang="es">Cómo se obtiene</th><th lang="en">How it is obtained</th><th lang="es">Cómo se lee</th><th lang="en">How to read it</th></tr></thead>
+    <tbody>
+      <tr><td lang="es"><b>Grados día de Winkler</b> (Amerine y Winkler, 1944)</td><td lang="en"><b>Winkler degree-days</b> (Amerine and Winkler, 1944)</td><td lang="es">De abril a octubre, suma lo que la temperatura media pasa de 10 °C, por los días de cada mes.</td><td lang="en">From April to October, add up how far the mean temperature exceeds 10 °C, times the days of each month.</td><td lang="es">Cinco regiones: I (menos de 1,389), II, III, IV y V (más de 2,222). Más grados día, uvas más maduras y menos ácidas.</td><td lang="en">Five regions: I (under 1,389), II, III, IV and V (over 2,222). More degree-days, riper and less acidic grapes.</td></tr>
+      <tr><td lang="es"><b>Índice de Huglin</b> (Huglin, 1978)</td><td lang="en"><b>Huglin index</b> (Huglin, 1978)</td><td lang="es">De abril a septiembre, suma el promedio de lo que la media y la máxima pasan de 10 °C, por los días; da más peso a las horas de sol.</td><td lang="en">From April to September, add up the average of how far mean and maximum exceed 10 °C, times the days; it weighs sunny hours more.</td><td lang="es">De «muy fresco» (1,500 o menos) a «muy cálido» (más de 3,000) (Tonietto y Carbonneau, 2004).</td><td lang="en">From “very cool” (1,500 or less) to “very warm” (over 3,000) (Tonietto and Carbonneau, 2004).</td></tr>
+      <tr><td lang="es"><b>Frescor nocturno</b> (Tonietto y Carbonneau, 2004)</td><td lang="en"><b>Cool-night index</b> (Tonietto and Carbonneau, 2004)</td><td lang="es">La temperatura mínima media del mes de maduración (septiembre).</td><td lang="en">The mean minimum temperature of the ripening month (September).</td><td lang="es">Noches muy frescas (12 °C o menos), frescas, templadas o cálidas (más de 18 °C). Las noches frescas favorecen el color y el aroma.</td><td lang="en">Very cool (12 °C or less), cool, temperate or warm nights (over 18 °C). Cool nights favour colour and aroma.</td></tr>
+    </tbody></table></div>
+  <figure data-fig="climag"><figcaption><span class="fn"></span><span lang="es"><b>El año de tu viñedo.</b> Máxima, media y mínima de cada mes, con el umbral de 10 °C y la temporada de Winkler.</span><span lang="en"><b>Your vineyard’s year.</b> Each month’s maximum, mean and minimum, with the 10 °C threshold and the Winkler season.</span></figcaption></figure>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">En climas sin invierno, léelos con cautela</span><span class="bt" lang="en">In climates without winter, read them with caution</span>
+    <p lang="es">Los tres índices se crearon para la viticultura de clima templado, con una temporada de crecimiento de abril a octubre. Si ningún mes tiene una media menor de 15 °C, la app muestra un aviso: la vid puede no tener un reposo marcado y el ciclo puede no coincidir con esos meses. En el trópico la uva de mesa pide variedades de ciclo corto y técnicas distintas de las de las zonas templadas (Kok, 2014).</p>
+    <p lang="en">The three indices were built for temperate viticulture, with an April–October growing season. If no month has a mean below 15 °C, the app shows a warning: the vine may lack a marked rest and its cycle may not match those months. In the tropics table grapes call for short-cycle varieties and techniques different from those of temperate zones (Kok, 2014).</p></div>
+  <figure data-fig="winkler"><figcaption><span class="fn"></span><span lang="es"><b>¿En qué región de Winkler está?</b> La escala completa y dónde cae el viñedo.</span><span lang="en"><b>Which Winkler region is it in?</b> The full scale and where the vineyard falls.</span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">La guía no publica temperaturas y en la localidad no hay estación meteorológica; tampoco sirve la del Centro Académico Regional de Huatusco, que tiene otro tipo de clima. Por eso el caso usa las medias mensuales de 1991 a 2020 del reanálisis <b>ERA5</b> (Hersbach et al., 2020) en la celda de 19.25° N y 96.75° O, ajustadas a 467 m. El mes más fresco es enero, con 19.1 °C de media, y el más cálido mayo, con 25.7 °C. Con esos datos: <b>3,195 grados día de Winkler (región V)</b>, <b>índice de Huglin de 3,203 (muy cálido)</b> y <b>21.2 °C de frescor nocturno (noches cálidas)</b>. Como ningún mes baja de 15 °C, aparece el aviso de clima sin invierno marcado: en Mata de Zarza los índices sirven para comparar, no para elegir variedades como en Sonora o Baja California.</p>
+    <p lang="en">The guide publishes no temperatures and there is no weather station in the locality; nor is the Huatusco Regional Academic Centre station suitable, as it has another climate type. So the case uses the 1991–2020 monthly means of the <b>ERA5</b> reanalysis (Hersbach et al., 2020) in the cell at 19.25° N and 96.75° W, adjusted to 467 m. The coolest month is January, averaging 19.1 °C, and the warmest May, at 25.7 °C. With those data: <b>3,195 Winkler degree-days (region V)</b>, <b>Huglin index of 3,203 (very warm)</b> and <b>21.2 °C cool-night index (warm nights)</b>. As no month drops below 15 °C, the no-marked-winter warning appears: in Mata de Zarza the indices serve for comparison, not for choosing varieties as in Sonora or Baja California.</p></div>
+</section>
+
+<!-- ============================ 4 · REQUERIMIENTOS ============================ -->
+<section class="chap" id="b4" data-toc="4" style="--c:var(--b4)">
+  <div class="chap-head"><span class="big">4</span>
+    <div class="eyebrow" lang="es">Bloque 4 · Requerimientos</div><div class="eyebrow" lang="en">Block 4 · Requirements</div>
+    <h2 lang="es">Lo que la vid necesita para salir bien</h2><h2 lang="en">What the vine needs to do well</h2>
+    <p lang="es">Siete requerimientos, uno por etapa del ciclo, y los que tu viñedo ha agregado con los años.</p>
+    <p lang="en">Seven requirements, one per stage of the cycle, and those your vineyard has added over the years.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="6" width="28" height="36" rx="3"/><path d="M16 16h16M16 24h16M16 32h10"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b4-trad" data-n="4.1"><span lang="es">Los requerimientos del cuestionario base</span><span lang="en">The baseline questionnaire’s requirements</span></h3>
+  <p lang="es">Cada requerimiento resume lo que pide una etapa del ciclo: material vegetal sano y bien enraizado, plantado en suelo húmedo y protegido el primer año; poda adecuada y estructura en buen estado; reposo suficiente o un manejo que rompa la dormancia donde falta frío; suelo con buen drenaje y riego oportuno; sanidad con monitoreo; equilibrio entre follaje y racimos; y cosecha en la madurez que pide el destino. Para cada uno marca si se cumple: <b>Sí</b>, <b>Parcial</b> o <b>No</b>. Como todavía no hay un Stack publicado de la vid en un viñedo productivo, los seis últimos son una ◆ lectura de Ratio Viña a partir de los textos de viticultura (Winkler et al., 1974; Keller, 2020); el del establecimiento sale de la guía de Mata de Zarza.</p>
+  <p lang="en">Each requirement sums up what a stage of the cycle needs: healthy, well-rooted material, planted in moist soil and protected in year one; suitable pruning and a sound trellis; enough rest, or management to break dormancy where chilling is lacking; well-drained soil and timely irrigation; plant health with scouting; balance between foliage and clusters; and harvest at the ripeness the use requires. For each, mark whether it is met: <b>Yes</b>, <b>Partly</b> or <b>No</b>. As there is no published grapevine Stack for a producing vineyard yet, the last six are a ◆ Ratio Viña reading of viticulture texts (Winkler et al., 1974; Keller, 2020); the establishment one comes from the Mata de Zarza guide.</p>
+  <figure data-fig="req"><figcaption><span class="fn"></span><span lang="es"><b>Requerimientos.</b> Con su etapa y el semáforo Sí, Parcial o No.</span><span lang="en"><b>Requirements.</b> With their stage and the Yes, Partly or No traffic light.</span></figcaption></figure>
+  <h3 id="b4-innovados" data-n="4.2"><span lang="es">Requerimientos innovados</span><span lang="en">Innovated requirements</span></h3>
+  <p lang="es">Abajo agregas lo que tu viñedo ha aprendido: escribe el requerimiento, elige la etapa a la que pertenece, una descripción y la fuente (productor, asesor, investigación, programa), y toca <span class="ui pri">Agregar requerimiento</span>.</p>
+  <p lang="en">Below you add what your vineyard has learnt: write the requirement, choose its stage, a description and the source (farmer, adviser, research, programme), and tap <span class="ui pri">Add requirement</span>.</p>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">El requerimiento del establecimiento se marca <b>Sí</b>: la guía describe la selección de esquejes sanos, la plantación en cepas recién regadas y la protección del primer año. Los otros seis quedan sin marcar, porque la guía cubre hasta la preparación para la poda y la parcela aún no florece. Se agregan dos requerimientos innovados de la guía: <b>arena de río limpia y cernida</b> para la cámara de enraizamiento, «no puede ser arena industrial ni arena de construcción», y <b>agua para riego constante en los tres primeros meses</b> después de plantar.</p>
+    <p lang="en">The establishment requirement is marked <b>Yes</b>: the guide describes selecting healthy cuttings, planting in freshly watered holes and first-year protection. The other six stay unmarked, because the guide covers up to preparation for pruning and the plot has not yet flowered. Two innovated requirements from the guide are added: <b>clean, sieved river sand</b> for the rooting chamber, “not industrial or building sand”, and <b>water for constant irrigation in the first three months</b> after planting.</p></div>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Anota siempre la fuente</span><span class="bt" lang="en">Always record the source</span>
+    <p lang="es">«Lo dijo el productor cooperante, 2025» o «Guía práctica UACh, 2026» bastan. La fuente se imprime en el informe y le da valor a tu registro.</p>
+    <p lang="en">“Said by the cooperating farmer, 2025” or “UACh practical guide, 2026” is enough. The source is printed in the report and gives your record its worth.</p></div>
+</section>
+
+<!-- ============================ 5 · MANEJO ============================ -->
+<section class="chap" id="b5" data-toc="5" style="--c:var(--b5)">
+  <div class="chap-head"><span class="big">5</span>
+    <div class="eyebrow" lang="es">Bloque 5 · Manejo</div><div class="eyebrow" lang="en">Block 5 · Management</div>
+    <h2 lang="es">Del esqueje a la cosecha</h2><h2 lang="en">From cutting to harvest</h2>
+    <p lang="es">El corazón del sistema: lo que se hace, en qué orden y cuándo. Todo lo que sigue se calcula con estas actividades.</p>
+    <p lang="en">The heart of the system: what is done, in what order and when. Everything that follows is computed from these activities.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40l18-28M28 12c3-4 9-4 10 0-3 3-6 3-10 0zM6 42h36"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b5-pasos" data-n="5.1"><span lang="es">Siete etapas, 37 pasos y 67 actividades</span><span lang="en">Seven stages, 37 steps and 67 activities</span></h3>
+  <p lang="es">El cuestionario base ordena el manejo del viñedo en siete etapas. La primera, <b>Establecimiento: propagación y plantación</b>, tiene 6 pasos y 15 actividades, de la elección del sitio y del material vegetal a la formación de la planta joven, tomados de la guía de Mata de Zarza (Mojica-Zárate et al., 2026). Las otras seis siguen el ciclo anual según las etapas fenológicas BBCH de la vid (Lorenz et al., 1995): reposo y poda; brotación y crecimiento; floración y cuajado; desarrollo del fruto y envero; maduración y cosecha; y poscosecha, destino y balance. Ninguna actividad viene contestada. Arriba ves cuántas respondiste, cuántas practicas (entran a la red) y cuántas no; los botones de colores filtran los pasos por etapa.</p>
+  <p lang="en">The baseline questionnaire orders vineyard management into seven stages. The first, <b>Establishment: propagation and planting</b>, has 6 steps and 15 activities, from choosing the site and planting material to training the young vine, taken from the Mata de Zarza guide (Mojica-Zárate et al., 2026). The other six follow the annual cycle by the grapevine’s BBCH phenological stages (Lorenz et al., 1995): dormancy and pruning; budburst and shoot growth; flowering and fruit set; berry development and veraison; ripening and harvest; and post-harvest, destination and balance. No activity comes answered. At the top you see how many you answered, how many you practise (they enter the network) and how many not; the coloured buttons filter steps by stage.</p>
+  <figure data-fig="manejo">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 5.</b></span><span lang="en"><b>Block 5.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Filtro por etapa.</span><span lang="en">Filter by stage.</span></li></ol>
+  </figure>
+  <h3 id="b5-paso" data-n="5.2"><span lang="es">Dentro de un paso</span><span lang="en">Inside a step</span></h3>
+  <p lang="es">Al abrir un paso ves sus actividades. Para cada una contesta <span class="ui pri">Sí la practico</span> o <span class="ui">No</span>; las que quedan «sin responder», con fondo rayado, no entran a la red. Con <span class="ui">Todas sí</span> o <span class="ui">Todas no</span> contestas el paso completo. Revisa los <b>cuadros de colores</b>, que dicen si la actividad suma (verde) o resta (rojo) al suelo, al agua, a la atmósfera, a la vegetación y a la fauna, y corrígelos si en tu caso es distinto; fija las <b>fechas</b> de la actividad principal; y con <span class="ui">+ Actividad innovadora</span> agrega lo que tu viñedo hace diferente, eligiendo los elementos que participan.</p>
+  <p lang="en">Opening a step shows its activities. For each one answer <span class="ui pri">Yes, I do</span> or <span class="ui">No</span>; those left “not answered”, with a striped background, do not enter the network. <span class="ui">All yes</span> or <span class="ui">All no</span> answers the whole step. Check the <b>coloured squares</b>, which show whether the activity adds (green) or subtracts (red) for soil, water, atmosphere, vegetation and fauna, and correct them if your case differs; set the <b>dates</b> of the main activity; and with <span class="ui">+ Innovative activity</span> add what your vineyard does differently, choosing the elements involved.</p>
+  <figure data-fig="paso"><figcaption><span class="fn"></span><span lang="es"><b>Paso 2, propagación de esquejes.</b> Las cuatro actividades respondidas «sí», sus fechas y la cámara de enraizamiento de Mata de Zarza como actividad innovadora.</span><span lang="en"><b>Step 2, propagating cuttings.</b> The four activities answered “yes”, their dates and the Mata de Zarza rooting chamber as an innovative activity.</span></figcaption></figure>
+  <figure data-fig="plantar"><figcaption><span class="fn"></span><span lang="es"><b>Paso 4, plantación.</b> Con dos innovaciones de la guía: varios esquejes por cepa y acolchado solarizado.</span><span lang="en"><b>Step 4, planting.</b> With two innovations from the guide: several cuttings per hole and solarised mulch.</span></figcaption></figure>
+  <figure data-fig="respsn"><figcaption><span class="fn"></span><span lang="es"><b>Respuestas Sí / No.</b> En la poda invernal de Mata de Zarza, la poda con tijera es «sí» y la elección de cargadores o pulgares es «no», porque la planta de primer año se poda desde la base.</span><span lang="en"><b>Yes / No answers.</b> In Mata de Zarza’s winter pruning, pruning with shears is “yes” and choosing canes or spurs is “no”, because the first-year vine is pruned from the base.</span></figcaption></figure>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Por qué importan los elementos de cada actividad?</span><span class="bt" lang="en">Why do each activity’s elements matter?</span>
+    <p lang="es">Porque así se teje la red: dos elementos que participan en la misma actividad quedan ligados. Si la cámara de enraizamiento usa «arena de río», «agua de riego» y «conocimiento tácito», esa práctica fortalece el vínculo entre ellos.</p>
+    <p lang="en">Because that is how the network is woven: two elements taking part in the same activity become linked. If the rooting chamber uses “river sand”, “irrigation water” and “tacit knowledge”, that practice strengthens the link between them.</p></div>
+  <h3 id="b5-guia" data-n="5.3"><span lang="es">La guía de llenado y el caso publicado</span><span lang="en">The filling guide and the published case</span></h3>
+  <p lang="es">Cada bloque muestra el recuadro <b>«¿No sabes cómo llenarlo?»</b>. Al tocar <span class="ui">Ver la guía de llenado</span> se abre una ventana, con la marca de agua «GUÍA · SOLO CONSULTA», que explica qué se captura, de dónde sacar el dato y cómo llenarlo. Desde ahí puedes entrar al caso de Mata de Zarza con <span class="ui">Ver el caso publicado de Mata de Zarza</span>. Al cerrar la ventana tus campos siguen igual.</p>
+  <p lang="en">Every block shows the <b>“Not sure how to fill it in?”</b> box. Tapping <span class="ui">See the filling guide</span> opens a window, with the “GUIDE · REFERENCE ONLY” watermark, explaining what to enter, where to find the data and how to fill it in. From there you can enter the Mata de Zarza case with <span class="ui">See the published Mata de Zarza case</span>. When you close the window your fields stay the same.</p>
+  <figure data-fig="ejemplo"><figcaption><span class="fn"></span><span lang="es"><b>Guía de llenado</b> del Bloque 5.</span><span lang="en"><b>Filling guide</b> for Block 5.</span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">De las 67 actividades, <b>48 están respondidas</b>: 27 «sí» y 21 «no»; las otras 19 quedan sin responder porque la guía no habla de ellas. Las <b>15 actividades del establecimiento</b> son «sí», con sus fechas: corte de esquejes en los primeros días de enero, 45 días en la cámara de enraizamiento a 24–28 °C y humedad de 95 % o más, cepas de 20 cm de diámetro y 70 cm de profundidad a 1.40 × 3.0 m, plantación con riego de 1.2 L por hora durante 40 horas y después 3 L por planta al día, acolchado, protección contra la hormiga cortadora y los animales, alzado en soportes y alambres de sostén. Del ciclo anual son «sí» la poda invernal, la revisión de alambres, la composta o estiércol (gallinaza o pollinaza), el riego, el amarre, la fertilización con fosfato diamónico (40 g por planta), el deshierbe con desbrozadora, el riego según la demanda, los bioinsumos (microorganismos de montaña), el registro de costos en bitácoras, la enseñanza a estudiantes y productores y el intercambio con viticultores de Sonora. Floración, raleo, anillado, envero, cosecha, empaque y venta son «no»: la parcela aún no llega a esas etapas. Además hay <b>8 actividades innovadoras</b> de la guía, como la cámara de enraizamiento excavada en el suelo, sin plástico, con arena de río, y la protección de cada planta con costales de red sostenidos por estacas.</p>
+    <p lang="en">Of the 67 activities, <b>48 are answered</b>: 27 “yes” and 21 “no”; the other 19 stay unanswered because the guide does not mention them. The <b>15 establishment activities</b> are “yes”, with their dates: cutting cuttings in the first days of January, 45 days in the rooting chamber at 24–28 °C and 95 % humidity or more, holes 20 cm wide and 70 cm deep at 1.40 × 3.0 m, planting with 1.2 L per hour for 40 hours and then 3 L per vine a day, mulching, protection against leaf-cutter ants and animals, lifting onto supports and support wires. From the annual cycle, “yes” goes to winter pruning, wire checks, compost or manure (chicken manure), irrigation, tying, fertilising with diammonium phosphate (40 g per vine), weeding with a brush cutter, irrigation by demand, bio-inputs (mountain microorganisms), recording costs in logbooks, teaching students and farmers and exchange with Sonora growers. Flowering, thinning, girdling, veraison, harvest, packing and sales are “no”: the plot has not reached those stages. There are also <b>8 innovative activities</b> from the guide, such as the rooting chamber dug in the ground, without plastic, with river sand, and protecting each vine with net sacks held by stakes.</p></div>
+</section>
+
+<!-- ============================ 6 · REGENERACIÓN ============================ -->
+<section class="chap" id="b6" data-toc="6" style="--c:var(--b6)">
+  <div class="chap-head"><span class="big">6</span>
+    <div class="eyebrow" lang="es">Bloque 6 · Regeneración</div><div class="eyebrow" lang="en">Block 6 · Regeneration</div>
+    <h2 lang="es">¿Tu viñedo se regenera o se desgasta?</h2><h2 lang="en">Is your vineyard regenerating or wearing out?</h2>
+    <p lang="es">Ocho perillas de 0 a 4 miden si las prácticas devuelven al suelo, al agua y a la biodiversidad más de lo que toman.</p>
+    <p lang="en">Eight 0–4 knobs measure whether practices give back to soil, water and biodiversity more than they take.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 24a14 14 0 0 1 24-10M38 24a14 14 0 0 1-24 10M34 6v8h-8M14 42v-8h8"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b6-indice" data-n="6.1"><span lang="es">El índice de regeneración</span><span lang="en">The regeneration index</span></h3>
+  <p lang="es">El medidor resume las ocho perillas en un número de 0 a 100 y una clase: <b>degradante</b> (menos de 25), <b>convencional</b> (25 a 49), <b>en transición regenerativa</b> (50 a 74) y <b>regenerativo</b> (75 o más). Junto está el <b>perfil de regeneración</b>, un radar donde se ve de un golpe qué principio está fuerte y cuál flojo.</p>
+  <p lang="en">The gauge sums up the eight knobs in a 0–100 number and a class: <b>degrading</b> (under 25), <b>conventional</b> (25–49), <b>regenerative transition</b> (50–74) and <b>regenerative</b> (75 or more). Next to it is the <b>regeneration profile</b>, a radar that shows at a glance which principle is strong and which weak.</p>
+  <figure data-fig="regen">
+    <figcaption><span class="fn"></span><span lang="es"><b>Índice y perfil de regeneración.</b></span><span lang="en"><b>Regeneration index and profile.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Medidor de 0 a 100, con su clase.</span><span lang="en">0–100 gauge, with its class.</span></li><li><span lang="es"><span class="ui pri">Guardar como línea base</span>.</span><span lang="en"><span class="ui pri">Save as baseline</span>.</span></li></ol>
+  </figure>
+  <h3 id="b6-perillas" data-n="6.2"><span lang="es">Las ocho perillas</span><span lang="en">The eight knobs</span></h3>
+  <p lang="es">Cada perilla responde una pregunta y trae un <b>valor sugerido</b> calculado con tus actividades del Bloque 5, con su motivo. Mientras no la confirmes se ve <b>punteada y gris</b>, con la leyenda «Sugerido, sin confirmar». Si el valor corresponde a tu viñedo, toca <span class="ui pri">Aceptar sugerencia</span>; si es distinto, muévela. Entonces dice «✓ Confirmado por ti». Mientras falten perillas, el índice se marca como <b>provisional</b>.</p>
+  <p lang="en">Each knob answers one question and brings a <b>suggested value</b> computed from your Block 5 activities, with its reason. Until you confirm it, it looks <b>dashed and grey</b>, labelled “Suggested, not confirmed”. If the value fits your vineyard, tap <span class="ui pri">Accept suggestion</span>; if not, move it. It then reads “✓ Confirmed by you”. While knobs are missing, the index is flagged <b>provisional</b>.</p>
+  {{FIG_PERILLA}}
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Perilla</th><th lang="en">Knob</th><th lang="es">Pregunta</th><th lang="en">Question</th><th class="r" lang="es">Mata de Zarza</th><th class="r" lang="en">Mata de Zarza</th></tr></thead>
+    <tbody>
+      <tr><td lang="es"><b>Labranza mínima</b></td><td lang="en"><b>Minimal tillage</b></td><td lang="es">¿Cuántos pasos de maquinaria o arado mueven el suelo en cada ciclo?</td><td lang="en">How many machinery or plough passes move the soil each cycle?</td><td class="r">4</td></tr>
+      <tr><td lang="es"><b>Suelo cubierto</b></td><td lang="en"><b>Soil cover</b></td><td lang="es">¿Cuántos meses está cubierto por cultivo, sarmientos, acolchado o abono verde?</td><td lang="en">How many months is it covered by crop, prunings, mulch or green manure?</td><td class="r">2</td></tr>
+      <tr><td lang="es"><b>Diversidad de especies</b></td><td lang="en"><b>Species diversity</b></td><td lang="es">¿Cuántas especies se cultivan o crían juntas?</td><td lang="en">How many species are grown or raised together?</td><td class="r">0</td></tr>
+      <tr><td lang="es"><b>Raíces vivas</b></td><td lang="en"><b>Living roots</b></td><td lang="es">¿Cuántos meses hay plantas vivas en la parcela?</td><td lang="en">How many months are there living plants on the plot?</td><td class="r">3</td></tr>
+      <tr><td lang="es"><b>Animales integrados</b></td><td lang="en"><b>Animals integrated</b></td><td lang="es">¿Hay animales que pastorean, aportan estiércol o conviven en la unidad?</td><td lang="en">Are there animals grazing, providing manure or living in the unit?</td><td class="r">0</td></tr>
+      <tr><td lang="es"><b>Menos agroquímicos</b></td><td lang="en"><b>Fewer agrochemicals</b></td><td lang="es">¿Qué parte de los insumos son de síntesis frente a bioinsumos?</td><td lang="en">What share of inputs is synthetic versus bio-inputs?</td><td class="r">2</td></tr>
+      <tr><td lang="es"><b>Materia orgánica</b></td><td lang="en"><b>Organic matter</b></td><td lang="es">¿Se devuelven residuos al suelo y se mide la materia orgánica?</td><td lang="en">Are residues returned to the soil and organic matter measured?</td><td class="r">2</td></tr>
+      <tr><td lang="es"><b>Saber local</b></td><td lang="en"><b>Local knowledge</b></td><td lang="es">¿Qué tanto se apoya el manejo en el saber tácito y cultural y en la familia?</td><td lang="en">How much does management rely on tacit and cultural knowledge and the family?</td><td class="r">3</td></tr>
+    </tbody></table></div>
+  <figure data-fig="perillas">
+    <figcaption><span class="fn"></span><span lang="es"><b>Las perillas.</b> Cada una con su pregunta y su valor sugerido.</span><span lang="en"><b>The knobs.</b> Each with its question and suggested value.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Labranza mínima: 4 · Muy alto, porque ninguna actividad del caso mueve el suelo con maquinaria.</span><span lang="en">Minimal tillage: 4 · Very high, because no activity in the case moves the soil with machinery.</span></li></ol>
+  </figure>
+  <figure data-fig="sugerido"><figcaption><span class="fn"></span><span lang="es"><b>Confirmadas y sugeridas.</b> Las dos primeras perillas ya están confirmadas; las demás siguen punteadas, con su botón <span class="ui pri">Aceptar sugerencia</span>.</span><span lang="en"><b>Confirmed and suggested.</b> The first two knobs are already confirmed; the others are still dashed, with their <span class="ui pri">Accept suggestion</span> button.</span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">Aceptando los valores sugeridos, el índice es <b>50 · En transición regenerativa</b>. Lo suben que ninguna actividad mueva el suelo con maquinaria, que la vid es perenne, el acolchado y la gallinaza, y que una tercera parte de las actividades (34 %) se apoya en el saber tácito y cultural. Lo bajan que la parcela tiene una sola especie y no integra animales. En insumos hay 2 actividades con agroquímicos de síntesis (el fosfato diamónico y el fertirriego) y 3 con bioinsumos o abonos orgánicos, entre ellos los microorganismos de montaña. Las actividades que más regeneran son la composta o estiércol y el acolchado; las que más restan son las de riego, por el agua que se extrae.</p>
+    <p lang="en">Accepting the suggested values, the index is <b>50 · Regenerative transition</b>. It is raised by no activity moving the soil with machinery, the vine being perennial, mulch and chicken manure, and a third of the activities (34 %) relying on tacit and cultural knowledge. It is lowered by the plot having a single species and no animals. On inputs there are 2 activities with synthetic agrochemicals (diammonium phosphate and fertigation) and 3 with bio-inputs or organic manures, including mountain microorganisms. The most regenerating activities are compost or manure and mulching; those subtracting most are the irrigation ones, because of the water drawn.</p></div>
+  <h3 id="b6-base" data-n="6.3"><span lang="es">Línea base y materia orgánica</span><span lang="en">Baseline and organic matter</span></h3>
+  <p lang="es">La regeneración se ve con el tiempo. Toca <span class="ui pri">Guardar como línea base</span> hoy y vuelve en el siguiente ciclo: la app dice si el índice subió («el sistema se regenera») o bajó («el sistema se desgasta») y en qué perillas. Si tienes dos análisis de suelo, anota el % de materia orgánica de antes y de ahora: es la prueba más directa.</p>
+  <p lang="en">Regeneration shows over time. Tap <span class="ui pri">Save as baseline</span> today and come back next cycle: the app says whether the index rose (“the system is regenerating”) or fell (“the system is wearing out”) and on which knobs. If you have two soil tests, enter the % organic matter before and now: it is the most direct proof.</p>
+  <figure data-fig="regenbase"><figcaption><span class="fn"></span><span lang="es"><b>Comparación con una línea base</b> (ejemplo ilustrativo, no publicado: línea base de 31 en marzo de 2025 y materia orgánica de 1.6 a 1.8 %).</span><span lang="en"><b>Comparison with a baseline</b> (illustrative, unpublished example: baseline of 31 in March 2025 and organic matter from 1.6 to 1.8 %).</span></figcaption></figure>
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de decisión · ¿por dónde empiezo?</span><span class="bt" lang="en">Decision rule · where do I start?</span>
+    <table><tbody>
+      <tr><td lang="es">Suelo cubierto en 0 o 1</td><td lang="en">Soil cover at 0 or 1</td><td lang="es">Deja los sarmientos picados entre hileras o acolcha la hilera; regístralo como actividad.</td><td lang="en">Leave chopped prunings between rows or mulch the row; record it as an activity.</td></tr>
+      <tr><td lang="es">Menos agroquímicos en 0 o 1</td><td lang="en">Fewer agrochemicals at 0 or 1</td><td lang="es">Sustituye una aplicación por un bioinsumo y regístrala como actividad innovadora.</td><td lang="en">Replace one application with a bio-input and record it as an innovative activity.</td></tr>
+      <tr><td lang="es">Diversidad o animales en 0</td><td lang="en">Diversity or animals at 0</td><td lang="es">Si siembras una cubierta entre hileras o integras aves de traspatio, regístralo como actividad y ajusta esas perillas; cuida a las plantas jóvenes de las gallinas.</td><td lang="en">If you sow a cover between rows or bring in backyard poultry, record it as an activity and adjust those knobs; protect young vines from the hens.</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ============================ 7 · RIESGOS ============================ -->
+<section class="chap" id="b7" data-toc="7" style="--c:var(--b7)">
+  <div class="chap-head"><span class="big">7</span>
+    <div class="eyebrow" lang="es">Bloque 7 · Riesgos</div><div class="eyebrow" lang="en">Block 7 · Risks</div>
+    <h2 lang="es">Qué puede salir mal y qué tan grave sería</h2><h2 lang="en">What could go wrong and how serious it would be</h2>
+    <p lang="es">Veintiocho amenazas en una matriz de probabilidad por impacto, reducidas por la capacidad de adaptación de tu viñedo.</p>
+    <p lang="en">Twenty-eight hazards in a likelihood-by-impact matrix, reduced by your vineyard’s adaptive capacity.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6L44 40H4z"/><path d="M24 18v10M24 33v2"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b7-indicadores" data-n="7.1"><span lang="es">El índice y la matriz</span><span lang="en">The index and the matrix</span></h3>
+  <p lang="es">Arriba ves el <b>índice de riesgo</b> (0 a 100), la <b>capacidad adaptativa</b> y de qué está hecha, cuántos riesgos son altos o muy altos y cuál es el mayor. Debajo, la <b>matriz de riesgos</b>: cada círculo dice cuántos riesgos caen en esa celda.</p>
+  <p lang="en">At the top you see the <b>risk index</b> (0 to 100), the <b>adaptive capacity</b> and what it is made of, how many risks are high or very high, and which is the highest. Below, the <b>risk matrix</b>: each circle shows how many risks fall in that cell.</p>
+  <figure data-fig="riesgos">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 7.</b></span><span lang="en"><b>Block 7.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Índice de riesgo y su clase.</span><span lang="en">Risk index and its class.</span></li><li><span lang="es">Matriz de probabilidad por impacto.</span><span lang="en">Likelihood-by-impact matrix.</span></li></ol>
+  </figure>
+  {{FIG_MATRIZ}}
+  <h3 id="b7-perillas" data-n="7.2"><span lang="es">Las 28 amenazas</span><span lang="en">The 28 hazards</span></h3>
+  <p lang="es">Están agrupadas en <b>climáticas</b> (sequía o lluvias tardías, helada, granizo, lluvias intensas, ola de calor, ciclones, falta de frío invernal), <b>biológicas</b> (plagas, enfermedades de hongos, enfermedad de Pierce, hormiga cortadora, daño por animales, material vegetal enfermo o mal enraizado, deriva de herbicidas, malezas), de <b>mercado</b> (caída del precio, alza de insumos, cultivo nuevo sin mercado, intermediarismo), <b>sociales</b> (falta de mano de obra y de relevo, abandono del cultivo en los primeros años, pérdida del saber local, inseguridad), <b>institucionales</b> (retiro de apoyos, tenencia de la tierra) y de <b>recursos naturales</b> (erosión, escasez de agua, suelos arcillosos o mal drenados). Junto a cada amenaza nueva aparece su fuente. Para cada una: desmarca si no aplica, y mueve <b>probabilidad</b>, <b>impacto</b> y el <b>control</b> que ya tienes.</p>
+  <p lang="en">They are grouped into <b>climatic</b> (drought or late rains, frost, hail, heavy rain, heatwave, cyclones, lack of winter chill), <b>biological</b> (pests, fungal diseases, Pierce’s disease, leaf-cutter ants, animal damage, diseased or poorly rooted material, herbicide drift, weeds), <b>market</b> (price fall, input cost rise, new crop without a market, middlemen), <b>social</b> (labour shortage and succession, abandoning the crop in the first years, loss of local knowledge, insecurity), <b>institutional</b> (support withdrawal, land tenure) and <b>natural resources</b> (erosion, water scarcity, clay or poorly drained soils). Each new hazard shows its source. For each: untick it if it does not apply, and move <b>likelihood</b>, <b>impact</b> and the <b>control</b> you already have.</p>
+  <figure data-fig="perillasr">
+    <figcaption><span class="fn"></span><span lang="es"><b>Perillas de las amenazas biológicas.</b></span><span lang="en"><b>Knobs of the biological hazards.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Probabilidad: qué tan seguido pasa (1 muy baja a 5 muy alta).</span><span lang="en">Likelihood: how often it happens (1 very low to 5 very high).</span></li><li><span lang="es">Impacto: cuánto daño hace.</span><span lang="en">Impact: how much damage it does.</span></li><li><span lang="es">Control que ya tienes: ninguno, bajo, medio o alto.</span><span lang="en">Control you already have: none, low, medium or high.</span></li><li><span lang="es">Riesgo resultante, de 0 a 25, con su nivel.</span><span lang="en">Resulting risk, 0 to 25, with its level.</span></li></ol>
+  </figure>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿De dónde salen los valores sugeridos?</span><span class="bt" lang="en">Where do the suggested values come from?</span>
+    <p lang="es">De tus datos y de la prospectiva. Por ejemplo, la probabilidad de sequía y de ola de calor sube a 4 porque el escenario tendencial supone 0.2 °C de calentamiento por década (IPCC, 2018); el impacto del alza de insumos depende de qué parte de tus actividades usa insumos comprados. Lo que no se puede deducir queda en 3, «moderado: ajústalo a tu localidad».</p>
+    <p lang="en">From your data and the outlook. For example, drought and heatwave likelihood rises to 4 because the trend scenario assumes 0.2 °C of warming per decade (IPCC, 2018); the impact of input cost rises depends on what share of your activities uses purchased inputs. What cannot be deduced stays at 3, “moderate: adjust it to your locality”.</p></div>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">Índice de riesgo <b>33 · Medio</b>, con capacidad adaptativa de <b>48</b> (regeneración 50, diversificación de productos 0, acceso a conocimiento técnico 80, integración institucional 60). Hay 9 riesgos altos entre 27 que aplican; la helada se desmarcó porque, con los datos de ERA5, la mínima media mensual más baja es de 14.7 °C. Los mayores, con 13.0 de 25, son la <b>escasez de agua</b> y el <b>abandono del cultivo en los primeros años</b>: la guía señala el recurso hídrico como la mayor dificultad, y su Tabla 1 registra 19 productores cooperantes en 2025 y 4 en 2026. Les siguen, con 9.7, la sequía, la ola de calor, la falta de frío invernal y la <b>hormiga cortadora</b>, que dañó las hojas en las tres primeras semanas. Los valores de las amenazas que describe la guía son una ◆ lectura de Ratio Viña sobre su texto: los productores de cada parcela los ajustan.</p>
+    <p lang="en">Risk index <b>33 · Medium</b>, with adaptive capacity of <b>48</b> (regeneration 50, product diversification 0, access to technical knowledge 80, institutional integration 60). There are 9 high risks among the 27 that apply; frost was unticked because, with the ERA5 data, the lowest monthly mean minimum is 14.7 °C. The highest, at 13.0 out of 25, are <b>water scarcity</b> and <b>abandoning the crop in the first years</b>: the guide singles out water as the biggest difficulty, and its Table 1 records 19 cooperating farmers in 2025 and 4 in 2026. Next, at 9.7, come drought, heatwave, lack of winter chill and <b>leaf-cutter ants</b>, which damaged leaves in the first three weeks. The values of the hazards the guide describes are a ◆ Ratio Viña reading of its text: each plot’s farmers adjust them.</p></div>
+</section>
+
+<!-- ============================ 8 · ELEMENTOS ============================ -->
+<section class="chap" id="b8" data-toc="8" style="--c:var(--b8)">
+  <div class="chap-head"><span class="big">8</span>
+    <div class="eyebrow" lang="es">Bloque 8 · Elementos</div><div class="eyebrow" lang="en">Block 8 · Elements</div>
+    <h2 lang="es">Quiénes y qué participan</h2><h2 lang="en">Who and what takes part</h2>
+    <p lang="es">Los hilos del telar: actores, instituciones, insumos, equipo, recursos naturales y financieros, conocimientos, políticas, perturbaciones y productos.</p>
+    <p lang="en">The loom’s threads: actors, institutions, inputs, equipment, natural and financial resources, knowledge, policies, disturbances and products.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="5"/><circle cx="36" cy="14" r="5"/><circle cx="24" cy="36" r="5"/><path d="M16 17l6 15M32 17l-6 15M17 14h14"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b8-categorias" data-n="8.1"><span lang="es">Diez categorías y 75 elementos</span><span lang="en">Ten categories and 75 elements</span></h3>
+  <p lang="es">Cada elemento pertenece a una de diez categorías y participa en una o varias actividades. El catálogo base tiene 75 elementos de un viñedo en México; con la etapa de establecimiento se agregaron, entre otros, los viveros y viñedos donantes, los estudiantes, los esquejes, el enraizador, la arena de río, el acolchado, la cámara de enraizamiento, los protectores y tutores, y la hormiga cortadora. La barra junto a cada elemento dice en cuántas actividades aparece. Si falta alguno de tu viñedo, agrégalo con su nombre y categoría y elígelo en las actividades donde participa.</p>
+  <p lang="en">Each element belongs to one of ten categories and takes part in one or more activities. The base catalogue has 75 elements of a Mexican vineyard; the establishment stage added, among others, nurseries and donor vineyards, students, cuttings, rooting hormone, river sand, mulch, the rooting chamber, guards and stakes, and leaf-cutter ants. The bar next to each element shows how many activities it appears in. If one from your vineyard is missing, add it with its name and category and choose it in the activities where it takes part.</p>
+  <figure data-fig="elementos"><figcaption><span class="fn"></span><span lang="es"><b>Elementos del viñedo</b> por categoría.</span><span lang="en"><b>Vineyard elements</b> by category.</span></figcaption></figure>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Un elemento sin actividad no entra a la red</span><span class="bt" lang="en">An element with no activity stays out of the network</span>
+    <p lang="es">Si agregas «Caja de ahorro de los productores», elígelo después en la actividad donde participa (Bloque 5, «+ Actividad innovadora»). Si no, queda en el catálogo pero no se teje.</p>
+    <p lang="en">If you add “Farmers’ savings fund”, then choose it in the activity where it takes part (Block 5, “+ Innovative activity”). Otherwise it stays in the catalogue but is not woven in.</p></div>
+  <h3 id="b8-rr" data-n="8.2"><span lang="es">Elementos expuestos al riesgo</span><span lang="en">Elements exposed to risk</span></h3>
+  <p lang="es">Al final del bloque, la tarjeta <b>Regeneración y riesgo en los elementos</b> muestra qué elementos están más expuestos: el riesgo mayor de las amenazas que los afectan (Bloque 7).</p>
+  <p lang="en">At the end of the block, the <b>Regeneration and risk in the elements</b> card shows which elements are most exposed: the highest risk among the hazards affecting them (Block 7).</p>
+  <figure data-fig="elemrr"><figcaption><span class="fn"></span><span lang="es"><b>Elementos más expuestos</b> en Mata de Zarza.</span><span lang="en"><b>Most exposed elements</b> in Mata de Zarza.</span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">Las 35 actividades practicadas usan <b>40 elementos</b>. La guía documenta, en su Tabla 1, los actores de 2025: 26 productores invitados y 19 cooperantes de Mata de Zarza, 32 estudiantes y 1 estudiante del PROFONI de la UACh, 4 profesores-investigadores del Centro Académico Regional Sede Huatusco, 22 cortadores de esquejes y 2 proveedores de material vegetal de Hermosillo, Sonora, y 1 proveedor de insumos de Atotonilco el Alto, Jalisco: 107 personas de cuatro estados.</p>
+    <p lang="en">The 35 practised activities use <b>40 elements</b>. The guide documents, in its Table 1, the 2025 actors: 26 invited and 19 cooperating farmers from Mata de Zarza, 32 students and 1 PROFONI student from UACh, 4 lecturer-researchers from the Huatusco Regional Academic Centre, 22 cutting harvesters and 2 planting-material suppliers from Hermosillo, Sonora, and 1 input supplier from Atotonilco el Alto, Jalisco: 107 people from four states.</p></div>
+</section>
+
+<!-- ============================ 9 · PRECIO Y VALOR ============================ -->
+<section class="chap" id="b9" data-toc="9" style="--c:var(--b9)">
+  <div class="chap-head"><span class="big">9</span>
+    <div class="eyebrow" lang="es">Bloque 9 · Precio y valor</div><div class="eyebrow" lang="en">Block 9 · Price and value</div>
+    <h2 lang="es">Lo que cuesta y lo que vale</h2><h2 lang="en">What it costs and what it is worth</h2>
+    <p lang="es">El precio es lo que se paga en el mercado; el valor es la importancia del elemento para el sistema. No son lo mismo.</p>
+    <p lang="en">Price is what the market charges; value is the element’s importance to the system. They are not the same.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v36M8 14h32M14 14l-6 14h12zM34 14l-6 14h12z"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b9-precio" data-n="9.1"><span lang="es">Precio por hectárea</span><span lang="en">Price per hectare</span></h3>
+  <p lang="es">Elige una categoría con las pestañas. Para cada elemento anota el <b>precio unitario</b>, la <b>unidad</b> (esqueje, kg, L, jornal) y la <b>cantidad por hectárea</b>; la app calcula el $/ha. En <b>Recursos financieros</b> están el costo de producción, los ingresos y el precio de venta: con ellos se calculan el margen del índice de Sarandón y el ingreso neto de la prospectiva.</p>
+  <p lang="en">Choose a category with the tabs. For each element enter the <b>unit price</b>, the <b>unit</b> (cutting, kg, L, day’s labour) and the <b>quantity per hectare</b>; the app computes $/ha. <b>Financial resources</b> holds production cost, income and sale price: they feed the margin in Sarandón’s index and net income in the outlook.</p>
+  <figure data-fig="precios">
+    <figcaption><span class="fn"></span><span lang="es"><b>Insumos con sus precios unitarios</b> en el caso de Mata de Zarza.</span><span lang="en"><b>Inputs with their unit prices</b> in the Mata de Zarza case.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Pestaña de la categoría.</span><span lang="en">Category tab.</span></li><li><span lang="es">Precio, unidad, cantidad por hectárea y las cuatro dimensiones del valor.</span><span lang="en">Price, unit, quantity per hectare and the four value dimensions.</span></li></ol>
+  </figure>
+  <h3 id="b9-valor" data-n="9.2"><span lang="es">El valor en cuatro dimensiones</span><span lang="en">Value in four dimensions</span></h3>
+  <p lang="es">Califica cada elemento de 0 a 5 en <b>valor económico</b>, <b>de uso</b>, <b>cultural</b> y <b>ecológico</b>. Arriba, las perillas de <b>pesos</b> dicen cuánto cuenta cada dimensión. Si no calificas, la app usa el <b>valor estructural</b>: qué tanto participa el elemento en las actividades.</p>
+  <p lang="en">Rate each element from 0 to 5 on <b>economic</b>, <b>use</b>, <b>cultural</b> and <b>ecological</b> value. At the top, the <b>weight</b> knobs say how much each dimension counts. If you do not rate, the app uses the <b>structural value</b>: how much the element takes part in the activities.</p>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">La Tabla 2 de la guía publica el costo del establecimiento con datos de las bitácoras de campo: esquejes a $17 cada uno, transporte a $6.10 por esqueje, jornales a $400 y enraizador a $150; con 3,600 esquejes, el establecimiento suma $119,160. Para los años 2 y 3 proyecta $444,691 de mantenimiento con datos del FIRA, un rendimiento esperado de 17 t/ha según viticultores de Sonora, un ingreso esperado de $867,000 y una relación beneficio/costo de 1.5. El caso captura solo los <b>precios unitarios</b>; deja sin dato el costo y el ingreso por hectárea porque la tabla junta el costo de las 19 parcelas con una proyección por hectárea de otra región. Por eso el margen y el ingreso neto esperan las cifras de cada parcela.</p>
+    <p lang="en">The guide’s Table 2 publishes establishment costs from the field logbooks: cuttings at MXN 17 each, transport at MXN 6.10 per cutting, labour days at MXN 400 and rooting hormone at MXN 150; with 3,600 cuttings, establishment totals MXN 119,160. For years 2 and 3 it projects MXN 444,691 of maintenance from FIRA data, an expected yield of 17 t/ha according to Sonora growers, expected income of MXN 867,000 and a benefit/cost ratio of 1.5. The case enters only the <b>unit prices</b>; it leaves cost and income per hectare without data because the table combines the cost of all 19 plots with a per-hectare projection from another region. So margin and net income await each plot’s figures.</p></div>
+  <h3 id="b9-catalogo" data-n="9.3"><span lang="es">Tu catálogo en CSV</span><span lang="en">Your catalogue as CSV</span></h3>
+  <p lang="es">Con <span class="ui">Descargar catálogo (CSV)</span> guardas tus elementos, precios y valores en una hoja de cálculo; con <span class="ui">Cargar catálogo (CSV)</span> los traes a otro proyecto.</p>
+  <p lang="en">With <span class="ui">Download catalogue (CSV)</span> you save your elements, prices and values to a spreadsheet; with <span class="ui">Load catalogue (CSV)</span> you bring them into another project.</p>
+</section>
+
+<!-- ============================ 10 · FORMULACIÓN ============================ -->
+<section class="chap" id="b10" data-toc="10" style="--c:var(--b10)">
+  <div class="chap-head"><span class="big">10</span>
+    <div class="eyebrow" lang="es">Bloque 10 · Formulación</div><div class="eyebrow" lang="en">Block 10 · Formulation</div>
+    <h2 lang="es">Tejer el sistema</h2><h2 lang="en">Weaving the system</h2>
+    <p lang="es">Los elementos se vuelven nodos, las actividades compartidas se vuelven vínculos y el valor da el grosor de cada hilo.</p>
+    <p lang="en">Elements become nodes, shared activities become links and value sets each thread’s thickness.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v36M20 6v36M28 6v36M36 6v36M6 16c6-4 10 4 18 0s12 4 18 0M6 32c6 4 10-4 18 0s12-4 18 0"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b10-tejer" data-n="10.1"><span lang="es">El botón «Tejer el sistema»</span><span lang="en">The “Weave the system” button</span></h3>
+  <p lang="es">Toca <span class="ui pri">Tejer el sistema</span>. La app arma la red y te lleva al Tablero. Junto al botón ves cuántos nodos, vínculos y actividades tiene tu sistema y su densidad. Debajo, el <b>modelo del sistema</b>: el entorno (clima y perturbaciones), los agentes, el Stack de conocimiento, el manejo, los insumos, los recursos, las instituciones, las políticas y los productos, con sus flechas.</p>
+  <p lang="en">Tap <span class="ui pri">Weave the system</span>. The app builds the network and takes you to the Dashboard. Next to the button you see how many nodes, links and activities your system has and its density. Below, the <b>system model</b>: the environment (climate and disturbances), agents, knowledge Stack, management, inputs, resources, institutions, policies and products, with their arrows.</p>
+  <figure data-fig="formulacion">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 10.</b> En Mata de Zarza: 42 nodos, 175 vínculos, 35 actividades y densidad de 0.203.</span><span lang="en"><b>Block 10.</b> In Mata de Zarza: 42 nodes, 175 links, 35 activities and density 0.203.</span></figcaption>
+    <ol class="legend"><li><span lang="es"><span class="ui pri">Tejer el sistema</span>; después de tejer dice «Volver a tejer el sistema».</span><span lang="en"><span class="ui pri">Weave the system</span>; once woven it reads “Re-weave the system”.</span></li></ol>
+  </figure>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Vuelve a tejer cuando cambies algo</span><span class="bt" lang="en">Re-weave whenever you change something</span>
+    <p lang="es">Si agregas actividades, elementos o valores, regresa a este bloque y vuelve a tejer. El Tablero avisa con un recuadro ámbar si aún no has tejido.</p>
+    <p lang="en">If you add activities, elements or values, come back to this block and re-weave. The Dashboard warns with an amber box if you have not woven yet.</p></div>
+</section>
+
+<!-- ============================ 11 · TABLERO ============================ -->
+<section class="chap" id="b11" data-toc="11" style="--c:var(--b11)">
+  <div class="chap-head"><span class="big">11</span>
+    <div class="eyebrow" lang="es">Bloque 11 · Tablero</div><div class="eyebrow" lang="en">Block 11 · Dashboard</div>
+    <h2 lang="es">Leer el sistema completo</h2><h2 lang="en">Reading the whole system</h2>
+    <p lang="es">Quién sostiene el sistema, qué hilos pesan más, qué grupos se forman, quién está cerca de quién y cuándo pasa cada cosa.</p>
+    <p lang="en">Who holds the system together, which threads weigh most, which groups form, who is close to whom and when each thing happens.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="32" rx="3"/><circle cx="18" cy="20" r="3"/><circle cx="31" cy="17" r="3"/><circle cx="28" cy="31" r="3"/><path d="M20 21l9 9M21 19l7-1"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b11-resumen" data-n="11.1"><span lang="es">El resumen de arriba</span><span lang="en">The summary at the top</span></h3>
+  <p lang="es">Los indicadores de arriba dicen el tamaño de la red (nodos y vínculos), su densidad, el agrupamiento y el camino medio, la modularidad Q y la sostenibilidad media. Debajo, la tarjeta <b>Regeneración y riesgo del sistema</b> trae los índices de los bloques 6 y 7, el radar y la matriz.</p>
+  <p lang="en">The top indicators give the network size (nodes and links), its density, clustering and mean path, modularity Q and mean sustainability. Below, the <b>System regeneration and risk</b> card brings the indices from blocks 6 and 7, the radar and the matrix.</p>
+  <figure data-fig="tablero"><figcaption><span class="fn"></span><span lang="es"><b>El Tablero de Mata de Zarza.</b></span><span lang="en"><b>The Mata de Zarza Dashboard.</b></span></figcaption></figure>
+  <h3 id="b11-red" data-n="11.2"><span lang="es">La red del sistema</span><span lang="en">The system network</span></h3>
+  <p lang="es">Cada punto es un elemento, con el color de su categoría; su tamaño depende de la medida que elijas arriba: <b>grado ponderado</b> (cuánto se relaciona), <b>intermediación</b> (cuánto sirve de puente), <b>vector propio</b> (si se relaciona con los importantes) o <b>cercanía</b>. Toca un nodo para ver solo sus relaciones. Como los viticultores participan en casi todo, la casilla <b>Ocultar al nodo omnipresente</b> deja ver la estructura interna.</p>
+  <p lang="en">Each dot is an element, coloured by category; its size depends on the measure you choose at the top: <b>weighted degree</b> (how related it is), <b>betweenness</b> (how much it bridges), <b>eigenvector</b> (whether it relates to the important ones) or <b>closeness</b>. Tap a node to see only its relations. Since growers take part in almost everything, the <b>Hide the omnipresent node</b> box reveals the inner structure.</p>
+  <figure data-fig="red">
+    <figcaption><span class="fn"></span><span lang="es"><b>Red del sistema.</b></span><span lang="en"><b>System network.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Medida que da el tamaño de los nodos.</span><span lang="en">Measure that sets node size.</span></li><li><span lang="es">Ocultar a los viticultores para ver la estructura interna.</span><span lang="en">Hide growers to see the inner structure.</span></li></ol>
+  </figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">Con los viticultores, la red tiene 42 elementos y 175 vínculos, y sus grupos casi no se distinguen (Q = 0.06). Al ocultarlos quedan 41 elementos y 136 vínculos en <b>cuatro comunidades</b> (Q = 0.19): <b>suelo, agua y nutrición</b> (acolchado, composta, bioinsumos, fertilizantes, riego, suelo, humedad, cubierta, fauna benéfica); <b>conocimiento e instituciones</b> (estudiantes, asesores, investigadores, universidades, INIFAP, asociaciones, programas, crédito, conocimiento técnico); <b>cuidado de la planta joven y saber local</b> (jornaleros, familia, protectores, tutores, estructura, malezas, hormiga cortadora, saber tácito y cultural); y <b>material vegetal</b> (viveros y viñedos donantes, esquejes, arena de río, cámara de enraizamiento, transporte, costos). El conocimiento técnico, el conocimiento tácito, el suelo y los esquejes son los mayores puentes.</p>
+    <p lang="en">With growers, the network has 42 elements and 175 links, and its groups barely show (Q = 0.06). Hiding them leaves 41 elements and 136 links in <b>four communities</b> (Q = 0.19): <b>soil, water and nutrition</b> (mulch, compost, bio-inputs, fertilisers, irrigation, soil, moisture, cover, beneficial fauna); <b>knowledge and institutions</b> (students, advisers, researchers, universities, INIFAP, associations, programmes, credit, technical knowledge); <b>young-vine care and local knowledge</b> (labourers, family, guards, stakes, trellis, weeds, leaf-cutter ants, tacit and cultural knowledge); and <b>planting material</b> (nurseries and donor vineyards, cuttings, river sand, rooting chamber, transport, costs). Technical knowledge, tacit knowledge, soil and cuttings are the biggest bridges.</p></div>
+  <h3 id="b11-corr" data-n="11.3"><span lang="es">Correlaciones de un elemento</span><span lang="en">One element’s correlations</span></h3>
+  <p lang="es">Elige un elemento en la lista y verás con cuáles aparece junto en las mismas actividades (barras verdes) y con cuáles casi nunca coincide (barras rojas).</p>
+  <p lang="en">Choose an element in the list to see which ones appear together with it in the same activities (green bars) and which hardly ever coincide (red bars).</p>
+  <figure data-fig="corr">
+    <figcaption><span class="fn"></span><span lang="es"><b>Correlaciones de un elemento.</b></span><span lang="en"><b>One element’s correlations.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Elemento a analizar.</span><span lang="en">Element to analyse.</span></li></ol>
+  </figure>
+  <h3 id="b11-clado" data-n="11.4"><span lang="es">El cladograma: ¿quién está cerca de quién?</span><span lang="en">The cladogram: who is close to whom?</span></h3>
+  <p lang="es">El cladograma agrupa a los elementos según su cercanía en la red: cada uno se une primero con su <b>vecino más cercano</b>. Lee el árbol de izquierda a derecha: las ramas cortas son elementos muy ligados, que conviene atender juntos. Elige ver solo actores, actores e instituciones, o todos los elementos. Debajo, la tabla dice el vecino más cercano de cada uno; ↔ marca a los vecinos mutuos.</p>
+  <p lang="en">The cladogram groups elements by closeness in the network: each first joins its <b>nearest neighbour</b>. Read the tree left to right: short branches are tightly linked elements, best looked after together. Choose to see actors only, actors and institutions, or all elements. Below, the table gives each one’s nearest neighbour; ↔ marks mutual neighbours.</p>
+  <figure data-fig="clado">
+    <figcaption><span class="fn"></span><span lang="es"><b>Cladograma de actores e instituciones de Mata de Zarza.</b> Viticultores y jornaleros son vecinos mutuos (0.19).</span><span lang="en"><b>Mata de Zarza actors and institutions cladogram.</b> Growers and labourers are mutual neighbours (0.19).</span></figcaption>
+    <ol class="legend"><li><span lang="es">Qué elementos agrupar.</span><span lang="en">Which elements to group.</span></li></ol>
+  </figure>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Las uniones lejanas</span><span class="bt" lang="en">Distant joins</span>
+    <p lang="es">Un elemento que participa en pocas actividades se une tarde y a gran distancia. Si un actor importante para tu viñedo aparece lejos, revisa que esté elegido en todas las actividades donde participa.</p>
+    <p lang="en">An element taking part in few activities joins late and at a great distance. If an actor important to your vineyard shows up far away, check that it is chosen in every activity it takes part in.</p></div>
+  <h3 id="b11-calendario" data-n="11.5"><span lang="es">El calendario circular</span><span lang="en">The circular calendar</span></h3>
+  <p lang="es">El año es un círculo; cada anillo es un tipo de actividad y cada arco, un paso con sus fechas. La aguja marca hoy y el centro anuncia la siguiente actividad. Toca un arco para abrir su paso en el Bloque 5; en la leyenda, para filtrar.</p>
+  <p lang="en">The year is a circle; each ring is an activity type and each arc a step with its dates. The needle marks today and the centre announces the next activity. Tap an arc to open its step in Block 5; tap the legend to filter.</p>
+  <figure data-fig="calendario"><figcaption><span class="fn"></span><span lang="es"><b>Calendario circular de Mata de Zarza.</b> Del corte de esquejes en enero a la poda de fines de diciembre.</span><span lang="en"><b>Mata de Zarza circular calendar.</b> From taking cuttings in January to late-December pruning.</span></figcaption></figure>
+</section>
+
+<!-- ============================ 12 · SOSTENIBILIDAD ============================ -->
+<section class="chap" id="b12" data-toc="12" style="--c:var(--b12)">
+  <div class="chap-head"><span class="big">12</span>
+    <div class="eyebrow" lang="es">Bloque 12 · Sostenibilidad</div><div class="eyebrow" lang="en">Block 12 · Sustainability</div>
+    <h2 lang="es">Suelo, agua, ODS y huella</h2><h2 lang="en">Soil, water, SDGs and footprint</h2>
+    <p lang="es">Cada actividad deja una marca. Aquí ves cuáles suman, cuáles restan, el índice de Sarandón, los 17 ODS y la huella de carbono.</p>
+    <p lang="en">Every activity leaves a mark. Here you see which add, which subtract, Sarandón’s index, the 17 SDGs and the carbon footprint.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M8 20c8 2 10 8 18 6s10 6 14 2M18 8c2 6-2 10 2 14"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b12-indices" data-n="12.1"><span lang="es">Índice de sostenibilidad y Sarandón</span><span lang="en">Sustainability index and Sarandón</span></h3>
+  <p lang="es">El <b>índice de sostenibilidad (IS)</b> va de 0 a 1: 0.5 es neutro, arriba la actividad suma y abajo resta. El <b>índice general de sostenibilidad de Sarandón (ISGen)</b> promedia tres dimensiones en escala de 0 a 4: económica (IK), ecológica (IE) y sociocultural (ISC). El sistema es sostenible si ISGen es mayor que 2 y ninguna dimensión queda por debajo de 2.</p>
+  <p lang="en">The <b>sustainability index (IS)</b> goes from 0 to 1: 0.5 is neutral, above it the activity adds and below it subtracts. <b>Sarandón’s general sustainability index (ISGen)</b> averages three dimensions on a 0–4 scale: economic (IK), ecological (IE) and socio-cultural (ISC). The system is sustainable if ISGen is above 2 and no dimension falls below 2.</p>
+  <figure data-fig="sostenible"><figcaption><span class="fn"></span><span lang="es"><b>Índice general de sostenibilidad de Mata de Zarza.</b> IK 1.65, IE 2.03, ISC 2.93 e ISGen 2.20.</span><span lang="en"><b>Mata de Zarza general sustainability index.</b> IK 1.65, IE 2.03, ISC 2.93 and ISGen 2.20.</span></figcaption></figure>
+  <h3 id="b12-ods" data-n="12.2"><span lang="es">Los 17 ODS</span><span lang="en">The 17 SDGs</span></h3>
+  <p lang="es">La rueda y las tarjetas muestran el grado de cumplimiento de cada Objetivo de Desarrollo Sostenible con evidencia de tu sistema. «Sin dato» no es incumplimiento: significa que tus datos no dicen nada de ese objetivo.</p>
+  <p lang="en">The wheel and cards show how far each Sustainable Development Goal is met with evidence from your system. “No data” is not failure: it means your data says nothing about that goal.</p>
+  <figure data-fig="ods"><figcaption><span class="fn"></span><span lang="es"><b>ODS en Mata de Zarza.</b> Siete de los 17 tienen evidencia.</span><span lang="en"><b>SDGs in Mata de Zarza.</b> Seven of the 17 have evidence.</span></figcaption></figure>
+  <h3 id="b12-huella" data-n="12.3"><span lang="es">Huella de carbono</span><span lang="en">Carbon footprint</span></h3>
+  <p lang="es">Captura los litros de diésel, los kilos de nitrógeno y de urea por hectárea y el rendimiento: la app calcula los kilos de CO₂ equivalente por hectárea y por tonelada con los factores del IPCC. Si dejas los campos vacíos, la huella aparece como «—».</p>
+  <p lang="en">Enter litres of diesel, kilos of nitrogen and urea per hectare and the yield: the app computes kilos of CO₂ equivalent per hectare and per tonne with IPCC factors. If you leave the fields empty, the footprint shows as “—”.</p>
+  <figure data-fig="sarandon"><figcaption><span class="fn"></span><span lang="es"><b>Lo que suma y lo que resta</b> por compartimento.</span><span lang="en"><b>What adds and what subtracts</b> by compartment.</span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">El IS medio de las 35 actividades es <b>0.51</b>, casi neutro. Las que más suman son la composta o estiércol y el acolchado; las que más restan son las de riego, por el agua que extraen, aunque el goteo lo compensa en parte. La dimensión ecológica (2.03) y la sociocultural (2.93) pasan de 2, pero la económica queda en <b>1.65</b>: la parcela aún no vende uva, tiene un solo producto y depende de esquejes, transporte e insumos de fuera. Por eso el ISGen de 2.20 todavía no alcanza la condición de sostenible. Al capturar los ingresos de la primera cosecha, la dimensión económica se recalcula. La guía no publica litros de diésel ni kilos de nitrógeno por hectárea, así que la huella espera esos datos.</p>
+    <p lang="en">The mean IS of the 35 activities is <b>0.51</b>, almost neutral. Those adding most are compost or manure and mulching; those subtracting most are the irrigation ones, because of the water drawn, though drip partly offsets it. The ecological (2.03) and socio-cultural (2.93) dimensions exceed 2, but the economic one stays at <b>1.65</b>: the plot does not sell grapes yet, has a single product and relies on cuttings, transport and inputs from outside. So the ISGen of 2.20 does not yet meet the sustainability condition. Once the first harvest’s income is entered, the economic dimension is recomputed. The guide publishes no litres of diesel or kilos of nitrogen per hectare, so the footprint awaits those data.</p></div>
+</section>
+
+<!-- ============================ 13 · PROSPECTIVA ============================ -->
+<section class="chap" id="b13" data-toc="13" style="--c:var(--b13)">
+  <div class="chap-head"><span class="big">13</span>
+    <div class="eyebrow" lang="es">Bloque 13 · Prospectiva</div><div class="eyebrow" lang="en">Block 13 · Outlook</div>
+    <h2 lang="es">Tres futuros a 2, 5 y 10 años</h2><h2 lang="en">Three futures at 2, 5 and 10 years</h2>
+    <p lang="es">No son pronósticos: son escenarios para conversar con la familia, los asesores y la comunidad sobre qué hacer hoy.</p>
+    <p lang="en">They are not forecasts: they are scenarios to discuss with the family, advisers and community what to do today.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 38c10-2 14-14 20-16s10 4 16-6M6 38c10 0 16-6 22-6s10 2 14 0M6 38c8 2 18 4 36 4"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b13-escenarios" data-n="13.1"><span lang="es">Deseable, tendencial y no deseado</span><span lang="en">Desirable, trend and undesired</span></h3>
+  <p lang="es">Cada escenario combina el precio del producto, el costo de los insumos, el calentamiento, la frecuencia de años extremos, la mano de obra disponible y la adopción de tus actividades innovadoras. La app grafica diez indicadores con marcas en los años 2, 5 y 10: rendimiento, precio, costo, ingreso bruto ÷ costo, ingreso neto, mano de obra, adopción, sostenibilidad, regeneración y riesgo. Debajo, las <b>potencialidades</b> y las <b>perspectivas no deseadas</b> se escriben solas con tus resultados.</p>
+  <p lang="en">Each scenario combines product price, input cost, warming, frequency of extreme years, available labour and adoption of your innovative activities. The app plots ten indicators marked at years 2, 5 and 10: yield, price, cost, gross income ÷ cost, net income, labour, adoption, sustainability, regeneration and risk. Below, the <b>potentials</b> and <b>undesired prospects</b> are written from your results.</p>
+  <figure data-fig="prospectiva"><figcaption><span class="fn"></span><span lang="es"><b>Bloque 13.</b> Los indicadores del caso a 10 años en los tres escenarios.</span><span lang="en"><b>Block 13.</b> The case’s indicators at 10 years in the three scenarios.</span></figcaption></figure>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En Mata de Zarza</span><span class="bt" lang="en">In Mata de Zarza</span>
+    <p lang="es">Con los supuestos iniciales y hoy = 100, a 10 años la relación ingreso bruto ÷ costo queda en <b>109</b> (deseable), <b>79</b> (tendencial) y <b>48</b> (no deseado), y el rendimiento en 106, 95 y 83. Como el caso tiene 8 actividades innovadoras (23 % de las practicadas), la adopción importa: llega a 90 % en el escenario deseable, 50 % en el tendencial y se queda en 23 % en el no deseado, y con ella el índice de regeneración pasa de 50 a 67, 57 y 50. Son escenarios con supuestos generales, no una proyección de la guía; para el viñedo de Mata de Zarza conviene ajustar el precio y el costo con datos de la primera cosecha.</p>
+    <p lang="en">With the default assumptions and today = 100, at 10 years the gross income ÷ cost ratio is <b>109</b> (desirable), <b>79</b> (trend) and <b>48</b> (undesired), and yield 106, 95 and 83. As the case has 8 innovative activities (23 % of those practised), adoption matters: it reaches 90 % in the desirable scenario, 50 % in the trend one and stays at 23 % in the undesired one, and with it the regeneration index goes from 50 to 67, 57 and 50. These are scenarios with general assumptions, not a projection from the guide; for the Mata de Zarza vineyard, price and cost are best adjusted with first-harvest data.</p></div>
+  <h3 id="b13-supuestos" data-n="13.2"><span lang="es">Los supuestos</span><span lang="en">The assumptions</span></h3>
+  <p lang="es">La tabla de supuestos es editable. Lo que tiene base publicada lleva su fuente (calentamiento, IPCC 2018; pérdida de rendimiento por grado, Zhao y colaboradores 2017; curva de adopción, Rogers 2003); el resto lleva la etiqueta ◆ de supuesto. Contrasta precios y costos con el SIAP y los costos de referencia del FIRA para la uva.</p>
+  <p lang="en">The assumptions table is editable. What has a published basis carries its source (warming, IPCC 2018; yield loss per degree, Zhao and colleagues 2017; adoption curve, Rogers 2003); the rest is flagged ◆ as an assumption. Check prices and costs against SIAP and FIRA’s reference costs for grapes.</p>
+  <figure data-fig="supuestos">
+    <figcaption><span class="fn"></span><span lang="es"><b>Supuestos de cada escenario.</b></span><span lang="en"><b>Assumptions for each scenario.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es">Cada fila es un supuesto; cada columna, un escenario.</span><span lang="en">Each row is an assumption; each column, a scenario.</span></li><li><span lang="es"><span class="ui">Volver a los valores iniciales</span>.</span><span lang="en"><span class="ui">Reset to defaults</span>.</span></li></ol>
+  </figure>
+</section>
+
+<!-- ============================ 14 · INFORME ============================ -->
+<section class="chap" id="b14" data-toc="14" style="--c:var(--b14)">
+  <div class="chap-head"><span class="big">14</span>
+    <div class="eyebrow" lang="es">Bloque 14 · Informe</div><div class="eyebrow" lang="en">Block 14 · Report</div>
+    <h2 lang="es">Todo tu viñedo en un documento</h2><h2 lang="en">Your whole vineyard in one document</h2>
+    <p lang="es">Resumen redactado, territorio, clima, historial, calendario, elementos clave, cladograma, regeneración, riesgos, prospectiva y ODS, listo para imprimir.</p>
+    <p lang="en">Written summary, territory, climate, history, calendar, key elements, cladogram, regeneration, risks, outlook and SDGs, ready to print.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4h18l8 8v32H12z"/><path d="M30 4v8h8M18 24h14M18 31h14M18 38h8"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b14-exportar" data-n="14.1"><span lang="es">Imprimir, exportar y guardar</span><span lang="en">Print, export and save</span></h3>
+  <figure data-fig="informe">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 14.</b></span><span lang="en"><b>Block 14.</b></span></figcaption>
+    <ol class="legend"><li><span lang="es"><span class="ui pri">Imprimir o guardar PDF</span>: en el cuadro de impresión elige «Guardar como PDF». La impresión sigue la vista activa.</span><span lang="en"><span class="ui pri">Print or save PDF</span>: in the print dialog choose “Save as PDF”. Printing follows the active view.</span></li><li><span lang="es"><span class="ui">Guardar proyecto</span>: un archivo <code>.vina.json</code> con todo lo que capturaste.</span><span lang="en"><span class="ui">Save project</span>: a <code>.vina.json</code> file with everything you entered.</span></li><li><span lang="es"><span class="ui">Abrir proyecto</span>: carga un archivo guardado. Los proyectos de la versión 0.1.0 se abren sin perder respuestas: sus pasos se recorren solos detrás de la nueva etapa de establecimiento.</span><span lang="en"><span class="ui">Open project</span>: loads a saved file. Version 0.1.0 projects open without losing answers: their steps shift automatically after the new establishment stage.</span></li></ol>
+  </figure>
+  <p lang="es">Los botones de CSV descargan las tablas de actividades, nodos, vínculos, calendario, ODS y cladograma para trabajarlas en una hoja de cálculo. <span class="ui">Empezar de nuevo</span> borra el proyecto de este navegador: guárdalo antes.</p>
+  <p lang="en">The CSV buttons download the activities, nodes, links, calendar, SDG and cladogram tables for use in a spreadsheet. <span class="ui">Start over</span> erases the project from this browser: save it first.</p>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">La impresión ya viene cuidada</span><span class="bt" lang="en">Printing is already looked after</span>
+    <p lang="es">Al imprimir, la app usa siempre el tema claro, despliega el marco teórico, quita las animaciones y ajusta las tablas al ancho de la hoja, aunque estés en modo noche.</p>
+    <p lang="en">When printing, the app always uses the light theme, expands the theory, drops animations and fits tables to the page width, even in night mode.</p></div>
+  <figure data-fig="oscuro"><figcaption><span class="fn"></span><span lang="es"><b>Modo noche.</b> En pantalla puedes trabajar de noche; el informe impreso sale en claro.</span><span lang="en"><b>Night mode.</b> On screen you can work at night; the printed report comes out light.</span></figcaption></figure>
+</section>
+
+<!-- ============================ 15 · ATLAS NACIONAL ============================ -->
+<section class="chap" id="b15" data-toc="15" style="--c:var(--b15)">
+  <div class="chap-head"><span class="big">15</span>
+    <div class="eyebrow" lang="es">Bloque 15 · Atlas nacional</div><div class="eyebrow" lang="en">Block 15 · National atlas</div>
+    <h2 lang="es">Muchos viñedos, un solo atlas</h2><h2 lang="en">Many vineyards, one atlas</h2>
+    <p lang="es">El atlas junta los archivos de los viñedos documentados para leer el conocimiento local de la vid a escala nacional, sin servidor.</p>
+    <p lang="en">The atlas combines the files of the documented vineyards to read local grapevine knowledge at national scale, without a server.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12l12-5 12 5 12-5v29l-12 5-12-5-12 5z"/><path d="M18 7v29M30 12v29"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="b15-flujo" data-n="15.1"><span lang="es">Cómo se arma el estudio nacional</span><span lang="en">How the national study is put together</span></h3>
+  <ol>
+    <li lang="es"><b>Cada encuestador</b> llena un viñedo, de preferencia con quienes lo trabajan, y lo guarda en el Bloque 14 con <span class="ui">⤓ Guardar proyecto</span>: obtiene un archivo <code>.vina.json</code> con el nombre del viñedo.</li><li lang="en"><b>Each surveyor</b> fills in one vineyard, ideally with those who work it, and saves it in Block 14 with <span class="ui">⤓ Save project</span>: the result is a <code>.vina.json</code> file named after the vineyard.</li>
+    <li lang="es"><b>Quien coordina</b> reúne los archivos (memoria USB, correo, carpeta compartida) y en el Bloque 15 toca <span class="ui pri">＋ Agregar archivos</span>; puede elegir muchos a la vez.</li><li lang="en"><b>The coordinator</b> gathers the files (USB stick, e-mail, shared folder) and in Block 15 taps <span class="ui pri">＋ Add files</span>; many can be chosen at once.</li>
+    <li lang="es">Con <span class="ui">⤓ Exportar atlas</span> se guarda todo en un solo archivo <code>.atlas.json</code>, que se puede compartir o seguir ampliando; los CSV de viñedos y de prácticas se abren en una hoja de cálculo.</li><li lang="en">With <span class="ui">⤓ Export atlas</span> everything is saved in a single <code>.atlas.json</code> file that can be shared or extended; the vineyards and practices CSVs open in a spreadsheet.</li>
+  </ol>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Y la privacidad?</span><span class="bt" lang="en">What about privacy?</span>
+    <p lang="es">Ningún dato sale a un servidor: el atlas vive en el navegador de quien coordina y en los archivos que ustedes deciden compartir. Antes de anotar nombres de productores pide su permiso; para el atlas bastan la localidad y sus respuestas.</p>
+    <p lang="en">No data goes to a server: the atlas lives in the coordinator’s browser and in the files you choose to share. Ask farmers’ permission before writing their names; the atlas only needs the locality and its answers.</p></div>
+  <h3 id="b15-leer" data-n="15.2"><span lang="es">Qué muestra el atlas</span><span lang="en">What the atlas shows</span></h3>
+  <figure data-fig="atlas">
+    <figcaption><span class="fn"></span><span lang="es"><b>Atlas nacional</b> con el caso de Mata de Zarza.</span><span lang="en"><b>National atlas</b> with the Mata de Zarza case.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Botones para agregar archivos, agregar tu proyecto y exportar.</span><span lang="en">Buttons to add files, add your project and export.</span></li><li><span lang="es">Mapa: el color del estado indica cuántos viñedos hay; cada punto es un viñedo.</span><span lang="en">Map: the state colour shows how many vineyards there are; each dot is a vineyard.</span></li></ol>
+  </figure>
+  <ul>
+    <li lang="es"><b>Comparación por región</b> (Norte, Centro norte, Centro y Sur), por <b>destino</b> (mesa, vino, pasa, jugo) y por <b>región de Winkler</b>: número de viñedos y medias de sostenibilidad, regeneración, riesgo y prácticas respondidas «sí».</li><li lang="en"><b>Comparison by region</b> (North, North-central, Central and South), by <b>use</b> (table, wine, raisins, juice) and by <b>Winkler region</b>: number of vineyards and means of sustainability, regeneration, risk and practices answered “yes”.</li>
+    <li lang="es"><b>Prácticas del cuestionario base</b>: para cada actividad, el porcentaje de viñedos que la practican, nacional y por región.</li><li lang="en"><b>Baseline questionnaire practices</b>: for each activity, the share of vineyards that practise it, nationally and by region.</li>
+    <li lang="es"><b>Variedades</b>, fechas de plantación y número de podas, <b>innovaciones</b> de los viñedos y la <b>red nacional</b> del conocimiento de la vid.</li><li lang="en"><b>Varieties</b>, planting dates and number of prunings, vineyards’ <b>innovations</b> and the <b>national network</b> of grapevine knowledge.</li>
+  </ul>
+  <figure data-fig="atlaspract"><figcaption><span class="fn"></span><span lang="es"><b>¿Quién conserva cada práctica?</b> Porcentaje de viñedos que respondieron «sí», nacional y por región.</span><span lang="en"><b>Who keeps each practice?</b> Share of vineyards answering “yes”, nationally and by region.</span></figcaption></figure>
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de lectura</span><span class="bt" lang="en">Reading rule</span>
+    <p lang="es">Un porcentaje solo cuenta a los viñedos que <b>respondieron</b> esa actividad: lo que nadie contestó queda fuera, no se toma como «no». Por eso junto a cada porcentaje va, entre paréntesis, cuántos viñedos respondieron. Con menos de cinco, léelo como indicio, no como tendencia.</p>
+    <p lang="en">A percentage only counts vineyards that <b>answered</b> that activity: unanswered items are left out, not taken as “no”. That is why each percentage shows, in brackets, how many vineyards answered. With fewer than five, read it as a hint, not a trend.</p></div>
+</section>
+
+<!-- ============================ D · DOCUMENTAR ============================ -->
+<section class="chap" id="documentar" data-toc="D" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">D</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Documentar un viñedo para el estudio nacional</h2><h2 lang="en">Documenting a vineyard for the national study</h2>
+    <p lang="es">La ruta completa para documentar un viñedo de modo que su archivo pueda sumarse al atlas nacional.</p>
+    <p lang="en">The full route to document a vineyard so that its file can join the national atlas.</p>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="d-ruta" data-n="D.1"><span lang="es">Once pasos</span><span lang="en">Eleven steps</span></h3>
+  <ol>
+    <li lang="es"><b>Reúne a la gente.</b> Quien trabaja el viñedo, quien lo heredará, el asesor técnico. En Mata de Zarza participaron productores, estudiantes y profesores, y lo aprendido se sistematizó como estudio de caso.</li><li lang="en"><b>Bring people together.</b> Whoever works the vineyard, whoever will inherit it, the technical adviser. In Mata de Zarza farmers, students and lecturers took part, and what was learnt was systematised as a case study.</li>
+    <li lang="es"><b>Bloque 1.</b> Destino, variedad, pie, conducción, plantas por hectárea, fecha y material de plantación y cada poda.</li><li lang="en"><b>Block 1.</b> Use, variety, rootstock, training, vines per hectare, planting date and material and every pruning.</li>
+    <li lang="es"><b>Bloque 2.</b> Ubica la localidad.</li><li lang="en"><b>Block 2.</b> Locate the locality.</li>
+    <li lang="es"><b>Bloque 3.</b> Captura las temperaturas mensuales de la estación más cercana y anota la fuente.</li><li lang="en"><b>Block 3.</b> Enter the monthly temperatures of the nearest station and note the source.</li>
+    <li lang="es"><b>Bloque 4.</b> Revisa con la gente qué requerimientos se cumplen y anota los que han aprendido.</li><li lang="en"><b>Block 4.</b> Check with people which requirements are met and record those they have learnt.</li>
+    <li lang="es"><b>Bloque 5.</b> Responde «sí» o «no» a cada actividad, pon las fechas y agrega las actividades propias del viñedo.</li><li lang="en"><b>Block 5.</b> Answer “yes” or “no” to each activity, set the dates and add the vineyard’s own activities.</li>
+    <li lang="es"><b>Bloques 6 y 7.</b> Ajusta las perillas de regeneración y de riesgo con lo que vive el viñedo; guarda la línea base.</li><li lang="en"><b>Blocks 6 and 7.</b> Adjust the regeneration and risk knobs to what the vineyard lives; save the baseline.</li>
+    <li lang="es"><b>Bloque 8.</b> Revisa que estén todos los elementos; agrega los que falten y elígelos en sus actividades.</li><li lang="en"><b>Block 8.</b> Check all elements are there; add the missing ones and choose them in their activities.</li>
+    <li lang="es"><b>Bloque 9.</b> Anota precios, costos e ingresos por hectárea y califica el valor.</li><li lang="en"><b>Block 9.</b> Enter prices, costs and income per hectare and rate value.</li>
+    <li lang="es"><b>Bloque 10.</b> Teje el sistema y léelo en los bloques 11 a 13 con la gente que lo vive.</li><li lang="en"><b>Block 10.</b> Weave the system and read it in blocks 11–13 with the people who live it.</li>
+    <li lang="es"><b>Bloque 14.</b> Imprime el informe y guarda el proyecto: el archivo <code>.vina.json</code> es el que se envía a quien coordina el atlas (Bloque 15).</li><li lang="en"><b>Block 14.</b> Print the report and save the project: the <code>.vina.json</code> file is the one sent to the atlas coordinator (Block 15).</li>
+  </ol>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">Tu registro es conocimiento</span><span class="bt" lang="en">Your record is knowledge</span>
+    <p lang="es">Un viñedo bien documentado es el primer paso para publicar su Stack de conocimiento local, como se hizo con el establecimiento en Mata de Zarza. Guarda las fuentes de cada dato.</p>
+    <p lang="en">A well-documented vineyard is the first step to publishing its local knowledge Stack, as was done with establishment in Mata de Zarza. Keep the sources of every figure.</p></div>
+  <h3 id="d-entrevista" data-n="D.2"><span lang="es">Guía de entrevista, bloque por bloque</span><span lang="en">Interview guide, block by block</span></h3>
+  <p lang="es">Preguntas abiertas para una plática con quienes trabajan el viñedo. No hace falta seguir el orden; lo importante es que cada respuesta quede anotada con quién la dijo y cuándo.</p>
+  <p lang="en">Open questions for a conversation with those who work the vineyard. The order is not important; what matters is that every answer is written down with who said it and when.</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Bloque</th><th lang="en">Block</th><th lang="es">Preguntas</th><th lang="en">Questions</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td lang="es">¿Para qué cultivan la uva? ¿Qué variedad y qué pie, y de dónde vino la planta? ¿Cuándo se plantó y con qué material? ¿Cuándo y cómo podan?</td><td lang="en">What do you grow grapes for? Which variety and rootstock, and where did the vines come from? When was it planted and with what material? When and how do you prune?</td></tr>
+      <tr><td>2</td><td lang="es">¿En qué localidad y municipio está el viñedo? ¿Hay riego o es de temporal?</td><td lang="en">In which locality and municipality is the vineyard? Irrigated or rainfed?</td></tr>
+      <tr><td>3</td><td lang="es">¿Cuál es la estación meteorológica más cercana? ¿Hay meses con frío? ¿Cuándo llueve y cuándo falta el agua?</td><td lang="en">Which is the nearest weather station? Are there cold months? When does it rain and when is water short?</td></tr>
+      <tr><td>4</td><td lang="es">¿Qué necesita la vid para salir bien aquí? ¿Qué cosas nunca se deben hacer? ¿Qué han cambiado y por qué?</td><td lang="en">What does the vine need to do well here? What must never be done? What have you changed and why?</td></tr>
+      <tr><td>5</td><td lang="es">¿Cuáles son los pasos del año, del primero al último? ¿Qué se hace en cada uno, con qué herramientas y quién lo hace? ¿En qué meses?</td><td lang="en">What are the year’s steps, first to last? What is done in each, with which tools and by whom? In which months?</td></tr>
+      <tr><td>6</td><td lang="es">¿Cuántas veces mueven el suelo? ¿Queda cubierto? ¿Usan abono, estiércol o bioinsumos? ¿Hay animales? ¿Han analizado el suelo?</td><td lang="en">How many times is the soil worked? Is it covered? Manure, compost or bio-inputs? Animals? Has the soil been tested?</td></tr>
+      <tr><td>7</td><td lang="es">¿Qué fue lo peor que le pasó al viñedo? ¿Cada cuánto pasa? ¿Cuánto perdieron? ¿Qué hacen para evitarlo?</td><td lang="en">What was the worst thing that happened to the vineyard? How often does it happen? How much was lost? What do you do to prevent it?</td></tr>
+      <tr><td>8</td><td lang="es">¿Quién más participa: familia, jornaleros, viveros, asesores, compradores, universidades, programas?</td><td lang="en">Who else takes part: family, labourers, nurseries, advisers, buyers, universities, programmes?</td></tr>
+      <tr><td>9</td><td lang="es">¿Cuánto cuesta establecer y mantener una hectárea y cuánto les pagan por la uva? ¿Qué vale este elemento para ustedes, además del dinero?</td><td lang="en">How much does it cost to establish and maintain a hectare and what are you paid for the grapes? What is this element worth to you, beyond money?</td></tr>
+      <tr><td>13</td><td lang="es">¿Quién va a cuidar el viñedo dentro de diez años? ¿Qué les gustaría que cambiara y qué no?</td><td lang="en">Who will look after the vineyard in ten years? What would you like to change and what not?</td></tr>
+    </tbody></table></div>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Consentimiento</span><span class="bt" lang="en">Consent</span>
+    <p lang="es">Explica para qué se usarán los datos y pide permiso antes de anotar nombres. En el informe basta con la localidad y el número de informantes.</p>
+    <p lang="en">Explain what the data will be used for and ask permission before writing down names. In the report the locality and the number of informants are enough.</p></div>
+
+  <h3 id="d-hoja1" data-n="D.3" style="break-before:page"><span lang="es">Hoja de campo 1: pasos y actividades</span><span lang="en">Field sheet 1: steps and activities</span></h3>
+  <p lang="es">Imprime esta página y llénala a mano en el viñedo; luego pásala al Bloque 5.</p>
+  <p lang="en">Print this page and fill it in by hand in the vineyard; then transfer it to Block 5.</p>
+  <p lang="es">Viñedo: ______________________ &nbsp; Localidad: ______________________ &nbsp; Fecha: ___________</p>
+  <p lang="en">Vineyard: ______________________ &nbsp; Locality: ______________________ &nbsp; Date: ___________</p>
+  <div class="tbl"><table class="hoja">
+    <thead><tr><th>#</th><th lang="es">Paso</th><th lang="en">Step</th><th lang="es">Actividad</th><th lang="en">Activity</th><th lang="es">Quién · con qué</th><th lang="en">Who · with what</th><th lang="es">Mes</th><th lang="en">Month</th><th lang="es">T / I</th><th lang="en">T / I</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>6</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>7</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>9</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>10</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>11</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>12</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>13</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>14</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>15</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>16</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>17</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>18</td><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+    </tbody></table></div>
+  <p class="where" lang="es">T = tradicional, I = innovada.</p><p class="where" lang="en">T = traditional, I = innovated.</p>
+
+  <h3 id="d-hoja2" data-n="D.4" style="break-before:page"><span lang="es">Hoja de campo 2: clima, plantación y podas</span><span lang="en">Field sheet 2: climate, planting and prunings</span></h3>
+  <p lang="es">Temperaturas mensuales en °C (normales de la estación más cercana). Fuente: ____________________________</p>
+  <p lang="en">Monthly temperatures in °C (normals of the nearest station). Source: ____________________________</p>
+  <div class="tbl"><table class="hoja">
+    <thead><tr><th></th><th>E/J</th><th>F</th><th>M</th><th>A</th><th>M</th><th>J</th><th>J</th><th>A</th><th>S</th><th>O</th><th>N</th><th>D</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Máxima</td><td lang="en">Maximum</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Mínima</td><td lang="en">Minimum</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Media</td><td lang="en">Mean</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td></tr>
+    </tbody></table></div>
+  <p lang="es">Fecha de plantación: ____ / ____ / ______ &nbsp; Material: ______________________ &nbsp; Plantas por ha: ________</p>
+  <p lang="en">Planting date: ____ / ____ / ______ &nbsp; Material: ______________________ &nbsp; Vines per ha: ________</p>
+  <div class="tbl"><table class="hoja">
+    <thead><tr><th lang="es">Fecha de la poda</th><th lang="en">Pruning date</th><th lang="es">Tipo</th><th lang="en">Type</th><th lang="es">Nota (yemas, cuadrilla, observaciones)</th><th lang="en">Note (buds, crew, observations)</th></tr></thead>
+    <tbody><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr></tbody></table></div>
+
+  <h3 id="d-hoja3" data-n="D.5" style="break-before:page"><span lang="es">Hoja de campo 3: regeneración</span><span lang="en">Field sheet 3: regeneration</span></h3>
+  <p lang="es">Marca con la gente un número del 0 al 4 en cada fila y anota por qué; luego pásalo a las perillas del Bloque 6.</p>
+  <p lang="en">Mark a number from 0 to 4 on each row with the people and write why; then transfer it to the Block 6 knobs.</p>
+  <div class="tbl"><table class="hoja">
+    <thead><tr><th lang="es">Indicador</th><th lang="en">Indicator</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th lang="es">¿Por qué?</th><th lang="en">Why?</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Labranza mínima</td><td lang="en">Minimal tillage</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Suelo cubierto</td><td lang="en">Soil cover</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Diversidad</td><td lang="en">Diversity</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Raíces vivas</td><td lang="en">Living roots</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Integración animal</td><td lang="en">Livestock integration</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Menos insumos de síntesis</td><td lang="en">Fewer synthetic inputs</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Materia orgánica</td><td lang="en">Organic matter</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Saber local</td><td lang="en">Local knowledge</td><td>○</td><td>○</td><td>○</td><td>○</td><td>○</td><td>&nbsp;</td></tr>
+    </tbody></table></div>
+  <p lang="es">Suma: ______ ÷ 32 = IR ______ &nbsp; Materia orgánica del análisis de suelo: ______ % &nbsp; Año: ______</p>
+  <p lang="en">Sum: ______ ÷ 32 = IR ______ &nbsp; Organic matter from soil test: ______ % &nbsp; Year: ______</p>
+
+  <h3 id="d-hoja4" data-n="D.6" style="break-before:page"><span lang="es">Hoja de campo 4: riesgos</span><span lang="en">Field sheet 4: risks</span></h3>
+  <p lang="es">Para cada amenaza: probabilidad (1 rara vez … 5 casi cada año), impacto (1 casi nada … 5 se pierde todo) y control (0 nada … 3 bien controlado). Tacha las que no aplican.</p>
+  <p lang="en">For each hazard: likelihood (1 rarely … 5 almost every year), impact (1 almost nothing … 5 everything lost) and control (0 none … 3 well controlled). Cross out those that do not apply.</p>
+  <div class="tbl"><table class="hoja">
+    <thead><tr><th lang="es">Amenaza</th><th lang="en">Hazard</th><th lang="es">Prob.</th><th lang="en">Lik.</th><th lang="es">Impacto</th><th lang="en">Impact</th><th>Control</th><th lang="es">Qué hacemos</th><th lang="en">What we do</th></tr></thead>
+    <tbody>{{HOJA_RIESGOS}}</tbody></table></div>
+
+  <h3 id="d-hoja5" data-n="D.7" style="break-before:page"><span lang="es">Hoja de campo 5: costos, precio y valor</span><span lang="en">Field sheet 5: costs, price and value</span></h3>
+  <p lang="es">Por hectárea y por ciclo. Luego pásalo al Bloque 9.</p>
+  <p lang="en">Per hectare and per cycle. Then transfer it to Block 9.</p>
+  <div class="tbl"><table class="hoja">
+    <thead><tr><th lang="es">Concepto</th><th lang="en">Item</th><th lang="es">Cantidad</th><th lang="en">Quantity</th><th lang="es">Precio unitario</th><th lang="en">Unit price</th><th>$</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Esquejes o plantas y su transporte</td><td lang="en">Cuttings or vines and their transport</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Postes, alambres y sistema de riego</td><td lang="en">Posts, wires and irrigation system</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Fertilizantes, abonos y bioinsumos</td><td lang="en">Fertilisers, manures and bio-inputs</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Fungicidas, insecticidas y herbicidas</td><td lang="en">Fungicides, insecticides and herbicides</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Jornales (familiares y pagados)</td><td lang="en">Labour days (family and paid)</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Agua, combustible, empaque, flete, otros</td><td lang="en">Water, fuel, packing, freight, other</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es"><b>Costo total</b></td><td lang="en"><b>Total cost</b></td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Uva vendida (kg o cajas)</td><td lang="en">Grapes sold (kg or boxes)</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es">Vino, pasa, jugo, esquejes vendidos u otros</td><td lang="en">Wine, raisins, juice, cuttings sold or other</td><td></td><td></td><td>&nbsp;</td></tr>
+      <tr><td lang="es"><b>Ingreso total</b></td><td lang="en"><b>Total income</b></td><td></td><td></td><td>&nbsp;</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ============================ E · PROBLEMAS ============================ -->
+<section class="chap" id="problemas" data-toc="E" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">E</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Problemas frecuentes</h2><h2 lang="en">Troubleshooting</h2>
+    <p lang="es">Si algo no se ve como esperas, busca aquí.</p>
+    <p lang="en">If something does not look as you expect, look here.</p>
+    <span class="rule"></span></div>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Veo esto</th><th lang="en">I see this</th><th lang="es">Haz esto</th><th lang="en">Do this</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">El Tablero dice «Aún no tejes el sistema».</td><td lang="en">The Dashboard says “You have not woven the system yet”.</td><td lang="es">Ve al Bloque 10 y toca <span class="ui pri">Tejer el sistema</span>.</td><td lang="en">Go to Block 10 and tap <span class="ui pri">Weave the system</span>.</td></tr>
+      <tr><td lang="es">Los índices de clima dicen «—».</td><td lang="en">The climate indices say “—”.</td><td lang="es">Faltan temperaturas: Winkler pide las medias de abril a octubre; Huglin, medias y máximas de abril a septiembre; el frescor nocturno, la mínima de septiembre.</td><td lang="en">Temperatures are missing: Winkler needs April–October means; Huglin, April–September means and maxima; the cool-night index, the September minimum.</td></tr>
+      <tr><td lang="es">La edad del viñedo dice «—».</td><td lang="en">The vineyard age says “—”.</td><td lang="es">Mueve la perilla de la fecha de plantación y escribe el año, o escribe la edad en años.</td><td lang="en">Move the planting-date knob and type the year, or type the age in years.</td></tr>
+      <tr><td lang="es">Un elemento que agregué no aparece en la red.</td><td lang="en">An element I added is not in the network.</td><td lang="es">Elígelo en al menos una actividad.</td><td lang="en">Choose it in at least one activity.</td></tr>
+      <tr><td lang="es">El ingreso neto dice «sin dato».</td><td lang="en">Net income says “no data”.</td><td lang="es">Captura el ingreso y el costo por hectárea en <span class="path">Bloque 9<i>›</i>Recursos financieros</span>.</td><td lang="en">Enter income and cost per hectare in <span class="path">Block 9<i>›</i>Financial resources</span>.</td></tr>
+      <tr><td lang="es">La huella de carbono dice «—».</td><td lang="en">The carbon footprint says “—”.</td><td lang="es">Captura diésel, nitrógeno, urea y rendimiento en el Bloque 12.</td><td lang="en">Enter diesel, nitrogen, urea and yield in Block 12.</td></tr>
+      <tr><td lang="es">Abrí un proyecto de la versión 0.1.0 y los pasos cambiaron de número.</td><td lang="en">I opened a version 0.1.0 project and the steps changed number.</td><td lang="es">Es normal: la etapa de establecimiento ocupa ahora los pasos 1 a 6 y tus respuestas se recorrieron a los pasos 7 a 37.</td><td lang="en">That is expected: the establishment stage now takes steps 1–6 and your answers moved to steps 7–37.</td></tr>
+      <tr><td lang="es">Cambié de computadora y no están mis datos.</td><td lang="en">I changed computer and my data is gone.</td><td lang="es">Los datos viven en cada navegador: usa <span class="path">Informe<i>›</i>Guardar proyecto</span> y <span class="path">Abrir proyecto</span>.</td><td lang="en">Data lives in each browser: use <span class="path">Report<i>›</i>Save project</span> and <span class="path">Open project</span>.</td></tr>
+      <tr><td lang="es">No veo los cambios de una nueva versión.</td><td lang="en">I do not see a new version’s changes.</td><td lang="es">Recarga con <kbd>Ctrl</kbd> + <kbd>F5</kbd>.</td><td lang="en">Reload with <kbd>Ctrl</kbd> + <kbd>F5</kbd>.</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ============================ F · GLOSARIO ============================ -->
+<section class="chap" id="glosario" data-toc="F" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">F</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Glosario</h2><h2 lang="en">Glossary</h2>
+    <p lang="es">Las palabras de la app y del viñedo, en lenguaje sencillo.</p>
+    <p lang="en">The app’s and the vineyard’s words, in plain language.</p>
+    <span class="rule"></span></div>
+  <dl class="glos" id="glos"></dl>
+</section>
+
+<!-- ============================ G · UNA PÁGINA ============================ -->
+<section class="chap" id="unapagina" data-toc="G" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">G</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Ratio Viña en una página</h2><h2 lang="en">Ratio Viña on one page</h2>
+    <p lang="es">Recórtala y llévala al viñedo.</p>
+    <p lang="en">Cut it out and take it to the vineyard.</p>
+    <span class="rule"></span></div>
+  <ol class="quick">{{RAPIDO}}</ol>
+  <div class="qrbox">{{QR}}<p lang="es">Escanea para abrir Ratio Viña:<br><b>hectortecumshe-ai.github.io/RatioVina</b></p><p lang="en">Scan to open Ratio Viña:<br><b>hectortecumshe-ai.github.io/RatioVina</b></p></div>
+</section>
+
+<!-- ============================ H · CRÉDITOS ============================ -->
+<section class="chap" id="creditos" data-toc="H" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">H</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Cómo citar, fuentes y créditos</h2><h2 lang="en">How to cite, sources and credits</h2>
+    <span class="rule"></span></div>
+  <h3 id="h-citar"><span lang="es">Cómo citar</span><span lang="en">How to cite</span></h3>
+  <p lang="es">Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., y Alejo-Bello, S. (2026). <i>Ratio Viña: el conocimiento local de la vid en México como sistema complejo adaptativo, con índices de regeneración y riesgo</i> (Versión {{VERSION}}) [Software]. Zenodo. https://doi.org/{{DOIAPP}}</p>
+  <p lang="en">Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., &amp; Alejo-Bello, S. (2026). <i>Ratio Viña: local grapevine knowledge in Mexico as a complex adaptive system, with regeneration and risk indices</i> (Version {{VERSION}}) [Software]. Zenodo. https://doi.org/{{DOIAPP}}</p>
+  <h3 id="h-fuentes"><span lang="es">Fuentes principales</span><span lang="en">Main sources</span></h3>
+  <ul style="font-size:16px">
+    <li>Mojica-Zárate HT, Barrera-Guzmán LÁ, Alejo-Bello S, Partida-Sedas JG, Rojas-Reyes JO, Díaz-José O, Tinoco-Rueda JÁ, Torres-Palacios C. 2026. <i>Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz</i>. Colección Guías Prácticas para Productores, Tomo 5. Universidad Autónoma Chapingo, Texcoco. ISBN 978-607-12-0712-8. https://sidicyt.chapingo.mx/repositorio/2026/guias-2026-005.pdf</li>
+    <li>Amerine MA, Winkler AJ. 1944. Composition and quality of musts and wines of California grapes. <i>Hilgardia</i> 15(6): 493–675. · Huglin P. 1978. Nouveau mode d’évaluation des possibilités héliothermiques d’un milieu viticole. <i>Comptes Rendus de l’Académie d’Agriculture de France</i> 64: 1117–1126. · Tonietto J, Carbonneau A. 2004. A multicriteria climatic classification system for grape-growing regions worldwide. <i>Agricultural and Forest Meteorology</i> 124(1–2): 81–97.</li>
+    <li>Hersbach H, Bell B, Berrisford P, et al. 2020. The ERA5 global reanalysis. <i>Quarterly Journal of the Royal Meteorological Society</i> 146(730): 1999–2049. https://doi.org/10.1002/qj.3803</li>
+    <li>Lorenz DH, Eichhorn KW, Bleiholder H, Klose R, Meier U, Weber E. 1995. Growth stages of the grapevine. <i>Australian Journal of Grape and Wine Research</i> 1(2): 100–103. · Winkler AJ, Cook JA, Kliewer WM, Lider LA. 1974. <i>General viticulture</i>, 2.ª ed. · Keller M. 2020. <i>The science of grapevines</i>, 3.ª ed. · Kok D. 2014. A review on grape growing in tropical regions. <i>Turkish Journal of Agricultural and Natural Sciences</i> 1 (Özel Sayı 1).</li>
+    <li>Díaz-José O, Mojica-Zárate HT, Díaz-José J, Vilaboa-Arróniz J. 2026. El conocimiento agrícola local: el stack del maíz criollo en Calpan, Puebla. <i>Agricultura, Sociedad y Desarrollo</i> 23(3). https://doi.org/10.22231/asyd.v23i3.1822 · INEGI. 2020. Censo de Población y Vivienda; Catálogo Único de Claves Geoestadísticas.</li>
+    <li>Sarandón SJ. 2002. El desarrollo y uso de indicadores para evaluar la sustentabilidad de los agroecosistemas. En: Sarandón SJ (ed.), <i>Agroecología: el camino hacia una agricultura sustentable</i>. Ediciones Científicas Americanas, La Plata: 393–414.</li>
+    <li>Newton P, et al. 2020. What is regenerative agriculture? <i>Frontiers in Sustainable Food Systems</i> 4: 577723. · Schreefel L, et al. 2020. Regenerative agriculture – the soil is the base. <i>Global Food Security</i> 26: 100404.</li>
+    <li>IPCC. 2014. Climate Change 2014: Impacts, Adaptation, and Vulnerability (SPM). · IPCC. 2018. Global Warming of 1.5 °C (SPM). · ISO 31000:2018 · IEC 31010:2019.</li>
+    <li>Zhao C, et al. 2017. Temperature increase reduces global yields of major crops in four independent estimates. <i>PNAS</i> 114(35): 9326–9331. · Rogers EM. 2003. <i>Diffusion of innovations</i>, 5.ª ed.</li>
+  </ul>
+  <h3 id="h-agradece"><span lang="es">Agradecimientos</span><span lang="en">Acknowledgements</span></h3>
+  <p lang="es">A los productores de Mata de Zarza, Puente Nacional, Veracruz, que decidieron cultivar uva y compartieron lo aprendido, y a los estudiantes y profesores del Centro Académico Regional Sede Huatusco de la Universidad Autónoma Chapingo que los acompañaron.</p>
+  <p lang="en">To the farmers of Mata de Zarza, Puente Nacional, Veracruz, who decided to grow grapes and shared what they learnt, and to the students and lecturers of Chapingo Autonomous University’s Huatusco Regional Academic Centre who worked alongside them.</p>
+  <h3 id="h-legal"><span lang="es">Página legal</span><span lang="en">Legal page</span></h3>
+  {{LEGAL}}
+</section>
+
+</div>

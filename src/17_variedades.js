@@ -94,7 +94,7 @@ function tarjetaNuevoCultivo(tipo){
     <div class="grid g2"><label class="f"><span>${T('Nombre común','Common name')}</span><input id="catN" maxlength="60" placeholder="${tipo==='especie'?T('p. ej., Codorniz, Tilapia, Borrego cimarrón','e.g., Quail, Tilapia, Bighorn sheep'):T('p. ej., Pitahaya, Vainilla, Amaranto','e.g., Dragon fruit, Vanilla, Amaranth')}"></label>
     <label class="f"><span>${T('Nombre científico (opcional)','Scientific name (optional)')}</span><input id="catS" maxlength="80" placeholder="${tipo==='especie'?'Oreochromis niloticus':'Vanilla planifolia'}"></label></div>
     <button type="button" class="btn sm" id="catAdd" data-tipo-nuevo="${tipo}">${T('Agregar y elegir','Add and select')}</button>
-    <p class="nota">${T('Quedará como «Por documentar»: el manejo, los elementos y los precios se capturan desde cero, con la ventana de ejemplo de Calpan como guía.','It will be marked “To document”: management, elements and prices are entered from scratch, with the Calpan example window as a guide.')}</p></details>`; }
+    <p class="nota">${T('Quedará como «Por documentar»: el manejo, los elementos y los precios se capturan desde cero, con la guía de llenado de cada bloque.','It will be marked “To document”: management, elements and prices are entered from scratch, with each block’s filling guide.')}</p></details>`; }
 
 /* =====================================================================
    Catálogos de la vid (Bloque 1 · Vid). Listas orientativas de lo que se
@@ -145,5 +145,9 @@ const TIPOS_PODA = [
   {id:'segunda', n:E('Segunda poda del año (dos cosechas)','Second pruning of the year (two crops)')},
   {id:'renovacion', n:E('Poda de renovación o rejuvenecimiento','Renewal pruning')}
 ];
+/* Fecha de plantación con perilla: día del año (0–364) + año → AAAA-MM-DD */
+const isoDiaAno = (a, d)=>{ const t=new Date(Date.UTC(a,0,1+Math.min(364,Math.max(0,Math.round(d))))); return t.toISOString().slice(0,10); };
+const diaDelAno = (iso)=>{ const t=new Date(iso+'T00:00:00Z'); return isNaN(t)?0:Math.round((t-Date.UTC(t.getUTCFullYear(),0,1))/864e5); };
+const fechaLarga = (iso)=>{ const t=new Date(iso+'T00:00:00'); return isNaN(t)?iso:t.toLocaleDateString(LOC(),{day:'numeric',month:'long',year:'numeric'}); };
 /* Edad del viñedo: con la fecha de plantación, si existe; si no, la que escribió el usuario */
 function edadVinedo(){ if(S.vidPlant){ const d=new Date(S.vidPlant+'T00:00:00'); if(!isNaN(d)) return Math.max(0,(Date.now()-d)/(365.25*864e5)); } return S.vidEdad!==''&&S.vidEdad!=null&&isFinite(+S.vidEdad)?+S.vidEdad:null; }

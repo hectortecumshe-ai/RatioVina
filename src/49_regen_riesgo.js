@@ -31,7 +31,7 @@ const REGEN_IND = [
    auto:(acts)=>{ if(!acts.length) return SIN_SUG(); const n=acts.filter(a=>_tiene(a,['ARADO','SUBS','RASTRA'])&&!/decisi|determinaci|evaluaci|decision/i.test(a.n.es||'')).length; return {s:n===0?4:n===1?3:n===2?2:n<=4?1:0, m:T(`${n} actividades de labranza practicadas`,`${n} tillage activities practised`)}; }},
   {id:'cobertura', pr:E('Suelo cubierto','Soil cover'), n:E('Suelo cubierto todo el año','Soil covered all year'), col:'#7a9a3a',
    q:E('¿Cuántos meses del año el suelo está cubierto por el cultivo, rastrojo, acolchado o abono verde?','How many months a year is the soil covered by crop, stubble, mulch or green manure?'),
-   auto:(acts)=>{ if(!acts.length) return SIN_SUG(); const r=acts.some(a=>_tiene(a,['RAST','CUB'])&&a.v&&a.v[0]>0); return {s:r?2:1, m:r?T('hay cubierta vegetal o sarmientos sobre el suelo; ajusta según los meses de cobertura','there is cover crop or prunings on the soil; adjust to months of cover'):T('sin dato de cobertura: ajústalo','no cover data: adjust it')}; }},
+   auto:(acts)=>{ if(!acts.length) return SIN_SUG(); const r=acts.some(a=>_tiene(a,['RAST','CUB','ACOL'])&&a.v&&a.v[0]>0); return {s:r?2:1, m:r?T('hay cubierta vegetal o sarmientos sobre el suelo; ajusta según los meses de cobertura','there is cover crop or prunings on the soil; adjust to months of cover'):T('sin dato de cobertura: ajústalo','no cover data: adjust it')}; }},
   {id:'diversidad', pr:E('Diversidad','Diversity'), n:E('Diversidad de especies','Species diversity'), col:'#2f8f6a',
    q:E('¿Cuántas especies se cultivan o crían juntas en la unidad (incluidos árboles y animales)?','How many species are grown or raised together in the unit (including trees and animals)?'),
    auto:()=>{ if(!S.sistema && S.cultivo!=='granja') return SIN_SUG(T('elige el sistema de producción (Bloque 1) o mueve la perilla','choose the production system (Block 1) or move the knob')); const k=S.cultivo==='granja'?Math.max(1,S.granja.length):(DIV_SIS[S.sistema]||1); return {s:k<=1?0:k===2?1:k===3?2:k<=5?3:4, m:T(`${k} especies según el sistema elegido`,`${k} species according to the chosen system`)}; }},
@@ -66,25 +66,34 @@ function regeneracion(){ const acts=sostenibilidad().acts, R=S.regen||{};
 /* ---------------- RIESGOS ---------------- */
 const CAT_R = {clima:{n:E('Climáticos','Climatic'),col:'#2d78b0'}, bio:{n:E('Biológicos','Biological'),col:'#5f8f3e'}, mercado:{n:E('Mercado','Market'),col:'#c98b21'}, social:{n:E('Sociales','Social'),col:'#b05434'}, inst:{n:E('Institucionales','Institutional'),col:'#5a6b8a'}, recursos:{n:E('Recursos naturales','Natural resources'),col:'#7a4f9a'}};
 const RIESGOS = [
-  {id:'sequia', cat:'clima', n:E('Sequía o lluvias tardías','Drought or late rains'), el:['HUM','CLIMA','ENSO']},
+  {id:'sequia', cat:'clima', n:E('Sequía o lluvias tardías','Drought or late rains'), el:['HUM','CLIMA','SEQ']},
   {id:'helada', cat:'clima', n:E('Helada','Frost'), el:['CLIMA']},
   {id:'granizo', cat:'clima', n:E('Granizo','Hail'), el:['CLIMA']},
-  {id:'lluvia', cat:'clima', n:E('Lluvias intensas o inundación','Heavy rain or flooding'), el:['CICL','CLIMA']},
+  {id:'lluvia', cat:'clima', n:E('Lluvias intensas o inundación','Heavy rain or flooding'), el:['CLIMA','HUM']},
   {id:'calor', cat:'clima', n:E('Ola de calor','Heatwave'), el:['CLIMA']},
-  {id:'ciclon', cat:'clima', n:E('Ciclones y huracanes','Cyclones and hurricanes'), el:['CICL','MJO']},
+  {id:'frio', cat:'clima', n:E('Falta de frío invernal: dormancia incompleta y brotación irregular','Lack of winter chill: incomplete dormancy and uneven budburst'), el:['CLIMA'], f:'Kok, 2014'},
+  {id:'ciclon', cat:'clima', n:E('Ciclones y huracanes','Cyclones and hurricanes'), el:['CLIMA']},
   {id:'plagas', cat:'bio', n:E('Plagas','Pests'), el:['PLAGA']},
-  {id:'enferm', cat:'bio', n:E('Enfermedades','Diseases'), el:['PLAGA']},
+  {id:'enferm', cat:'bio', n:E('Enfermedades de hongos (cenicilla, mildiu, pudriciones del racimo)','Fungal diseases (powdery mildew, downy mildew, bunch rots)'), el:['PLAGA'], f:'Keller, 2020'},
+  {id:'pierce', cat:'bio', n:E('Enfermedad de Pierce (Xylella fastidiosa) y sus insectos vectores','Pierce’s disease (Xylella fastidiosa) and its insect vectors'), el:['PLAGA','CESV'], f:'Keller, 2020'},
+  {id:'hormiga', cat:'bio', n:E('Hormiga cortadora en la planta joven','Leaf-cutter ants on young vines'), el:['HORM','PROT'], f:'Mojica-Zárate et al., 2026'},
+  {id:'fauna', cat:'bio', n:E('Daño por animales domésticos y fauna silvestre','Damage by livestock and wildlife'), el:['HORM','PROT'], f:'Mojica-Zárate et al., 2026'},
+  {id:'material', cat:'bio', n:E('Material vegetal enfermo o mal enraizado (pérdida de raíces al sacarlo y trasladarlo)','Diseased or poorly rooted planting material (root loss when lifting and moving it)'), el:['ESQ','VIV'], f:'Mojica-Zárate et al., 2026'},
+  {id:'deriva', cat:'bio', n:E('Deriva de herbicidas de parcelas vecinas (la vid es muy sensible)','Herbicide drift from neighbouring plots (grapevines are very sensitive)'), el:['HERB'], f:E('Lectura de Ratio Viña','Ratio Viña reading')},
   {id:'malezas', cat:'bio', n:E('Malezas resistentes o invasoras','Resistant or invasive weeds'), el:['ARV','HERB']},
-  {id:'precio', cat:'mercado', n:E('Caída del precio de venta','Fall in sale price'), el:['PRECIO','COMP','GRANO']},
+  {id:'precio', cat:'mercado', n:E('Caída del precio de venta','Fall in sale price'), el:['PRECIO','COMP','UVAM']},
   {id:'insumos', cat:'mercado', n:E('Alza de insumos y servicios','Rise in input and service costs'), el:['COSTOS','FERTG','PI']},
+  {id:'nuevo', cat:'mercado', n:E('Cultivo nuevo en la región: mercado y canales de venta por construir','New crop in the region: market and sales channels still to be built'), el:['COMP','PRECIO'], f:'Mojica-Zárate et al., 2026'},
   {id:'venta', cat:'mercado', n:E('Intermediarismo o falta de comprador','Middlemen or no buyer'), el:['COMP','TRANS']},
   {id:'manoobra', cat:'social', n:E('Falta de mano de obra y de relevo generacional','Labour shortage and no generational succession'), el:['PM','FAM']},
+  {id:'adopcion', cat:'social', n:E('Abandono del cultivo por falta de experiencia o de resultados en los primeros años','Abandoning the crop for lack of experience or early results'), el:['PM','KTEC'], f:'Mojica-Zárate et al., 2026'},
   {id:'saber', cat:'social', n:E('Pérdida del saber local','Loss of local knowledge'), el:['KTAC','KCUL','FAM']},
   {id:'insegur', cat:'social', n:E('Inseguridad o robo','Insecurity or theft'), el:[]},
-  {id:'apoyos', cat:'inst', n:E('Retiro de programas y apoyos','Withdrawal of programmes and support'), el:['AT','SDR']},
+  {id:'apoyos', cat:'inst', n:E('Retiro de programas y apoyos','Withdrawal of programmes and support'), el:['AT','PROG']},
   {id:'tierra', cat:'inst', n:E('Conflictos de tenencia de la tierra','Land tenure conflicts'), el:[]},
   {id:'erosion', cat:'recursos', n:E('Erosión y pérdida de fertilidad','Erosion and fertility loss'), el:['SUELO']},
-  {id:'agua', cat:'recursos', n:E('Escasez de agua','Water scarcity'), el:['HUM']}
+  {id:'agua', cat:'recursos', n:E('Escasez de agua','Water scarcity'), el:['HUM'], f:'Mojica-Zárate et al., 2026'},
+  {id:'arcilla', cat:'recursos', n:E('Suelos arcillosos o mal drenados: encharcamiento y asfixia de raíces','Clay or poorly drained soils: waterlogging and root asphyxia'), el:['SUELO','HUM'], f:'Mojica-Zárate et al., 2026'}
 ];
 const NIVEL_R = r=> r<=4?{n:E('Bajo','Low'),c:'#3f9b5f'} : r<=9?{n:E('Medio','Medium'),c:'#d9b13a'} : r<=15?{n:E('Alto','High'),c:'#e0803a'} : {n:E('Muy alto','Very high'),c:'#c43a2f'};
 function sugerenciaRiesgo(id, acts, P){ const e=P.esc.ten; let p=3, i=3, m=T('moderado: ajústalo a tu localidad','moderate: adjust it to your locality');
@@ -171,7 +180,7 @@ function renderRegeneracion(el){ const rg=regeneracion();
 /* ---------------- Bloque 7 · Riesgos ---------------- */
 function renderRiesgos(el){ const rs=riesgos(), cls=CLASE_RG(rs.idx), filtro=renderRiesgos.cat||'todos';
   const fila=x=>`<tr class="${x.off?'r-off':''} ${x.conf?'r-conf':'r-sinconf'}"><td><input type="checkbox" data-roff="${x.id}" ${x.off?'':'checked'} aria-label="${T('Aplica','Applies')}"></td>
-    <td><span class="punto" style="background:${CAT_R[x.cat].col}"></span>${esc(tx(x.n))} ${x.off?'':x.conf?`<span class="estado-p ok">✓ ${T('confirmado','confirmed')}</span>`:`<span class="estado-p">${T('sugerido, sin confirmar','suggested, not confirmed')}</span> <button type="button" class="btn sm" data-rok="${x.id}">✓ ${T('Aceptar','Accept')}</button>`}<br><small class="muted">${T('Sugerido','Suggested')}: P ${x.sug.p} · I ${x.sug.i} — ${esc(x.sug.m)}</small></td>
+    <td><span class="punto" style="background:${CAT_R[x.cat].col}"></span>${esc(tx(x.n))}${x.f?` <small class="muted">(${esc(tx(x.f))})</small>`:''} ${x.off?'':x.conf?`<span class="estado-p ok">✓ ${T('confirmado','confirmed')}</span>`:`<span class="estado-p">${T('sugerido, sin confirmar','suggested, not confirmed')}</span> <button type="button" class="btn sm" data-rok="${x.id}">✓ ${T('Aceptar','Accept')}</button>`}<br><small class="muted">${T('Sugerido','Suggested')}: P ${x.sug.p} · I ${x.sug.i} — ${esc(x.sug.m)}</small></td>
     <td class="perilla-c"><input type="range" min="1" max="5" step="1" value="${Math.round(x.p)}" data-rp="${x.id}" ${x.off?'disabled':''}><small>${Math.round(x.p)} · ${esc(tx(NIVEL15[Math.round(x.p)]))}</small></td>
     <td class="perilla-c"><input type="range" min="1" max="5" step="1" value="${x.i}" data-ri="${x.id}" ${x.off?'disabled':''}><small>${x.i} · ${esc(tx(NIVEL15[x.i]))}</small></td>
     <td class="perilla-c"><input type="range" min="0" max="3" step="1" value="${x.ctl}" data-rc="${x.id}" ${x.off?'disabled':''}><small>${[T('ninguno','none'),T('bajo','low'),T('medio','medium'),T('alto','high')][x.ctl]}</small></td>

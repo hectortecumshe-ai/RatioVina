@@ -119,7 +119,7 @@ function abrirEjemplo(id){ const g=GUIA[id](); let d=$('#dlgEjemplo');
    <h3>${T('Qué se captura','What you enter')}</h3>${g.que}
    <h3>${T('De dónde sacar el dato','Where to find the data')}</h3><p>${g.donde}</p>
    <h3>${T('Cómo llenarlo','How to fill it in')}</h3>${g.pasos}
-   <div class="row" style="gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="this.closest('dialog').close()">${T('Cerrar y volver a mis datos','Close and return to my data')}</button></div></div>`;
+   <div class="row" style="gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="this.closest('dialog').close()">${T('Cerrar y volver a mis datos','Close and return to my data')}</button><button class="btn ghost" data-entrar-ej>${T('Ver el caso publicado de Mata de Zarza','See the published Mata de Zarza case')}</button></div></div>`;
   d.showModal(); }
 document.addEventListener('click',ev=>{ const t=ev.target.closest('[data-ejemplo]'); if(t) abrirEjemplo(t.dataset.ejemplo); });
 function ponerEjemplo(id, el){ const h=ejemploCalpan(id); if(!h) return; const cab=$('.bhead',el); if(cab) cab.insertAdjacentHTML('afterend',h); else el.insertAdjacentHTML('beforeend',h); }

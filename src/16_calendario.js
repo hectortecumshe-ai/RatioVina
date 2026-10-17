@@ -7,6 +7,7 @@
    Sonora a la vendimia de Baja California o del Bajío).
    ===================================================================== */
 const EVENTOS = {
+  establece:  {n:E('Propagación y plantación','Propagation and planting'), col:'#3f7a6a'},
   poda:       {n:E('Poda y estructura','Pruning and trellis'), col:'#7d5a2c'},
   suelo:      {n:E('Suelo y cubierta','Soil and cover'), col:'#9a6a3a'},
   brotacion:  {n:E('Brotación','Budburst'), col:'#5f8f3e'},
@@ -23,9 +24,8 @@ const EVENTOS = {
 };
 const EV_PRINCIPALES = ['poda','brotacion','floracion','envero','cosecha'];
 /* Tipo de evento de cada paso del cuestionario de la vid (lectura de Ratio Viña) */
-const EV_PASO = {1:'poda',2:'suelo',3:'poda',4:'poda',5:'brotacion',6:'suelo',7:'riego',8:'dosel',9:'dosel',10:'fertiliza',11:'sanidad',12:'sanidad',13:'suelo',
-  14:'floracion',15:'floracion',16:'dosel',17:'dosel',18:'riego',19:'sanidad',20:'sanidad',21:'envero',22:'envero',23:'cosecha',24:'transforma',25:'cosecha',
-  26:'transforma',27:'riego',28:'sanidad',29:'venta',30:'venta',31:'otro'};
+const EV_PASO = {1:'establece',2:'establece',3:'suelo',4:'establece',5:'establece',6:'poda',
+  7:'poda',8:'suelo',9:'poda',10:'poda',11:'brotacion',12:'suelo',13:'riego',14:'dosel',15:'dosel',16:'fertiliza',17:'sanidad',18:'sanidad',19:'suelo',20:'floracion',21:'floracion',22:'dosel',23:'dosel',24:'riego',25:'sanidad',26:'sanidad',27:'envero',28:'envero',29:'cosecha',30:'transforma',31:'cosecha',32:'transforma',33:'riego',34:'sanidad',35:'venta',36:'venta',37:'otro'};
 const diaFecha = (d)=>{ const t=new Date(2026,0,1+Math.round(((d%365)+365)%365)); return t.toLocaleDateString(LOC(),{day:'numeric',month:'short'}); };
 const isoDeDia = (d)=>{ const t=new Date(Date.UTC(2026,0,1+Math.round(((d%365)+365)%365))); return t.toISOString().slice(0,10); };
 const diaDeIso = (s)=>{ const t=new Date(s+'T00:00:00Z'); return Math.round((t-Date.UTC(t.getUTCFullYear(),0,1))/864e5); };

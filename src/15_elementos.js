@@ -26,6 +26,8 @@ const ELEM = [
   {id:'PM', cat:'actores', n:E('Viticultores (productores de uva)','Grape growers')},
   {id:'JOR', cat:'actores', n:E('Jornaleros y cuadrillas de poda y cosecha','Pruning and harvest crews')},
   {id:'FAM', cat:'actores', n:E('Familia y comunidad (transmisión entre generaciones)','Family and community (intergenerational transfer)')},
+  {id:'VIV', cat:'actores', n:E('Viveros y viñedos donantes de material vegetal','Nurseries and donor vineyards')},
+  {id:'EST', cat:'actores', n:E('Estudiantes y servicio social','Students and social service')},
   {id:'AT', cat:'actores', n:E('Asesores técnicos','Technical advisers')},
   {id:'PI', cat:'actores', n:E('Proveedores de insumos','Input suppliers')},
   {id:'ENO', cat:'actores', n:E('Enólogo o maestro de bodega','Winemaker or cellar master')},
@@ -38,6 +40,10 @@ const ELEM = [
   {id:'INIFAP', cat:'instituciones', n:E('INIFAP y centros de investigación','INIFAP and research centres')},
   {id:'UNI', cat:'instituciones', n:E('Universidades','Universities')},
   // insumos
+  {id:'ESQ', cat:'insumos', n:E('Esquejes o plantas de vid','Cuttings or vines')},
+  {id:'ENR', cat:'insumos', n:E('Enraizador y desinfectante (cobre)','Rooting hormone and disinfectant (copper)')},
+  {id:'ARENA', cat:'insumos', n:E('Arena de río o sustrato de enraizamiento','River sand or rooting medium')},
+  {id:'ACOL', cat:'insumos', n:E('Acolchado (material vegetal seco)','Mulch (dry plant material)')},
   {id:'AZUF', cat:'insumos', n:E('Azufre','Sulfur')},
   {id:'FUNG', cat:'insumos', n:E('Fungicidas de síntesis','Synthetic fungicides')},
   {id:'INSEC', cat:'insumos', n:E('Insecticidas','Insecticides')},
@@ -52,6 +58,9 @@ const ELEM = [
   {id:'COMB', cat:'insumos', n:E('Combustible de la maquinaria','Machinery fuel'), i:true},
   {id:'EMP', cat:'insumos', n:E('Material de empaque','Packing material')},
   // equipo e infraestructura
+  {id:'CAMARA', cat:'equipo', n:E('Cámara, cama o vivero de enraizamiento','Rooting chamber, bed or nursery')},
+  {id:'PROT', cat:'equipo', n:E('Protectores y cercos (mallas, costales, estacas)','Guards and fences (netting, sacks, stakes)')},
+  {id:'TUT', cat:'equipo', n:E('Tutores y soportes','Stakes and supports')},
   {id:'TIJ', cat:'equipo', n:E('Tijeras y herramientas de poda','Pruning shears and tools')},
   {id:'ESTR', cat:'equipo', n:E('Estructura de conducción (postes y alambres)','Training structure (posts and wires)')},
   {id:'GOT', cat:'equipo', n:E('Sistema de riego (goteo u otro)','Irrigation system (drip or other)')},
@@ -71,6 +80,7 @@ const ELEM = [
   {id:'ARV', cat:'naturales', n:E('Malezas (vegetación arvense)','Weeds (arable flora)')},
   {id:'PLAGA', cat:'naturales', n:E('Plagas y enfermedades (cenicilla, mildiu, pudriciones)','Pests and diseases (powdery and downy mildew, rots)')},
   {id:'CLIMA', cat:'naturales', n:E('Temperatura, horas frío y lluvia','Temperature, chilling and rainfall')},
+  {id:'HORM', cat:'naturales', n:E('Hormiga cortadora y animales que ramonean','Leaf-cutter ants and browsing animals')},
   {id:'FAUB', cat:'naturales', n:E('Fauna benéfica y polinizadores','Beneficial fauna and pollinators')},
   // financieros
   {id:'COSTOS', cat:'financieros', n:E('Costos de producción','Production costs')},
@@ -100,6 +110,12 @@ const ELEM = [
 ];
 /* Elementos que intervienen en cada actividad. Lectura de Ratio Viña del texto de cada actividad. */
 const ACT_EL = {
+  EA:'PM AT SUELO HUM CLIMA KTEC KAMB', EB:'PM VIV ESQ TRANS COSTOS',
+  EC:'PM JOR VIV ESQ TIJ KTEC', ED:'PM ENR ESQ KTEC', EE:'PM CAMARA ARENA AGUAR ESQ KTEC KTAC', EF:'PM AT ESQ KTEC',
+  EG:'PM JOR SUELO KTEC', EH:'PM AGUAR HUM SUELO',
+  EI:'PM TRANS ESQ AGUAR', EJ:'PM JOR EST ESQ AGUAR SUELO', EK:'PM ACOL SUELO HUM',
+  EL:'PM PROT HORM KTAC KAMB', EM:'PM TUT KTAC', EN:'PM AGUAR GOT HUM',
+  EO:'PM ESTR JOR KTEC',
   A:'PM ESTR KTAC PLAGA', B:'PM COSTOS INGR KTEC', C:'PM AT LAB SUELO KTEC', D:'PM AT LAB AGUAR KTEC',
   E:'PM JOR TIJ KTAC', F:'PM JOR TIJ KTAC KTEC', G:'PM RAST SUELO RASTRA COMB',
   H:'PM JOR ESTR', I:'PM PI COSTOS',
@@ -120,7 +136,7 @@ const ACT_EL = {
 /* Vínculos estructurales (no ligados a una actividad). Lectura de Ratio Viña: en tu proyecto entran solo si tocan un elemento de tus actividades. */
 const LAZOS = [
   ['AT','INIFAP'],['AT','UNI'],['IAC','INIFAP'],['IAC','UNI'],['CESV','SENASICA'],['PM','ASOC'],['ENO','BOD'],
-  ['RAST','SUELO'],['CUB','SUELO'],['INGR','COSTOS'],['CRED','PROG']
+  ['RAST','SUELO'],['CUB','SUELO'],['VIV','ESQ'],['CAMARA','ARENA'],['ACOL','SUELO'],['INGR','COSTOS'],['CRED','PROG']
 ];
 /* Perfil de impacto de cada elemento sobre [suelo, agua, atmósfera, vegetación, fauna], escala −2…+2.
    Lectura de Ratio Viña con su justificación; editable por actividad en el Bloque 6. */
@@ -137,6 +153,7 @@ const IMPACTO = {
   AZUF:{v:[-1,0,0,0,0], r:E('Aplicaciones repetidas acidifican el suelo; es un fungicida mineral de baja toxicidad.','Repeated use acidifies soil; it is a low-toxicity mineral fungicide.')},
   RAST:{v:[2,1,1,0,1], r:E('Sarmientos incorporados: materia orgánica, estructura y carbono en el suelo.','Incorporated prunings: organic matter, structure and soil carbon.')},
   CUB:{v:[2,1,1,1,1], r:E('La cubierta vegetal protege de la erosión, retiene agua y da refugio a la fauna benéfica.','Cover crops prevent erosion, retain water and shelter beneficial fauna.')},
+  ACOL:{v:[1,1,0,0,0], r:E('El acolchado conserva la humedad y protege el suelo (Mojica-Zárate et al., 2026).','Mulch keeps moisture in and protects the soil (Mojica-Zárate et al., 2026).')},
   COMPO:{v:[2,0,0,0,1], r:E('La composta aporta materia orgánica y vida al suelo.','Compost adds organic matter and soil life.')},
   BIOI:{v:[0,0,0,0,1], r:E('El control biológico sustituye plaguicidas de síntesis.','Biological control replaces synthetic pesticides.')},
   FAUB:{v:[0,0,0,0,1], r:E('Conservar la fauna benéfica favorece el control natural de plagas.','Conserving beneficial fauna supports natural pest control.')},

@@ -3,7 +3,7 @@
    Llenado por el usuario, modo ejemplo y bloques sin datos.
    - avance(id): cuántos campos de un bloque llenó la persona (nunca cuenta
      sugerencias ni el ejemplo publicado) → Pendiente / En proceso / Completo.
-   - Modo ejemplo: carga el caso publicado de Calpan (Díaz-José et al., 2026)
+   - Modo ejemplo: carga el caso publicado de Mata de Zarza (Mojica-Zárate et al., 2026; 18b_matazarza.js)
      en un estado aparte que no se guarda; una franja fija lo anuncia y el
      proyecto del usuario queda intacto.
    - Los bloques de resultados sin actividades muestran qué falta en vez de
@@ -28,7 +28,7 @@ function avance(id){ let h=0, t=0, nota='';
   return {h, t, f, estado, nota, txt:{pend:T('Pendiente','Pending'), proc:T('En proceso','In progress'), ok:T('Completo','Complete')}[estado]}; }
 function avanceTotal(){ const l=BLOQUES_LLENAR.map(avance).filter(Boolean); return l.reduce((s,a)=>s+a.f,0)/l.length; }
 /* Franja de avance bajo el título de cada bloque que se llena */
-function franjaAvance(id){ if(EJ) return `<div class="avance ej"><b>${T('Ejemplo publicado','Published example')}</b> · ${T('estos datos son del caso de Calpan, Puebla; no son tuyos','these data are from the Calpan, Puebla case; they are not yours')}</div>`;
+function franjaAvance(id){ if(EJ) return `<div class="avance ej"><b>${T('Ejemplo publicado','Published example')}</b> · ${T('estos datos son del caso de Mata de Zarza, Veracruz; no son tuyos','these data are from the Mata de Zarza, Veracruz case; they are not yours')}</div>`;
   const a=avance(id); if(!a) return '';
   return `<div class="avance est-${a.estado}"><div class="av-barra"><i style="width:${100*a.f}%"></i></div><span><b>${a.h} ${T('de','of')} ${a.t}</b> ${T('llenados por ti','filled in by you')} · ${a.txt}${a.nota?' · '+esc(a.nota):''}</span></div>`; }
 
@@ -41,10 +41,10 @@ function estadoPrueba(){ const s=estadoInicial();
   PASOS.forEach(p=>{ s.manejo[p.n]={resp:Object.fromEntries(p.a.map(a=>[a[0],'si'])), inn:[], imp:{}}; });
   return s; }
 const estadoCalpan = estadoPrueba;   // nombre que usa el código común
-function entrarEjemplo(){} function salirEjemplo(){}
+/* entrarEjemplo y salirEjemplo: 18b_matazarza.js (caso publicado de Mata de Zarza) */
 function franjaEjemplo(){ let f=$('#franjaEj'); if(!EJ){ if(f) f.remove(); return; }
   if(!f){ f=document.createElement('div'); f.id='franjaEj'; f.className='franja-ej no-print'; document.body.prepend(f); }
-  f.innerHTML=`<span>⚑ <b>${T('Estás viendo el EJEMPLO publicado de Calpan, Puebla.','You are viewing the published EXAMPLE of Calpan, Puebla.')}</b> ${T('Tus datos no han cambiado y nada de esto se guarda.','Your data have not changed and nothing here is saved.')}</span><button class="btn sm" data-salir-ej>${T('Salir del ejemplo','Leave the example')} ✕</button>`; }
+  f.innerHTML=`<span>⚑ <b>${T('Estás viendo el EJEMPLO publicado de Mata de Zarza, Veracruz.','You are viewing the published EXAMPLE of Mata de Zarza, Veracruz.')}</b> ${T('Tus datos no han cambiado y nada de esto se guarda.','Your data have not changed and nothing here is saved.')}</span><button class="btn sm" data-salir-ej>${T('Salir del ejemplo','Leave the example')} ✕</button>`; }
 document.addEventListener('click',ev=>{ if(ev.target.closest('[data-entrar-ej]')){ const d=ev.target.closest('dialog'); if(d) d.close(); entrarEjemplo(); } if(ev.target.closest('[data-salir-ej]')) salirEjemplo(); });
 
 /* ---------- Bloques de resultados sin datos ---------- */
@@ -52,7 +52,7 @@ function renderVacio(el, id){
   el.innerHTML=`${cabecera(id,'')}<div class="card vacio-res"><h2>${T('Todavía no hay datos tuyos para calcular este bloque','There are no data of yours to compute this block yet')}</h2>
    <p>${T('Los resultados se calculan solo con lo que tú llenas. Para empezar, responde en el Bloque 5 qué actividades practicas o agrega las tuyas.','Results are computed only from what you fill in. To start, answer in Block 5 which activities you practise or add your own.')}</p>
    <div class="vacio-lista">${BLOQUES_LLENAR.map(k=>{ const a=avance(k), b=B(k); return `<button class="vacio-item est-${a.estado}" data-ir="${k}"><span class="n">${b.n}</span><b>${esc(tx(b.corto))}</b><small>${a.h} / ${a.t} · ${a.txt}</small></button>`; }).join('')}</div>
-   <div class="row" style="gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" data-ir="manejo">${T('Ir al Bloque 5 · Manejo','Go to Block 5 · Management')} →</button></div></div>${siguiente(id)}`; }
+   <div class="row" style="gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" data-ir="manejo">${T('Ir al Bloque 5 · Manejo','Go to Block 5 · Management')} →</button><button class="btn ghost" data-entrar-ej>${T('Ver cómo se ve con el caso publicado (Mata de Zarza)','See how it looks with the published case (Mata de Zarza)')}</button></div></div>${siguiente(id)}`; }
 
 /* ---------- Bloque sin campos propios: «ya lo revisé» ---------- */
 function ponerRevisado(id, el){ if(id!=='elementos'||EJ) return; const ok=(S.revisado||{}).elementos, nx=$('.next',el);

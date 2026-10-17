@@ -33,10 +33,10 @@ function construirRed(sinPM){
   const acts=actividades(), part=participacion(); const val={}; todosElem().forEach(e=>val[e.id]=valorEl(e.id,part).v);
   const W=new Map(), key=(a,b)=>a<b?a+'|'+b:b+'|'+a, add=(a,b,w,act)=>{ if(a===b) return; const k=key(a,b); const o=W.get(k)||{a:a<b?a:b, b:a<b?b:a, w:0, n:0, acts:[]}; o.w+=w; o.n++; if(act) o.acts.push(act); W.set(k,o); };
   acts.forEach(x=>{ const el=[...new Set(x.el)].filter(id=>val[id]!=null && !(sinPM&&id==='PM')); for(let i=0;i<el.length;i++) for(let j=i+1;j<el.length;j++) add(el[i],el[j],Math.sqrt((val[el[i]]||0.05)*(val[el[j]]||0.05)),x.cod); });
-  // Lazos estructurales documentados en Calpan: en el ejemplo publicado entran todos (red validada);
-  // en tu proyecto, solo los que tocan un elemento de tus actividades, para no traer actores de otra localidad.
+  // Lazos estructurales del catálogo:
+  // solo los que tocan un elemento de las actividades (también en el modo ejemplo), para no traer actores ajenos.
   const enActs=new Set(acts.flatMap(x=>x.el));
-  if(conStack() && acts.length) LAZOS.forEach(([a,b])=>{ if(sinPM&&(a==='PM'||b==='PM')) return; if(!EJ && !enActs.has(a) && !enActs.has(b)) return; add(a,b,Math.sqrt((val[a]||0.05)*(val[b]||0.05)),null); });
+  if(conStack() && acts.length) LAZOS.forEach(([a,b])=>{ if(sinPM&&(a==='PM'||b==='PM')) return; if(!enActs.has(a) && !enActs.has(b)) return;   /* también en el modo ejemplo: el caso de Mata de Zarza es un viñedo real */ add(a,b,Math.sqrt((val[a]||0.05)*(val[b]||0.05)),null); });
   const usados=new Set(); W.forEach(o=>{ usados.add(o.a); usados.add(o.b); });
   const nodos=todosElem().filter(e=>usados.has(e.id)).map(e=>({id:e.id, nombre:tx(e.n), cat:e.cat, col:CATS[e.cat].col, val:val[e.id], part:part[e.id]||0}));
   const aristas=[...W.values()];

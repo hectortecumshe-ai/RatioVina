@@ -1265,7 +1265,7 @@ html[lang="en"] .familia-ratio .fr-es,html:not([lang="en"]) .familia-ratio .fr-e
    Ratio Viña — Ratio Complexus («lo que está tejido junto»)
    ===================================================================== */
 const CONFIG = {
-  app:'Ratio Viña', version:'0.1.0', anio:2026, doi:'10.5281/zenodo.23439305',
+  app:'Ratio Viña', version:'0.2.0', anio:2026, doi:'10.5281/zenodo.23439305',
   repo:'https://github.com/hectortecumshe-ai/RatioVina',
   autores:'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello',
   citaAutores:{es:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., y Alejo-Bello, S.',en:'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., & Alejo-Bello, S.'},
@@ -1338,7 +1338,7 @@ const bovTexto = ()=>{ const p=BOV.find(b=>b.id===S.bovProp)||BOV[0], s=bovSisSe
 /* ---------- Estado / state ---------- */
 let S;
 function estadoInicial(){ return {
-  formato:2,                       // 2 = respuestas sí/no (sin precarga); los archivos sin «formato» son de la versión anterior
+  formato:3,                       // 3 = con la etapa de Establecimiento (pasos 1–6); 2 = versión 0.1.0 (pasos 1–31); sin «formato» = otra app
   bloque:'inicio', visitados:{},
   proyecto:{nombre:'', productor:'', fecha:new Date().toISOString().slice(0,10), notas:''},
   cultivo:'uva', sistema:'', tipoUP:'', superficie:'',   // la app es solo de vid; lo demás empieza vacío
@@ -1368,10 +1368,13 @@ function estadoInicial(){ return {
   revisado:{},                     // bloques sin campos propios que el usuario marcó como revisados
   formulado:false
 }; }
-/* EJ = modo ejemplo (caso publicado de Calpan): nunca se guarda y no toca el proyecto del usuario */
+/* EJ = modo ejemplo (caso publicado de Mata de Zarza): nunca se guarda y no toca el proyecto del usuario */
 let EJ = false, S_USUARIO = null;
 function guardar(){ if(EJ) return; try{ localStorage.setItem('vina_v1', JSON.stringify(S)); }catch(e){} }
-function cargar(){ try{ const g=JSON.parse(localStorage.getItem('vina_v1')||'null'); if(g && g.manejo) return Object.assign(estadoInicial(), g); }catch(e){} return estadoInicial(); }
+function cargar(){ try{ const g=JSON.parse(localStorage.getItem('vina_v1')||'null'); if(g && g.manejo) return migrarPasos(Object.assign(estadoInicial(), g, {formato:g.formato})); }catch(e){} return estadoInicial(); }
+/* Proyectos de Ratio Viña 0.1.0 (formato 2): sus pasos 1–31 pasan a ser 7–37, porque la etapa de Establecimiento ocupa los pasos 1–6 */
+function migrarPasos(s){ if(s.formato!==2) return s; const mueve=o=>Object.fromEntries(Object.entries(o||{}).map(([n,v])=>[isFinite(+n)?String(+n+6):n, v]));
+  s.manejo=mueve(s.manejo); s.fechas=mueve(s.fechas); s.formato=3; return s; }
 /* Proyectos de Ratio Telar (maíz) abiertos como archivo: «off» se convierte en respuestas «sí» y «no».
    Solo se recupera si el usuario lo pide; «off» se convierte en respuestas «sí» y «no». */
 function proyectoAnterior(){ return null; }   // Ratio Viña no tiene versión anterior
@@ -1411,16 +1414,20 @@ const MAPA_MX = {w:1000, h:627, edo:{"MX-SON":"M115.0,10.2L232.3,50.0L297.9,50.2
    ordena el ciclo anual del viñedo según las etapas fenológicas principales
    de la escala BBCH para la vid (Lorenz et al., 1995) y reúne las labores
    que describen los textos de viticultura general (Winkler et al., 1974;
-   Keller, 2020). Cada localidad lo responde (sí / no) y lo amplía con sus
+   Keller, 2020). La etapa de Establecimiento (propagación y plantación)
+   sigue la Guía práctica para el establecimiento de uva en Mata de Zarza,
+   Veracruz (Mojica-Zárate et al., 2026, UACh, ISBN 978-607-12-0712-8). Cada localidad lo responde (sí / no) y lo amplía con sus
    propias actividades; así se documenta su Stack.
    La cuarta posición de una actividad indica si es propia de un destino (mesa, vino).
    ===================================================================== */
 const ART = {   // ficha del cuestionario (no es un artículo publicado)
   doi: '', cita: 'Ratio Viña (2026). Cuestionario base del ciclo anual de la vid, ordenado por etapas BBCH (Lorenz et al., 1995). Lectura de Ratio Viña.',
-  periodo: '—', informantes: 0, pasos: 31, actividades: 52, reglas: 6
+  periodo: '—', informantes: 0, pasos: 37, actividades: 67, reglas: 7
 };
 /* Etapas del ciclo (ocupan el lugar de las 5B de Ratio Viña). bbch: estadios principales que abarca */
 const B5 = [
+  {id:'establecimiento', es:'Establecimiento: propagación y plantación', en:'Establishment: propagation and planting', col:'#3f7a6a', bbch:'00–19 · 1.er año',
+   d:['Del material vegetal a la planta establecida: esquejes, enraizamiento, preparación del terreno, plantación y cuidados del primer año (Mojica-Zárate et al., 2026).','From planting material to an established vine: cuttings, rooting, site preparation, planting and first-year care (Mojica-Zárate et al., 2026).']},
   {id:'reposo', es:'Reposo y poda', en:'Dormancy and pruning', col:'#7d5a2c', bbch:'97–00',
    d:['Del final de la caída de hojas a la yema de invierno: diagnóstico, poda, estructura y preparación del suelo.','From leaf fall to the winter bud: assessment, pruning, trellis and soil preparation.']},
   {id:'brotacion', es:'Brotación y crecimiento', en:'Budburst and shoot growth', col:'#5f8f3e', bbch:'01–19',
@@ -1436,37 +1443,43 @@ const B5 = [
 ];
 /* Pasos y actividades. a: [código, es, en, destino?]. Sin ventanas de fechas: cambian mucho entre regiones y las pone cada localidad. */
 const PASOS = [
- {n:1, b:'reposo', es:'Diagnóstico del viñedo', en:'Vineyard assessment', a:[['A','Inspección de cepas, brazos y estructura','Inspection of vines, arms and trellis'],['B','Registro de rendimiento y problemas del ciclo anterior','Record of last cycle’s yield and problems']]},
- {n:2, b:'reposo', es:'Análisis de suelo y agua', en:'Soil and water analysis', a:[['C','Muestreo y análisis de suelo','Soil sampling and analysis'],['D','Análisis del agua de riego','Irrigation water analysis']]},
- {n:3, b:'reposo', es:'Poda invernal', en:'Winter pruning', a:[['E','Poda de producción con tijera','Production pruning with shears'],['F','Elección de cargadores o pulgares según la variedad','Choice of canes or spurs by variety'],['G','Retiro, triturado o incorporación de los sarmientos','Removal, shredding or incorporation of prunings']]},
- {n:4, b:'reposo', es:'Mantenimiento de la estructura', en:'Trellis maintenance', a:[['H','Revisión de postes, alambres y sistema de conducción','Check of posts, wires and training system'],['I','Reposición de plantas faltantes','Replanting of missing vines']]},
- {n:5, b:'reposo', es:'Ruptura de la dormancia', en:'Breaking dormancy', a:[['J','Aplicación de cianamida hidrogenada donde faltan horas frío','Hydrogen cyanamide where chilling is insufficient','mesa']]},
- {n:6, b:'reposo', es:'Manejo del suelo entre hileras', en:'Inter-row soil management', a:[['K','Rastreo o desvare entre hileras','Inter-row harrowing or mowing'],['L','Siembra o conservación de una cubierta vegetal','Sowing or keeping a cover crop'],['M','Aplicación de composta o estiércol','Compost or manure application']]},
- {n:7, b:'brotacion', es:'Riego de brotación', en:'Budburst irrigation', a:[['N','Riego o fertirriego al inicio de la brotación','Irrigation or fertigation at budburst']]},
- {n:8, b:'brotacion', es:'Desbrote', en:'Shoot thinning', a:[['O','Eliminación de brotes dobles, chupones y brotes del tronco','Removal of double shoots, suckers and trunk shoots']]},
- {n:9, b:'brotacion', es:'Amarre y posicionamiento de brotes', en:'Tying and shoot positioning', a:[['P','Amarre o acomodo de brotes en los alambres','Tying or positioning shoots on the wires']]},
- {n:10, b:'brotacion', es:'Nutrición', en:'Nutrition', a:[['Q','Fertilización al suelo o por fertirriego','Soil or fertigation fertilising'],['R','Fertilización foliar','Foliar fertilising']]},
- {n:11, b:'brotacion', es:'Monitoreo de plagas y enfermedades', en:'Pest and disease monitoring', a:[['S','Recorridos para detectar cenicilla, mildiu y plagas','Scouting for powdery mildew, downy mildew and pests'],['T','Consulta del pronóstico del clima para decidir aplicaciones','Checking the weather forecast to time sprays']]},
- {n:12, b:'brotacion', es:'Control de cenicilla y mildiu', en:'Powdery and downy mildew control', a:[['U','Aplicación de azufre','Sulfur application'],['V','Aplicación de fungicidas de síntesis','Synthetic fungicide application']]},
- {n:13, b:'brotacion', es:'Control de malezas', en:'Weed control', a:[['W','Deshierbe manual o mecánico en la hilera','Manual or mechanical in-row weeding'],['X','Aplicación de herbicida','Herbicide application']]},
- {n:14, b:'floracion', es:'Floración', en:'Flowering', a:[['Y','Aplicación de giberelinas u otros reguladores','Gibberellin or other regulator application','mesa'],['Z','Protección contra heladas tardías','Protection against late frost']]},
- {n:15, b:'floracion', es:'Raleo', en:'Thinning', a:[['ZA','Raleo de racimos','Cluster thinning'],['ZB','Raleo de bayas o despunte del racimo','Berry thinning or cluster tipping','mesa']]},
- {n:16, b:'fruto', es:'Anillado', en:'Girdling', a:[['ZC','Anillado del tronco o de los brazos','Trunk or arm girdling','mesa']]},
- {n:17, b:'fruto', es:'Manejo del dosel', en:'Canopy management', a:[['ZD','Deshoje en la zona de racimos','Leaf removal in the cluster zone'],['ZE','Despunte o recorte de brotes','Shoot topping or hedging']]},
- {n:18, b:'fruto', es:'Riego durante el desarrollo del fruto', en:'Irrigation during berry development', a:[['ZF','Riego según la demanda de la planta','Irrigation by vine demand'],['ZG','Riego deficitario controlado','Regulated deficit irrigation','vino']]},
- {n:19, b:'fruto', es:'Control de plagas', en:'Pest control', a:[['ZH','Aplicación de insecticidas contra plagas','Insecticide application against pests'],['ZI','Control biológico o bioinsumos','Biological control or bio-inputs']]},
- {n:20, b:'fruto', es:'Protección de racimos', en:'Cluster protection', a:[['ZJ','Malla antigranizo o contra aves','Hail or bird netting']]},
- {n:21, b:'cosecha', es:'Seguimiento de la madurez', en:'Ripeness monitoring', a:[['ZK','Muestreo de grados Brix y acidez','Sampling of Brix and acidity'],['ZL','Revisión de color, sabor y semilla','Checking colour, taste and seed']]},
- {n:22, b:'cosecha', es:'Decisión de cosecha', en:'Harvest decision', a:[['ZM','Fecha de cosecha según el destino y el mercado','Harvest date by destination and market']]},
- {n:23, b:'cosecha', es:'Cosecha o vendimia', en:'Harvest', a:[['ZN','Corte manual de racimos','Hand cutting of clusters'],['ZO','Cosecha mecánica','Mechanical harvest','vino']]},
- {n:24, b:'cosecha', es:'Selección y empaque', en:'Sorting and packing', a:[['ZP','Selección, limpieza y empaque en campo','Sorting, cleaning and field packing','mesa'],['ZQ','Preenfriamiento y cadena de frío','Pre-cooling and cold chain','mesa']]},
- {n:25, b:'cosecha', es:'Transporte', en:'Transport', a:[['ZR','Transporte a bodega, empacadora o mercado','Transport to winery, packing house or market']]},
- {n:26, b:'poscosecha', es:'Transformación', en:'Processing', a:[['ZS','Elaboración de vino, pasa, jugo o vinagre en la unidad','Making wine, raisins, juice or vinegar on the farm']]},
- {n:27, b:'poscosecha', es:'Recuperación de reservas', en:'Reserve recovery', a:[['ZT','Riego y fertilización poscosecha','Post-harvest irrigation and fertilising']]},
- {n:28, b:'poscosecha', es:'Sanidad poscosecha', en:'Post-harvest plant health', a:[['ZU','Aplicación preventiva después de la cosecha','Preventive spray after harvest']]},
- {n:29, b:'poscosecha', es:'Venta', en:'Sales', a:[['ZV','Venta a empacadora, bodega o intermediario','Sale to packing house, winery or middleman'],['ZW','Venta directa, enoturismo o tienda propia','Direct sale, wine tourism or own shop']]},
- {n:30, b:'poscosecha', es:'Balance económico', en:'Economic balance', a:[['ZX','Registro de costos, ingresos y rendimiento del ciclo','Record of the cycle’s costs, income and yield']]},
- {n:31, b:'poscosecha', es:'Transmisión del saber', en:'Passing on knowledge', a:[['ZY','Enseñanza del oficio a la familia y a los jornaleros','Teaching the craft to family and workers'],['ZZ','Intercambio con otros viticultores y asociaciones','Exchange with other growers and associations']]}
+ {n:1, b:'establecimiento', es:'Elección del sitio y del material vegetal', en:'Choice of site and planting material', a:[['EA','Elección del sitio por su suelo, su agua y su clima','Choosing the site for its soil, water and climate'],['EB','Obtención de esquejes o plantas de un viñedo donante o un vivero','Obtaining cuttings or vines from a donor vineyard or nursery']]},
+ {n:2, b:'establecimiento', es:'Propagación de esquejes', en:'Propagating cuttings', a:[['EC','Corte y selección de esquejes sanos (largo, nudos y grosor)','Cutting and selecting healthy cuttings (length, nodes and thickness)'],['ED','Tratamiento con enraizador y desinfectante (p. ej., solución de cobre)','Rooting hormone and disinfectant treatment (e.g., copper solution)'],['EE','Enraizamiento en cámara, cama o vivero con riego frecuente','Rooting in a chamber, bed or nursery with frequent watering'],['EF','Revisión de las raíces antes de llevar a campo','Checking the roots before field planting']]},
+ {n:3, b:'establecimiento', es:'Preparación del terreno de plantación', en:'Preparing the planting site', a:[['EG','Trazo del marco de plantación y apertura de cepas u hoyos','Laying out the planting pattern and digging the planting holes'],['EH','Riego de las cepas antes de plantar','Watering the holes before planting']]},
+ {n:4, b:'establecimiento', es:'Plantación', en:'Planting', a:[['EI','Traslado del material cuidando que las raíces no se sequen','Moving the material without letting the roots dry out'],['EJ','Plantación de esquejes enraizados o plantas y riego de plantación','Planting rooted cuttings or vines and watering in'],['EK','Acolchado alrededor de la planta','Mulching around the vine']]},
+ {n:5, b:'establecimiento', es:'Cuidados de la planta joven', en:'Young-vine care', a:[['EL','Protección contra hormiga cortadora, animales domésticos y fauna','Protection against leaf-cutter ants, livestock and wildlife'],['EM','Tutoreo o alzado de la planta en soportes','Staking or lifting the vine onto supports'],['EN','Riego frecuente durante el primer año','Frequent watering during the first year']]},
+ {n:6, b:'establecimiento', es:'Formación de la planta', en:'Training the young vine', a:[['EO','Colocación de alambres de sostén para el follaje','Installing support wires for the foliage']]},
+ {n:7, b:'reposo', es:'Diagnóstico del viñedo', en:'Vineyard assessment', a:[['A','Inspección de cepas, brazos y estructura','Inspection of vines, arms and trellis'],['B','Registro de rendimiento y problemas del ciclo anterior','Record of last cycle’s yield and problems']]},
+ {n:8, b:'reposo', es:'Análisis de suelo y agua', en:'Soil and water analysis', a:[['C','Muestreo y análisis de suelo','Soil sampling and analysis'],['D','Análisis del agua de riego','Irrigation water analysis']]},
+ {n:9, b:'reposo', es:'Poda invernal', en:'Winter pruning', a:[['E','Poda de producción con tijera','Production pruning with shears'],['F','Elección de cargadores o pulgares según la variedad','Choice of canes or spurs by variety'],['G','Retiro, triturado o incorporación de los sarmientos','Removal, shredding or incorporation of prunings']]},
+ {n:10, b:'reposo', es:'Mantenimiento de la estructura', en:'Trellis maintenance', a:[['H','Revisión de postes, alambres y sistema de conducción','Check of posts, wires and training system'],['I','Reposición de plantas faltantes','Replanting of missing vines']]},
+ {n:11, b:'reposo', es:'Ruptura de la dormancia', en:'Breaking dormancy', a:[['J','Aplicación de cianamida hidrogenada donde faltan horas frío','Hydrogen cyanamide where chilling is insufficient','mesa']]},
+ {n:12, b:'reposo', es:'Manejo del suelo entre hileras', en:'Inter-row soil management', a:[['K','Rastreo o desvare entre hileras','Inter-row harrowing or mowing'],['L','Siembra o conservación de una cubierta vegetal','Sowing or keeping a cover crop'],['M','Aplicación de composta o estiércol','Compost or manure application']]},
+ {n:13, b:'brotacion', es:'Riego de brotación', en:'Budburst irrigation', a:[['N','Riego o fertirriego al inicio de la brotación','Irrigation or fertigation at budburst']]},
+ {n:14, b:'brotacion', es:'Desbrote', en:'Shoot thinning', a:[['O','Eliminación de brotes dobles, chupones y brotes del tronco','Removal of double shoots, suckers and trunk shoots']]},
+ {n:15, b:'brotacion', es:'Amarre y posicionamiento de brotes', en:'Tying and shoot positioning', a:[['P','Amarre o acomodo de brotes en los alambres','Tying or positioning shoots on the wires']]},
+ {n:16, b:'brotacion', es:'Nutrición', en:'Nutrition', a:[['Q','Fertilización al suelo o por fertirriego','Soil or fertigation fertilising'],['R','Fertilización foliar','Foliar fertilising']]},
+ {n:17, b:'brotacion', es:'Monitoreo de plagas y enfermedades', en:'Pest and disease monitoring', a:[['S','Recorridos para detectar cenicilla, mildiu y plagas','Scouting for powdery mildew, downy mildew and pests'],['T','Consulta del pronóstico del clima para decidir aplicaciones','Checking the weather forecast to time sprays']]},
+ {n:18, b:'brotacion', es:'Control de cenicilla y mildiu', en:'Powdery and downy mildew control', a:[['U','Aplicación de azufre','Sulfur application'],['V','Aplicación de fungicidas de síntesis','Synthetic fungicide application']]},
+ {n:19, b:'brotacion', es:'Control de malezas', en:'Weed control', a:[['W','Deshierbe manual o mecánico en la hilera','Manual or mechanical in-row weeding'],['X','Aplicación de herbicida','Herbicide application']]},
+ {n:20, b:'floracion', es:'Floración', en:'Flowering', a:[['Y','Aplicación de giberelinas u otros reguladores','Gibberellin or other regulator application','mesa'],['Z','Protección contra heladas tardías','Protection against late frost']]},
+ {n:21, b:'floracion', es:'Raleo', en:'Thinning', a:[['ZA','Raleo de racimos','Cluster thinning'],['ZB','Raleo de bayas o despunte del racimo','Berry thinning or cluster tipping','mesa']]},
+ {n:22, b:'fruto', es:'Anillado', en:'Girdling', a:[['ZC','Anillado del tronco o de los brazos','Trunk or arm girdling','mesa']]},
+ {n:23, b:'fruto', es:'Manejo del dosel', en:'Canopy management', a:[['ZD','Deshoje en la zona de racimos','Leaf removal in the cluster zone'],['ZE','Despunte o recorte de brotes','Shoot topping or hedging']]},
+ {n:24, b:'fruto', es:'Riego durante el desarrollo del fruto', en:'Irrigation during berry development', a:[['ZF','Riego según la demanda de la planta','Irrigation by vine demand'],['ZG','Riego deficitario controlado','Regulated deficit irrigation','vino']]},
+ {n:25, b:'fruto', es:'Control de plagas', en:'Pest control', a:[['ZH','Aplicación de insecticidas contra plagas','Insecticide application against pests'],['ZI','Control biológico o bioinsumos','Biological control or bio-inputs']]},
+ {n:26, b:'fruto', es:'Protección de racimos', en:'Cluster protection', a:[['ZJ','Malla antigranizo o contra aves','Hail or bird netting']]},
+ {n:27, b:'cosecha', es:'Seguimiento de la madurez', en:'Ripeness monitoring', a:[['ZK','Muestreo de grados Brix y acidez','Sampling of Brix and acidity'],['ZL','Revisión de color, sabor y semilla','Checking colour, taste and seed']]},
+ {n:28, b:'cosecha', es:'Decisión de cosecha', en:'Harvest decision', a:[['ZM','Fecha de cosecha según el destino y el mercado','Harvest date by destination and market']]},
+ {n:29, b:'cosecha', es:'Cosecha o vendimia', en:'Harvest', a:[['ZN','Corte manual de racimos','Hand cutting of clusters'],['ZO','Cosecha mecánica','Mechanical harvest','vino']]},
+ {n:30, b:'cosecha', es:'Selección y empaque', en:'Sorting and packing', a:[['ZP','Selección, limpieza y empaque en campo','Sorting, cleaning and field packing','mesa'],['ZQ','Preenfriamiento y cadena de frío','Pre-cooling and cold chain','mesa']]},
+ {n:31, b:'cosecha', es:'Transporte', en:'Transport', a:[['ZR','Transporte a bodega, empacadora o mercado','Transport to winery, packing house or market']]},
+ {n:32, b:'poscosecha', es:'Transformación', en:'Processing', a:[['ZS','Elaboración de vino, pasa, jugo o vinagre en la unidad','Making wine, raisins, juice or vinegar on the farm']]},
+ {n:33, b:'poscosecha', es:'Recuperación de reservas', en:'Reserve recovery', a:[['ZT','Riego y fertilización poscosecha','Post-harvest irrigation and fertilising']]},
+ {n:34, b:'poscosecha', es:'Sanidad poscosecha', en:'Post-harvest plant health', a:[['ZU','Aplicación preventiva después de la cosecha','Preventive spray after harvest']]},
+ {n:35, b:'poscosecha', es:'Venta', en:'Sales', a:[['ZV','Venta a empacadora, bodega o intermediario','Sale to packing house, winery or middleman'],['ZW','Venta directa, enoturismo o tienda propia','Direct sale, wine tourism or own shop']]},
+ {n:36, b:'poscosecha', es:'Balance económico', en:'Economic balance', a:[['ZX','Registro de costos, ingresos y rendimiento del ciclo','Record of the cycle’s costs, income and yield']]},
+ {n:37, b:'poscosecha', es:'Transmisión del saber', en:'Passing on knowledge', a:[['ZY','Enseñanza del oficio a la familia y a los jornaleros','Teaching the craft to family and workers'],['ZZ','Intercambio con otros viticultores y asociaciones','Exchange with other growers and associations']]}
 ];
 /* Datos del caso publicado del maíz: no aplican a la vid; se dejan vacíos para el código común */
 const CLUSTERS = [], GRUPOS = [], ACTORES = [], CUADRO1 = [];
@@ -1620,6 +1633,8 @@ const ELEM = [
   {id:'PM', cat:'actores', n:E('Viticultores (productores de uva)','Grape growers')},
   {id:'JOR', cat:'actores', n:E('Jornaleros y cuadrillas de poda y cosecha','Pruning and harvest crews')},
   {id:'FAM', cat:'actores', n:E('Familia y comunidad (transmisión entre generaciones)','Family and community (intergenerational transfer)')},
+  {id:'VIV', cat:'actores', n:E('Viveros y viñedos donantes de material vegetal','Nurseries and donor vineyards')},
+  {id:'EST', cat:'actores', n:E('Estudiantes y servicio social','Students and social service')},
   {id:'AT', cat:'actores', n:E('Asesores técnicos','Technical advisers')},
   {id:'PI', cat:'actores', n:E('Proveedores de insumos','Input suppliers')},
   {id:'ENO', cat:'actores', n:E('Enólogo o maestro de bodega','Winemaker or cellar master')},
@@ -1632,6 +1647,10 @@ const ELEM = [
   {id:'INIFAP', cat:'instituciones', n:E('INIFAP y centros de investigación','INIFAP and research centres')},
   {id:'UNI', cat:'instituciones', n:E('Universidades','Universities')},
   // insumos
+  {id:'ESQ', cat:'insumos', n:E('Esquejes o plantas de vid','Cuttings or vines')},
+  {id:'ENR', cat:'insumos', n:E('Enraizador y desinfectante (cobre)','Rooting hormone and disinfectant (copper)')},
+  {id:'ARENA', cat:'insumos', n:E('Arena de río o sustrato de enraizamiento','River sand or rooting medium')},
+  {id:'ACOL', cat:'insumos', n:E('Acolchado (material vegetal seco)','Mulch (dry plant material)')},
   {id:'AZUF', cat:'insumos', n:E('Azufre','Sulfur')},
   {id:'FUNG', cat:'insumos', n:E('Fungicidas de síntesis','Synthetic fungicides')},
   {id:'INSEC', cat:'insumos', n:E('Insecticidas','Insecticides')},
@@ -1646,6 +1665,9 @@ const ELEM = [
   {id:'COMB', cat:'insumos', n:E('Combustible de la maquinaria','Machinery fuel'), i:true},
   {id:'EMP', cat:'insumos', n:E('Material de empaque','Packing material')},
   // equipo e infraestructura
+  {id:'CAMARA', cat:'equipo', n:E('Cámara, cama o vivero de enraizamiento','Rooting chamber, bed or nursery')},
+  {id:'PROT', cat:'equipo', n:E('Protectores y cercos (mallas, costales, estacas)','Guards and fences (netting, sacks, stakes)')},
+  {id:'TUT', cat:'equipo', n:E('Tutores y soportes','Stakes and supports')},
   {id:'TIJ', cat:'equipo', n:E('Tijeras y herramientas de poda','Pruning shears and tools')},
   {id:'ESTR', cat:'equipo', n:E('Estructura de conducción (postes y alambres)','Training structure (posts and wires)')},
   {id:'GOT', cat:'equipo', n:E('Sistema de riego (goteo u otro)','Irrigation system (drip or other)')},
@@ -1665,6 +1687,7 @@ const ELEM = [
   {id:'ARV', cat:'naturales', n:E('Malezas (vegetación arvense)','Weeds (arable flora)')},
   {id:'PLAGA', cat:'naturales', n:E('Plagas y enfermedades (cenicilla, mildiu, pudriciones)','Pests and diseases (powdery and downy mildew, rots)')},
   {id:'CLIMA', cat:'naturales', n:E('Temperatura, horas frío y lluvia','Temperature, chilling and rainfall')},
+  {id:'HORM', cat:'naturales', n:E('Hormiga cortadora y animales que ramonean','Leaf-cutter ants and browsing animals')},
   {id:'FAUB', cat:'naturales', n:E('Fauna benéfica y polinizadores','Beneficial fauna and pollinators')},
   // financieros
   {id:'COSTOS', cat:'financieros', n:E('Costos de producción','Production costs')},
@@ -1694,6 +1717,12 @@ const ELEM = [
 ];
 /* Elementos que intervienen en cada actividad. Lectura de Ratio Viña del texto de cada actividad. */
 const ACT_EL = {
+  EA:'PM AT SUELO HUM CLIMA KTEC KAMB', EB:'PM VIV ESQ TRANS COSTOS',
+  EC:'PM JOR VIV ESQ TIJ KTEC', ED:'PM ENR ESQ KTEC', EE:'PM CAMARA ARENA AGUAR ESQ KTEC KTAC', EF:'PM AT ESQ KTEC',
+  EG:'PM JOR SUELO KTEC', EH:'PM AGUAR HUM SUELO',
+  EI:'PM TRANS ESQ AGUAR', EJ:'PM JOR EST ESQ AGUAR SUELO', EK:'PM ACOL SUELO HUM',
+  EL:'PM PROT HORM KTAC KAMB', EM:'PM TUT KTAC', EN:'PM AGUAR GOT HUM',
+  EO:'PM ESTR JOR KTEC',
   A:'PM ESTR KTAC PLAGA', B:'PM COSTOS INGR KTEC', C:'PM AT LAB SUELO KTEC', D:'PM AT LAB AGUAR KTEC',
   E:'PM JOR TIJ KTAC', F:'PM JOR TIJ KTAC KTEC', G:'PM RAST SUELO RASTRA COMB',
   H:'PM JOR ESTR', I:'PM PI COSTOS',
@@ -1714,7 +1743,7 @@ const ACT_EL = {
 /* Vínculos estructurales (no ligados a una actividad). Lectura de Ratio Viña: en tu proyecto entran solo si tocan un elemento de tus actividades. */
 const LAZOS = [
   ['AT','INIFAP'],['AT','UNI'],['IAC','INIFAP'],['IAC','UNI'],['CESV','SENASICA'],['PM','ASOC'],['ENO','BOD'],
-  ['RAST','SUELO'],['CUB','SUELO'],['INGR','COSTOS'],['CRED','PROG']
+  ['RAST','SUELO'],['CUB','SUELO'],['VIV','ESQ'],['CAMARA','ARENA'],['ACOL','SUELO'],['INGR','COSTOS'],['CRED','PROG']
 ];
 /* Perfil de impacto de cada elemento sobre [suelo, agua, atmósfera, vegetación, fauna], escala −2…+2.
    Lectura de Ratio Viña con su justificación; editable por actividad en el Bloque 6. */
@@ -1731,6 +1760,7 @@ const IMPACTO = {
   AZUF:{v:[-1,0,0,0,0], r:E('Aplicaciones repetidas acidifican el suelo; es un fungicida mineral de baja toxicidad.','Repeated use acidifies soil; it is a low-toxicity mineral fungicide.')},
   RAST:{v:[2,1,1,0,1], r:E('Sarmientos incorporados: materia orgánica, estructura y carbono en el suelo.','Incorporated prunings: organic matter, structure and soil carbon.')},
   CUB:{v:[2,1,1,1,1], r:E('La cubierta vegetal protege de la erosión, retiene agua y da refugio a la fauna benéfica.','Cover crops prevent erosion, retain water and shelter beneficial fauna.')},
+  ACOL:{v:[1,1,0,0,0], r:E('El acolchado conserva la humedad y protege el suelo (Mojica-Zárate et al., 2026).','Mulch keeps moisture in and protects the soil (Mojica-Zárate et al., 2026).')},
   COMPO:{v:[2,0,0,0,1], r:E('La composta aporta materia orgánica y vida al suelo.','Compost adds organic matter and soil life.')},
   BIOI:{v:[0,0,0,0,1], r:E('El control biológico sustituye plaguicidas de síntesis.','Biological control replaces synthetic pesticides.')},
   FAUB:{v:[0,0,0,0,1], r:E('Conservar la fauna benéfica favorece el control natural de plagas.','Conserving beneficial fauna supports natural pest control.')},
@@ -1752,6 +1782,7 @@ const ODS_COMP = {2:[0,3], 6:[1], 13:[2], 15:[0,3,4]};
    Sonora a la vendimia de Baja California o del Bajío).
    ===================================================================== */
 const EVENTOS = {
+  establece:  {n:E('Propagación y plantación','Propagation and planting'), col:'#3f7a6a'},
   poda:       {n:E('Poda y estructura','Pruning and trellis'), col:'#7d5a2c'},
   suelo:      {n:E('Suelo y cubierta','Soil and cover'), col:'#9a6a3a'},
   brotacion:  {n:E('Brotación','Budburst'), col:'#5f8f3e'},
@@ -1768,9 +1799,8 @@ const EVENTOS = {
 };
 const EV_PRINCIPALES = ['poda','brotacion','floracion','envero','cosecha'];
 /* Tipo de evento de cada paso del cuestionario de la vid (lectura de Ratio Viña) */
-const EV_PASO = {1:'poda',2:'suelo',3:'poda',4:'poda',5:'brotacion',6:'suelo',7:'riego',8:'dosel',9:'dosel',10:'fertiliza',11:'sanidad',12:'sanidad',13:'suelo',
-  14:'floracion',15:'floracion',16:'dosel',17:'dosel',18:'riego',19:'sanidad',20:'sanidad',21:'envero',22:'envero',23:'cosecha',24:'transforma',25:'cosecha',
-  26:'transforma',27:'riego',28:'sanidad',29:'venta',30:'venta',31:'otro'};
+const EV_PASO = {1:'establece',2:'establece',3:'suelo',4:'establece',5:'establece',6:'poda',
+  7:'poda',8:'suelo',9:'poda',10:'poda',11:'brotacion',12:'suelo',13:'riego',14:'dosel',15:'dosel',16:'fertiliza',17:'sanidad',18:'sanidad',19:'suelo',20:'floracion',21:'floracion',22:'dosel',23:'dosel',24:'riego',25:'sanidad',26:'sanidad',27:'envero',28:'envero',29:'cosecha',30:'transforma',31:'cosecha',32:'transforma',33:'riego',34:'sanidad',35:'venta',36:'venta',37:'otro'};
 const diaFecha = (d)=>{ const t=new Date(2026,0,1+Math.round(((d%365)+365)%365)); return t.toLocaleDateString(LOC(),{day:'numeric',month:'short'}); };
 const isoDeDia = (d)=>{ const t=new Date(Date.UTC(2026,0,1+Math.round(((d%365)+365)%365))); return t.toISOString().slice(0,10); };
 const diaDeIso = (s)=>{ const t=new Date(s+'T00:00:00Z'); return Math.round((t-Date.UTC(t.getUTCFullYear(),0,1))/864e5); };
@@ -1912,7 +1942,7 @@ function tarjetaNuevoCultivo(tipo){
     <div class="grid g2"><label class="f"><span>${T('Nombre común','Common name')}</span><input id="catN" maxlength="60" placeholder="${tipo==='especie'?T('p. ej., Codorniz, Tilapia, Borrego cimarrón','e.g., Quail, Tilapia, Bighorn sheep'):T('p. ej., Pitahaya, Vainilla, Amaranto','e.g., Dragon fruit, Vanilla, Amaranth')}"></label>
     <label class="f"><span>${T('Nombre científico (opcional)','Scientific name (optional)')}</span><input id="catS" maxlength="80" placeholder="${tipo==='especie'?'Oreochromis niloticus':'Vanilla planifolia'}"></label></div>
     <button type="button" class="btn sm" id="catAdd" data-tipo-nuevo="${tipo}">${T('Agregar y elegir','Add and select')}</button>
-    <p class="nota">${T('Quedará como «Por documentar»: el manejo, los elementos y los precios se capturan desde cero, con la ventana de ejemplo de Calpan como guía.','It will be marked “To document”: management, elements and prices are entered from scratch, with the Calpan example window as a guide.')}</p></details>`; }
+    <p class="nota">${T('Quedará como «Por documentar»: el manejo, los elementos y los precios se capturan desde cero, con la guía de llenado de cada bloque.','It will be marked “To document”: management, elements and prices are entered from scratch, with each block’s filling guide.')}</p></details>`; }
 
 /* =====================================================================
    Catálogos de la vid (Bloque 1 · Vid). Listas orientativas de lo que se
@@ -1963,6 +1993,10 @@ const TIPOS_PODA = [
   {id:'segunda', n:E('Segunda poda del año (dos cosechas)','Second pruning of the year (two crops)')},
   {id:'renovacion', n:E('Poda de renovación o rejuvenecimiento','Renewal pruning')}
 ];
+/* Fecha de plantación con perilla: día del año (0–364) + año → AAAA-MM-DD */
+const isoDiaAno = (a, d)=>{ const t=new Date(Date.UTC(a,0,1+Math.min(364,Math.max(0,Math.round(d))))); return t.toISOString().slice(0,10); };
+const diaDelAno = (iso)=>{ const t=new Date(iso+'T00:00:00Z'); return isNaN(t)?0:Math.round((t-Date.UTC(t.getUTCFullYear(),0,1))/864e5); };
+const fechaLarga = (iso)=>{ const t=new Date(iso+'T00:00:00'); return isNaN(t)?iso:t.toLocaleDateString(LOC(),{day:'numeric',month:'long',year:'numeric'}); };
 /* Edad del viñedo: con la fecha de plantación, si existe; si no, la que escribió el usuario */
 function edadVinedo(){ if(S.vidPlant){ const d=new Date(S.vidPlant+'T00:00:00'); if(!isNaN(d)) return Math.max(0,(Date.now()-d)/(365.25*864e5)); } return S.vidEdad!==''&&S.vidEdad!=null&&isFinite(+S.vidEdad)?+S.vidEdad:null; }
 
@@ -2089,7 +2123,7 @@ function abrirEjemplo(id){ const g=GUIA[id](); let d=$('#dlgEjemplo');
    <h3>${T('Qué se captura','What you enter')}</h3>${g.que}
    <h3>${T('De dónde sacar el dato','Where to find the data')}</h3><p>${g.donde}</p>
    <h3>${T('Cómo llenarlo','How to fill it in')}</h3>${g.pasos}
-   <div class="row" style="gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="this.closest('dialog').close()">${T('Cerrar y volver a mis datos','Close and return to my data')}</button></div></div>`;
+   <div class="row" style="gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" onclick="this.closest('dialog').close()">${T('Cerrar y volver a mis datos','Close and return to my data')}</button><button class="btn ghost" data-entrar-ej>${T('Ver el caso publicado de Mata de Zarza','See the published Mata de Zarza case')}</button></div></div>`;
   d.showModal(); }
 document.addEventListener('click',ev=>{ const t=ev.target.closest('[data-ejemplo]'); if(t) abrirEjemplo(t.dataset.ejemplo); });
 function ponerEjemplo(id, el){ const h=ejemploCalpan(id); if(!h) return; const cab=$('.bhead',el); if(cab) cab.insertAdjacentHTML('afterend',h); else el.insertAdjacentHTML('beforeend',h); }
@@ -2098,10 +2132,88 @@ function ponerEjemplo(id, el){ const h=ejemploCalpan(id); if(!h) return; const c
 <script>
 "use strict";
 /* =====================================================================
+   CASO PUBLICADO DE REFERENCIA: Mata de Zarza, Puente Nacional, Veracruz.
+   Fuente: Mojica-Zárate HT, Barrera-Guzmán LÁ, Alejo-Bello S, Partida-Sedas JG,
+   Rojas-Reyes JO, Díaz-José O, Tinoco-Rueda JÁ, Torres-Palacios C. 2026.
+   Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz.
+   Colección Guías Prácticas para Productores, Tomo 5. UACh. ISBN 978-607-12-0712-8.
+   Uva de mesa (Perlette, Flame Seedless y Summer Royal) introducida en enero de
+   2025 con 3,600 esquejes de Hermosillo, Sonora, en 19 parcelas cooperantes;
+   periodo documentado: enero de 2025 a febrero de 2026. Aquí se documenta una
+   parcela cooperante de 1 ha con el marco de plantación de la guía
+   (1.40 m × 3.0 m → 10,000 / 4.2 = 2,381 plantas).
+   Solo se usa en el modo ejemplo: nunca se guarda ni se mezcla con el proyecto.
+   Clima: la guía no publica temperaturas y no hay estación del SMN en la
+   localidad; se usan las medias mensuales 1991–2020 del reanálisis ERA5
+   (Hersbach et al., 2020) en la celda de 19.25° N, 96.75° O ajustada a 467 m,
+   descargadas de Open-Meteo. Es un dato de reanálisis, no de estación.
+   Lo que la guía no dice queda sin responder; las respuestas que dio el autor
+   de la guía por comunicación personal (2026) se marcan así en las notas.
+   ===================================================================== */
+const MZ_CLIMA = {   // ERA5 1991–2020, medias mensuales (°C)
+  tmax:[23.7,25.4,27.5,29.8,30.7,30.1,29.8,29.8,29.0,27.9,25.9,24.3],
+  tmin:[14.7,15.5,17.1,19.3,20.9,21.5,20.5,20.8,21.2,19.7,17.2,15.3],
+  tmed:[19.1,20.3,22.2,24.5,25.7,25.6,25.1,25.1,24.8,23.7,21.4,19.7]};
+function estadoMataZarza(){ const s=estadoInicial(), G='Mojica-Zárate et al., 2026';
+  Object.assign(s, {cultivo:'uva', sistema:'riego_tec', tipoUP:5, superficie:1,
+    vidDestino:'mesa', vidVar:'Flame Seedless, Perlette y Summer Royal', vidPie:'Pie franco (sin portainjerto)', vidCond:'espaldera', vidDens:2381,
+    vidPlant:'2025-02-24', vidMat:'barbado',
+    podas:[{f:'2025-12-30', t:'formacion', nota:T('Desde la base del tallo, para engrosar los tallos del segundo año (fecha aproximada: fines de diciembre; '+G+')','From the base of the stem, to thicken second-year shoots (approximate date: late December; '+G+')')}],
+    clima:{tmax:MZ_CLIMA.tmax.slice(), tmin:MZ_CLIMA.tmin.slice(), tmed:MZ_CLIMA.tmed.slice(), fuente:T('ERA5 (Hersbach et al., 2020), medias 1991–2020, celda 19.25° N 96.75° O ajustada a 467 m; vía Open-Meteo. Reanálisis, no estación.','ERA5 (Hersbach et al., 2020), 1991–2020 means, cell 19.25° N 96.75° W adjusted to 467 m; via Open-Meteo. Reanalysis, not a station.')},
+    edo:'30', mun:'134', loc:'0018',
+    proyecto:{nombre:T('Caso publicado: parcela cooperante de 1 ha, Mata de Zarza, Veracruz','Published case: 1 ha cooperating plot, Mata de Zarza, Veracruz'), productor:G, fecha:'2026-02-28',
+      notas:T('Establecimiento de uva de mesa en clima cálido subhúmedo, de enero de 2025 a febrero de 2026. La plantación es de febrero de 2025; el día exacto es aproximado (inicio del enraizamiento en los primeros 10 días de enero + 45 días en la cámara).','Table-grape establishment in a warm sub-humid climate, January 2025 to February 2026. Planting was in February 2025; the exact day is approximate (rooting started in the first 10 days of January + 45 days in the chamber).')},
+    reqEst:{0:'ok'},
+    reqInn:[{t:T('Arena de río limpia y cernida para la cámara de enraizamiento (no arena de construcción)','Clean, sieved river sand for the rooting chamber (not building sand)'), b:'establecimiento', d:'', fuente:G},
+            {t:T('Agua para riego constante durante los primeros tres meses después de plantar','Water for constant irrigation during the first three months after planting'), b:'establecimiento', d:'', fuente:G}],
+    revisado:{elementos:true}, formulado:true});
+  const si=(n,cods)=>{ const m=s.manejo[n]=s.manejo[n]||{resp:{}, inn:[], imp:{}}; cods.forEach(c=>m.resp[c]='si'); return m; };
+  const no=(n,cods)=>{ const m=s.manejo[n]=s.manejo[n]||{resp:{}, inn:[], imp:{}}; cods.forEach(c=>m.resp[c]='no'); return m; };
+  // Etapa de establecimiento (pasos 1–6): todo lo describe la guía
+  si(1,['EA','EB']); si(2,['EC','ED','EE','EF']);
+  s.manejo[1].inn.push({t:T('Elección de la localidad por profesores-investigadores del CARSH-UACh, con investigación documental y recorridos de campo','Choice of the locality by CARSH-UACh lecturer-researchers, through desk research and field visits'), el:['PM','IAC','UNI','CLIMA','SUELO','KTEC'], nota:G});
+  s.manejo[1].inn.push({t:T('Esquejes de viñedos de Hermosillo, Sonora, cortados por una cuadrilla de 22 cortadores y traídos a Veracruz','Cuttings from Hermosillo, Sonora vineyards, cut by a crew of 22 and brought to Veracruz'), el:['PM','VIV','JOR','ESQ','TRANS','COSTOS'], nota:G}); si(3,['EG','EH']); si(4,['EI','EJ','EK']); si(5,['EL','EM','EN']); si(6,['EO']);
+  s.manejo[2].inn.push({t:T('Cámara de enraizamiento excavada en el suelo, sin plástico, con arena de río: 45 días, humedad ≥ 95 % y 24–28 °C','Rooting chamber dug in the ground, without plastic, with river sand: 45 days, humidity ≥ 95 % and 24–28 °C'), el:['PM','CAMARA','ARENA','AGUAR','ESQ','KTEC','KTAC'], nota:G});
+  s.manejo[4].inn.push({t:T('Dos o tres esquejes por cepa según la cantidad de raíz, para asegurar al menos una planta','Two or three cuttings per hole depending on root amount, to secure at least one vine'), el:['PM','ESQ','KTAC'], nota:G});
+  s.manejo[4].inn.push({t:T('Acolchado con material vegetal seco solarizado 48 horas','Mulch of dry plant material solarised for 48 hours'), el:['PM','ACOL','SUELO','HUM','KAMB'], nota:G});
+  s.manejo[5].inn.push({t:T('Protección de cada planta con costales de red sostenidos por estacas','Protecting each vine with net sacks held by stakes'), el:['PM','PROT','HORM','KTAC'], nota:G});
+  // Ciclo anual (pasos 7–37): primer año, sin floración ni cosecha todavía
+  si(9,['E']); no(9,['F']);                        // poda invernal (de formación, desde la base): comunicación personal
+  si(10,['H']);                                    // alambres de sostén
+  si(12,['M']);                                    // gallinaza o pollinaza
+  si(13,['N']);                                    // riego
+  si(15,['P']);                                    // alzado y amarre a soportes y alambres
+  si(16,['Q']);                                    // fosfato diamónico 18-46-0, 40 g por planta
+  s.manejo[16].inn.push({t:T('Aplicación de microorganismos de montaña al suelo','Applying mountain microorganisms to the soil'), el:['PM','BIOI','SUELO','KTAC'], nota:T('Comunicación personal del autor de la guía (2026)','Personal communication from the guide’s author (2026)')});
+  si(19,['W']);                                    // deshierbe con desbrozadora en la hilera (com. pers.)
+  no(20,['Y','Z']); no(21,['ZA','ZB']); no(22,['ZC']); no(26,['ZJ']);
+  si(24,['ZF']); no(24,['ZG']);
+  si(25,['ZI']);                                   // bioinsumos: microorganismos de montaña (com. pers.)
+  no(27,['ZK','ZL']); no(28,['ZM']); no(29,['ZN','ZO']); no(30,['ZP','ZQ']); no(31,['ZR']); no(32,['ZS']); no(33,['ZT']); no(34,['ZU']); no(35,['ZV','ZW']);
+  si(36,['ZX']);                                   // bitácoras de campo y costos (Tabla 2)
+  si(37,['ZY','ZZ']);
+  s.manejo[37].inn.push({t:T('Plataforma tecnológica con productores cooperantes, estudiantes y profesores de la UACh que sistematiza lo aprendido (estudio de caso)','Technology platform with cooperating farmers, UACh students and lecturers that systematises what is learnt (case study)'), el:['PM','EST','UNI','IAC','KTEC','KTAC'], nota:G});                              // estudiantes y productores aprenden; intercambio con viticultores de Sonora
+  // Fechas (día del año, 0 = 1 de enero)
+  s.fechas={1:{ini:0,fin:9,ev:'establece'}, 2:{ini:9,fin:54,ev:'establece'}, 3:{ini:0,fin:58,ev:'suelo'}, 4:{ini:54,fin:58,ev:'establece'}, 5:{ini:54,fin:144,ev:'riego'}, 9:{ini:355,fin:364,ev:'poda'}};
+  // Riesgos que documenta la guía (lectura de Ratio Viña sobre su texto; el productor los ajusta)
+  s.riesgo={hormiga:{p:4,i:3}, fauna:{p:3,i:3}, material:{p:3,i:3}, agua:{p:4,i:4}, arcilla:{p:3,i:3}, nuevo:{p:4,i:3}, adopcion:{p:4,i:4}, frio:{p:4,i:3}, helada:{off:true}};
+  s.precio={ESQ:{p:17, u:T('esqueje','cutting')}, TRANS:{p:6.1, u:T('esqueje','cutting')}, JOR:{p:400, u:T('jornal','day')}, ENR:{p:150, u:T('lote','batch')}};
+  return s; }
+
+/* ---------- Modo ejemplo: el caso publicado de Mata de Zarza ---------- */
+function entrarEjemplo(){ if(EJ) return; S_USUARIO=S; const b=S.bloque; S=estadoMataZarza(); S.bloque=b==='inicio'?'tablero':b; EJ=true; document.documentElement.classList.add('modo-ejemplo'); render(); scrollTo(0,0);
+  toast(T('Modo ejemplo: tus datos no cambian','Example mode: your data stay unchanged')); }
+function salirEjemplo(){ if(!EJ) return; const b=S.bloque; S=S_USUARIO; S_USUARIO=null; EJ=false; S.bloque=b; document.documentElement.classList.remove('modo-ejemplo'); render(); scrollTo(0,0);
+  toast(T('De vuelta a tu proyecto','Back to your project')); }
+
+</script>
+<script>
+"use strict";
+/* =====================================================================
    Llenado por el usuario, modo ejemplo y bloques sin datos.
    - avance(id): cuántos campos de un bloque llenó la persona (nunca cuenta
      sugerencias ni el ejemplo publicado) → Pendiente / En proceso / Completo.
-   - Modo ejemplo: carga el caso publicado de Calpan (Díaz-José et al., 2026)
+   - Modo ejemplo: carga el caso publicado de Mata de Zarza (Mojica-Zárate et al., 2026; 18b_matazarza.js)
      en un estado aparte que no se guarda; una franja fija lo anuncia y el
      proyecto del usuario queda intacto.
    - Los bloques de resultados sin actividades muestran qué falta en vez de
@@ -2126,7 +2238,7 @@ function avance(id){ let h=0, t=0, nota='';
   return {h, t, f, estado, nota, txt:{pend:T('Pendiente','Pending'), proc:T('En proceso','In progress'), ok:T('Completo','Complete')}[estado]}; }
 function avanceTotal(){ const l=BLOQUES_LLENAR.map(avance).filter(Boolean); return l.reduce((s,a)=>s+a.f,0)/l.length; }
 /* Franja de avance bajo el título de cada bloque que se llena */
-function franjaAvance(id){ if(EJ) return `<div class="avance ej"><b>${T('Ejemplo publicado','Published example')}</b> · ${T('estos datos son del caso de Calpan, Puebla; no son tuyos','these data are from the Calpan, Puebla case; they are not yours')}</div>`;
+function franjaAvance(id){ if(EJ) return `<div class="avance ej"><b>${T('Ejemplo publicado','Published example')}</b> · ${T('estos datos son del caso de Mata de Zarza, Veracruz; no son tuyos','these data are from the Mata de Zarza, Veracruz case; they are not yours')}</div>`;
   const a=avance(id); if(!a) return '';
   return `<div class="avance est-${a.estado}"><div class="av-barra"><i style="width:${100*a.f}%"></i></div><span><b>${a.h} ${T('de','of')} ${a.t}</b> ${T('llenados por ti','filled in by you')} · ${a.txt}${a.nota?' · '+esc(a.nota):''}</span></div>`; }
 
@@ -2139,10 +2251,10 @@ function estadoPrueba(){ const s=estadoInicial();
   PASOS.forEach(p=>{ s.manejo[p.n]={resp:Object.fromEntries(p.a.map(a=>[a[0],'si'])), inn:[], imp:{}}; });
   return s; }
 const estadoCalpan = estadoPrueba;   // nombre que usa el código común
-function entrarEjemplo(){} function salirEjemplo(){}
+/* entrarEjemplo y salirEjemplo: 18b_matazarza.js (caso publicado de Mata de Zarza) */
 function franjaEjemplo(){ let f=$('#franjaEj'); if(!EJ){ if(f) f.remove(); return; }
   if(!f){ f=document.createElement('div'); f.id='franjaEj'; f.className='franja-ej no-print'; document.body.prepend(f); }
-  f.innerHTML=`<span>⚑ <b>${T('Estás viendo el EJEMPLO publicado de Calpan, Puebla.','You are viewing the published EXAMPLE of Calpan, Puebla.')}</b> ${T('Tus datos no han cambiado y nada de esto se guarda.','Your data have not changed and nothing here is saved.')}</span><button class="btn sm" data-salir-ej>${T('Salir del ejemplo','Leave the example')} ✕</button>`; }
+  f.innerHTML=`<span>⚑ <b>${T('Estás viendo el EJEMPLO publicado de Mata de Zarza, Veracruz.','You are viewing the published EXAMPLE of Mata de Zarza, Veracruz.')}</b> ${T('Tus datos no han cambiado y nada de esto se guarda.','Your data have not changed and nothing here is saved.')}</span><button class="btn sm" data-salir-ej>${T('Salir del ejemplo','Leave the example')} ✕</button>`; }
 document.addEventListener('click',ev=>{ if(ev.target.closest('[data-entrar-ej]')){ const d=ev.target.closest('dialog'); if(d) d.close(); entrarEjemplo(); } if(ev.target.closest('[data-salir-ej]')) salirEjemplo(); });
 
 /* ---------- Bloques de resultados sin datos ---------- */
@@ -2150,7 +2262,7 @@ function renderVacio(el, id){
   el.innerHTML=`${cabecera(id,'')}<div class="card vacio-res"><h2>${T('Todavía no hay datos tuyos para calcular este bloque','There are no data of yours to compute this block yet')}</h2>
    <p>${T('Los resultados se calculan solo con lo que tú llenas. Para empezar, responde en el Bloque 5 qué actividades practicas o agrega las tuyas.','Results are computed only from what you fill in. To start, answer in Block 5 which activities you practise or add your own.')}</p>
    <div class="vacio-lista">${BLOQUES_LLENAR.map(k=>{ const a=avance(k), b=B(k); return `<button class="vacio-item est-${a.estado}" data-ir="${k}"><span class="n">${b.n}</span><b>${esc(tx(b.corto))}</b><small>${a.h} / ${a.t} · ${a.txt}</small></button>`; }).join('')}</div>
-   <div class="row" style="gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" data-ir="manejo">${T('Ir al Bloque 5 · Manejo','Go to Block 5 · Management')} →</button></div></div>${siguiente(id)}`; }
+   <div class="row" style="gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" data-ir="manejo">${T('Ir al Bloque 5 · Manejo','Go to Block 5 · Management')} →</button><button class="btn ghost" data-entrar-ej>${T('Ver cómo se ve con el caso publicado (Mata de Zarza)','See how it looks with the published case (Mata de Zarza)')}</button></div></div>${siguiente(id)}`; }
 
 /* ---------- Bloque sin campos propios: «ya lo revisé» ---------- */
 function ponerRevisado(id, el){ if(id!=='elementos'||EJ) return; const ok=(S.revisado||{}).elementos, nx=$('.next',el);
@@ -2415,10 +2527,10 @@ function construirRed(sinPM){
   const acts=actividades(), part=participacion(); const val={}; todosElem().forEach(e=>val[e.id]=valorEl(e.id,part).v);
   const W=new Map(), key=(a,b)=>a<b?a+'|'+b:b+'|'+a, add=(a,b,w,act)=>{ if(a===b) return; const k=key(a,b); const o=W.get(k)||{a:a<b?a:b, b:a<b?b:a, w:0, n:0, acts:[]}; o.w+=w; o.n++; if(act) o.acts.push(act); W.set(k,o); };
   acts.forEach(x=>{ const el=[...new Set(x.el)].filter(id=>val[id]!=null && !(sinPM&&id==='PM')); for(let i=0;i<el.length;i++) for(let j=i+1;j<el.length;j++) add(el[i],el[j],Math.sqrt((val[el[i]]||0.05)*(val[el[j]]||0.05)),x.cod); });
-  // Lazos estructurales documentados en Calpan: en el ejemplo publicado entran todos (red validada);
-  // en tu proyecto, solo los que tocan un elemento de tus actividades, para no traer actores de otra localidad.
+  // Lazos estructurales del catálogo:
+  // solo los que tocan un elemento de las actividades (también en el modo ejemplo), para no traer actores ajenos.
   const enActs=new Set(acts.flatMap(x=>x.el));
-  if(conStack() && acts.length) LAZOS.forEach(([a,b])=>{ if(sinPM&&(a==='PM'||b==='PM')) return; if(!EJ && !enActs.has(a) && !enActs.has(b)) return; add(a,b,Math.sqrt((val[a]||0.05)*(val[b]||0.05)),null); });
+  if(conStack() && acts.length) LAZOS.forEach(([a,b])=>{ if(sinPM&&(a==='PM'||b==='PM')) return; if(!enActs.has(a) && !enActs.has(b)) return;   /* también en el modo ejemplo: el caso de Mata de Zarza es un viñedo real */ add(a,b,Math.sqrt((val[a]||0.05)*(val[b]||0.05)),null); });
   const usados=new Set(); W.forEach(o=>{ usados.add(o.a); usados.add(o.b); });
   const nodos=todosElem().filter(e=>usados.has(e.id)).map(e=>({id:e.id, nombre:tx(e.n), cat:e.cat, col:CATS[e.cat].col, val:val[e.id], part:part[e.id]||0}));
   const aristas=[...W.values()];
@@ -3085,7 +3197,7 @@ const REGEN_IND = [
    auto:(acts)=>{ if(!acts.length) return SIN_SUG(); const n=acts.filter(a=>_tiene(a,['ARADO','SUBS','RASTRA'])&&!/decisi|determinaci|evaluaci|decision/i.test(a.n.es||'')).length; return {s:n===0?4:n===1?3:n===2?2:n<=4?1:0, m:T(`${n} actividades de labranza practicadas`,`${n} tillage activities practised`)}; }},
   {id:'cobertura', pr:E('Suelo cubierto','Soil cover'), n:E('Suelo cubierto todo el año','Soil covered all year'), col:'#7a9a3a',
    q:E('¿Cuántos meses del año el suelo está cubierto por el cultivo, rastrojo, acolchado o abono verde?','How many months a year is the soil covered by crop, stubble, mulch or green manure?'),
-   auto:(acts)=>{ if(!acts.length) return SIN_SUG(); const r=acts.some(a=>_tiene(a,['RAST','CUB'])&&a.v&&a.v[0]>0); return {s:r?2:1, m:r?T('hay cubierta vegetal o sarmientos sobre el suelo; ajusta según los meses de cobertura','there is cover crop or prunings on the soil; adjust to months of cover'):T('sin dato de cobertura: ajústalo','no cover data: adjust it')}; }},
+   auto:(acts)=>{ if(!acts.length) return SIN_SUG(); const r=acts.some(a=>_tiene(a,['RAST','CUB','ACOL'])&&a.v&&a.v[0]>0); return {s:r?2:1, m:r?T('hay cubierta vegetal o sarmientos sobre el suelo; ajusta según los meses de cobertura','there is cover crop or prunings on the soil; adjust to months of cover'):T('sin dato de cobertura: ajústalo','no cover data: adjust it')}; }},
   {id:'diversidad', pr:E('Diversidad','Diversity'), n:E('Diversidad de especies','Species diversity'), col:'#2f8f6a',
    q:E('¿Cuántas especies se cultivan o crían juntas en la unidad (incluidos árboles y animales)?','How many species are grown or raised together in the unit (including trees and animals)?'),
    auto:()=>{ if(!S.sistema && S.cultivo!=='granja') return SIN_SUG(T('elige el sistema de producción (Bloque 1) o mueve la perilla','choose the production system (Block 1) or move the knob')); const k=S.cultivo==='granja'?Math.max(1,S.granja.length):(DIV_SIS[S.sistema]||1); return {s:k<=1?0:k===2?1:k===3?2:k<=5?3:4, m:T(`${k} especies según el sistema elegido`,`${k} species according to the chosen system`)}; }},
@@ -3120,25 +3232,34 @@ function regeneracion(){ const acts=sostenibilidad().acts, R=S.regen||{};
 /* ---------------- RIESGOS ---------------- */
 const CAT_R = {clima:{n:E('Climáticos','Climatic'),col:'#2d78b0'}, bio:{n:E('Biológicos','Biological'),col:'#5f8f3e'}, mercado:{n:E('Mercado','Market'),col:'#c98b21'}, social:{n:E('Sociales','Social'),col:'#b05434'}, inst:{n:E('Institucionales','Institutional'),col:'#5a6b8a'}, recursos:{n:E('Recursos naturales','Natural resources'),col:'#7a4f9a'}};
 const RIESGOS = [
-  {id:'sequia', cat:'clima', n:E('Sequía o lluvias tardías','Drought or late rains'), el:['HUM','CLIMA','ENSO']},
+  {id:'sequia', cat:'clima', n:E('Sequía o lluvias tardías','Drought or late rains'), el:['HUM','CLIMA','SEQ']},
   {id:'helada', cat:'clima', n:E('Helada','Frost'), el:['CLIMA']},
   {id:'granizo', cat:'clima', n:E('Granizo','Hail'), el:['CLIMA']},
-  {id:'lluvia', cat:'clima', n:E('Lluvias intensas o inundación','Heavy rain or flooding'), el:['CICL','CLIMA']},
+  {id:'lluvia', cat:'clima', n:E('Lluvias intensas o inundación','Heavy rain or flooding'), el:['CLIMA','HUM']},
   {id:'calor', cat:'clima', n:E('Ola de calor','Heatwave'), el:['CLIMA']},
-  {id:'ciclon', cat:'clima', n:E('Ciclones y huracanes','Cyclones and hurricanes'), el:['CICL','MJO']},
+  {id:'frio', cat:'clima', n:E('Falta de frío invernal: dormancia incompleta y brotación irregular','Lack of winter chill: incomplete dormancy and uneven budburst'), el:['CLIMA'], f:'Kok, 2014'},
+  {id:'ciclon', cat:'clima', n:E('Ciclones y huracanes','Cyclones and hurricanes'), el:['CLIMA']},
   {id:'plagas', cat:'bio', n:E('Plagas','Pests'), el:['PLAGA']},
-  {id:'enferm', cat:'bio', n:E('Enfermedades','Diseases'), el:['PLAGA']},
+  {id:'enferm', cat:'bio', n:E('Enfermedades de hongos (cenicilla, mildiu, pudriciones del racimo)','Fungal diseases (powdery mildew, downy mildew, bunch rots)'), el:['PLAGA'], f:'Keller, 2020'},
+  {id:'pierce', cat:'bio', n:E('Enfermedad de Pierce (Xylella fastidiosa) y sus insectos vectores','Pierce’s disease (Xylella fastidiosa) and its insect vectors'), el:['PLAGA','CESV'], f:'Keller, 2020'},
+  {id:'hormiga', cat:'bio', n:E('Hormiga cortadora en la planta joven','Leaf-cutter ants on young vines'), el:['HORM','PROT'], f:'Mojica-Zárate et al., 2026'},
+  {id:'fauna', cat:'bio', n:E('Daño por animales domésticos y fauna silvestre','Damage by livestock and wildlife'), el:['HORM','PROT'], f:'Mojica-Zárate et al., 2026'},
+  {id:'material', cat:'bio', n:E('Material vegetal enfermo o mal enraizado (pérdida de raíces al sacarlo y trasladarlo)','Diseased or poorly rooted planting material (root loss when lifting and moving it)'), el:['ESQ','VIV'], f:'Mojica-Zárate et al., 2026'},
+  {id:'deriva', cat:'bio', n:E('Deriva de herbicidas de parcelas vecinas (la vid es muy sensible)','Herbicide drift from neighbouring plots (grapevines are very sensitive)'), el:['HERB'], f:E('Lectura de Ratio Viña','Ratio Viña reading')},
   {id:'malezas', cat:'bio', n:E('Malezas resistentes o invasoras','Resistant or invasive weeds'), el:['ARV','HERB']},
-  {id:'precio', cat:'mercado', n:E('Caída del precio de venta','Fall in sale price'), el:['PRECIO','COMP','GRANO']},
+  {id:'precio', cat:'mercado', n:E('Caída del precio de venta','Fall in sale price'), el:['PRECIO','COMP','UVAM']},
   {id:'insumos', cat:'mercado', n:E('Alza de insumos y servicios','Rise in input and service costs'), el:['COSTOS','FERTG','PI']},
+  {id:'nuevo', cat:'mercado', n:E('Cultivo nuevo en la región: mercado y canales de venta por construir','New crop in the region: market and sales channels still to be built'), el:['COMP','PRECIO'], f:'Mojica-Zárate et al., 2026'},
   {id:'venta', cat:'mercado', n:E('Intermediarismo o falta de comprador','Middlemen or no buyer'), el:['COMP','TRANS']},
   {id:'manoobra', cat:'social', n:E('Falta de mano de obra y de relevo generacional','Labour shortage and no generational succession'), el:['PM','FAM']},
+  {id:'adopcion', cat:'social', n:E('Abandono del cultivo por falta de experiencia o de resultados en los primeros años','Abandoning the crop for lack of experience or early results'), el:['PM','KTEC'], f:'Mojica-Zárate et al., 2026'},
   {id:'saber', cat:'social', n:E('Pérdida del saber local','Loss of local knowledge'), el:['KTAC','KCUL','FAM']},
   {id:'insegur', cat:'social', n:E('Inseguridad o robo','Insecurity or theft'), el:[]},
-  {id:'apoyos', cat:'inst', n:E('Retiro de programas y apoyos','Withdrawal of programmes and support'), el:['AT','SDR']},
+  {id:'apoyos', cat:'inst', n:E('Retiro de programas y apoyos','Withdrawal of programmes and support'), el:['AT','PROG']},
   {id:'tierra', cat:'inst', n:E('Conflictos de tenencia de la tierra','Land tenure conflicts'), el:[]},
   {id:'erosion', cat:'recursos', n:E('Erosión y pérdida de fertilidad','Erosion and fertility loss'), el:['SUELO']},
-  {id:'agua', cat:'recursos', n:E('Escasez de agua','Water scarcity'), el:['HUM']}
+  {id:'agua', cat:'recursos', n:E('Escasez de agua','Water scarcity'), el:['HUM'], f:'Mojica-Zárate et al., 2026'},
+  {id:'arcilla', cat:'recursos', n:E('Suelos arcillosos o mal drenados: encharcamiento y asfixia de raíces','Clay or poorly drained soils: waterlogging and root asphyxia'), el:['SUELO','HUM'], f:'Mojica-Zárate et al., 2026'}
 ];
 const NIVEL_R = r=> r<=4?{n:E('Bajo','Low'),c:'#3f9b5f'} : r<=9?{n:E('Medio','Medium'),c:'#d9b13a'} : r<=15?{n:E('Alto','High'),c:'#e0803a'} : {n:E('Muy alto','Very high'),c:'#c43a2f'};
 function sugerenciaRiesgo(id, acts, P){ const e=P.esc.ten; let p=3, i=3, m=T('moderado: ajústalo a tu localidad','moderate: adjust it to your locality');
@@ -3225,7 +3346,7 @@ function renderRegeneracion(el){ const rg=regeneracion();
 /* ---------------- Bloque 7 · Riesgos ---------------- */
 function renderRiesgos(el){ const rs=riesgos(), cls=CLASE_RG(rs.idx), filtro=renderRiesgos.cat||'todos';
   const fila=x=>`<tr class="${x.off?'r-off':''} ${x.conf?'r-conf':'r-sinconf'}"><td><input type="checkbox" data-roff="${x.id}" ${x.off?'':'checked'} aria-label="${T('Aplica','Applies')}"></td>
-    <td><span class="punto" style="background:${CAT_R[x.cat].col}"></span>${esc(tx(x.n))} ${x.off?'':x.conf?`<span class="estado-p ok">✓ ${T('confirmado','confirmed')}</span>`:`<span class="estado-p">${T('sugerido, sin confirmar','suggested, not confirmed')}</span> <button type="button" class="btn sm" data-rok="${x.id}">✓ ${T('Aceptar','Accept')}</button>`}<br><small class="muted">${T('Sugerido','Suggested')}: P ${x.sug.p} · I ${x.sug.i} — ${esc(x.sug.m)}</small></td>
+    <td><span class="punto" style="background:${CAT_R[x.cat].col}"></span>${esc(tx(x.n))}${x.f?` <small class="muted">(${esc(tx(x.f))})</small>`:''} ${x.off?'':x.conf?`<span class="estado-p ok">✓ ${T('confirmado','confirmed')}</span>`:`<span class="estado-p">${T('sugerido, sin confirmar','suggested, not confirmed')}</span> <button type="button" class="btn sm" data-rok="${x.id}">✓ ${T('Aceptar','Accept')}</button>`}<br><small class="muted">${T('Sugerido','Suggested')}: P ${x.sug.p} · I ${x.sug.i} — ${esc(x.sug.m)}</small></td>
     <td class="perilla-c"><input type="range" min="1" max="5" step="1" value="${Math.round(x.p)}" data-rp="${x.id}" ${x.off?'disabled':''}><small>${Math.round(x.p)} · ${esc(tx(NIVEL15[Math.round(x.p)]))}</small></td>
     <td class="perilla-c"><input type="range" min="1" max="5" step="1" value="${x.i}" data-ri="${x.id}" ${x.off?'disabled':''}><small>${x.i} · ${esc(tx(NIVEL15[x.i]))}</small></td>
     <td class="perilla-c"><input type="range" min="0" max="3" step="1" value="${x.ctl}" data-rc="${x.id}" ${x.off?'disabled':''}><small>${[T('ninguno','none'),T('bajo','low'),T('medio','medium'),T('alto','high')][x.ctl]}</small></td>
@@ -3411,6 +3532,7 @@ function atlasLeerArchivo(nombre, texto){ const d=JSON.parse(texto);
   if(d && d.atlas && Array.isArray(d.localidades)) return d.localidades.filter(x=>x&&x.resp);
   if(d && d.estado && d.estado.manejo){ let st=d.estado; if(st.cultivo && st.cultivo!=='uva') throw new Error(T('no es un proyecto de vid','not a grapevine project'));
     if(!st.formato) st=migrarV2(Object.assign({}, st, {cultivo:'uva'}));
+    st=migrarPasos(st);
     return [resumenProyecto(st, nombre, false)]; }
   throw new Error(T('formato no reconocido','unrecognised format')); }
 function atlasAgregar(lista){ const L=atlasLeer(); let n=0, rep=0; lista.forEach(x=>{ const i=L.findIndex(y=>y.id===x.id); if(i>=0){ L[i]=x; rep++; } else { L.push(x); n++; } }); atlasEscribir(L); return {n, rep}; }
@@ -3586,7 +3708,7 @@ function renderInicio(el){
       <h1>${T('Ratio <em>Viña</em>: el saber local de la vid como <span class="acc">sistema vivo</span>','Ratio <em>Viña</em>: local grapevine knowledge as a <span class="acc">living system</span>')}</h1>
       <p class="big">${T('De la uva de mesa del desierto de Sonora a los vinos de Baja California, Coahuila, Querétaro y el Bajío, cada viñedo de México se cultiva con un saber propio: podas, riegos, variedades, personas e instituciones que interactúan y se adaptan a su clima. Ratio Viña documenta ese saber como un <b>sistema complejo adaptativo</b>, viñedo por viñedo, con un mismo cuestionario, mide su <b>regeneración</b> y su <b>riesgo</b>, y junta los resultados en un <b>atlas nacional</b>.','From the table grapes of the Sonoran desert to the wines of Baja California, Coahuila, Querétaro and the Bajío, every Mexican vineyard is grown with its own knowledge: pruning, irrigation, varieties, people and institutions that interact and adapt to their climate. Ratio Viña documents that knowledge as a <b>complex adaptive system</b>, vineyard by vineyard, with the same questionnaire, measures its <b>regeneration</b> and <b>risk</b>, and combines the results into a <b>national atlas</b>.')}</p>
       <div class="ctas"><button class="btn lg" data-ir="cultivo">${T('Documentar mi viñedo →','Document my vineyard →')}</button>
-        <button class="btn ghost lg" data-ir="atlas">${T('Atlas nacional','National atlas')}</button><button class="btn link" data-ir="teoria">${T('Leer la teoría','Read the theory')}</button></div>
+        <button class="btn ghost lg" data-entrar-ej>${T('Ver el caso publicado (Mata de Zarza)','See the published case (Mata de Zarza)')}</button><button class="btn ghost lg" data-ir="atlas">${T('Atlas nacional','National atlas')}</button><button class="btn link" data-ir="teoria">${T('Leer la teoría','Read the theory')}</button><a class="btn link" href="instructivo-productor.html" target="_blank" rel="noopener">${T('Instructivo del Productor','Producer Guide')} ↗</a><a class="btn link" href="instructivo-cientifico.html" target="_blank" rel="noopener">${T('Instructivo del Científico','Scientist Guide')} ↗</a></div>
       <div class="chips"><span class="chip">${T('Todo el cálculo ocurre en tu navegador','All calculations run in your browser')}</span><span class="chip">${T('Sin cookies ni recursos de terceros','No cookies or third-party resources')}</span><span class="chip">${T('Español e inglés','Spanish and English')}</span><span class="chip">${T('Libre (MIT)','Free (MIT)')}</span></div></div>
     <div class="art" aria-hidden="true" style="--anim:running"><div class="stage"></div>${telarVivo()}
       <svg class="big float" style="left:2%;top:2%;width:22%;height:30%"><use href="#c-uva"/></svg>
@@ -3636,7 +3758,10 @@ function renderCultivo(el){ const c=cultivoSel(), dest=VID_DESTINOS.find(d=>d.id
       <label class="f"><span>${T('Plantas por hectárea','Vines per hectare')}</span><input type="number" id="vDens" min="0" step="10" value="${esc(S.vidDens)}" placeholder="${T('p. ej., 2,200','e.g., 2,200')}"></label></div></div></div>
   <div class="card aparece"><h3>${T('Historial del viñedo','Vineyard history')}</h3>
     <p class="nota">${T('La historia de cada viñedo ayuda a entender su presente: cuándo y con qué se plantó, y cuándo y cómo se ha podado. Anota cada poda con su fecha; en climas sin invierno marcado puede haber dos podas y dos cosechas al año.','Each vineyard’s history explains its present: when and with what it was planted, and when and how it has been pruned. Record each pruning with its date; in climates without a marked winter there may be two prunings and two crops a year.')}</p>
-    <div class="grid g3"><label class="f"><span>${T('Fecha de plantación','Planting date')}</span><input type="date" id="vPlant" value="${esc(S.vidPlant)}"></label>
+    <div class="grid g3"><div class="f plantacion" style="grid-column:1/-1"><span>${T('Fecha de plantación','Planting date')}: <b id="vPlantTxt">${S.vidPlant?fechaLarga(S.vidPlant):T('sin capturar','not entered')}</b></span>
+      <div class="row" style="gap:10px;align-items:center"><input type="range" min="0" max="364" id="vPlantD" value="${S.vidPlant?diaDelAno(S.vidPlant):45}" class="${S.vidPlant?'':'fantasma'}" style="flex:1" aria-label="${T('Día del año de la plantación','Day of the year of planting')}">
+      <input type="number" id="vPlantA" min="1900" max="2100" step="1" style="width:90px" value="${S.vidPlant?S.vidPlant.slice(0,4):''}" placeholder="${T('año','year')}" aria-label="${T('Año de plantación','Planting year')}"></div>
+      <small class="muted">${T('Mueve la perilla por los 365 días del año y escribe el año.','Move the knob through the 365 days of the year and type the year.')}</small></div>
      <label class="f"><span>${T('Material de plantación','Planting material')}</span><select id="vMat" class="${S.vidMat?'':'vacio'}"><option value="" ${S.vidMat?'':'selected'} disabled>${T('— Elige el material —','— Choose the material —')}</option>${VID_MATERIAL.map(x=>`<option value="${x.id}" ${S.vidMat===x.id?'selected':''}>${esc(tx(x.n))}</option>`).join('')}</select></label>
      <div class="kpi" style="margin:0"><div class="l">${T('Edad','Age')}</div><div class="v">${edadVinedo()==null?'—':fmt(edadVinedo(),1)}</div><div class="s">${T('años','years')}</div></div></div>
     <h4 style="margin:12px 0 6px">${T('Registro de podas','Pruning record')} <span class="muted" style="font-weight:400">(${(S.podas||[]).length})</span></h4>
@@ -3667,7 +3792,9 @@ function renderCultivo(el){ const c=cultivoSel(), dest=VID_DESTINOS.find(d=>d.id
   $('#vPie',el).onchange=e=>{ S.vidPie=e.target.value.trim(); guardar(); render(); };
   $('#vCond',el).onchange=e=>{ S.vidCond=e.target.value; guardar(); render(); };
   if($('#vEdad',el)) $('#vEdad',el).onchange=e=>{ S.vidEdad=e.target.value; guardar(); render(); };
-  $('#vPlant',el).onchange=e=>{ S.vidPlant=e.target.value; guardar(); render(); };
+  const pD=$('#vPlantD',el), pA=$('#vPlantA',el), fijaPlant=()=>{ const a=+pA.value||new Date().getFullYear(); S.vidPlant=isoDiaAno(a,+pD.value); guardar(); render(); };
+  pD.oninput=()=>{ $('#vPlantTxt',el).textContent=fechaLarga(isoDiaAno(+pA.value||new Date().getFullYear(),+pD.value)); }; pD.onchange=fijaPlant;
+  pA.onchange=()=>{ if(pA.value) fijaPlant(); };
   $('#vMat',el).onchange=e=>{ S.vidMat=e.target.value; guardar(); render(); };
   $('#pzAdd',el).onclick=()=>{ const f=$('#pzF',el).value; if(!f) return toast(T('Pon la fecha de la poda','Set the pruning date')); S.podas=S.podas||[]; S.podas.push({f, t:$('#pzT',el).value, nota:$('#pzN',el).value.trim()}); guardar(); render(); toast(T('Poda registrada','Pruning recorded')); };
   $$('[data-qpoda]',el).forEach(b=>b.onclick=()=>{ S.podas.splice(+b.dataset.qpoda,1); guardar(); render(); });
@@ -3726,13 +3853,14 @@ function renderRegionVacia(el){
   enlazarRegion(el); }
 
 /* ================= BLOQUE 3 · REQUERIMIENTOS ================= */
-const REQ_TRAD = [   // lectura de Ratio Viña a partir de Winkler et al. (1974) y Keller (2020); pasos del cuestionario base
-  {b:'reposo', t:E('Poda adecuada a la variedad y estructura de conducción en buen estado','Pruning suited to the variety and a sound training structure'), pasos:[1,3,4]},
-  {b:'reposo', t:E('Reposo invernal suficiente o un manejo que rompa la dormancia donde faltan horas frío','Enough winter rest, or management to break dormancy where chilling is short'), pasos:[5]},
-  {b:'brotacion', t:E('Suelo con buen drenaje y agua de riego suficiente y oportuna, con su análisis','Well-drained soil and enough, timely irrigation water, with its analysis'), pasos:[2,7,18,27]},
-  {b:'brotacion', t:E('Sanidad: prevención de cenicilla, mildiu y pudriciones con monitoreo','Plant health: preventing powdery mildew, downy mildew and rots by scouting'), pasos:[11,12,19,28]},
-  {b:'fruto', t:E('Equilibrio entre follaje y racimos: desbrote, raleo y manejo del dosel','Balance between foliage and clusters: shoot thinning, thinning and canopy management'), pasos:[8,9,15,17]},
-  {b:'cosecha', t:E('Cosecha en la madurez que pide el destino y salida al mercado sin pérdidas','Harvest at the ripeness the destination requires and getting to market without losses'), pasos:[21,22,23,24,25]}
+const REQ_TRAD = [   // lectura de Ratio Viña a partir de Winkler et al. (1974), Keller (2020) y Mojica-Zárate et al. (2026); pasos del cuestionario base
+  {b:'establecimiento', t:E('Material vegetal sano y bien enraizado, plantado en suelo húmedo y protegido durante el primer año','Healthy, well-rooted planting material, planted in moist soil and protected during the first year'), pasos:[1,2,3,4,5]},
+  {b:'reposo', t:E('Poda adecuada a la variedad y estructura de conducción en buen estado','Pruning suited to the variety and a sound training structure'), pasos:[7,9,10]},
+  {b:'reposo', t:E('Reposo invernal suficiente o un manejo que rompa la dormancia donde faltan horas frío','Enough winter rest, or management to break dormancy where chilling is short'), pasos:[11]},
+  {b:'brotacion', t:E('Suelo con buen drenaje y agua de riego suficiente y oportuna, con su análisis','Well-drained soil and enough, timely irrigation water, with its analysis'), pasos:[8,13,24,33]},
+  {b:'brotacion', t:E('Sanidad: prevención de cenicilla, mildiu y pudriciones con monitoreo','Plant health: preventing powdery mildew, downy mildew and rots by scouting'), pasos:[17,18,25,34]},
+  {b:'fruto', t:E('Equilibrio entre follaje y racimos: desbrote, raleo y manejo del dosel','Balance between foliage and clusters: shoot thinning, thinning and canopy management'), pasos:[14,15,21,23]},
+  {b:'cosecha', t:E('Cosecha en la madurez que pide el destino y salida al mercado sin pérdidas','Harvest at the ripeness the destination requires and getting to market without losses'), pasos:[27,28,29,30,31]}
 ];
 function renderReq(el){ S.reqEst=S.reqEst||{};
   el.innerHTML = `${cabecera('requerimientos',T('Lo que el viñedo necesita para prosperar en cada etapa del año. Los seis requerimientos base son una lectura de Ratio Viña de la viticultura general; abajo puedes registrar los que tu localidad ha innovado.','What the vineyard needs to thrive at each stage of the year. The six baseline requirements are a Ratio Viña reading of general viticulture; below you can record those your locality has innovated.'))}
@@ -4094,7 +4222,7 @@ function renderInforme(el){ const R=construirRed(), st=estadisticaRed(R), sos=so
   $('#iOds',el).onclick=()=>descargar(slug()+'_ods.csv', csv([['ODS','cumplimiento_%','evidencias']].concat(ODS.map(([o])=>[o, cum[o].v!=null?cum[o].v.toFixed(1):'', cum[o].fuentes.join(' ')]))), 'text/csv');
   $('#iGuar',el).onclick=()=>descargar(slug()+'.vina.json', JSON.stringify({app:'Ratio Viña', version:CONFIG.version, estado:S},null,1), 'application/json');
   $('#iCarg',el).onclick=()=>$('#fProy',el).click();
-  $('#fProy',el).onchange=ev=>{ const f=ev.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ const d=JSON.parse(r.result); if(d.estado&&d.estado.manejo){ if(d.estado.cultivo && d.estado.cultivo!=='uva'){ toast(T('Ese archivo no es de vid','That file is not a grapevine project')); return; } const viejo=!d.estado.formato; S=viejo?migrarV2(d.estado):Object.assign(estadoInicial(), d.estado); guardar(); render(); toast(T('Proyecto abierto','Project opened')); } }catch(e){ toast(T('Archivo no válido','Invalid file')); } }; r.readAsText(f); };
+  $('#fProy',el).onchange=ev=>{ const f=ev.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ const d=JSON.parse(r.result); if(d.estado&&d.estado.manejo){ if(d.estado.cultivo && d.estado.cultivo!=='uva'){ toast(T('Ese archivo no es de vid','That file is not a grapevine project')); return; } const viejo=!d.estado.formato; S=viejo?migrarV2(d.estado):migrarPasos(Object.assign(estadoInicial(), d.estado)); guardar(); render(); toast(T('Proyecto abierto','Project opened')); } }catch(e){ toast(T('Archivo no válido','Invalid file')); } }; r.readAsText(f); };
   $('#iReset',el).onclick=()=>{ if(confirm(T('¿Borrar los datos de este proyecto en este navegador?','Delete this project’s data in this browser?'))){ S=estadoInicial(); guardar(); render(); } }; }
 
 /* ================= VALIDACIÓN ================= */
@@ -4115,9 +4243,9 @@ function renderValidacion(el){ const v=correrValidacion(); const ok=(x,t=1e-3)=>
   const n2o=100*(IPCC.EF1+IPCC.gasf*IPCC.EF4+IPCC.leach*IPCC.EF5)*44/28*IPCC.gwpN2O;
   el.innerHTML = `${cabecera('validacion',T('Una herramienta científica tiene que demostrar que calcula bien. Aquí se comprueba, en tu propio navegador, que el cuestionario base está completo, que los índices de clima dan el cálculo de control y que el motor de redes da los mismos números que una biblioteca de referencia independiente.','A scientific tool must prove it computes correctly. Here, in your own browser, it is checked that the baseline questionnaire is complete, that climate indices match the control calculation and that the network engine gives the same numbers as an independent reference library.'))}
   <div class="card"><h3>1 · ${T('Integridad del cuestionario base','Baseline questionnaire integrity')}</h3><table class="tbl"><thead><tr><th>${T('Comprobación','Check')}</th><th class="r">${T('Esperado','Expected')}</th><th class="r">Ratio Viña</th><th></th></tr></thead><tbody>
-   <tr><td>${T('Pasos del cuestionario','Questionnaire steps')}</td><td class="r">31</td><td class="r">${PASOS.length}</td><td>${PASOS.length===31?'✓':'✗'}</td></tr>
-   <tr><td>${T('Actividades','Activities')}</td><td class="r">52</td><td class="r">${nAct}</td><td>${nAct===52?'✓':'✗'}</td></tr>
-   <tr><td>${T('Etapas BBCH con pasos','BBCH stages with steps')}</td><td class="r">6</td><td class="r">${new Set(PASOS.map(p=>p.b)).size}</td><td>${PASOS.every(p=>B5.some(b=>b.id===p.b))?'✓':'✗'}</td></tr>
+   <tr><td>${T('Pasos del cuestionario','Questionnaire steps')}</td><td class="r">37</td><td class="r">${PASOS.length}</td><td>${PASOS.length===37?'✓':'✗'}</td></tr>
+   <tr><td>${T('Actividades','Activities')}</td><td class="r">67</td><td class="r">${nAct}</td><td>${nAct===67?'✓':'✗'}</td></tr>
+   <tr><td>${T('Etapas BBCH con pasos','BBCH stages with steps')}</td><td class="r">7</td><td class="r">${new Set(PASOS.map(p=>p.b)).size}</td><td>${PASOS.every(p=>B5.some(b=>b.id===p.b))?'✓':'✗'}</td></tr>
    <tr><td>${T('Actividades vinculadas a elementos','Activities linked to elements')}</td><td class="r">${nAct}</td><td class="r">${nAct-sinEl.length}</td><td>${sinEl.length?'✗ '+sinEl.join(','):'✓'}</td></tr>
    <tr><td>${T('Elementos citados que existen en el catálogo','Cited elements present in the catalogue')}</td><td class="r">${elCit.length}</td><td class="r">${elCit.filter(id=>ELEM.some(e=>e.id===id)).length}</td><td>${elCit.every(id=>ELEM.some(e=>e.id===id))?'✓':'✗'}</td></tr></tbody></table>
    <p class="nota">${T('No existe todavía un Stack publicado de la vid: el cuestionario es una lectura de Ratio Viña ordenada por etapas BBCH (Lorenz et al., 1995). Esta prueba comprueba que esté completo y bien ligado.','There is no published grapevine Stack yet: the questionnaire is a Ratio Viña reading ordered by BBCH stages (Lorenz et al., 1995). This test checks that it is complete and well linked.')}</p>
@@ -4133,15 +4261,16 @@ function renderValidacion(el){ const v=correrValidacion(); const ok=(x,t=1e-3)=>
      <tr><td>${T('Diámetro','Diameter')} (4)</td><td class="r">${ok(v.diam)}</td></tr><tr><td>${T('Densidad','Density')} (0.4)</td><td class="r">${ok(v.dens)}</td></tr>
      <tr><td>${T('Red ponderada: intermediación con distancia 1/w','Weighted network: betweenness with 1/w distance')}</td><td class="r">${ok(v.pbet)}</td></tr><tr><td>${T('Red ponderada: fuerza','Weighted network: strength')}</td><td class="r">${ok(v.pfuerza)}</td></tr></tbody></table>
      <p class="nota">${T('Tolerancia: 0.001 (redondeo de las referencias a cuatro decimales).','Tolerance: 0.001 (references rounded to four decimals).')}</p></div></div></div>
-  <div class="card"><h3>3 · ${T('El mismo motor con una red real publicada (maíz criollo de Calpan, en Ratio Telar)','The same engine on a real published network (Calpan landrace maize, in Ratio Telar)')}</h3>
-   <p>${T('Ratio Viña usa el motor de redes de Ratio Telar sin cambios. Con él, la red del caso publicado del maíz (60 elementos y 158 vínculos, sin el nodo omnipresente de productores) se recalculó con NetworkX 3.7 mediante el script <code>pruebas/verificar_red.py</code>.','The case network (60 elements and 158 links with structural values, without the omnipresent farmer node) was exported from the app and recomputed with NetworkX 3.7 using the repository script <code>pruebas/verificar_red.py</code>.')}</p>
-   <table class="tbl"><thead><tr><th>${T('Métrica','Metric')}</th><th class="r">Ratio Viña</th><th class="r">NetworkX</th><th></th></tr></thead><tbody>
-    <tr><td>${T('Intermediación ponderada (60 nodos), diferencia máxima','Weighted betweenness (60 nodes), max difference')}</td><td class="r" colspan="2">0.0</td><td>✓</td></tr>
-    <tr><td>${T('Modularidad Q de la partición de Ratio Viña','Modularity Q of the Ratio Viña partition')}</td><td class="r">0.4496</td><td class="r">0.4496</td><td>✓</td></tr>
-    <tr><td>${T('Agrupamiento medio','Mean clustering')}</td><td class="r">0.5252</td><td class="r">0.5252</td><td>✓</td></tr>
-    <tr><td>${T('Camino medio','Mean path')}</td><td class="r">2.9017</td><td class="r">2.9017</td><td>✓</td></tr>
-    <tr><td>${T('Q de Louvain (7 comunidades en Ratio Viña; 5 en NetworkX, semilla 1)','Louvain Q (7 communities in Ratio Viña; 5 in NetworkX, seed 1)')}</td><td class="r">0.4496</td><td class="r">0.4422</td><td>✓</td></tr></tbody></table>
-   <p class="nota">${T('Las siete comunidades son coherentes con el campo: asesoría técnica y sanidad; insumos comprados y costos; maquinaria, suelo y humedad; memoria campesina (familia, semilla criolla, saber tácito y cultural, luna); mercado; clima; y academia e instituciones.','The seven communities make field sense: technical advice and plant health; purchased inputs and costs; machinery, soil and moisture; farmer memory (family, landrace seed, tacit and cultural knowledge, moon); market; climate; and academia and institutions.')}</p></div>
+  <div class="card"><h3>3 · ${T('El mismo motor con un viñedo real: el caso publicado de Mata de Zarza','The same engine on a real vineyard: the published Mata de Zarza case')}</h3>
+   <p>${T('La red del caso publicado de Mata de Zarza (Mojica-Zárate et al., 2026) se exportó desde el modo ejemplo y se recalculó con NetworkX 3.7 y SciPy 1.18 mediante el script <code>pruebas/verificar_matazarza.py</code>: 41 elementos y 136 vínculos sin el nodo omnipresente de viticultores, y 42 y 175 con él.','The published Mata de Zarza case network (Mojica-Zárate et al., 2026) was exported from example mode and recomputed with NetworkX 3.7 and SciPy 1.18 using the script <code>pruebas/verificar_matazarza.py</code>: 41 elements and 136 links without the omnipresent grower node, and 42 and 175 with it.')}</p>
+   <table class="tbl"><thead><tr><th>${T('Métrica','Metric')}</th><th class="r">Ratio Viña</th><th class="r">${T('Referencia','Reference')}</th><th></th></tr></thead><tbody>
+    <tr><td>${T('Intermediación ponderada (41 nodos), diferencia máxima','Weighted betweenness (41 nodes), max difference')}</td><td class="r" colspan="2">0.0</td><td>✓</td></tr>
+    <tr><td>${T('Modularidad Q de la partición de Ratio Viña (4 comunidades)','Modularity Q of the Ratio Viña partition (4 communities)')}</td><td class="r">0.1940</td><td class="r">0.1940</td><td>✓</td></tr>
+    <tr><td>${T('Agrupamiento medio','Mean clustering')}</td><td class="r">0.6761</td><td class="r">0.6761</td><td>✓</td></tr>
+    <tr><td>${T('Camino medio','Mean path')}</td><td class="r">2.1329</td><td class="r">2.1329</td><td>✓</td></tr>
+    <tr><td>${T('Cladograma por enlace simple: correlación cofenética (actores; actores e instituciones; todos) frente a SciPy','Single-linkage cladogram: cophenetic correlation (actors; actors and institutions; all) against SciPy')}</td><td class="r">0.9646 · 0.9199 · 0.9750</td><td class="r">0.9646 · 0.9199 · 0.9750</td><td>✓</td></tr>
+    <tr><td>${T('Q de Louvain (4 comunidades en Ratio Viña; 4 en NetworkX, semilla 1)','Louvain Q (4 communities in Ratio Viña; 4 in NetworkX, seed 1)')}</td><td class="r">0.1940</td><td class="r">0.2024</td><td>≈</td></tr></tbody></table>
+   <p class="nota">${T('Las métricas coinciden exactamente. El Louvain aleatorizado de NetworkX encuentra aquí una partición con Q algo mayor (0.2024 frente a 0.1940): Louvain es un método heurístico y ninguna de las dos particiones es necesariamente la óptima.','Metrics match exactly. NetworkX’s randomised Louvain finds a partition with slightly higher Q here (0.2024 versus 0.1940): Louvain is a heuristic and neither partition is necessarily optimal.')}</p></div>
   <div class="card"><h3>4 · ${T('Huella de carbono: cálculo de control','Carbon footprint: control calculation')}</h3>
    <p>${T('100 kg de N aplicados','100 kg N applied')}: N₂O = 100 × (0.010 + 0.11 × 0.010 + 0.24 × 0.011) × 44/28 = ${fmt(100*(IPCC.EF1+IPCC.gasf*IPCC.EF4+IPCC.leach*IPCC.EF5)*44/28,3)} kg; × 273 = <b>${fmt(n2o,1)} kg CO₂e</b>. ${T('100 L de diésel','100 L diesel')}: <b>${fmt(100*IPCC.diesel,0)} kg CO₂</b>. ${T('100 kg de urea','100 kg urea')}: 100 × 0.20 × 44/12 = <b>${fmt(100*IPCC.ureaC*44/12,1)} kg CO₂</b>.</p>
    <p class="nota">IPCC (2006, ${T('vol. 4, cap. 11','vol. 4, ch. 11')}; 2019 ${T('refinamiento','refinement')}); Forster et al. (2021).</p></div>
@@ -4176,6 +4305,8 @@ const REF_EXTRA = [
  'Lorenz DH, Eichhorn KW, Bleiholder H, Klose R, Meier U, Weber E. 1995. Growth stages of the grapevine: phenological growth stages of the grapevine (Vitis vinifera L. ssp. vinifera). Codes and descriptions according to the extended BBCH scale. Australian Journal of Grape and Wine Research 1(2): 100–103.',
  'Winkler AJ, Cook JA, Kliewer WM, Lider LA. 1974. General viticulture, 2.ª ed. University of California Press, Berkeley.',
  'Keller M. 2020. The science of grapevines, 3.ª ed. Academic Press, Londres.',
+ 'Mojica-Zárate HT, Barrera-Guzmán LÁ, Alejo-Bello S, Partida-Sedas JG, Rojas-Reyes JO, Díaz-José O, Tinoco-Rueda JÁ, Torres-Palacios C. 2026. Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz. Colección Guías Prácticas para Productores, Tomo 5. Universidad Autónoma Chapingo, Texcoco. ISBN 978-607-12-0712-8. https://sidicyt.chapingo.mx/repositorio/2026/guias-2026-005.pdf',
+ 'Kok D. 2014. A review on grape growing in tropical regions. Turkish Journal of Agricultural and Natural Sciences 1 (Özel Sayı 1).',
  'Díaz-José O, Mojica-Zárate HT, Díaz-José J, Vilaboa-Arróniz J. 2026. El conocimiento agrícola local: el stack del maíz criollo en Calpan, Puebla. Agricultura, Sociedad y Desarrollo 23(3). https://doi.org/10.22231/asyd.v23i3.1822',
  'Godet M, Durance P. 2007. Prospectiva estratégica: problemas y métodos. Cuadernos de LIPSOR 20. LIPSOR, París.',
  'IPCC. 2018. Summary for Policymakers. En: Global Warming of 1.5 °C. An IPCC Special Report. Cambridge University Press.',

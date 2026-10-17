@@ -37,6 +37,7 @@ function atlasLeerArchivo(nombre, texto){ const d=JSON.parse(texto);
   if(d && d.atlas && Array.isArray(d.localidades)) return d.localidades.filter(x=>x&&x.resp);
   if(d && d.estado && d.estado.manejo){ let st=d.estado; if(st.cultivo && st.cultivo!=='uva') throw new Error(T('no es un proyecto de vid','not a grapevine project'));
     if(!st.formato) st=migrarV2(Object.assign({}, st, {cultivo:'uva'}));
+    st=migrarPasos(st);
     return [resumenProyecto(st, nombre, false)]; }
   throw new Error(T('formato no reconocido','unrecognised format')); }
 function atlasAgregar(lista){ const L=atlasLeer(); let n=0, rep=0; lista.forEach(x=>{ const i=L.findIndex(y=>y.id===x.id); if(i>=0){ L[i]=x; rep++; } else { L.push(x); n++; } }); atlasEscribir(L); return {n, rep}; }
