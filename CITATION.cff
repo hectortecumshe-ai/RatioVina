@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "Si usas este software, cítalo como se indica. / If you use this software, please cite it as below."
+title: "Ratio Viña: el conocimiento local de la vid en México como sistema complejo adaptativo, con índices de regeneración y riesgo"
+version: 0.1.0
+date-released: 2026-10-16
+type: software
+license: MIT
+authors:
+  - given-names: "Héctor Tecumshé"
+    family-names: "Mojica-Zárate"
+    orcid: "https://orcid.org/0000-0002-9067-3983"
+  - given-names: "Oscar"
+    family-names: "Díaz-José"
+repository-code: "https://github.com/hectortecumshe-ai/RatioVina"
+url: "https://hectortecumshe-ai.github.io/RatioVina/"
+keywords: [grapevine, Vitis vinifera, viticulture, local knowledge, Winkler index, Huglin index, BBCH, national atlas, complex adaptive systems, social network analysis, regenerative agriculture, agricultural risk, sostenibilidad, Mexico]
+references:
+  - type: article
+    title: "El conocimiento agrícola local: el stack del maíz criollo en Calpan, Puebla"
+    authors:
+      - family-names: "Díaz-José"
+        given-names: "Oscar"
+      - family-names: "Mojica-Zárate"
+        given-names: "Héctor Tecumshé"
+      - family-names: "Díaz-José"
+        given-names: "Julio"
+      - family-names: "Vilaboa-Arróniz"
+        given-names: "Julio"
+    journal: "Agricultura, Sociedad y Desarrollo"
+    volume: 23
+    issue: 3
+    year: 2026
+    doi: "10.22231/asyd.v23i3.1822"
+  - type: thesis
+    title: "Modelo y procedimiento para la gestión estratégica integrada de los recursos naturales en territorios áridos con orientación agroproductiva"
+    authors:
+      - family-names: "Mojica Zárate"
+        given-names: "Héctor Tecumshé"
+    institution:
+      name: "Universidad Central «Marta Abreu» de Las Villas"
+    year: 2017
