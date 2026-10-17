@@ -19,7 +19,7 @@ Está hecha para productores y para científicos, en español y en inglés.
 | 5 · Manejo | Cuestionario base de 31 pasos y 52 actividades ordenado por etapas fenológicas BBCH (Lorenz et al., 1995): reposo y poda, brotación, floración, desarrollo del fruto, cosecha y poscosecha; labores propias de uva de mesa o de vino; fechas e innovaciones |
 | 6 · Regeneración | Ocho perillas 0–4 con valores sugeridos que se confirman |
 | 7 · Riesgos | Amenazas con perillas de probabilidad, impacto y control; matriz 5 × 5 y capacidad adaptativa |
-| 8 · Elementos | 70 elementos del viñedo en 10 categorías y los propios |
+| 8 · Elementos | 65 elementos del viñedo en 10 categorías y los propios |
 | 9 · Precio y valor | Precio por hectárea y valor económico, de uso, cultural y ecológico |
 | 10–13 | Formulación, tablero de redes (centralidades, Louvain, correlaciones, cladograma, calendario), sostenibilidad (Sarandón, 17 ODS, huella de carbono) y prospectiva |
 | 14 · Informe | Resumen, tablas, CSV, PDF y el archivo del viñedo (`.vina.json`) |
