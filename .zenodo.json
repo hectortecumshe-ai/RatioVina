@@ -17,6 +17,9 @@
     },
     {
       "name": "Alejo-Bello, Sergio"
+    },
+    {
+      "name": "Barrera-Guzmán, Luis Ángel"
     }
   ],
   "description": "Aplicación web libre, bilingüe (español/inglés) y de un solo archivo, de la línea Ratio Complexus, para un estudio nacional del conocimiento local de la vid en México. Cada viñedo se documenta como un sistema complejo adaptativo en 15 bloques: destino (mesa, vino, pasa, jugo), variedad, portainjerto, conducción e historial (fecha de plantación con perilla de 365 días, material de plantación y podas); región hasta la localidad (INEGI); clima vitícola con grados día de Winkler (Amerine y Winkler, 1944), índice de Huglin (1978) e índice de frescor nocturno (Tonietto y Carbonneau, 2004); requerimientos; manejo con un cuestionario base de 37 pasos y 67 actividades en siete etapas: establecimiento (propagación de esquejes y plantación, según Mojica-Zárate et al., 2026) y el ciclo anual por etapas fenológicas BBCH (Lorenz et al., 1995), que cada viñedo responde (sí/no) y amplía; regeneración (ocho perillas 0–4); riesgos (28 amenazas, matriz de probabilidad × impacto, capacidad adaptativa); elementos (75); precio y valor; red ponderada, comunidades, correlaciones y cladograma; sostenibilidad (compartimentos, índice de Sarandón, 17 ODS, huella de carbono IPCC); prospectiva a 2, 5 y 10 años; informe; y un atlas nacional que junta sin servidor los archivos de muchos viñedos. Caso publicado de referencia en modo ejemplo, nunca precargado: establecimiento de uva de mesa en Mata de Zarza, Puente Nacional, Veracruz (Mojica-Zárate et al., 2026), con temperaturas del reanálisis ERA5. El resto del cuestionario se marca como «Lectura de Ratio Viña». Motor de redes y cladograma verificados contra NetworkX y SciPy con el caso de Mata de Zarza; índices de clima con cálculo de control; agregación del atlas verificada. Instructivos del Productor y del Científico en español e inglés.",

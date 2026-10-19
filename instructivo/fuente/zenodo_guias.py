@@ -14,7 +14,7 @@ _rutas = [os.environ.get('ZENODO_TOKEN_FILE', ''), r'D:\CLAUDE\ZENODO\TOKEN\TOKE
 TOKEN = open(next(r for r in _rutas if r and os.path.isfile(r)), encoding='utf-8').read().strip()
 ESTADO = os.path.join(AQUI, 'doi_guias.json')
 CREADORES = [{'name': 'Mojica-Zárate, Héctor Tecumshé', 'orcid': '0000-0002-9067-3983'}, {'name': 'Díaz-José, Oscar'},
-             {'name': 'Sánchez-Moreno, Edgar Arturo'}, {'name': 'Alejo-Bello, Sergio'}]
+             {'name': 'Sánchez-Moreno, Edgar Arturo'}, {'name': 'Alejo-Bello, Sergio'}, {'name': 'Barrera-Guzmán, Luis Ángel'}]
 GUIAS = {
   'productor': dict(pdfs=['RatioVina-Instructivo-Productor.pdf', 'RatioVina-Producer-Guide.pdf'],
     title='Ratio Viña: Instructivo del Productor / Producer Guide (1.ª edición, versión 0.2.0)',

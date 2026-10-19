@@ -11,12 +11,12 @@ VERSION_APP = '0.2.0'
 EDICION = ('1.ª edición', '1st edition')
 FECHA = ('octubre de 2026', 'October 2026')
 DOI_APP = '10.5281/zenodo.23439305'
-DOI_GUIA = {}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
+DOI_GUIA = {'productor': '10.5281/zenodo.23480997', 'cientifico': '10.5281/zenodo.23481001'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
 ISBN = {'productor': ('', ''), 'cientifico': ('', '')}  # ← (ISBN impreso o PDF ES, ISBN PDF EN) cuando el INDAUTOR los asigne
-AUTORES = 'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello'
+AUTORES = 'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Luis Ángel Barrera-Guzmán'
 APP = 'https://hectortecumshe-ai.github.io/RatioVina/'
-AFILIACION = ('Centro Académico Regional Sede Huatusco, Universidad Autónoma Chapingo, México (Héctor Tecumshé Mojica-Zárate, Oscar Díaz-José); [POR CONFIRMAR: afiliación de Edgar Arturo Sánchez-Moreno y Sergio Alejo-Bello].',
-              'Huatusco Regional Academic Centre, Chapingo Autonomous University, Mexico (Héctor Tecumshé Mojica-Zárate, Oscar Díaz-José); [TO CONFIRM: affiliation of Edgar Arturo Sánchez-Moreno and Sergio Alejo-Bello].')
+AFILIACION = ('Centro Académico Regional Sede Huatusco, Universidad Autónoma Chapingo, México (Héctor Tecumshé Mojica-Zárate, Oscar Díaz-José, Luis Ángel Barrera-Guzmán).',
+              'Huatusco Regional Academic Centre, Chapingo Autonomous University, Mexico (Héctor Tecumshé Mojica-Zárate, Oscar Díaz-José, Luis Ángel Barrera-Guzmán).')
 leer = lambda n: open(os.path.join(AQUI, n), encoding='utf-8').read()
 
 # ---------------------------------------------------------------- bloques de la app

@@ -37,7 +37,7 @@ html = f'''<!DOCTYPE html>
 <!--
   Ratio Viña · Ratio Complexus («lo que está tejido junto») · versión 0.1
   Un solo archivo (HTML + CSS + JavaScript). Sin servidor, sin instalación, sin recursos de terceros.
-  Autores: Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Licencia MIT
+  Autores: Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Luis Ángel Barrera-Guzmán · Licencia MIT
   Fuentes: Díaz-José et al. (2026) doi:10.22231/asyd.v23i3.1822; Mojica Zárate (2017), tesis doctoral UCLV; INEGI (2020); IPCC (2006, 2019); Sarandón (2002).
   Contornos del mapa: Natural Earth (dominio público).
 -->
