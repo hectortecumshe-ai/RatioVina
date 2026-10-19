@@ -13,6 +13,7 @@ FECHA = ('octubre de 2026', 'October 2026')
 DOI_APP = '10.5281/zenodo.23439305'
 DOI_GUIA = {'productor': '10.5281/zenodo.23484386', 'cientifico': '10.5281/zenodo.23484387'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
 ISBN = {'productor': ('', ''), 'cientifico': ('', '')}  # ← (ISBN impreso o PDF ES, ISBN PDF EN) cuando el INDAUTOR los asigne
+CITA_AUT = ('Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., y Barrera-Guzmán, L. Á.', 'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., &amp; Barrera-Guzmán, L. Á.')
 AUTORES = 'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Luis Ángel Barrera-Guzmán'
 APP = 'https://hectortecumshe-ai.github.io/RatioVina/'
 AFILIACION = ('Centro Académico Regional Sede Huatusco, Universidad Autónoma Chapingo, México (Héctor Tecumshé Mojica-Zárate, Oscar Díaz-José, Luis Ángel Barrera-Guzmán).',
@@ -215,9 +216,19 @@ def pagina(guia, cuerpo, t_es, t_en, sub_es, sub_en, pdf_es, pdf_en, grupos, glo
 '''
 
 
+
+def cita_guia(guia, t_es, t_en):
+    """Referencia del instructivo en APA (7.ª ed.): Autores (año). Título (edición). Zenodo. DOI."""
+    d = DOI_GUIA.get(guia)
+    ed_es = EDICION[0].replace('edición', 'ed.'); ed_en = EDICION[1].replace('edition', 'ed.')
+    url = f'https://doi.org/{d}' if d else APP + ('instructivo-productor.html' if guia == 'productor' else 'instructivo-cientifico.html')
+    edit = 'Zenodo. ' if d else ''
+    return (f'<p lang="es">{CITA_AUT[0]} (2026). <i>{t_es.replace(" · ", ": ")}</i> ({ed_es}). {edit}{url}</p>'
+            f'<p lang="en">{CITA_AUT[1]} (2026). <i>{t_en.replace(" · ", ": ")}</i> ({ed_en}). {edit}{url}</p>')
+
 def comunes(guia, t_es, t_en):
     return {'BANDA': banda(), 'VERSION': VERSION_APP, 'DOI': doi_txt(guia), 'AUTORES': AUTORES, 'PASOS': pasos(), 'FLUJO': flujo(),
-            'RAPIDO': rapido(), 'QR': qr_svg(), 'LEGAL': legal(guia, t_es, t_en), 'DOIAPP': DOI_APP, 'APP': APP}
+            'RAPIDO': rapido(), 'QR': qr_svg(), 'LEGAL': legal(guia, t_es, t_en), 'CITA_GUIA': cita_guia(guia, t_es, t_en), 'DOIAPP': DOI_APP, 'APP': APP}
 
 
 def productor():

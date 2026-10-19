@@ -3631,6 +3631,9 @@ function renderAtlas(el){ const L=atlasLeer(), orden=renderAtlas.orden||'paso', 
 /* =====================================================================
    6. BLOQUES · base, Inicio, 1 Cultivo, 2 Región, 3 Requerimientos
    ===================================================================== */
+/* Referencia del software en formato APA (7.ª ed.): Autores (año). Título (Versión) [Software]. Editorial. DOI */
+const citaAPA = ()=> `${esc(tx(CONFIG.citaAutores))} (${CONFIG.anio}). <i>${CONFIG.app}: ${esc(tx(CONFIG.titulo))}</i> (${T('Versión','Version')} ${CONFIG.version}) [Software]. Zenodo. ${CONFIG.doi?`https://doi.org/${CONFIG.doi}`:esc(CONFIG.repo||'')}`;
+document.addEventListener('click',ev=>{ if(!ev.target.closest('[data-copiar-cita]')) return; const t=document.getElementById('citaTxt'); try{ navigator.clipboard.writeText(t.innerText); toast(T('Referencia copiada','Reference copied')); }catch(e){} });
 const BLOQUES = [
   {id:'inicio',      n:'⌂', ill:null,       corto:E('Inicio','Home'),                 titulo:E('Inicio','Home'), render:()=>renderInicio},
   {id:'cultivo',     n:'1', ill:'cult',     corto:E('Vid','Vine'),                    titulo:E('Tu viñedo: destino, variedad, portainjerto y conducción','Your vineyard: use, variety, rootstock and training'), render:()=>renderCultivo},
@@ -3736,6 +3739,10 @@ function renderInicio(el){
    <p>${marcaDato()} ${T('Cifras y fórmulas tomadas de una fuente citada (INEGI, IPCC, Amerine y Winkler, Huglin, Tonietto y Carbonneau, Sarandón).','Figures and formulas from a cited source (INEGI, IPCC, Amerine and Winkler, Huglin, Tonietto and Carbonneau, Sarandón).')}</p>
    <p>${marcaInterp()} ${T('Relaciones y perfiles que propone Ratio Viña para leer los datos; todos son editables.','Links and profiles proposed by Ratio Viña to read the data; all are editable.')}</p>
    <p class="nota">${T('Lo que no está documentado aparece como «sin dato». Ratio Viña no inventa valores. Todavía no existe un Stack publicado de la vid: el cuestionario base es una lectura de Ratio Viña que cada viñedo responde y amplía.','What is undocumented appears as “no data”. Ratio Viña does not invent values. There is no published grapevine Stack yet: the baseline questionnaire is a Ratio Viña reading that each vineyard answers and extends.')}</p></div>
+  <div class="card cita-card"><h2>${T('¿Cómo citarla?','How to cite it?')}</h2>
+   <p class="nota">${T(`Si usas ${CONFIG.app} en un artículo, una tesis, un informe o una clase, cítala así (APA, 7.ª ed.):`,`If you use ${CONFIG.app} in a paper, thesis, report or class, cite it as follows (APA 7th ed.):`)}</p>
+   <p id="citaTxt" class="cita-apa">${citaAPA()}</p>
+   <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center"><button class="btn ghost sm" data-copiar-cita>⧉ ${T('Copiar referencia','Copy reference')}</button>${CONFIG.doi?`<a class="btn link sm" href="https://doi.org/${CONFIG.doi}" target="_blank" rel="noopener">DOI ${CONFIG.doi} ↗</a>`:''}</div></div>
   ${siguiente('inicio')}`; }
 
 /* ================= BLOQUE 1 · VID ================= */
