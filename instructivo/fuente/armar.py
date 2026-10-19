@@ -11,7 +11,7 @@ VERSION_APP = '0.2.0'
 EDICION = ('1.ª edición', '1st edition')
 FECHA = ('octubre de 2026', 'October 2026')
 DOI_APP = '10.5281/zenodo.23439305'
-DOI_GUIA = {'productor': '10.5281/zenodo.23480997', 'cientifico': '10.5281/zenodo.23481001'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
+DOI_GUIA = {'productor': '10.5281/zenodo.23484386', 'cientifico': '10.5281/zenodo.23484387'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
 ISBN = {'productor': ('', ''), 'cientifico': ('', '')}  # ← (ISBN impreso o PDF ES, ISBN PDF EN) cuando el INDAUTOR los asigne
 AUTORES = 'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Luis Ángel Barrera-Guzmán'
 APP = 'https://hectortecumshe-ai.github.io/RatioVina/'
@@ -151,8 +151,8 @@ def legal(guia, titulo_es, titulo_en):
   <p lang="es"><b>{titulo_es}</b> · {EDICION[0]}, {FECHA[0]} · describe Ratio Viña {VERSION_APP}.</p>
   <p lang="en"><b>{titulo_en}</b> · {EDICION[1]}, {FECHA[1]} · covers Ratio Viña {VERSION_APP}.</p>
   <p>{AUTORES}</p>
-  <p lang="es">{AFILIACION[0]} ORCID del autor de correspondencia: 0000-0002-9067-3983.</p>
-  <p lang="en">{AFILIACION[1]} Corresponding author ORCID: 0000-0002-9067-3983.</p>
+  <p lang="es">ORCID del autor de correspondencia (Héctor Tecumshé Mojica-Zárate): 0000-0002-9067-3983.</p>
+  <p lang="en">Corresponding author ORCID (Héctor Tecumshé Mojica-Zárate): 0000-0002-9067-3983.</p>
   <p><span class="isbn" lang="es">{isbn_es}</span><span class="isbn" lang="en">{isbn_en}</span><br>
      <span lang="es">{doi_es} · DOI de la aplicación: <a href="https://doi.org/{DOI_APP}">{DOI_APP}</a></span><span lang="en">{doi_en} · DOI of the app: <a href="https://doi.org/{DOI_APP}">{DOI_APP}</a></span></p>
   <p lang="es">Texto y figuras bajo licencia Creative Commons Atribución 4.0 Internacional (CC BY 4.0); la aplicación, bajo licencia MIT. Puedes copiar, adaptar y compartir este instructivo citando a sus autores. Las capturas de pantalla son de la aplicación Ratio Viña {VERSION_APP}. Composición tipográfica en Palatino Linotype.</p>
