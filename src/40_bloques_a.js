@@ -98,7 +98,7 @@ function renderInicio(el){
   <div class="card cita-card"><h2>${T('¿Cómo citarla?','How to cite it?')}</h2>
    <p class="nota">${T(`Si usas ${CONFIG.app} en un artículo, una tesis, un informe o una clase, cítala así (APA, 7.ª ed.):`,`If you use ${CONFIG.app} in a paper, thesis, report or class, cite it as follows (APA 7th ed.):`)}</p>
    <p id="citaTxt" class="cita-apa">${citaAPA()}</p>
-   <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center"><button class="btn ghost sm" data-copiar-cita>⧉ ${T('Copiar referencia','Copy reference')}</button>${CONFIG.doi?`<a class="btn link sm" href="https://doi.org/${CONFIG.doi}" target="_blank" rel="noopener">DOI ${CONFIG.doi} ↗</a>`:''}</div></div>
+   <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center"><button class="btn ghost sm" data-copiar-cita>⧉ ${T('Copiar referencia','Copy reference')}</button>${CONFIG.doi?`<a class="btn link sm" href="https://doi.org/${CONFIG.doi}" target="_blank" rel="noopener">DOI ${CONFIG.doi} ↗</a>`:''}</div></div><div class="qr-app"><span class="qr-img">${CONFIG.qr}</span><span><b>${CONFIG.url.replace(/^https:\/\//,'').replace(/\/$/,'').replace('.io/','.io/<wbr>')}</b><br>${T('Escanea el código para abrirla en tu celular o compartirla.','Scan the code to open it on your phone or share it.')}</span></div></div>
   <div class="stats">
     <div class="stat"><div class="v">${nVar}</div><div class="l">${T('variedades en la lista (y la tuya)','varieties listed (plus yours)')}</div></div>
     <div class="stat"><div class="v">${fmt(nl,0)}</div><div class="l">${T('localidades de México','Mexican localities')}</div></div>
