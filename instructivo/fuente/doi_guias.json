@@ -7,6 +7,11 @@
    "id": 23484386,
    "doi": "10.5281/zenodo.23484386",
    "bucket": "https://zenodo.org/api/files/1ec9a982-c416-4c1b-b2e6-80b87703a4ac"
+  },
+  "v3": {
+   "id": 23488145,
+   "doi": "10.5281/zenodo.23488145",
+   "bucket": "https://zenodo.org/api/files/308ece37-de13-445f-a902-d3dbef5b91bb"
   }
  },
  "cientifico": {
@@ -17,6 +22,11 @@
    "id": 23484387,
    "doi": "10.5281/zenodo.23484387",
    "bucket": "https://zenodo.org/api/files/8ff1456f-1466-4445-b228-b4965e40ee1e"
+  },
+  "v3": {
+   "id": 23488146,
+   "doi": "10.5281/zenodo.23488146",
+   "bucket": "https://zenodo.org/api/files/b501311d-2fb5-47a0-86aa-226b0d1c9ddb"
   }
  }
 }
