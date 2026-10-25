@@ -23,7 +23,7 @@ fav = 'data:image/svg+xml,' + urllib.parse.quote(logo)
 modesw = open(os.path.join(os.path.join(R,'herramientas'), 'modesw.html'), encoding='utf-8').read().strip() if os.path.exists(os.path.join(os.path.join(R,'herramientas'), 'modesw.html')) else ''
 css = leer('01_estilo_base.css') + '\n' + leer('02_estilo_bos.css') + '\n' + leer('03_estilo_telar.css')
 js = ['10_datos.js', '11_territorio.js', '12_mapa.js', '13_stack.js', '14_gei.js', '15_elementos.js', '16_calendario.js', '17_variedades.js', '18_ejemplo.js', '18b_matazarza.js', '19_avance.js', '20_ayuda.js',
-      '30_motor.js', '32_sistema.js', '45_graficos.js', '46_graficos2.js', '47_cladograma.js', '48_prospectiva.js', '49_regen_riesgo.js', '51_clima.js', '52_atlas.js', '40_bloques_a.js', '50_bloques_b.js', '55_tablero.js', '57_sostenible.js', '60_final.js']
+      '30_motor.js', '32_sistema.js', '45_graficos.js', '46_graficos2.js', '46b_modelo3d.js', '47_cladograma.js', '48_prospectiva.js', '49_regen_riesgo.js', '51_clima.js', '52_atlas.js', '40_bloques_a.js', '50_bloques_b.js', '55_tablero.js', '57_sostenible.js', '60_final.js']
 familia = leer('90_familia.html')  # enlaces a las demás apps de la familia Ratio
 cuerpo = '\n'.join('<script>\n' + leer(n) + '\n</script>' for n in js)
 html = f'''<!DOCTYPE html>
