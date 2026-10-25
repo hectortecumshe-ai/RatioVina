@@ -37,7 +37,8 @@ function modelo3D(cont, opt={}){
   const an=(cont.clientWidth||980)<640, W=an?520:980, H=an?820:780, D=2600, fz=an?1.45:1;   // en celular: lienzo compacto y letra mayor
   const P=posiciones3D(nodos), maxI=Math.max(1,...nodos.map(d=>d.inter)), wmax=Math.max(1e-9,...R.aristas.map(e=>e.w));
   const reducir=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let yaw=-0.55, pitch=0.3, zoom=1, girar=!reducir && opt.girar!==false, foco=null, frac=opt.frac||0.5, raf=0, med=opt.med||'grado', verVal=opt.verVal!==false;
+  let yaw=-0.55, pitch=0.3, zoom=1, girar=!reducir && opt.girar!==false && !window.__m3dQuieto,   // __m3dQuieto: capturas de los instructivos
+      foco=null, frac=opt.frac||0.5, raf=0, med=opt.med||'grado', verVal=opt.verVal!==false;
   const aristas=R.aristas.slice().sort((a,b)=>b.w-a.w);
   const maxM={}; Object.keys(IMP3D).forEach(k=>maxM[k]=Math.max(1e-9,...nodos.map(d=>+d[k]||0)));
   const imp=d=>100*(+d[med]||0)/maxM[med];                       // importancia 0–100 según la medida elegida

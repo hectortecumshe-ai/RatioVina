@@ -7,11 +7,11 @@ import json, os, re, subprocess, sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, '..', '..'))
 sys.path.insert(0, AQUI)
-VERSION_APP = '0.2.0'
-EDICION = ('1.ª edición', '1st edition')
+VERSION_APP = '0.3.0'
+EDICION = ('1.ª edición, actualizada', '1st edition, updated')
 FECHA = ('octubre de 2026', 'October 2026')
 DOI_APP = '10.5281/zenodo.23439305'
-DOI_GUIA = {'productor': '10.5281/zenodo.23488145', 'cientifico': '10.5281/zenodo.23488146'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
+DOI_GUIA = {'productor': '10.5281/zenodo.23642447', 'cientifico': '10.5281/zenodo.23642448'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
 ISBN = {'productor': ('', ''), 'cientifico': ('', '')}  # ← (ISBN impreso o PDF ES, ISBN PDF EN) cuando el INDAUTOR los asigne
 CITA_AUT = ('Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., y Barrera-Guzmán, L. Á.', 'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., &amp; Barrera-Guzmán, L. Á.')
 AUTORES = 'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Luis Ángel Barrera-Guzmán'

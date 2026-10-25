@@ -39,6 +39,8 @@ CAPTURAS = {
   'elemrr':        dict(b='elementos', sel='.rr-card', off=150),
   'precios':       dict(b='precios', prep='precio_ins', sel='.tbl.val', off=260, m='[data-pcat="insumos"]|.tbl.val tbody tr:first-child'),
   'formulacion':   dict(b='formulacion', m='#bForm'),
+  'modelo3d':      dict(b='formulacion', js='window.__m3dQuieto=true;', sel='.m3d-barra', off=230, h=1180, m='[data-m3d="med"]|[data-m3d="pm"]|.seg-m3d'),
+  'importancia':   dict(b='formulacion', js='window.__m3dQuieto=true;', sel='.m3d-rank', off=330, h=900, m='.m3d-rank ol li:first-child'),
   'tablero':       dict(b='tablero', prep='formulado', sel='.tablero', off=160),
   'red':           dict(b='tablero', prep='formulado', sel='.tablero .t8', off=150, m='.basesw|#sinPM'),
   'corr':          dict(b='tablero', prep='formulado', sel='#corrEl', off=200, m='#corrEl'),

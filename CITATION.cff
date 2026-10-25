@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "Si usas este software, cítalo como se indica. / If you use this software, please cite it as below."
 title: "Ratio Viña: el conocimiento local de la vid en México como sistema complejo adaptativo, con índices de regeneración y riesgo"
-version: 0.2.0
-date-released: 2026-10-17
+version: 0.3.0
+date-released: 2026-10-25
 doi: "10.5281/zenodo.23439305"
 type: software
 license: MIT

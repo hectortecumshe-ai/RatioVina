@@ -10,7 +10,7 @@
 
 Está hecha para productores y para científicos, en español y en inglés.
 
-## Qué contiene (versión 0.2.0)
+## Qué contiene (versión 0.3.0)
 
 | Bloque | Contenido |
 |---|---|
@@ -30,6 +30,13 @@ Está hecha para productores y para científicos, en español y en inglés.
 ## Caso publicado de referencia
 
 **Mata de Zarza, Puente Nacional, Veracruz**: establecimiento de uva de mesa (Perlette, Flame Seedless y Summer Royal) en una parcela cooperante de 1 ha, de enero de 2025 a febrero de 2026, según la *Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz* (Mojica-Zárate et al., 2026; UACh, ISBN 978-607-12-0712-8). Se consulta en un **modo ejemplo** con franja naranja que nunca se guarda ni toca el proyecto del usuario; la app sigue arrancando en blanco. Las temperaturas del caso son del reanálisis ERA5 1991–2020 (Hersbach et al., 2020), porque en la localidad no hay estación. Su red se verificó con NetworkX y SciPy (`pruebas/verificar_matazarza.py`).
+
+## Novedades de la versión 0.3.0
+
+- **Modelo 3D del sistema complejo adaptativo** en el Bloque 10 (Formulación): capas apiladas de abajo arriba (entorno, entradas, agentes y conocimiento, manejo con los 5B y salidas) con el halo de la emergencia encima. Los nodos y vínculos son los de la red real del proyecto, y las líneas punteadas son las retroalimentaciones del ciclo. Se gira arrastrando o con el teclado, se acerca con botones, Ctrl + rueda o pellizco, y al tocar un nodo se resaltan sus vecinos. La perspectiva se calcula en la app, sin bibliotecas. El esquema 2D queda como segunda pestaña.
+- **Importancia de cada nodo (0–100)** respecto del máximo de la red, por grado ponderado (por omisión), intermediación, vector propio o valor del elemento, con el ranking de los 10 elementos más importantes. Por omisión se oculta el nodo omnipresente de los productores.
+- Código QR de la app en la tarjeta «¿Cómo citarla?».
+- Instructivos actualizados con el modelo 3D y la importancia de los nodos, con el caso de Mata de Zarza.
 
 ## Novedades de la versión 0.2.0
 
