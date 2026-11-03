@@ -21,7 +21,7 @@ function atlasEscribir(L){ try{ localStorage.setItem(ATLAS_KEY, JSON.stringify(L
 function conEstado(est, ref, fn){ const prev=S, prevEJ=EJ; S=Object.assign(estadoInicial(), JSON.parse(JSON.stringify(est))); EJ=!!ref; try{ return fn(); } finally{ S=prev; EJ=prevEJ; } }
 function resumenProyecto(est, archivo, ref){ return conEstado(est, ref, ()=>{
   const acts=actividades(), l=locSel(), m=munSel(), ed=edoDe(S.edo)||EDO_VACIO;
-  const resp={}; PASOS.forEach(p=>{ const mm=manejoDe(p.n); p.a.forEach(a=>{ if(mm.resp[a[0]]) resp[a[0]]=mm.resp[a[0]]; }); });
+  const resp={}; pasosProyecto().forEach(p=>{ const mm=manejoDe(p.n); p.a.forEach(a=>{ if(p.noAplica) resp[a[0]]='no'; else if(mm.resp[a[0]]) resp[a[0]]=mm.resp[a[0]]; }); });
   const sos=acts.length?sostenibilidad():null, rg=regeneracion(), rs=riesgos({rg}), R=acts.length?construirRed(true):null;
   const nombres={}; if(R) R.nodos.forEach(d=>nombres[d.id]=[d.nombre, d.cat]);
   const r=Object.values(resp);

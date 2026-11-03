@@ -28,6 +28,8 @@ try { localStorage.clear(); localStorage.setItem('vina_lang', P.get('l') || 'es'
 const espera = ms => new Promise(r => setTimeout(r, ms));
 const PREP = {   // código que se ejecuta dentro de la app (S, LANG y las funciones de la app), después del caso base
   paso: "renderManejo.abierto=2;",
+  noaplica: "S.pasoNoAplica={11:true};",
+  actnueva: "renderManejo.abierto=2; window.__abrir=['.pacc[open] details.nueva','.pacc[open] details.nuevo-el'];",
   plantar: "renderManejo.abierto=4;",
   regenbase: "S.regenBase={fecha:'2025-03-01', IR:0.31, ind:[{id:'labranza',s:4},{id:'cobertura',s:1},{id:'diversidad',s:0},{id:'raices',s:2},{id:'animales',s:0},{id:'insumos',s:1},{id:'mo',s:1},{id:'saber',s:1}]}; S.regenMO={b:'1.6',a:'1.8'};",
   formulado: "S.formulado=true;",

@@ -10,7 +10,7 @@
 
 Está hecha para productores y para científicos, en español y en inglés.
 
-## Qué contiene (versión 0.3.0)
+## Qué contiene (versión 0.4.0)
 
 | Bloque | Contenido |
 |---|---|
@@ -30,6 +30,13 @@ Está hecha para productores y para científicos, en español y en inglés.
 ## Caso publicado de referencia
 
 **Mata de Zarza, Puente Nacional, Veracruz**: establecimiento de uva de mesa (Perlette, Flame Seedless y Summer Royal) en una parcela cooperante de 1 ha, de enero de 2025 a febrero de 2026, según la *Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz* (Mojica-Zárate et al., 2026; UACh, ISBN 978-607-12-0712-8). Se consulta en un **modo ejemplo** con franja naranja que nunca se guarda ni toca el proyecto del usuario; la app sigue arrancando en blanco. Las temperaturas del caso son del reanálisis ERA5 1991–2020 (Hersbach et al., 2020), porque en la localidad no hay estación. Su red se verificó con NetworkX y SciPy (`pruebas/verificar_matazarza.py`).
+
+## Novedades de la versión 0.4.0
+
+- **Manejo flexible.** Los pasos se mueven sosteniéndolos desde la agarradera ⠿ (con el ratón o el dedo) o con ↑ ↓; se cambian de etapa; se marcan «No aplica en mi viñedo» (se pliegan en gris y sus actividades salen de la red, los índices y el avance); y se agregan pasos propios en el lugar del ciclo que elijas.
+- **Más actividades por paso.** Cada paso acepta todas las actividades que necesites, tradicionales o innovadas, con **quién la propone** (un actor o institución de la red, que queda elegido como elemento) y **desde cuándo** (año). Desde la actividad se crea un elemento nuevo con un botón visible antes de la lista. Las actividades se arrastran dentro del paso o a otro paso y conservan su respuesta y sus impactos.
+- Los requerimientos (Bloque 4) se conservan.
+- Instructivos actualizados con las secciones del Manejo flexible y capturas nuevas.
 
 ## Novedades de la versión 0.3.0
 

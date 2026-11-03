@@ -16,7 +16,7 @@ function avance(id){ let h=0, t=0, nota='';
   else if(id==='clima'){ const cl=S.clima||{}, ok=(a,i)=>a&&a[i]!==''&&a[i]!=null&&isFinite(+a[i]); const req=[...[3,4,5,6,7,8,9].map(i=>ok(cl.tmed,i)), ...[3,4,5,6,7,8].map(i=>ok(cl.tmax,i)), ok(cl.tmin,8)]; t=req.length; h=req.filter(Boolean).length; }
   else if(id==='region'){ const c=[!!S.edo, !!S.mun, !!S.loc]; t=3; h=c.filter(Boolean).length; }
   else if(id==='requerimientos'){ if(conStack()){ t=REQ_TRAD.length; h=REQ_TRAD.filter((r,i)=>(S.reqEst||{})[i]).length; } else { t=1; h=S.reqInn.length?1:0; } }
-  else if(id==='manejo'){ if(conStack()){ t=N_ACT_STACK(); h=PASOS.reduce((s,p)=>s+p.a.filter(a=>manejoDe(p.n).resp[a[0]]).length,0); }
+  else if(id==='manejo'){ if(conStack()){ const pa=pasosActivos(); t=pa.reduce((s,p)=>s+p.a.length,0); h=pa.reduce((s,p)=>s+p.a.filter(a=>manejoDe(p.n).resp[a[0]]).length,0); }
     else { t=1; h=actividades().length?1:0; } }
   else if(id==='regeneracion'){ t=REGEN_IND.length; h=Object.keys(S.regen||{}).filter(k=>S.regen[k]!==''&&S.regen[k]!=null).length; }
   else if(id==='riesgos'){ t=RIESGOS.length; const U=S.riesgo||{}; h=RIESGOS.filter(d=>{ const u=U[d.id]||{}; return u.off===true||u.ok===true||(u.p!=null&&u.i!=null); }).length; }

@@ -7,16 +7,31 @@
 const todosElem = ()=> ELEM.concat(S.elemExtra||[]);
 const elemPorId = (id)=> todosElem().find(e=>e.id===id);
 const nombreEl = (id)=> { const e=elemPorId(id); return e ? tx(e.n) : id; };
-const manejoDe = (n)=>{ const m = S.manejo[n] = S.manejo[n] || {resp:{}, inn:[], imp:{}}; m.resp=m.resp||{}; m.inn=m.inn||[]; m.imp=m.imp||{}; return m; };
+const nuevoId = ()=> 'a'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const manejoDe = (n)=>{ const m = S.manejo[n] = S.manejo[n] || {resp:{}, inn:[], imp:{}}; m.resp=m.resp||{}; m.inn=m.inn||[]; m.imp=m.imp||{}; m.inn.forEach(x=>{ if(!x.id) x.id=nuevoId(); }); return m; };
+/* Paso del cuestionario base de cada actividad (su «casa») */
+const CASA_ACT = {}; PASOS.forEach(p=>p.a.forEach(a=>{ CASA_ACT[a[0]]=p.n; }));
 const N_ACT_STACK = ()=> PASOS.reduce((s,p)=>s+p.a.length,0);
+/* Pasos del proyecto: los del cuestionario base con el orden, la etapa y la marca «no aplica» que elige el usuario,
+   más los pasos propios de su viñedo; las actividades van en el paso donde el usuario las puso y en su orden.
+   num = posición en el ciclo (lo que ve el usuario); n = clave interna. */
+function pasosProyecto(){ if(!conStack()) return [];
+  const prop=(S.pasosPropios||[]).map(p=>({n:p.n, es:p.es, en:p.en||p.es, b:p.b, a:[], v:[], c:0, propio:true}));
+  const mapa=new Map(PASOS.map(p=>[p.n,p]).concat(prop.map(p=>[p.n,p])));
+  const mov=S.actPaso||{}, pub={}; PASOS.forEach(p=>p.a.forEach(a=>{ const t=mapa.has(mov[a[0]])?mov[a[0]]:p.n; (pub[t]=pub[t]||[]).push(a); }));
+  const orden=[...new Set((S.pasoOrden||[]).filter(n=>mapa.has(n)))]; mapa.forEach((p,n)=>{ if(!orden.includes(n)) orden.push(n); });
+  const ordAct=(n,l)=>{ const o=(S.actOrden||{})[n]||[], k=a=>{ const j=o.indexOf(a[0]); return j<0?1e6:j; }; return l.map((a,i)=>[a,i]).sort((u,v)=>k(u[0])-k(v[0])||u[1]-v[1]).map(x=>x[0]); };
+  return orden.map((n,i)=>{ const p=mapa.get(n); return Object.assign({}, p, {a:ordAct(n,pub[n]||[]), num:i+1, b:(S.pasoGrupo||{})[n]||p.b, propio:!!p.propio, noAplica:!!(S.pasoNoAplica||{})[n]}); }); }
+const pasosActivos = ()=> pasosProyecto().filter(p=>!p.noAplica);
+const numPaso = (n)=>{ const p=pasosProyecto().find(x=>x.n===n); return p ? p.num : n; };
 
 /* Actividades del sistema: las tradicionales del Stack publicado SOLO si el usuario respondió «sí, la practico»
    (sin respuesta no cuentan: nada se precarga) + las innovadoras o propias que agregó */
 function actividades(){
   const out=[];
-  if(conStack()) PASOS.forEach(p=>{ const m=manejoDe(p.n);
+  if(conStack()) pasosActivos().forEach(p=>{ const m=manejoDe(p.n);      // los pasos que no aplican quedan fuera
     p.a.forEach(a=>{ if(m.resp[a[0]]!=='si') return; out.push({paso:p.n, b:p.b, cod:a[0], n:E(a[1],a[2]), tipo:'trad', el:(ACT_EL[a[0]]||'').split(' ').filter(Boolean), imp:m.imp[a[0]]||null}); });
-    (m.inn||[]).forEach((x,i)=> out.push({paso:p.n, b:p.b, cod:'N'+p.n+'.'+(i+1), n:E(x.t,x.t), tipo:'inn', el:x.el||[], imp:x.imp||null})); });
+    (m.inn||[]).forEach((x,i)=> out.push({paso:p.n, b:p.b, cod:'N'+p.n+'.'+(i+1), n:E(x.t,x.t), tipo:x.tipo==='trad'?'trad':'inn', propia:true, el:x.el||[], imp:x.imp||null})); });
   else Object.entries(S.manejo).forEach(([n,m])=> (m.inn||[]).forEach((x,i)=> out.push({paso:+n, b:'', cod:'N'+n+'.'+(i+1), n:E(x.t,x.t), tipo:'inn', el:x.el||[], imp:x.imp||null})));
   return out;
 }
@@ -94,7 +109,7 @@ const IS = (v)=> v.reduce((s,x)=>s+(x+2)/4,0)/v.length;
 function sostenibilidad(){ const acts=actividades().map(a=>({...a, v:impactoAct(a)})); acts.forEach(a=>a.is=IS(a.v));
   const media=(l)=> l.length ? l.reduce((a,b)=>a+b,0)/l.length : null;
   const comp=COMP.map((_,c)=>({suma:acts.reduce((s,a)=>s+a.v[c],0), pos:acts.reduce((s,a)=>s+Math.max(0,a.v[c]),0), neg:acts.reduce((s,a)=>s+Math.min(0,a.v[c]),0)}));
-  const porPaso=PASOS.map(p=>{ const l=acts.filter(a=>a.paso===p.n); return {n:p.n, trad:media(l.filter(a=>a.tipo==='trad').map(a=>a.is)), inn:media(l.filter(a=>a.tipo==='inn').map(a=>a.is)), todos:media(l.map(a=>a.is))}; });
+  const porPaso=pasosActivos().map(p=>{ const l=acts.filter(a=>a.paso===p.n); return {n:p.num, b:p.b, trad:media(l.filter(a=>a.tipo==='trad').map(a=>a.is)), inn:media(l.filter(a=>a.tipo==='inn').map(a=>a.is)), todos:media(l.map(a=>a.is))}; });
   return {acts, comp, porPaso, global:media(acts.map(a=>a.is)), trad:media(acts.filter(a=>a.tipo==='trad').map(a=>a.is)), inn:media(acts.filter(a=>a.tipo==='inn').map(a=>a.is))}; }
 /* Cumplimiento de cada ODS (0–100 %). Fuentes de evidencia:
    (a) ambientales: media de (s_c+2)/4 de los compartimentos ligados al ODS en todas las actividades;

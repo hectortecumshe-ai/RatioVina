@@ -33,10 +33,10 @@ const diaDeIso = (s)=>{ const t=new Date(s+'T00:00:00Z'); return Math.round((t-D
 function ventanaPaso(p){ return {ini:null, fin:null, origen:'sin'}; }
 /* Fechas efectivas de todos los pasos (con las ediciones del usuario) */
 function calendarioPasos(){ const out=[];
-  if(conStack()) PASOS.forEach(p=>{ const f=S.fechas[p.n]||{}, w=ventanaPaso(p), m=manejoDe(p.n);
+  if(conStack()) pasosActivos().forEach(p=>{ const f=S.fechas[p.n]||{}, w=ventanaPaso(p), m=manejoDe(p.n);
     if(!p.a.some(a=>m.resp[a[0]]==='si') && !(m.inn||[]).length) return;           // paso sin actividades practicadas
     if(f.ini==null && (w.ini==null || (w.origen==='fig4' && !EJ))) return;           // sin fecha propia (la ventana de Calpan solo en el ejemplo)
-    out.push({n:p.n, nombre:E(p.es,p.en), b:p.b, ev:f.ev||EV_PASO[p.n]||'otro', ini:f.ini!=null?f.ini:w.ini, fin:f.fin!=null?f.fin:w.fin, origen:f.ini!=null?'usuario':w.origen,
+    out.push({n:p.num, nombre:E(p.es,p.en), b:p.b, ev:f.ev||EV_PASO[p.n]||'otro', ini:f.ini!=null?f.ini:w.ini, fin:f.fin!=null?f.fin:w.fin, origen:f.ini!=null?'usuario':w.origen,
       inn:(manejoDe(p.n).inn||[]).length}); });
   else Object.entries(S.manejo).forEach(([n,m])=>{ const f=S.fechas[n]||{}; if(f.ini==null) return; out.push({n:+n, nombre:E(m.nombre||'',m.nombre||''), b:'', ev:f.ev||'otro', ini:f.ini, fin:f.fin!=null?f.fin:f.ini, origen:'usuario', inn:(m.inn||[]).length}); });
   return out; }

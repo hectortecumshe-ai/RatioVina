@@ -2,7 +2,7 @@
 from armar import bi, fig, BLOQUES
 
 GLOS = [['Actividad', 'Activity', 'Lo que se hace dentro de un paso de manejo (por ejemplo, «riego de las cepas antes de plantar»). Cada actividad liga a los elementos que participan en ella.', 'What is done within a management step (for example, “watering the holes before planting”). Each activity links the elements taking part in it.'],
-  ['Actividad innovadora', 'Innovative activity', 'Una práctica nueva que el viñedo agregó al cuestionario base; en la app se agrega con «+ Actividad innovadora».', 'A new practice the vineyard added to the baseline questionnaire; in the app it is added with “+ Innovative activity”.'],
+  ['Actividad innovadora', 'Innovative activity', 'Una práctica nueva que el viñedo agregó al cuestionario base; en la app se agrega con «+ Actividad en este paso», con quién la propone y desde cuándo.', 'A new practice the vineyard added to the baseline questionnaire; in the app it is added with “+ Activity in this step”, with who proposes it and since when.'],
   ['Acolchado', 'Mulch', 'Capa de material vegetal seco alrededor de la planta que conserva la humedad y protege el suelo.', 'A layer of dry plant material around the vine that keeps moisture in and protects the soil.'],
   ['Barbado', 'Rooted cutting', 'Esqueje que ya echó raíces y se planta en el sitio definitivo.', 'A cutting that has already rooted and is planted in its final place.'],
   ['BBCH', 'BBCH', 'Escala que numera las etapas de desarrollo de la vid, de la yema de invierno a la caída de hojas (Lorenz et al., 1995).', 'Scale numbering the vine’s development stages, from winter bud to leaf fall (Lorenz et al., 1995).'],

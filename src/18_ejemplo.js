@@ -46,7 +46,8 @@ const GUIA = {
     pasos: _ol([T('Abre las etapas en orden, del reposo a la poscosecha.','Open the stages in order, from dormancy to post-harvest.'),
       T('Contesta «Sí la practico» o «No»; usa «Todas sí» o «Todas no» si aplica a todo el paso.','Answer “Yes, I do” or “No”; use “All yes” or “All no” for a whole step.'),
       T('Pon las fechas de cada paso: alimentan el calendario circular.','Set each step’s dates: they feed the circular calendar.'),
-      T('Con «+ Actividad innovadora» agrega lo que haces diferente y elige sus elementos.','Use “+ Innovative activity” for what you do differently and choose its elements.')])}),
+      T('Con «+ Actividad en este paso» agrega lo que haces diferente o es propio de tu viñedo, di quién la propone y elige sus elementos; si falta alguno, créalo ahí mismo.','Use “+ Activity in this step” for what you do differently or is your vineyard’s own, say who proposes it and choose its elements; if one is missing, create it right there.'),
+      T('Mueve pasos y actividades con la agarradera ⠿ (una actividad puede pasar a otro paso), marca «No aplica en mi viñedo» los pasos que no practicas y agrega abajo los pasos propios de tu viñedo.','Move steps and activities with the ⠿ handle (an activity can go to another step), mark “Not applicable in my vineyard” for steps you do not practise and add your vineyard’s own steps below.')])}),
   regeneracion: ()=>({
     que: _li([T('Ocho perillas de 0 a 4: labranza, cubierta, diversidad, raíces vivas, animales, insumos de síntesis, materia orgánica y saber local.','Eight 0–4 knobs: tillage, cover, diversity, living roots, animals, synthetic inputs, organic matter and local knowledge.')]),
     donde: T('Tus respuestas del Bloque 5 (la app sugiere un valor) y, si los tienes, tus análisis de suelo.','Your Block 5 answers (the app suggests a value) and, if you have them, your soil tests.'),

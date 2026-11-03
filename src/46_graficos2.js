@@ -108,7 +108,7 @@ function sumaResta(comp){ const W=620, fila=44, L=120, H=COMP.length*fila+40, mx
 /* Barras por paso: índice de sostenibilidad tradicional e innovado */
 function barrasPasos(pp){ const W=980, H=280, L=40, B=40, n=pp.length, bw=(W-L-10)/n; const Y=(v)=>H-B-(H-B-14)*v;
   let s=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img">`; [0,.4,.5,.6,1].forEach(t=>{ s+=`<line class="grid" x1="${L}" y1="${Y(t)}" x2="${W-6}" y2="${Y(t)}" ${t===.5?'stroke-dasharray="4 4"':''}/><text x="${L-6}" y="${Y(t)+4}" text-anchor="end" font-size="10.5" class="m">${f1(t,1)}</text>`; });
-  pp.forEach((p,i)=>{ const x=L+i*bw; const b=PASOS[i]?colB(PASOS[i].b):'var(--primary)';
+  pp.forEach((p,i)=>{ const x=L+i*bw; const b=p.b?colB(p.b):'var(--primary)';
     if(p.trad!=null) s+=`<rect class="creceV" x="${x+2}" y="${Y(p.trad)}" width="${p.inn!=null?bw/2-3:bw-4}" height="${H-B-Y(p.trad)}" rx="2" fill="${b}" style="animation-delay:${i*12}ms" data-tip="${esc('<b>'+T('Paso','Step')+' '+p.n+'</b><br>'+T('Tradicional','Traditional')+': IS '+f1(p.trad,2)+(p.inn!=null?'<br>'+T('Innovado','Innovated')+': IS '+f1(p.inn,2):''))}"/>`;
     if(p.inn!=null) s+=`<rect class="creceV" x="${x+bw/2}" y="${Y(p.inn)}" width="${bw/2-3}" height="${H-B-Y(p.inn)}" rx="2" fill="var(--accent)" style="animation-delay:${i*12}ms"/>`;
     s+=`<text x="${x+bw/2}" y="${H-B+14}" text-anchor="middle" font-size="9.5" class="m">${p.n}</text>`; });
