@@ -3,6 +3,8 @@ Uso:  python armar.py          → ../../instructivo-productor.html y ../../inst
 Las capturas se toman con capturar.py (Edge sin interfaz) y se guardan en ../img/<id>-<idioma>.jpg.
 Los PDF se imprimen con pdf.py."""
 import json, os, re, subprocess, sys
+from enlaces_web import web   # enlaces públicos (no localhost) en el HTML y en los PDF
+APP_WEB = 'https://hectortecumshe-ai.github.io/RatioVina/'
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, '..', '..'))
@@ -11,7 +13,7 @@ VERSION_APP = '0.4.0'
 EDICION = ('1.ª edición, actualizada', '1st edition, updated')
 FECHA = ('noviembre de 2026', 'November 2026')
 DOI_APP = '10.5281/zenodo.23439305'
-DOI_GUIA = {'productor': '10.5281/zenodo.23904214', 'cientifico': '10.5281/zenodo.23904215'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
+DOI_GUIA = {'productor': '10.5281/zenodo.24048802', 'cientifico': '10.5281/zenodo.24048803'}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
 ISBN = {'productor': ('', ''), 'cientifico': ('', '')}  # ← (ISBN impreso o PDF ES, ISBN PDF EN) cuando el INDAUTOR los asigne
 CITA_AUT = ('Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., y Barrera-Guzmán, L. Á.', 'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., &amp; Barrera-Guzmán, L. Á.')
 AUTORES = 'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Luis Ángel Barrera-Guzmán'
@@ -241,7 +243,7 @@ def productor():
     html = pagina('productor', cuerpo, t_es, t_en, 'Instructivo del Productor', 'Producer Guide', 'RatioVina-Instructivo-Productor.pdf', 'RatioVina-Producer-Guide.pdf',
                   {'leer': ['Para empezar', 'Getting started'], 'b1': ['Los quince bloques', 'The fifteen blocks'], 'documentar': ['Consulta', 'Reference']}, tp.GLOS,
                   'Instructivo del Productor de Ratio Viña: documenta el conocimiento local de la vid de tu viñedo, con el caso de Mata de Zarza, Veracruz. · Ratio Viña Producer Guide.')
-    open(os.path.join(RAIZ, 'instructivo-productor.html'), 'w', encoding='utf-8', newline='\n').write(html)
+    open(os.path.join(RAIZ, 'instructivo-productor.html'), 'w', encoding='utf-8', newline='\n').write(web(html, APP_WEB))
     print('instructivo-productor.html', round(len(html.encode('utf-8')) / 1024), 'KB')
 
 
@@ -255,7 +257,7 @@ def cientifico():
     html = pagina('cientifico', cuerpo, t_es, t_en, 'Instructivo del Científico', 'Scientist Guide', 'RatioVina-Instructivo-Cientifico.pdf', 'RatioVina-Scientist-Guide.pdf',
                   {'leer': ['Preliminares', 'Front matter'], 'datos': ['Método', 'Method'], 'validacion': ['Evidencia y uso', 'Evidence and use']}, tc.GLOS,
                   'Instructivo del Científico de Ratio Viña: modelo, ecuaciones, validación y reproducibilidad. · Ratio Viña Scientist Guide.')
-    open(os.path.join(RAIZ, 'instructivo-cientifico.html'), 'w', encoding='utf-8', newline='\n').write(html)
+    open(os.path.join(RAIZ, 'instructivo-cientifico.html'), 'w', encoding='utf-8', newline='\n').write(web(html, APP_WEB))
     print('instructivo-cientifico.html', round(len(html.encode('utf-8')) / 1024), 'KB')
 
 
