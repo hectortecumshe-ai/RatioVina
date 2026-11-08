@@ -1,0 +1,49 @@
+{
+ "productor": {
+  "es": {
+   "title": "Ratio Viña: Instructivo del Productor (1.ª edición, versión 0.4.0)",
+   "description": "Instructivo en español para viticultores, técnicos y encuestadores de Ratio Viña 0.4.0, aplicación libre para un estudio nacional del conocimiento local de la vid en México como sistema complejo adaptativo. Recorre los 15 bloques con un caso real publicado: el establecimiento de uva de mesa (Perlette, Flame Seedless y Summer Royal) en una parcela cooperante de 1 ha en Mata de Zarza, Puente Nacional, Veracruz (Mojica-Zárate et al., 2026, UACh): historial del viñedo, clima vitícola (Winkler, Huglin y frescor nocturno), cuestionario base con la etapa de establecimiento y manejo flexible, regeneración, riesgo, red y modelo 3D, sostenibilidad, prospectiva, informe y atlas nacional. Incluye guía de entrevista, hojas de campo imprimibles, problemas frecuentes y glosario. 1.ª edición, noviembre de 2026. La versión en inglés (Producer Guide) es un registro aparte con su propio DOI."
+  },
+  "en": {
+   "title": "Ratio Viña: Producer Guide (1st edition, version 0.4.0)",
+   "description": "English guide for growers, technicians and survey staff using Ratio Viña 0.4.0, a free app for a national study of local grapevine knowledge in Mexico as a complex adaptive system. It walks through the 15 blocks with a real published case: table-grape establishment (Perlette, Flame Seedless and Summer Royal) on a 1 ha cooperating plot in Mata de Zarza, Puente Nacional, Veracruz (Mojica-Zárate et al., 2026, UACh): vineyard history, viticultural climate (Winkler, Huglin and cool nights), baseline questionnaire with the establishment stage and flexible management, regeneration, risk, network and 3D model, sustainability, outlook, report and national atlas. It includes an interview guide, printable field sheets, troubleshooting and a glossary. 1st edition, November 2026. The Spanish version (Instructivo del Productor) is a separate record with its own DOI.",
+   "keywords": [
+    "Ratio Viña",
+    "user guide",
+    "grapevine",
+    "table grape",
+    "vineyard establishment",
+    "Winkler index",
+    "complex adaptive systems",
+    "local knowledge",
+    "national atlas",
+    "sustainability",
+    "Veracruz",
+    "Mexico"
+   ]
+  }
+ },
+ "cientifico": {
+  "es": {
+   "title": "Ratio Viña: Instructivo del Científico (1.ª edición, versión 0.4.0)",
+   "description": "Instructivo en español para investigación y docencia de Ratio Viña 0.4.0: modelo de datos con la etapa de establecimiento, índices de clima vitícola (Winkler, Huglin, frescor nocturno) con datos del reanálisis ERA5, red ponderada y su estadística, cladograma, modelo 3D e importancia de los nodos, sostenibilidad, regeneración, riesgo, modelo de escenarios, agregación del atlas nacional, validación frente a NetworkX y SciPy con el caso publicado de Mata de Zarza, Veracruz, reproducibilidad y ejemplo resuelto a mano. 1.ª edición, noviembre de 2026. La versión en inglés (Scientist Guide) es un registro aparte con su propio DOI."
+  },
+  "en": {
+   "title": "Ratio Viña: Scientist Guide (1st edition, version 0.4.0)",
+   "description": "English guide for research and teaching with Ratio Viña 0.4.0: data model with the establishment stage, viticultural climate indices (Winkler, Huglin, cool nights) with ERA5 reanalysis data, weighted network and its statistics, cladogram, 3D model and node importance, sustainability, regeneration, risk, scenario model, national-atlas aggregation, validation against NetworkX and SciPy with the published Mata de Zarza, Veracruz case, reproducibility and a worked example by hand. 1st edition, November 2026. The Spanish version (Instructivo del Científico) is a separate record with its own DOI.",
+   "keywords": [
+    "Ratio Viña",
+    "scientist guide",
+    "grapevine",
+    "viticultural climate",
+    "Winkler index",
+    "Huglin index",
+    "network analysis",
+    "complex adaptive systems",
+    "validation",
+    "reproducibility",
+    "Mexico"
+   ]
+  }
+ }
+}
