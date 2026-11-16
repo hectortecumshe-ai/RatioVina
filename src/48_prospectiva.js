@@ -1,6 +1,6 @@
 "use strict";
 /* =====================================================================
-   A. CORRELACIONES POR ELEMENTO (Bloque 11)
+   A. CORRELACIONES POR ELEMENTO (Bloque 12)
    φ = correlación de Pearson entre los vectores de incidencia (0/1) de dos
    elementos en las actividades del sistema (la misma de la matriz del Tablero).
    ===================================================================== */
@@ -78,7 +78,7 @@ const IND_PROSP = [
   {k:'Pr', n:E('Precio real del producto','Real product price'), u:E('índice','index'), d:0},
   {k:'C', n:E('Costo de producción por ha','Production cost per ha'), u:E('índice','index'), d:0},
   {k:'rel', n:E('Ingreso bruto ÷ costo','Gross income ÷ cost'), u:E('índice, año 0 = 100','index, year 0 = 100'), d:0},
-  {k:'neto', n:E('Ingreso neto por ha','Net income per ha'), u:E('$ / ha (Bloque 9)','$ / ha (Block 9)'), d:0},
+  {k:'neto', n:E('Ingreso neto por ha','Net income per ha'), u:E('$ / ha (Bloque 10)','$ / ha (Block 10)'), d:0},
   {k:'Ld', n:E('Mano de obra familiar disponible','Available family labour'), u:E('índice; la línea punteada es la requerida','index; dotted line is the labour required'), d:0},
   {k:'A', n:E('Adopción de innovaciones','Innovation adoption'), u:E('% de las actividades','% of activities'), d:0},
   {k:'IS', n:E('Índice de sostenibilidad','Sustainability index'), u:E('0–1','0–1'), d:2},
@@ -86,7 +86,7 @@ const IND_PROSP = [
   {k:'RG', n:E('Índice de riesgo','Risk index'), u:E('0–100 (Bloque 7)','0–100 (Block 7)'), d:0}
 ];
 function graficaProsp(sim, k){ const W=420, H=250, L=54, B=36, R=14, Tp=14, ser=sim.res.map(r=>r.serie.map(x=>x[k]));
-  if(ser[0][0]==null) return `<p class="sindato">${T('Captura el ingreso y el costo por hectárea en el Bloque 9 (Recursos financieros) para ver el ingreso neto en pesos.','Enter income and cost per hectare in Block 9 (Financial resources) to see net income in pesos.')}</p>`;
+  if(ser[0][0]==null) return `<p class="sindato">${T('Captura el ingreso y el costo por hectárea en el Bloque 10 (Recursos financieros) para ver el ingreso neto en pesos.','Enter income and cost per hectare in Block 10 (Financial resources) to see net income in pesos.')}</p>`;
   const extra=k==='Ld'?sim.res.map(r=>r.serie.map(x=>x.Ln)):[]; const all=[...ser.flat(),...extra.flat()];
   let mn=Math.min(...all), mx=Math.max(...all); if(k==='IS'){ mn=0; mx=1; } else if(k==='A'||k==='IR'||k==='RG'){ mn=0; mx=100; } else { if(mx-mn<1e-9){ mn-=Math.abs(mn)*.05||1; mx+=Math.abs(mx)*.05||1; } const pad=(mx-mn)*.08; mn-=pad; mx+=pad; }
   const X=t=>L+(W-L-R)*t/10, Yp=v=>Tp+(H-Tp-B)*(1-(v-mn)/(mx-mn));
@@ -147,7 +147,7 @@ function renderProspectiva(el){ const sim=simularProspectiva(), P=sim.P, lec=lec
    P(t) = 100·(1+g<sub>P</sub>)<sup>t</sup> ; C(t) = 100·(1+g<sub>C</sub>)<sup>t</sup>·[1 − s<sub>C</sub>·(A − a₀)] ; ${T('ingreso ÷ costo','income ÷ cost')} = 100·(P·Y/100)/C<br>
    L<sub>disp</sub>(t) = (1+g<sub>L</sub>)<sup>t</sup> ; L<sub>req</sub>(t) = 1 − r<sub>L</sub>·(A − a₀) ; ${T('déficit','shortfall')} = max(0, L<sub>req</sub> − L<sub>disp</sub>)/L<sub>req</sub><br>
    IR(t) = IR₀ + 0.5·(1 − IR₀)·(A − a₀) ; L<sub>ext,ef</sub> = L<sub>ext</sub>·(1 − 0.5·IR₀) ; ${T('riesgo','risk')}(t): P<sub>clima</sub> + 5·(p(t) − p₀) ${T('y CA con IR(t)','and CA with IR(t)')}<br>
-   IS(t) = IS<sub>trad</sub>·(1 − A) + IS<sub>inn</sub>·A ${T('(medias de tus actividades, Bloque 12)','(means of your activities, Block 12)')}</div>
+   IS(t) = IS<sub>trad</sub>·(1 − A) + IS<sub>inn</sub>·A ${T('(medias de tus actividades, Bloque 13)','(means of your activities, Block 13)')}</div>
    <p class="nota">a₀ = ${fmt(sim.a0,3)} · IS<sub>trad</sub> = ${fmt(sim.ISt,3)} · IS<sub>inn</sub> = ${sim.ISi==null?'—':fmt(sim.ISi,3)} · β = ${fmt(P.beta,1)} %/°C. ${T('La elasticidad 0.5 del rendimiento al déficit de mano de obra, el amortiguamiento 0.5 de las pérdidas por la regeneración y la ganancia 0.5 de regeneración por adopción son supuestos.','The 0.5 elasticity of yield to labour shortfall, the 0.5 damping of losses by regeneration and the 0.5 regeneration gain from adoption are assumptions.')} IR₀ = ${fmt(sim.IR0,2)}.</p>
    <p class="fuente">${T('Fuentes','Sources')}: IPCC (2018), SR1.5, SPM A.1 · Zhao C, et al. (2017) PNAS 114(35): 9326–9331 · Rogers EM (2003) · Godet M, Durance P (2007).</p></div>
   ${siguiente('prospectiva')}`;

@@ -1,6 +1,6 @@
 "use strict";
 /* =====================================================================
-   Bloque 15 · ATLAS NACIONAL DEL CONOCIMIENTO LOCAL DE LA VID
+   Bloque 16 · ATLAS NACIONAL DEL CONOCIMIENTO LOCAL DE LA VID
    ---------------------------------------------------------------------
    Sin servidor ni terceros: cada localidad guarda su proyecto (.vina.json)
    y aquí se juntan muchos. De cada archivo se calcula un resumen con las
@@ -34,6 +34,7 @@ function resumenProyecto(est, archivo, ref){ return conEstado(est, ref, ()=>{
     resp, red:R?{v:R.aristas.map(x=>[x.a,x.b]), nombres}:null, lleno:avanceTotal()}; }); }
 /* Archivos que entiende el atlas: proyecto de Ratio Viña (.vina.json), proyecto de uva de Ratio Telar, o un atlas consolidado */
 function atlasLeerArchivo(nombre, texto){ const d=JSON.parse(texto);
+  if(d && d.lote && Array.isArray(d.entrevistas)) return d.entrevistas.flatMap((e,i)=>atlasLeerArchivo(nombre+' #'+(i+1), JSON.stringify({estado:e.estado})));
   if(d && d.atlas && Array.isArray(d.localidades)) return d.localidades.filter(x=>x&&x.resp);
   if(d && d.estado && d.estado.manejo){ let st=d.estado; if(st.cultivo && st.cultivo!=='uva') throw new Error(T('no es un proyecto de vid','not a grapevine project'));
     if(!st.formato) st=migrarV2(Object.assign({}, st, {cultivo:'uva'}));
@@ -67,7 +68,7 @@ function mapaAtlas(L){ const W=MAPA_MX.w, H=MAPA_MX.h, cveDe=Object.fromEntries(
   return s+'</svg>'; }
 const celdaF = f=> f==null?`<td class="hc vacia">—</td>`:`<td class="hc" style="--f:${f.toFixed(3)}" title="${fmt(100*f,0)} %">${fmt(100*f,0)}</td>`;
 
-/* ---------------- Bloque 15 ---------------- */
+/* ---------------- Bloque 16 ---------------- */
 function renderAtlas(el){ const L=atlasLeer(), orden=renderAtlas.orden||'paso', ab=renderAtlas.ab||false;
   const P=L.length?practicasAtlas(L):[], RN=L.length?redNacional(L):null, stN=RN&&RN.R.nodos.length?estadisticaRed(RN.R):null, PR=porRegion(L);
   const razas={}; L.forEach(x=>{ const k=x.vari||T('Variedad sin especificar','Variety not specified'); razas[k]=(razas[k]||0)+1; });
@@ -76,10 +77,10 @@ function renderAtlas(el){ const L=atlasLeer(), orden=renderAtlas.orden||'paso', 
   const estados=new Set(L.map(x=>x.edo).filter(Boolean)), regiones=new Set(L.map(x=>x.reg).filter(Boolean)), innov=L.flatMap(x=>x.inn.map(i=>({...i, loc:x.loc||x.nombre, edo:x.edoN})));
   const Pord=[...P].sort(orden==='mas'?(a,b)=>(b.f??-1)-(a.f??-1):orden==='menos'?(a,b)=>(a.f??2)-(b.f??2):(a,b)=>a.paso-b.paso||a.cod.localeCompare(b.cod)), Pver=ab?Pord:Pord.slice(0,25);
   el.innerHTML=`${cabecera('atlas',T('El atlas junta los archivos de muchos viñedos para leer el conocimiento local de la vid a escala nacional: dónde se documentó, en qué clima, qué prácticas se conservan en cada región y en cada destino, qué variedades se cultivan y cómo se teje la red nacional. Todo ocurre en este navegador; ningún dato sale a un servidor.','The atlas combines files from many vineyards to read local grapevine knowledge at national scale: where it was documented, in which climate, which practices persist in each region and destination, which varieties are grown and how the national network is woven. Everything happens in this browser; no data goes to a server.'))}
-  ${consejo(T('Cada encuestador llena un viñedo y lo guarda en el Bloque 14 con «Guardar proyecto». Quien coordina el estudio reúne esos archivos y los agrega aquí, varios a la vez. El atlas se puede exportar como un solo archivo para compartirlo o seguir agregando.','Each surveyor fills in one vineyard and saves it in Block 14 with “Save project”. The study coordinator gathers those files and adds them here, several at once. The atlas can be exported as a single file to share it or keep adding.'),
+  ${consejo(T('Cada encuestador llena un viñedo y lo guarda en el Bloque 15 con «Guardar proyecto». Quien coordina el estudio reúne esos archivos y los agrega aquí, varios a la vez. El atlas se puede exportar como un solo archivo para compartirlo o seguir agregando.','Each surveyor fills in one vineyard and saves it in Block 15 with “Save project”. The study coordinator gathers those files and adds them here, several at once. The atlas can be exported as a single file to share it or keep adding.'),
     T('Frecuencia de una práctica: f = localidades que respondieron «sí» ÷ localidades que respondieron (sí o no); lo no respondido no entra al denominador. Red nacional: peso de un vínculo = fracción de localidades cuya red (sin PM) lo contiene. Los índices regionales son medias simples de los valores de cada localidad.','Practice frequency: f = localities answering “yes” ÷ localities answering (yes or no); unanswered items stay out of the denominator. National network: link weight = share of localities whose network (without PM) contains it. Regional indices are simple means of each locality’s values.'))}
   <div class="card no-print"><div class="row" style="gap:8px;flex-wrap:wrap">
-    <button class="btn" id="aArch">＋ ${T('Agregar archivos de localidades','Add locality files')}</button><input type="file" id="aFile" accept=".json,application/json" multiple hidden>
+    <button class="btn" id="aArch">＋ ${T('Agregar archivos de localidades','Add locality files')}</button><input type="file" id="aFile" accept=".json,.txt,application/json,text/plain" multiple hidden>
     <button class="btn ghost" id="aMio" ${EJ?'disabled':''}>${T('Agregar mi proyecto actual','Add my current project')}</button>
     ${L.length?`<button class="btn ghost" id="aExp">⤓ ${T('Exportar atlas','Export atlas')}</button><button class="btn ghost" id="aCsvL">${T('CSV de localidades','Localities CSV')}</button><button class="btn ghost" id="aCsvP">${T('CSV de prácticas','Practices CSV')}</button><button class="btn ghost danger" id="aVac">${T('Vaciar el atlas','Empty the atlas')}</button>`:''}</div>
     <p class="nota">${T('Acepta proyectos de Ratio Viña (.vina.json), proyectos de uva de Ratio Telar (.telar.json) y atlas exportados. Si un archivo ya estaba, se actualiza.','Accepts Ratio Viña projects (.vina.json), Ratio Telar grape projects (.telar.json) and exported atlases. If a file was already there, it is updated.')}</p></div>

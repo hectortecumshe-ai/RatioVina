@@ -1,5 +1,5 @@
 // =====================================================================
-// 46b_modelo3d.js — modelo 3D del sistema complejo adaptativo (Bloque 9)
+// 46b_modelo3d.js — modelo 3D del sistema complejo adaptativo (Bloque 10)
 // Capas apiladas de abajo arriba: entorno → entradas → agentes y conocimiento
 // → manejo (5B) → salidas, con el halo de la emergencia encima. Los nodos y
 // vínculos son los de la red real del proyecto; las líneas punteadas son las

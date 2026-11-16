@@ -1,6 +1,6 @@
 "use strict";
 /* =====================================================================
-   1e. ELEMENTOS DEL SISTEMA COMPLEJO ADAPTATIVO DEL VIÑEDO (Bloque 9)
+   1e. ELEMENTOS DEL SISTEMA COMPLEJO ADAPTATIVO DEL VIÑEDO (Bloque 10)
    Catálogo base de elementos de un viñedo en México: actores, instituciones,
    insumos, equipo, recursos naturales y financieros, conocimientos, políticas,
    perturbaciones y productos. No proviene de un Stack publicado: es una
@@ -161,5 +161,5 @@ const IMPACTO = {
   GOT:{v:[0,1,0,0,0], r:E('El riego por goteo usa el agua con más eficiencia.','Drip irrigation uses water more efficiently.')},
   LAB:{v:[1,1,0,0,0], r:E('Fertilizar y regar según análisis evita excesos.','Fertilising and irrigating by analysis avoids excess.')}
 };
-/* Relación compartimento / indicador → ODS para el Bloque 13 (relación propuesta por Ratio Viña). */
+/* Relación compartimento / indicador → ODS para el Bloque 14 (relación propuesta por Ratio Viña). */
 const ODS_COMP = {2:[0,3], 6:[1], 13:[2], 15:[0,3,4]};

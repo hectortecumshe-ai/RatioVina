@@ -35,7 +35,7 @@ function actividades(){
   else Object.entries(S.manejo).forEach(([n,m])=> (m.inn||[]).forEach((x,i)=> out.push({paso:+n, b:'', cod:'N'+n+'.'+(i+1), n:E(x.t,x.t), tipo:'inn', el:x.el||[], imp:x.imp||null})));
   return out;
 }
-/* Valor de un elemento (Bloque 9): media ponderada de cuatro dimensiones 0–5, normalizada 0–1.
+/* Valor de un elemento (Bloque 10): media ponderada de cuatro dimensiones 0–5, normalizada 0–1.
    Si no se ha valorado, se usa su valor estructural: participación relativa en las actividades. */
 function participacion(){ const c={}; actividades().forEach(a=>a.el.forEach(id=>c[id]=(c[id]||0)+1)); return c; }
 function valorEl(id, part){ const v=S.valor[id], w=S.pesosValor;
@@ -101,7 +101,7 @@ function correlaciones(R, ids){ const acts=R.acts, N=acts.length; const inc=ids.
 function matrizCategorias(R){ const ks=Object.keys(CATS), cat=Object.fromEntries(R.nodos.map(d=>[d.id,d.cat])); const M=ks.map(()=>ks.map(()=>0));
   R.aristas.forEach(e=>{ const i=ks.indexOf(cat[e.a]), j=ks.indexOf(cat[e.b]); M[i][j]+=e.w; if(i!==j) M[j][i]+=e.w; }); return {ks, M}; }
 
-/* ---------- Sostenibilidad (Bloque 12) ----------
+/* ---------- Sostenibilidad (Bloque 13) ----------
    Impacto de una actividad en el compartimento c: s_c = recorte a [−2, 2] de Σ perfiles de sus elementos (o el valor editado).
    Índice de sostenibilidad de la actividad: IS = (1/5) Σ_c (s_c + 2)/4  ∈ [0, 1]   (0.5 = neutra). */
 function impactoAct(a){ if(a.imp) return a.imp.slice(); const v=[0,0,0,0,0]; a.el.forEach(id=>{ const p=IMPACTO[id]; if(p) p.v.forEach((x,c)=>v[c]+=x); }); return v.map(x=>Math.max(-2,Math.min(2,x))); }

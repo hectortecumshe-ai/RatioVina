@@ -62,7 +62,7 @@ function histograma(vals, opt={}){ const W=opt.w||460, H=230, L=40, B=34; if(!va
     `<text x="${L+i*bw+bw/2}" y="${H-B+14}" text-anchor="middle" font-size="10.5" class="m">${f0(i*ancho)}</text>${v?`<text x="${L+i*bw+bw/2}" y="${H-B-h-4}" text-anchor="middle" font-size="10.5">${v}</text>`:''}`; });
   return s+`<text x="${(L+W)/2}" y="${H-4}" text-anchor="middle" font-size="12" class="m">${T('vecinos por elemento','neighbours per element')}</text></svg>`; }
 
-/* Modelo esquemático del sistema complejo adaptativo (Bloque 10) */
+/* Modelo esquemático del sistema complejo adaptativo (Bloque 11) */
 function modeloSCA(R){ const W=980, H=560; const cnt=(c)=>R.nodos.filter(d=>d.cat===c).length;
   const caja=(x,y,w,h,col,tit,sub,cl='')=>`<g class="caja ${cl}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="14" fill="${col}" fill-opacity=".13" stroke="${col}" stroke-width="2"/><text x="${x+w/2}" y="${y+24}" text-anchor="middle" font-size="15" font-weight="700" style="fill:${col}">${esc(tit)}</text><text x="${x+w/2}" y="${y+44}" text-anchor="middle" font-size="12" class="m">${esc(sub)}</text></g>`;
   const fl=(d,col='var(--border-strong)',das='',cl='flujo')=>`<path d="${d}" fill="none" stroke="${col}" stroke-width="2.6" ${das?`stroke-dasharray="${das}"`:''} marker-end="url(#fl)" class="${cl}"/>`;

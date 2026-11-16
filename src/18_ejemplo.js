@@ -75,7 +75,7 @@ const GUIA = {
       T('Califica el valor aunque el elemento no tenga precio (el saber, la familia, el suelo).','Rate value even if the element has no price (knowledge, family, soil).')])}),
   formulacion: ()=>({
     que: _li([T('Nada que capturar: aquí se teje la red con lo que ya llenaste.','Nothing to enter: the network is woven from what you already filled in.')]),
-    donde: T('Los bloques 1 a 9.','Blocks 1 to 9.'),
+    donde: T('Los bloques 1 a 10.','Blocks 1 to 10.'),
     pasos: _ol([T('Toca «Tejer el sistema».','Tap “Weave the system”.'),
       T('Si algo se ve raro, vuelve al bloque correspondiente y corrige.','If something looks odd, go back to the relevant block and fix it.')])}),
   tablero: ()=>({
@@ -89,7 +89,7 @@ const GUIA = {
     donde: T('Tus registros de combustible y fertilización del ciclo.','Your fuel and fertilising records for the cycle.'),
     pasos: _ol([T('Revisa el efecto de cada labor sobre suelo, agua, atmósfera, vegetación y fauna.','Review each task’s effect on soil, water, atmosphere, vegetation and fauna.'),
       T('Captura los datos de la huella.','Enter the footprint data.'),
-      T('Completa el Bloque 9 para la dimensión económica de Sarandón.','Complete Block 9 for Sarandón’s economic dimension.')])}),
+      T('Completa el Bloque 10 para la dimensión económica de Sarandón.','Complete Block 10 for Sarandón’s economic dimension.')])}),
   prospectiva: ()=>({
     que: _li([T('Supuestos de cada escenario: precio, costo, calentamiento, años extremos, mano de obra y adopción.','Each scenario’s assumptions: price, cost, warming, extreme years, labour and adoption.')]),
     donde: T('Tu experiencia y la de tu región; los valores iniciales son supuestos editables.','Your and your region’s experience; starting values are editable assumptions.'),

@@ -9,7 +9,7 @@
    - Los bloques de resultados sin actividades muestran qué falta en vez de
      resultados vacíos.
    ===================================================================== */
-const BLOQUES_LLENAR = ['cultivo','region','clima','requerimientos','manejo','regeneracion','riesgos','elementos','precios'];
+const BLOQUES_LLENAR = ['cultivo','region','clima','requerimientos','manejo','regeneracion','riesgos','resiliencia','elementos','precios'];
 const BLOQUES_RESULTADO = ['formulacion','tablero','sostenible','prospectiva','informe'];
 function avance(id){ let h=0, t=0, nota='';
   if(id==='cultivo'){ const c=[!!S.vidDestino, !!S.vidVar, !!S.vidCond, !!S.sistema, S.tipoUP!==''&&S.tipoUP!=null, +S.superficie>0]; t=c.length; h=c.filter(Boolean).length; }
@@ -20,6 +20,7 @@ function avance(id){ let h=0, t=0, nota='';
     else { t=1; h=actividades().length?1:0; } }
   else if(id==='regeneracion'){ t=REGEN_IND.length; h=Object.keys(S.regen||{}).filter(k=>S.regen[k]!==''&&S.regen[k]!=null).length; }
   else if(id==='riesgos'){ t=RIESGOS.length; const U=S.riesgo||{}; h=RIESGOS.filter(d=>{ const u=U[d.id]||{}; return u.off===true||u.ok===true||(u.p!=null&&u.i!=null); }).length; }
+  else if(id==='resiliencia'){ const z=resilAgro(); t=z.nTot; h=z.nHecho; }
   else if(id==='elementos'){ t=1; h=(S.revisado||{}).elementos?1:0; }
   else if(id==='precios'){ const ids=Object.keys(participacion()); t=ids.length; h=ids.filter(k=>{ const v=S.valor[k]||{}, p=S.precio[k]||{}; return ['eco','uso','cul','eia'].some(d=>v[d]!==''&&v[d]!=null) || (p.p!==''&&p.p!=null); }).length;
     if(!t) nota=T('primero responde el Bloque 5','first answer Block 5'); }

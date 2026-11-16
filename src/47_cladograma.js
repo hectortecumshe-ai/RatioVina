@@ -1,6 +1,6 @@
 "use strict";
 /* =====================================================================
-   Cladograma del vecino más cercano (Bloque 11).
+   Cladograma del vecino más cercano (Bloque 12).
    Distancia entre dos elementos = camino más corto en la red ponderada,
    con longitud de cada vínculo = 1/peso (la misma que usan cercanía e
    intermediación; Brandes, 2001). Agrupamiento jerárquico aglomerativo por
@@ -74,10 +74,10 @@ function tarjetaCladograma(R){
       <div class="tbl-c" style="max-height:420px"><table class="tbl"><thead><tr><th>${T('Elemento','Element')}</th><th>${T('Vecino más cercano','Nearest neighbour')}</th><th class="r">${T('Distancia','Distance')}</th></tr></thead><tbody>
       ${vn.map(v=>{ const a=C.nodos[v.i], b=C.nodos[v.j]; return `<tr><td><span style="color:${a.col}">${CATS[a.cat].sym}</span> ${esc(a.nombre)}</td><td><span style="color:${b.col}">${CATS[b.cat].sym}</span> ${esc(b.nombre)}${v.mutuo?` <span class="badge ok" title="${T('vecinos mutuos: cada uno es el más cercano del otro','mutual neighbours: each is the other’s nearest')}">↔</span>`:''}</td><td class="r">${fmt(v.d,3)}</td></tr>`; }).join('')}
       </tbody></table></div>
-      <p class="nota">↔ ${T('vecinos mutuos: cada uno es el más cercano del otro.','mutual neighbours: each is the other’s nearest.')}${C.U.some(u=>u[2]>=19.99)?' '+T('Las uniones a distancia 20 son elementos que no participan en ninguna actividad capturada ni tienen valor asignado en el Bloque 9: los liga solo un vínculo estructural, con el peso mínimo (0.05).','Joins at distance 20 are elements that take part in no recorded activity and have no value set in Block 9: only a structural tie with the minimum weight (0.05) links them.'):''}${C.desconectados?' '+T('Hay elementos sin camino entre sí; se les asignó una distancia de '+fmt(C.tope,2)+' (115 % de la mayor observada).','Some elements have no path between them; they were given a distance of '+fmt(C.tope,2)+' (115 % of the largest observed).'):''}</p>
+      <p class="nota">↔ ${T('vecinos mutuos: cada uno es el más cercano del otro.','mutual neighbours: each is the other’s nearest.')}${C.U.some(u=>u[2]>=19.99)?' '+T('Las uniones a distancia 20 son elementos que no participan en ninguna actividad capturada ni tienen valor asignado en el Bloque 10: los liga solo un vínculo estructural, con el peso mínimo (0.05).','Joins at distance 20 are elements that take part in no recorded activity and have no value set in Block 10: only a structural tie with the minimum weight (0.05) links them.'):''}${C.desconectados?' '+T('Hay elementos sin camino entre sí; se les asignó una distancia de '+fmt(C.tope,2)+' (115 % de la mayor observada).','Some elements have no path between them; they were given a distance of '+fmt(C.tope,2)+' (115 % of the largest observed).'):''}</p>
       <p class="nota sci">${T('Enlace simple sobre distancias de camino más corto (1/peso). Correlación cofenética','Single linkage on shortest-path distances (1/weight). Cophenetic correlation')}: <b>${C.r==null?'—':fmt(C.r,3)}</b> (Sokal y Rohlf, 1962) · n = ${C.nodos.length}.</p></div></div></div>`; }
 
-/* Versión para el Informe (Bloque 14): cladograma, vecinos más cercanos y CSV de uniones; se imprime completo. */
+/* Versión para el Informe (Bloque 15): cladograma, vecinos más cercanos y CSV de uniones; se imprime completo. */
 function informeCladograma(R){
   const sub=renderInforme.clado||renderTablero.clado||'actinst', C=datosCladograma(R, sub);
   const opc={actores:T('Actores','Actors'), actinst:T('Actores e instituciones','Actors and institutions'), todos:T('Todos los elementos','All elements')};
