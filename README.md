@@ -10,7 +10,7 @@
 
 Está hecha para productores y para científicos, en español y en inglés.
 
-## Qué contiene (versión 0.4.0)
+## Qué contiene (versión 0.5.0)
 
 | Bloque | Contenido |
 |---|---|
@@ -30,6 +30,12 @@ Está hecha para productores y para científicos, en español y en inglés.
 ## Caso publicado de referencia
 
 **Mata de Zarza, Puente Nacional, Veracruz**: establecimiento de uva de mesa (Perlette, Flame Seedless y Summer Royal) en una parcela cooperante de 1 ha, de enero de 2025 a febrero de 2026, según la *Guía práctica para el establecimiento de uva en Mata de Zarza, Veracruz* (Mojica-Zárate et al., 2026; UACh, ISBN 978-607-12-0712-8). Se consulta en un **modo ejemplo** con franja naranja que nunca se guarda ni toca el proyecto del usuario; la app sigue arrancando en blanco. Las temperaturas del caso son del reanálisis ERA5 1991–2020 (Hersbach et al., 2020), porque en la localidad no hay estación. Su red se verificó con NetworkX y SciPy (`pruebas/verificar_matazarza.py`).
+
+## Novedades de la versión 0.5.0
+
+- **Nuevo bloque 8 · Resiliencia.** Los 13 indicadores de comportamiento de la resiliencia del agroecosistema (Cabell y Oelofse, 2012) en perillas 0–4 y el riesgo frente a un evento climático, Riesgo = Vulnerabilidad × Amenaza / Capacidad de respuesta (Nicholls y Altieri, 2013, en Altieri et al., 2015). Los bloques siguientes se renumeran.
+- **Mis entrevistas y Enviar al administrador.** Cada encuestador guarda en su teléfono todas las entrevistas que haga, aunque no haya internet; una entrevista nueva no borra las anteriores. Cada una lleva encuestador, código del entrevistado y consentimiento informado. Con «Enviar al administrador» las elegidas salen en un solo archivo por WhatsApp o correo (menú de compartir del teléfono); lo no enviado queda pendiente y la app lo recuerda. El administrador recibe los archivos, descarga una tabla consolidada (CSV) para su análisis colectivo o las pasa al Atlas nacional.
+- **Funciona sin conexión.** Después de abrirla una vez con internet, la app se abre en el teléfono sin señal.
 
 ## Novedades de la versión 0.4.0
 
