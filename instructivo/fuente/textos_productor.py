@@ -43,14 +43,19 @@ GLOS = [['Actividad', 'Activity', 'Lo que se hace dentro de un paso de manejo (p
   ['Sistema complejo adaptativo', 'Complex adaptive system', 'Conjunto de agentes y recursos que interactúan, aprenden y se adaptan; de sus relaciones surgen comportamientos que nadie diseñó.', 'A set of interacting agents and resources that learn and adapt; behaviours nobody designed emerge from their relationships.'],
   ['Sostenibilidad', 'Sustainability', 'Producir hoy sin comprometer la capacidad de producir mañana, en lo ambiental, lo económico y lo social.', 'Producing today without compromising the capacity to produce tomorrow, environmentally, economically and socially.'],
   ['Stack de conocimiento local', 'Local knowledge stack', 'Organización en capas del saber de una localidad sobre un cultivo: reglas, pasos y actividades (Díaz-José et al., 2026).', 'Layered organisation of a locality’s knowledge of a crop: rules, steps and activities (Díaz-José et al., 2026).'],
-  ['Valor', 'Value', 'Importancia de un elemento para el sistema en cuatro dimensiones: económica, de uso, cultural y ecológica. No es lo mismo que el precio.', 'An element’s importance to the system in four dimensions: economic, use, cultural and ecological. Not the same as price.']]
+  ['Valor', 'Value', 'Importancia de un elemento para el sistema en cuatro dimensiones: económica, de uso, cultural y ecológica. No es lo mismo que el precio.', 'An element’s importance to the system in four dimensions: economic, use, cultural and ecological. Not the same as price.'],
+  ["Resiliencia", "Resilience", "Capacidad del sistema de aguantar un golpe, reorganizarse y seguir. La app la mide con los trece rasgos de Cabell y Oelofse (2012).", "The system’s capacity to absorb a blow, reorganise and carry on. The app measures it with Cabell and Oelofse’s (2012) thirteen traits."],
+  ["Vulnerabilidad", "Vulnerability", "Qué tan expuesto está el sistema a un evento del clima por su pendiente, su paisaje y su suelo (Altieri et al., 2015).", "How exposed the system is to a climatic event because of its slope, landscape and soil (Altieri et al., 2015)."],
+  ["Capacidad de respuesta", "Response capacity", "Lo que el sistema y la familia tienen para resistir un evento y recuperarse: conservación de suelo, manejo del agua, diversidad y autosuficiencia.", "What the system and the family have to withstand an event and recover: soil conservation, water management, diversity and self-sufficiency."],
+  ["Mis entrevistas", "My interviews", "Lista de las entrevistas guardadas en el teléfono, enviadas o pendientes. Se abre con el botón de la hoja, arriba.", "List of the interviews saved on the phone, sent or pending. It opens with the sheet button at the top."],
+  ["Administrador", "Administrator", "Quien recibe las entrevistas de los encuestadores y las analiza juntas con la tabla consolidada.", "Whoever receives the interviewers’ files and analyses them together with the consolidated table."]]
 
 
 def fig_telar():
     W, H = 780, 300
-    fases = [(0, 5, 'Tu viñedo', 'Your vineyard', '#6b3fa0'), (5, 9, 'Evaluar', 'Assess', '#b8562e'), (9, 12, 'Tejer y leer', 'Weave and read', '#3f6fb0'), (12, 14, 'Futuro e informe', 'Future and report', '#8a3f5a'), (14, 15, 'Atlas', 'Atlas', '#2f5d50')]
+    fases = [(0, 5, 'Tu viñedo', 'Your vineyard', '#6b3fa0'), (5, 10, 'Evaluar', 'Assess', '#b8562e'), (10, 13, 'Tejer y leer', 'Weave and read', '#3f6fb0'), (13, 15, 'Futuro e informe', 'Future and report', '#8a3f5a'), (15, 16, 'Atlas', 'Atlas', '#2f5d50')]
     s = [f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="Ratio Viña">']
-    cw = (W - 40) / 15
+    cw = (W - 40) / len(BLOQUES)
     for a, b, es, en, col in fases:
         x0, x1 = 20 + a * cw, 20 + b * cw
         s.append(f'<rect x="{x0+3:.1f}" y="18" width="{x1-x0-6:.1f}" height="30" rx="8" fill="{col}" opacity=".14"/>')
@@ -59,7 +64,7 @@ def fig_telar():
         cx = 20 + i * cw + cw / 2
         s.append(f'<circle cx="{cx:.1f}" cy="120" r="22" fill="var(--b{i+1})"/><text x="{cx:.1f}" y="126" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">{i+1}</text>')
         s.append(f'<g transform="translate({cx:.1f} 156) rotate(40)">' + bi(bl[1], bl[2], x='0', y='0', font_size='12.5') + '</g>')
-        if i < 14:
+        if i < len(BLOQUES) - 1:
             s.append(f'<line x1="{cx+23:.1f}" y1="120" x2="{cx+cw-23:.1f}" y2="120" stroke="var(--line2)" stroke-width="2"/>')
     # flechas de retroalimentación
     def arco(i, j, es, en, y):
@@ -70,8 +75,8 @@ def fig_telar():
     s.append(arco(4, 5, 'actividades', 'activities', 64))
     s.append(arco(2, 6, 'clima → riesgo', 'climate → risk', 58))
     s.append('</svg>')
-    return fig(''.join(s), '<b>Los quince bloques.</b> Los bloques 1 a 5 describen tu viñedo; del 6 al 9 lo evalúas; en el 10 se teje la red, que lees en el 11 y el 12; el 13 mira al futuro, el 14 lo resume todo y el 15 junta muchos viñedos en el atlas nacional. Las flechas punteadas son ejemplos de cómo un bloque alimenta a otro.',
-               '<b>The fifteen blocks.</b> Blocks 1–5 describe your vineyard; 6–9 assess it; 10 weaves the network, which you read in 11 and 12; 13 looks to the future, 14 sums everything up and 15 combines many vineyards into the national atlas. Dashed arrows are examples of one block feeding another.')
+    return fig(''.join(s), '<b>Los dieciséis bloques.</b> Los bloques 1 a 5 describen tu viñedo; del 6 al 10 lo evalúas (regeneración, riesgos, resiliencia, elementos y su valor); en el 11 se teje la red, que lees en el 12 y el 13; el 14 mira al futuro, el 15 lo resume todo y el 16 junta muchos viñedos en el atlas nacional. Las flechas punteadas son ejemplos de cómo un bloque alimenta a otro.',
+               '<b>The sixteen blocks.</b> Blocks 1–5 describe your vineyard; 6–10 assess it (regeneration, risks, resilience, elements and their value); 11 weaves the network, which you read in 12 and 13; 14 looks to the future, 15 sums everything up and 16 combines many vineyards into the national atlas. Dashed arrows are examples of one block feeding another.')
 
 
 def fig_perilla():

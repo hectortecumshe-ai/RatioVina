@@ -9,11 +9,11 @@ APP_WEB = 'https://hectortecumshe-ai.github.io/RatioVina/'
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, '..', '..'))
 sys.path.insert(0, AQUI)
-VERSION_APP = '0.4.0'
-EDICION = ('1.ª edición, actualizada', '1st edition, updated')
+VERSION_APP = '0.5.0'
+EDICION = ('2.ª edición', '2nd edition')
 FECHA = ('noviembre de 2026', 'November 2026')
 DOI_APP = '10.5281/zenodo.23439305'
-DOI_GUIA = {'productor': {'es': '10.5281/zenodo.24049274', 'en': '10.5281/zenodo.24049278'}, 'cientifico': {'es': '10.5281/zenodo.24049282', 'en': '10.5281/zenodo.24049284'}}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
+DOI_GUIA = {'productor': {'es': '10.5281/zenodo.24510871', 'en': '10.5281/zenodo.24510878'}, 'cientifico': {'es': '10.5281/zenodo.24510879', 'en': '10.5281/zenodo.24510880'}}        # ← DOI propio de cada instructivo cuando Zenodo lo asigne
 ISBN = {'productor': ('', ''), 'cientifico': ('', '')}  # ← (ISBN impreso o PDF ES, ISBN PDF EN) cuando el INDAUTOR los asigne
 CITA_AUT = ('Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., y Barrera-Guzmán, L. Á.', 'Mojica-Zárate, H. T., Díaz-José, O., Sánchez-Moreno, E. A., Alejo-Bello, S., &amp; Barrera-Guzmán, L. Á.')
 AUTORES = 'Héctor Tecumshé Mojica-Zárate · Oscar Díaz-José · Edgar Arturo Sánchez-Moreno · Sergio Alejo-Bello · Luis Ángel Barrera-Guzmán'
@@ -31,17 +31,18 @@ BLOQUES = [  # id, es, en, minutos, resumen es, resumen en, frase rápida es, fr
  ('b5', 'Manejo', 'Management', '12 min', 'Del esqueje a la cosecha', 'From cutting to harvest', 'Responde sí o no a cada actividad, agrega innovaciones y fechas.', 'Answer yes or no to each activity, add innovations and dates.'),
  ('b6', 'Regeneración', 'Regeneration', '4 min', '¿Se regenera o se desgasta?', 'Regenerating or wearing out?', 'Confirma las ocho perillas y guarda una línea base.', 'Confirm the eight knobs and save a baseline.'),
  ('b7', 'Riesgos', 'Risks', '6 min', 'Probabilidad × impacto', 'Likelihood × impact', 'Desmarca lo que no aplica y mueve probabilidad, impacto y control.', 'Untick what does not apply and move likelihood, impact and control.'),
- ('b8', 'Elementos', 'Elements', '4 min', 'Quiénes y qué participan', 'Who and what takes part', 'Revisa actores, insumos y recursos; agrega los que falten.', 'Review actors, inputs and resources; add the missing ones.'),
- ('b9', 'Precio y valor', 'Price and value', '6 min', 'Lo que cuesta y lo que vale', 'What it costs and what it is worth', 'Anota precios por hectárea y califica el valor de 0 a 5.', 'Enter prices per hectare and rate value from 0 to 5.'),
- ('b10', 'Formulación', 'Formulation', '1 min', 'Tejer el sistema', 'Weave the system', '⚙ Tejer: la app arma la red del viñedo.', '⚙ Weave: the app builds the vineyard network.'),
- ('b11', 'Tablero', 'Dashboard', '5 min', 'Red, cladograma, calendario', 'Network, cladogram, calendar', 'Lee quién sostiene el sistema y quién está cerca de quién.', 'Read who holds the system together and who is close to whom.'),
- ('b12', 'Sostenibilidad', 'Sustainability', '4 min', 'Suelo, agua, ODS, huella', 'Soil, water, SDGs, footprint', 'Revisa qué suma, qué resta y el índice de Sarandón.', 'See what adds, what subtracts and Sarandón’s index.'),
- ('b13', 'Prospectiva', 'Outlook', '5 min', 'A 2, 5 y 10 años', 'At 2, 5 and 10 years', 'Compara los tres futuros y ajusta los supuestos.', 'Compare the three futures and adjust the assumptions.'),
- ('b14', 'Informe', 'Report', '2 min', 'PDF, CSV y proyecto', 'PDF, CSV and project', 'Imprime, exporta y guarda el archivo de tu viñedo.', 'Print, export and save your vineyard’s file.'),
- ('b15', 'Atlas', 'Atlas', '5 min', 'Muchos viñedos, un atlas', 'Many vineyards, one atlas', 'Junta los archivos de los viñedos y lee el país.', 'Combine vineyard files and read the country.'),
+ ('b8', 'Resiliencia', 'Resilience', '6 min', '¿Aguanta el golpe y se levanta?', 'Does it absorb the blow and recover?', 'Responde los trece rasgos y califica vulnerabilidad, amenaza y capacidad.', 'Answer the thirteen traits and rate vulnerability, threat and capacity.'),
+ ('b9', 'Elementos', 'Elements', '4 min', 'Quiénes y qué participan', 'Who and what takes part', 'Revisa actores, insumos y recursos; agrega los que falten.', 'Review actors, inputs and resources; add the missing ones.'),
+ ('b10', 'Precio y valor', 'Price and value', '6 min', 'Lo que cuesta y lo que vale', 'What it costs and what it is worth', 'Anota precios por hectárea y califica el valor de 0 a 5.', 'Enter prices per hectare and rate value from 0 to 5.'),
+ ('b11', 'Formulación', 'Formulation', '1 min', 'Tejer el sistema', 'Weave the system', '⚙ Tejer: la app arma la red del viñedo.', '⚙ Weave: the app builds the vineyard network.'),
+ ('b12', 'Tablero', 'Dashboard', '5 min', 'Red, cladograma, calendario', 'Network, cladogram, calendar', 'Lee quién sostiene el sistema y quién está cerca de quién.', 'Read who holds the system together and who is close to whom.'),
+ ('b13', 'Sostenibilidad', 'Sustainability', '4 min', 'Suelo, agua, ODS, huella', 'Soil, water, SDGs, footprint', 'Revisa qué suma, qué resta y el índice de Sarandón.', 'See what adds, what subtracts and Sarandón’s index.'),
+ ('b14', 'Prospectiva', 'Outlook', '5 min', 'A 2, 5 y 10 años', 'At 2, 5 and 10 years', 'Compara los tres futuros y ajusta los supuestos.', 'Compare the three futures and adjust the assumptions.'),
+ ('b15', 'Informe', 'Report', '2 min', 'PDF, CSV y proyecto', 'PDF, CSV and project', 'Imprime, exporta y guarda el archivo de tu viñedo.', 'Print, export and save your vineyard’s file.'),
+ ('b16', 'Atlas', 'Atlas', '5 min', 'Muchos viñedos, un atlas', 'Many vineyards, one atlas', 'Junta los archivos de los viñedos y lee el país.', 'Combine vineyard files and read the country.'),
 ]
-CLARO = ['#6b3fa0', '#4f7d3a', '#b0703e', '#a7801c', '#3f7a6a', '#2f8f6a', '#b8562e', '#39718a', '#8a6d1f', '#4a5d6b', '#3f6fb0', '#2f7d4a', '#8a3f5a', '#5a4a3a', '#2f5d50']
-OSCURO = ['#c4a6ea', '#a9cf7e', '#e0a878', '#e3c063', '#8fd1bf', '#86d1a2', '#ec9a72', '#86c3dc', '#e0c06e', '#9fb4c2', '#9dbbe8', '#86d1a2', '#e08aa8', '#c9b6a3', '#8fc2ad']
+CLARO = ['#6b3fa0', '#4f7d3a', '#b0703e', '#a7801c', '#3f7a6a', '#2f8f6a', '#b8562e', '#6a7a2f', '#39718a', '#8a6d1f', '#4a5d6b', '#3f6fb0', '#2f7d4a', '#8a3f5a', '#5a4a3a', '#2f5d50']
+OSCURO = ['#c4a6ea', '#a9cf7e', '#e0a878', '#e3c063', '#8fd1bf', '#86d1a2', '#ec9a72', '#c8d67e', '#86c3dc', '#e0c06e', '#9fb4c2', '#9dbbe8', '#86d1a2', '#e08aa8', '#c9b6a3', '#8fc2ad']
 
 
 def css(cien=False):
@@ -54,7 +55,7 @@ def css(cien=False):
     assert viejo_c in c and viejo_o in c
     c = c.replace(viejo_c, ' '.join(f'--b{i+1}:{x};' for i, x in enumerate(CLARO)))
     c = c.replace(viejo_o, ' '.join(f'--b{i+1}:{x};' for i, x in enumerate(OSCURO)))
-    c = c.replace('.cover .steps{display:grid;grid-template-columns:repeat(8,1fr);', '.cover .steps{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));')
+    c = c.replace('.cover .steps{display:grid;grid-template-columns:repeat(8,1fr);', '.cover .steps{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));')
     c += '\n@media print{html .cover{height:297mm;overflow:hidden}html .cover .in{flex:1 1 auto;min-height:0;overflow:hidden}html .cover .steps{flex:none}html .cover .steps div{padding:3mm .7mm 3.5mm 1.4mm}html .cover .steps div span{font-size:6pt;letter-spacing:-.01em}html .cover .steps b{font-size:13pt}}\n'
     c = c.replace('.cover .steps div{padding:14px 12px 16px;', '.cover .steps div{padding:10px 6px 12px;')
     c = c.replace('  .cover .steps div:nth-child(4){border-right:0}', '  .cover .steps div:nth-child(5n){border-right:0}')
@@ -245,7 +246,7 @@ def productor():
     for k, v in rep.items():
         cuerpo = cuerpo.replace('{{' + k + '}}', v)
     html = pagina('productor', cuerpo, t_es, t_en, 'Instructivo del Productor', 'Producer Guide', 'RatioVina-Instructivo-Productor.pdf', 'RatioVina-Producer-Guide.pdf',
-                  {'leer': ['Para empezar', 'Getting started'], 'b1': ['Los quince bloques', 'The fifteen blocks'], 'documentar': ['Consulta', 'Reference']}, tp.GLOS,
+                  {'leer': ['Para empezar', 'Getting started'], 'b1': ['Los dieciséis bloques', 'The sixteen blocks'], 'documentar': ['Consulta', 'Reference']}, tp.GLOS,
                   'Instructivo del Productor de Ratio Viña: documenta el conocimiento local de la vid de tu viñedo, con el caso de Mata de Zarza, Veracruz. · Ratio Viña Producer Guide.')
     open(os.path.join(RAIZ, 'instructivo-productor.html'), 'w', encoding='utf-8', newline='\n').write(web(html, APP_WEB))
     print('instructivo-productor.html', round(len(html.encode('utf-8')) / 1024), 'KB')

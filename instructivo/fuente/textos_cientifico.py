@@ -27,11 +27,11 @@ GLOS = [
 def fig_tubo():
     W, H = 780, 250
     pasos = [('Bloques 1–5', 'Blocks 1–5', 'clima W, HI, CI; actividades a', 'climate W, HI, CI; activities a', '#6b3fa0'),
-             ('Bloque 9', 'Block 9', 'valores vᵢ', 'values vᵢ', '#8a6d1f'),
-             ('Bloque 10', 'Block 10', 'red G = (V, E, w)', 'network G = (V, E, w)', '#4a5d6b'),
-             ('Bloque 11', 'Block 11', 'centralidades, Q, φ, árbol', 'centralities, Q, φ, tree', '#3f6fb0'),
+             ('Bloque 10', 'Block 10', 'valores vᵢ', 'values vᵢ', '#8a6d1f'),
+             ('Bloque 11', 'Block 11', 'red G = (V, E, w)', 'network G = (V, E, w)', '#4a5d6b'),
+             ('Bloque 12', 'Block 12', 'centralidades, Q, φ, árbol', 'centralities, Q, φ, tree', '#3f6fb0'),
              ('Bloques 6, 7, 12', 'Blocks 6, 7, 12', 'IR, riesgo, IS, ISGen', 'IR, risk, IS, ISGen', '#2f8f6a'),
-             ('Bloque 13', 'Block 13', 'escenarios t = 0…10', 'scenarios t = 0…10', '#8a3f5a')]
+             ('Bloque 14', 'Block 14', 'escenarios t = 0…10', 'scenarios t = 0…10', '#8a3f5a')]
     s = [f'<svg viewBox="0 0 {W} {H}" role="img">', '<defs><marker id="ft" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--muted)"/></marker></defs>']
     bw, gap = 116, 16
     for i, (a, ae, b, be, col) in enumerate(pasos):
